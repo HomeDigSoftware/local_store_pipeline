@@ -1,0 +1,27 @@
+
+version : 2
+
+models:
+  - name: data_test
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+sources:
+  - name: store_data
+    database: MIFGASH_RAW
+    schema: dbo 
+    tables:
+      - name: Items
+      - name: Documents
+      - name: DocumentLines
+      - name: ReceiptLines
+      - name: DailyPOSsum
+      - name: vw_pos_cash_receipts
+      - name: Inventory
+
+  
