@@ -33,10 +33,10 @@ select * from cleaned_shifts
  #}
 
 
-
 WITH OrderedAttendance AS (
     SELECT
         Employee_ID,
+		Employee_Name,
         MovementType,
         AttendanceDateTime,
         SourceSequence,
@@ -48,53 +48,55 @@ WITH OrderedAttendance AS (
     FROM Fact_Attendance_Event
     WHERE MovementType IN (1, 2, 91, 92)
 )
-    SELECT
-        i.Employee_ID
+SELECT
+    i.Employee_ID
+	,i.Employee_Name
 
-        ,FORMAT(CAST(i.AttendanceDateTime AS TIME), N'hh\:mm') as ShiftStartTime
-        ,FORMAT(CAST(o.AttendanceDateTime AS TIME), N'hh\:mm') as ShiftEndTime
+	--,FORMAT(CAST(i.AttendanceDateTime AS TIME), N'hh\:mm') as ShiftStartTime
+	--,FORMAT(CAST(o.AttendanceDateTime AS TIME), N'hh\:mm') as ShiftEndTime
 
-        ,CAST(i.AttendanceDateTime AS DATE) AS ShiftDate
-
-        ,DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime)
-            AS ShiftDurationMinutes
-        ,FORMAT(CAST(i.AttendanceDateTime AS TIME), N'hh\:mm') AS Shift_Start_Time
-        ,FORMAT(CAST(o.AttendanceDateTime AS TIME), N'hh\:mm') AS Shift_End_Time
-    -- ,cast(i.AttendanceDateTime as time) AS Shift_Start_Time
-    -- ,cast(o.AttendanceDateTime as time) AS Shift_End_Time
-
-        ,CAST(
-            DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime) / 60.0
-            AS DECIMAL(5,2)
-        ) AS ShiftDurationHours
-
-        ,RIGHT('00' + CAST(DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime) / 60 AS VARCHAR(2)), 2)
-                + ':' +
-        RIGHT('00' + CAST(DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime) % 60 AS VARCHAR(2)), 2)
-        AS ShiftDuration_HHMM
+    ,CAST(i.AttendanceDateTime AS DATE) AS ShiftDate
 
 
-        ,DATEPART(HOUR, i.AttendanceDateTime) AS ShiftStartHour
-        ,DATEPART(HOUR, o.AttendanceDateTime) AS ShiftEndHour
+	,FORMAT(CAST(i.AttendanceDateTime AS TIME), N'hh\:mm') AS Shift_Start_Time
+	,FORMAT(CAST(o.AttendanceDateTime AS TIME), N'hh\:mm') AS Shift_End_Time
+	
+    ,RIGHT('00' + CAST(DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime) / 60 AS VARCHAR(2)), 2)
+			+ ':' +
+	RIGHT('00' + CAST(DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime) % 60 AS VARCHAR(2)), 2)
+     AS ShiftDuration_HHMM
+    
+    ,DATEPART(HOUR, i.AttendanceDateTime) AS ShiftStartHour
+    ,DATEPART(HOUR, o.AttendanceDateTime) AS ShiftEndHour
 
-        ,i.SourceSequence AS StartSequence
-        ,o.SourceSequence AS EndSequence
+    ,DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime)
+        AS ShiftDurationMinutes
+    
+    ,CAST(
+        DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime) / 60.0
+        AS DECIMAL(5,2)
+    ) AS ShiftDurationHours
 
-        ,CASE
-            WHEN CAST(i.AttendanceDateTime AS DATE)
-            <> CAST(o.AttendanceDateTime AS DATE)
-            THEN 1 ELSE 0
-        END AS IsCrossMidnight
 
-        ,CASE
-            WHEN i.MovementType IN (91, 92)
-            OR o.MovementType IN (91, 92)
-            THEN 1 ELSE 0
-        END AS IsManualCorrection
+    ,i.SourceSequence AS StartSequence
+    ,o.SourceSequence AS EndSequence
 
-    FROM OrderedAttendance i
-    JOIN OrderedAttendance o
-    ON i.Employee_ID = o.Employee_ID
-    AND o.rn = i.rn + 1
-    WHERE i.MovementType IN (1, 91)   -- IN
-    AND o.MovementType IN (2, 92);  -- OUT
+    ,CASE
+        WHEN CAST(i.AttendanceDateTime AS DATE)
+           <> CAST(o.AttendanceDateTime AS DATE)
+        THEN 1 ELSE 0
+    END AS IsCrossMidnight
+
+    ,CASE
+        WHEN i.MovementType IN (91, 92)
+          OR o.MovementType IN (91, 92)
+        THEN 1 ELSE 0
+    END AS IsManualCorrection
+
+FROM OrderedAttendance i
+JOIN OrderedAttendance o
+  ON i.Employee_ID = o.Employee_ID
+  AND o.rn = i.rn + 1
+WHERE i.MovementType IN (1, 91)   -- IN
+  AND o.MovementType IN (2, 92);  -- OUT #}
+

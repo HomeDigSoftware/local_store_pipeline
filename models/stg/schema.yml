@@ -58,5 +58,5 @@ sources:
         description: "Employee shifts and scheduling data (23 records)"
       - name: Calendar
         description: "Date dimension table (40,541 records)"
-
-  
+      - name: EmployeesAttendance
+      - name: EmployeesSelection_byEntrance
