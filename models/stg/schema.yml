@@ -2,6 +2,35 @@
 version : 2
 
 models:
+  - name: exploring_data
+    description: "Data discovery analysis showing table volumes across Verifon POS system"
+    columns:
+      - name: table_name
+        description: "Name of the table in the POS database"
+        data_tests:
+          - not_null
+          - unique
+      - name: row_count
+        description: "Number of rows in each table"
+        data_tests:
+          - not_null
+
+  - name: stg_fact_sales
+    description: "Staging model for sales transactions from Fact_Sales table (14,946 records identified)"
+    columns:
+      - name: dbt_loaded_at
+        description: "Timestamp when record was processed by dbt"
+        data_tests:
+          - not_null
+
+  - name: stg_fact_shifts  
+    description: "Staging model for employee shifts from Fact_Shifts table (23 records identified)"
+    columns:
+      - name: dbt_loaded_at
+        description: "Timestamp when record was processed by dbt" 
+        data_tests:
+          - not_null
+
   - name: data_test
     description: "A starter dbt model"
     columns:
@@ -23,5 +52,11 @@ sources:
       - name: DailyPOSsum
       - name: vw_pos_cash_receipts
       - name: Inventory
+      - name: Fact_Sales
+        description: "Primary sales transactions table (14,946 records)"
+      - name: Fact_Shifts  
+        description: "Employee shifts and scheduling data (23 records)"
+      - name: Calendar
+        description: "Date dimension table (40,541 records)"
 
   

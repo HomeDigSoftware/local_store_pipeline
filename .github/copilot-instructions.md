@@ -1,86 +1,65 @@
 # Copilot Instructions for store_pipeline
 
 ## Project Overview
-This is a **dbt (data build tool) project** named `store_pipeline`, managing data transformation workflows for a store analytics pipeline. dbt compiles SQL models into executable SQL and orchestrates their execution order based on dependencies.
+This is a **retail analytics pipeline project** built with dbt (data build tool), designed for processing real POS (Point of Sale) data from Verifon Retail 360 systems. The pipeline transforms raw transaction data into business intelligence reports for store management, including sales analysis, employee productivity, and inventory insights.
 
-## Architecture & Key Concepts
+## Business Context
+This project serves as a portfolio piece demonstrating end-to-end data engineering capabilities:
+- **Data Source**: Real store POS data from Verifon Retail 360
+- **Business Value**: Automated daily reports for store managers, regional directors, and executives
+- **Technical Challenge**: Complete automation from data extraction to report delivery
+- **End Users**: Store managers, regional staff, C-suite executives
+
+## Architecture & Data Flow
+
+### Complete Pipeline Overview
+1. **Verifon Retail 360** → Daily backup files
+2. **Task Scheduler** → Automated SSH transfer to processing server
+3. **SSMS (SQL Server)** → Raw data storage
+4. **dbt transformations** → Data cleaning and business logic
+5. **Automated CSV exports** → Staging for analytics
+6. **Python scripts** → Report generation and dashboards
+7. **Email delivery** → Stakeholder notifications
 
 ### dbt Project Structure
-- **models/**: SQL/Jinja templates defining data transformations. Each model becomes a table/view in the data warehouse
-  - Currently uses `example/` subdirectory with starter models
-  - Models reference each other via `{{ ref('model_name') }}` for dependency management
-- **seeds/**: CSV files loaded as tables (currently empty, ready for static data)
-- **macros/**: Reusable Jinja functions (currently empty, ready for custom SQL logic)
-- **tests/**: Data quality tests (currently empty)
-- **snapshots/**: SCD Type 2 implementations for tracking historical changes
-- **target/**: Compiled SQL and metadata (gitignored build artifacts)
+- **models/stg/**: Staging layer - raw data cleaning and standardization from POS systems
+  - Clean transaction data, standardize formats, basic quality checks
+- **models/intermediate/**: Business logic transformations
+  - Calculate derived metrics, join dimensions, prepare for reporting
+- **models/marts/**: Final analytical models for business consumption
+  - `fct_sales`: Sales transactions fact table
+  - `dim_products`: Product dimension with categories and attributes
+  - `dim_employees`: Employee dimension with roles and schedules
+  - `rpt_*`: Ready-to-use report tables
+- **seeds/**: Static reference data (product categories, store locations, employee roles)
+- **macros/**: Reusable SQL functions for retail calculations (margins, seasonality, etc.)
+- **tests/**: Data quality tests ensuring business rule compliance
+- **snapshots/**: Historical tracking for price changes, product updates
 
 ### Configuration Files
-- **dbt_project.yml**: Project-level config defining project name (`store_pipeline`), paths, and model materializations
-  - Default materialization for `example/` models: `view`
-  - Models can override this with `{{ config(materialized='table') }}` in-file
-- **profiles.yml**: Database connection config (NOT in repo - lives in `~/.dbt/` on Windows)
-  - Profile name: `store_pipeline` (matches `dbt_project.yml`)
+- **dbt_project.yml**: Project config with retail-specific materializations
+  - Staging: `view` (fast development)  
+  - Marts: `table` (fast queries for reports)
+  - Reports: `table` with post-hooks for CSV export
+- **profiles.yml**: SQL Server connection (lives in `~/.dbt/profiles.yml`)
+  - Profile name: `store_pipeline`
 
-### Model Patterns (from existing examples)
-- **Inline config**: Use `{{ config(materialized='table') }}` at top of SQL files to override project defaults
-- **CTEs for staging**: Use `with source_data as (...)` pattern for intermediate transformations
-- **Model dependencies**: Reference upstream models with `{{ ref('my_first_dbt_model') }}` not direct table names
-- **schema.yml**: Define model documentation and data tests alongside models
-  - Tests: `unique`, `not_null`, custom tests
-  - Document all columns with descriptions
+## Model Patterns for Retail Analytics
 
-## Critical Workflows
+### Staging Models (stg_*)
+````sql
+{{ config(materialized='view') }}
 
-### Running the Project
-```bash
-# Execute this with uv (Python package manager wrapper used in this project)
-uv run dbt run        # Build all models
-uv run dbt test       # Run data quality tests
-uv run dbt build      # Run + test in dependency order
-uv run dbt compile    # Generate SQL without executing
-```
+with source_data as (
+    select * from InterfaceLog  -- Raw POS data
+),
 
-**Important**: This project uses `uv run` prefix for dbt commands (not plain `dbt`), indicating uv manages the Python environment.
+cleaned as (
+    select
+        cast(trans_date as date) as transaction_date,
+        cast(amount as decimal(10,2)) as sale_amount,
+        -- Standard retail transformations
+    from source_data
+)
 
-### Development Workflow
-1. Create/modify SQL models in `models/`
-2. Add tests and documentation in `schema.yml` files
-3. Run `uv run dbt run --select model_name` to test individual model
-4. Run `uv run dbt test` to validate data quality
-5. Compiled SQL appears in `target/compiled/` for debugging
-
-### Adding New Models
-1. Create `.sql` file in appropriate `models/` subdirectory
-2. Use `{{ ref() }}` for dependencies, never hardcode table names
-3. Add entry in `schema.yml` with description and tests
-4. Configure materialization strategy (`view` for development, `table` for production, `incremental` for large datasets)
-
-## Project-Specific Conventions
-
-### Materialization Strategy
-- **Views** (current default for `example/`): Fast builds, always fresh data, slower queries
-- **Tables**: Slower builds, faster queries, manual refresh needed
-- **Override** project defaults inline: `{{ config(materialized='table') }}`
-
-### Testing Approach
-- Define tests in `schema.yml` under model columns
-- Use built-in tests: `unique`, `not_null`, `accepted_values`, `relationships`
-- Custom tests go in `tests/` directory
-
-### Naming Conventions (to establish as project grows)
-- Models should follow `staging_`, `intermediate_`, `fact_`, `dim_` prefixes as layers emerge
-- Source files reference raw data, models transform it
-
-## Common Pitfalls
-- **Don't hardcode table names**: Always use `{{ ref('model_name') }}` for dbt dependency tracking
-- **Profile location**: `profiles.yml` is NOT in project directory (it's in `~/.dbt/profiles.yml` on Windows)
-- **Target directory**: Never edit files in `target/` - these are generated artifacts
-- **Run command**: Use `uv run dbt [command]` not plain `dbt [command]`
-
-## Next Steps for This Codebase
-- Replace `example/` starter models with actual store pipeline models
-- Add source definitions in `models/sources.yml` for raw data tables
-- Implement proper staging → intermediate → marts layer structure
-- Add seeds for reference data (product categories, store locations, etc.)
-- Create custom macros for reusable transformations
+select * from cleaned
