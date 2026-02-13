@@ -1,37 +1,5 @@
 {{ config(materialized='view') }}
 
--- Employee shifts data from Verifon Retail 360 POS
--- Source: Fact_Shifts table (23 records identified in data discovery)
-{# 
-with source_data as (
-    select * from {{ source('store_data', 'Fact_Shifts') }}
-),
-
-cleaned_shifts as (
-    select
-        -- TODO: Replace with actual column names from Fact_Shifts table
-        -- Based on typical shift tracking, expected columns might be:
-        -- shift_id,
-        -- employee_id,
-        -- shift_date,
-        -- start_time,
-        -- end_time,
-        -- total_hours,
-        -- break_time,
-        -- overtime_hours,
-        -- shift_type
-        
-        *,  -- Temporary - replace with actual column transformations
-        current_timestamp as dbt_loaded_at
-    from source_data
-)
-
-select * from cleaned_shifts
-
--- TODO: Add your specific Fact_Shifts query here  
--- Replace the above with your actual transformation logic
- #}
-
 
 WITH OrderedAttendance AS (
     SELECT
@@ -45,7 +13,7 @@ WITH OrderedAttendance AS (
             PARTITION BY Employee_ID
             ORDER BY AttendanceDateTime
         ) AS rn
-    FROM Fact_Attendance_Event
+    FROM {{ source('store_data', 'Fact_Attendance_Event') }}
     WHERE MovementType IN (1, 2, 91, 92)
 )
 SELECT

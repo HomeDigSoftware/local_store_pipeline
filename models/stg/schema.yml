@@ -60,3 +60,5 @@ sources:
         description: "Date dimension table (40,541 records)"
       - name: EmployeesAttendance
       - name: EmployeesSelection_byEntrance
+      - name: Fact_Attendance_Event
+      - name: CreditCardsTypes

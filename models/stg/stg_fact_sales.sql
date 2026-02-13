@@ -5,44 +5,28 @@
 -- Clean and standardize Documents + DocumentLines + ReceiptLines for sales analytics
 
 
-
-        -- TODO: Replace with actual column names from Fact_Sales table
-        -- Based on typical POS structure, expected columns might be:
-        -- sale_id,
-        -- sale_date,
-        -- sale_amount,
-        -- item_id,
-        -- employee_id,  
-        -- receipt_number,
-        -- store_id,
-        -- payment_type,
-        -- discount_amount,
-        -- tax_amount
-  
 SELECT
-    d.Document_ID as Sale_ID,
+    d.Document_ID,
 
     concat (d.RecordingDate , ' ',RIGHT('00' + CAST((d.PrintTime / 60) / 60 AS VARCHAR(2)), 2)
 			+ ':' +
-	RIGHT('00' + CAST((d.PrintTime / 60) % 60 AS VARCHAR(2)), 2) ) AS Sale_DateTime,
-    CAST(d.RecordingDate AS DATE) AS Sale_Date,
+	RIGHT('00' + CAST((d.PrintTime / 60) % 60 AS VARCHAR(2)), 2) ) AS ReceiptDateTime,
+    CAST(d.RecordingDate AS DATE) AS ReceiptDate,
     
 	
 	RIGHT('00' + CAST((d.PrintTime / 60) / 60 AS VARCHAR(2)), 2)
 			+ ':' +
 	RIGHT('00' + CAST((d.PrintTime / 60) % 60 AS VARCHAR(2)), 2)
      AS Sale_Time,
-  --  d.DocumentType,
+    d.DocumentType,
 
-    dl.Details AS ItemName,
-   
-    dl.ItemsQty AS Quantity,
-   
     dl.Item_ID,
+    dl.Details AS ItemName,
 
+    dl.ItemsQty AS Quantity,
 
     dl.TotalPerLine_IncVAT AS LineTotal_IncVAT,
-    d.GeneralTotalIncludeVAT AS SaleTotal_IncVAT,
+    d.GeneralTotalIncludeVAT AS ReceiptTotal_IncVAT,
 
 	r.PaymentType ,
 	case
@@ -51,16 +35,17 @@ SELECT
 	end as IsCredit,
 
 	r.CreditCardType,
+	cct.CardDesc ,
     CASE 
         WHEN d.GeneralTotalIncludeVAT < 0 THEN 1
         ELSE 0
     END AS IsReturn,
 
     d.s__sequence AS SourceDocumentSequence
-FROM Documents d
-JOIN DocumentLines dl
+FROM {{ source('store_data', 'Documents') }} d
+JOIN {{ source('store_data', 'DocumentLines') }} dl
   ON d.Document_ID = dl.Document_ID
-LEFT JOIN ReceiptLines r on r.Receipt_ID = d.Document_ID 
+LEFT JOIN {{ source('store_data', 'ReceiptLines') }} r on r.Receipt_ID = d.Document_ID 
+LEFT join {{ source('store_data', 'CreditCardsTypes') }} cct on r.CreditCardType = cct.CreditCardType
 WHERE r.AccountNumber_moreInfo not like '2'
-
 
