@@ -1,5 +1,9 @@
 
-
+{{
+  config(
+    materialized = 'view',
+    )
+}}
 
 SELECT 
     t.name AS table_name,

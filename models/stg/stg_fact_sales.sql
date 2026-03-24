@@ -48,4 +48,5 @@ JOIN {{ source('store_data', 'DocumentLines') }} dl
 LEFT JOIN {{ source('store_data', 'ReceiptLines') }} r on r.Receipt_ID = d.Document_ID 
 LEFT join {{ source('store_data', 'CreditCardsTypes') }} cct on r.CreditCardType = cct.CreditCardType
 WHERE r.AccountNumber_moreInfo not like '2'
+order by d.RecordingDate desc, Sale_Time desc
 

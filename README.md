@@ -272,3 +272,11 @@ For technical issues or feature requests, contact the Analytics Engineering team
 
 ---
 *Built with ❤️ by the Analytics Engineering Team*
+
+
+<!-- 
+אני רוצה ליצור פרופיל של analytics engineer in github 
+אני רוצה שהפרוייקט הנוכחי יהיה כלול בו  
+אני רוצה שתעזור לי להכין את הפרוייקט למטרה הזאת כולל מה חסר ואיזה סיפור אני יציג , סט הנתונים הוא של עסק של מכר שלי מה שעשיתי בפועל הוא 
+1. יצרתי task-schedule שמעתיק את קובץ הגיבוי בקופה הרושמת , מסוג : verifone retail 360 שולח בחיבור SSH את הקובץ למחשב של הבעלים 
+2. על המחשב של הבעלים יש task-schedule שמריץ תסריט SQL   -->
