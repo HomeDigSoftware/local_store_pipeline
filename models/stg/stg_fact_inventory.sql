@@ -1,11 +1,11 @@
 {{
   config(
-    materialized = 'view',
+    materialized = 'table',
     )
 }}
 
 select 
     i.*
-    ,t.ItemDesc
-from {{ source('store_data', 'Inventory') }} i
-left join {{ source('store_data', 'Items') }} t on i.Item_ID = t.Item_ID 
+    ,t.itemdesc
+from {{ source('store_data', 'inventory') }} i
+left join {{ source('store_data', 'items') }} t on i.item_id = t.item_id 

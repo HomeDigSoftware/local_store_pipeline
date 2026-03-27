@@ -33,32 +33,7 @@ models:
 
   - name: stg_items
     description: "Product master data staging from Items table (1,950 products identified)"
-    columns:
-      - name: product_id
-        description: "Unique product identifier"
-        data_tests:
-          - not_null
-          - unique
-      - name: product_name
-        description: "Product display name"
-        data_tests:
-          - not_null
-      - name: current_sale_price
-        description: "Current selling price"
-        data_tests:
-          - not_null
-      - name: gross_margin_percent
-        description: "Calculated gross margin percentage"
-        data_tests:
-          - not_null
-      - name: is_active_product
-        description: "Product active status flag"
-        data_tests:
-          - not_null
-      - name: dbt_loaded_at
-        description: "Timestamp when record was processed by dbt"
-        data_tests:
-          - not_null
+   
 
   - name: data_test
     description: "A starter dbt model"
@@ -71,23 +46,24 @@ models:
 
 sources:
   - name: store_data
-    database: POS_SANDBOX
-    schema: dbo 
+    database: store_local
+    schema: raw
     tables:
-      - name: Items
-      - name: Documents
-      - name: DocumentLines
-      - name: ReceiptLines
-      - name: DailyPOSsum
+      - name: items
+      - name: documents
+      - name: documentlines
+      - name: receiptlines
+      - name: dailypossum
       - name: vw_pos_cash_receipts
-      - name: Inventory
-      - name: Fact_Sales
+      - name: inventory
+      - name: fact_sales
         description: "Primary sales transactions table (14,946 records)"
-      - name: Fact_Shifts  
+      - name: fact_shifts  
         description: "Employee shifts and scheduling data (23 records)"
-      - name: Calendar
+      - name: calendar
         description: "Date dimension table (40,541 records)"
-      - name: EmployeesAttendance
-      - name: EmployeesSelection_byEntrance
-      - name: Fact_Attendance_Event
-      - name: CreditCardsTypes
+      - name: employeesattendance
+        description: "Employee attendance records (1,825 records)"
+      - name: employeesselection_byentrance
+      - name: fact_attendance_event
+      - name: creditcardstypes

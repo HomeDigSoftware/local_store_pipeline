@@ -1,11 +1,11 @@
-{{ config(materialized='view') }}
+{{ config(materialized='table') }}
 
 -- Product master data for inventory and sales analysis
 -- Source: Items table (1,950 records identified in data discovery)
 -- Note: Column names need to be validated against actual table structure
 
 with source_data as (
-    select * from {{ source('store_data', 'Items') }}
+    select * from {{ source('store_data', 'items') }}
 ),
 
 cleaned_items as (
@@ -16,7 +16,7 @@ cleaned_items as (
         'stg_items' as dbt_source_relation
         
     from source_data
-    where Item_ID is not null
+    where item_id is not null
 )
 
 select * from cleaned_items

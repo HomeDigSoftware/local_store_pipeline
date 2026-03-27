@@ -1,0 +1,2036 @@
+2026-03-27 03:00:18,878 [INFO] Starting restore of 'POS_SANDBOX' from: F:\.DATA-Analyst-Coures\.shlomy_store\store_date_ETL\store_date_21_03_26.bak\MSSQL_POS_DB.bak
+2026-03-27 03:00:18,878 [ERROR] Backup file not found: F:\.DATA-Analyst-Coures\.shlomy_store\store_date_ETL\store_date_21_03_26.bak\MSSQL_POS_DB.bak
+2026-03-27 03:06:45,337 [INFO] Starting restore of 'POS_SANDBOX' from: F:\.DATA-Analyst-Coures\.shlomy_store\store_date_ETL\store_date_21_03_26.bak\MSSQL_POS_DB.bak
+2026-03-27 03:06:45,338 [ERROR] Backup file not found: F:\.DATA-Analyst-Coures\.shlomy_store\store_date_ETL\store_date_21_03_26.bak\MSSQL_POS_DB.bak
+2026-03-27 03:07:14,100 [INFO] Starting restore of 'POS_SANDBOX' from: f:\.DATA-Analyst-Coures\.shlomy_store\store_date_ETL\store_date_21_03_26\MSSQL_POS_DB.bak
+2026-03-27 03:07:14,602 [INFO] Restore completed successfully.
+Msg 3110, Level 14, State 1, Server DESKTOP-E7P613O\STORE_DATA, Line 1
+User does not have permission to RESTORE database 'POS_SANDBOX'.
+Msg 3013, Level 16, State 1, Server DESKTOP-E7P613O\STORE_DATA, Line 1
+RESTORE DATABASE is terminating abnormally.
+
+2026-03-27 03:07:40,130 [INFO] Connecting to SQL Server...
+2026-03-27 03:07:40,230 [INFO] Connecting to local Postgres...
+2026-03-27 03:07:40,523 [INFO]   Loading: Items
+2026-03-27 03:07:41,192 [INFO]   Done: Items — 2,002 rows
+2026-03-27 03:07:41,192 [INFO]   Loading: Documents
+2026-03-27 03:07:42,409 [INFO]   Done: Documents — 9,379 rows
+2026-03-27 03:07:42,409 [INFO]   Loading: DocumentLines
+2026-03-27 03:07:43,664 [INFO]   Done: DocumentLines — 17,615 rows
+2026-03-27 03:07:43,664 [INFO]   Loading: ReceiptLines
+2026-03-27 03:07:45,273 [INFO]   Done: ReceiptLines — 13,631 rows
+2026-03-27 03:07:45,273 [INFO]   Loading: DailyPOSsum
+2026-03-27 03:07:45,311 [INFO]   Done: DailyPOSsum — 93 rows
+2026-03-27 03:07:45,311 [INFO]   Loading: vw_pos_cash_receipts
+2026-03-27 03:07:45,315 [ERROR]   FAILED: vw_pos_cash_receipts — ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'dbo.vw_pos_cash_receipts'. (208) (SQLExecDirectW)")
+2026-03-27 03:10:07,048 [INFO] Connecting to SQL Server...
+2026-03-27 03:10:07,161 [INFO] Connecting to local Postgres...
+2026-03-27 03:10:07,593 [INFO]   Loading: Items
+2026-03-27 03:10:08,179 [INFO]   Done: Items — 2,002 rows
+2026-03-27 03:10:08,179 [INFO]   Loading: Documents
+2026-03-27 03:10:09,510 [INFO]   Done: Documents — 9,379 rows
+2026-03-27 03:10:09,511 [INFO]   Loading: DocumentLines
+2026-03-27 03:10:10,929 [INFO]   Done: DocumentLines — 17,615 rows
+2026-03-27 03:10:10,929 [INFO]   Loading: ReceiptLines
+2026-03-27 03:10:12,640 [INFO]   Done: ReceiptLines — 13,631 rows
+2026-03-27 03:10:12,640 [INFO]   Loading: DailyPOSsum
+2026-03-27 03:10:12,689 [INFO]   Done: DailyPOSsum — 93 rows
+2026-03-27 03:10:12,689 [INFO]   Loading: vw_pos_cash_receipts
+2026-03-27 03:10:12,691 [ERROR]   FAILED: vw_pos_cash_receipts — Execution failed on sql 'SELECT * FROM dbo.[vw_pos_cash_receipts]': ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'dbo.vw_pos_cash_receipts'. (208) (SQLExecDirectW)")
+2026-03-27 03:10:41,985 [INFO] Connecting to SQL Server...
+2026-03-27 03:10:42,084 [INFO] Connecting to local Postgres...
+2026-03-27 03:10:42,184 [INFO]   Loading: Items
+2026-03-27 03:10:42,752 [INFO]   Done: Items — 2,002 rows
+2026-03-27 03:10:42,753 [INFO]   Loading: Documents
+2026-03-27 03:10:44,190 [INFO]   Done: Documents — 9,379 rows
+2026-03-27 03:10:44,190 [INFO]   Loading: DocumentLines
+2026-03-27 03:10:45,692 [INFO]   Done: DocumentLines — 17,615 rows
+2026-03-27 03:10:45,692 [INFO]   Loading: ReceiptLines
+2026-03-27 03:10:47,456 [INFO]   Done: ReceiptLines — 13,631 rows
+2026-03-27 03:10:47,456 [INFO]   Loading: DailyPOSsum
+2026-03-27 03:10:47,506 [INFO]   Done: DailyPOSsum — 93 rows
+2026-03-27 03:10:47,506 [INFO]   Loading: Inventory
+2026-03-27 03:10:47,636 [INFO]   Done: Inventory — 3,448 rows
+2026-03-27 03:10:47,637 [INFO]   Loading: Fact_Sales
+2026-03-27 03:10:49,216 [INFO]   Done: Fact_Sales — 17,633 rows
+2026-03-27 03:10:49,216 [INFO]   Loading: Fact_Shifts
+2026-03-27 03:10:49,233 [INFO]   Done: Fact_Shifts — 24 rows
+2026-03-27 03:10:49,233 [INFO]   Loading: Calendar
+2026-03-27 03:10:50,112 [INFO]   Done: Calendar — 40,541 rows
+2026-03-27 03:10:50,113 [INFO]   Loading: EmployeesAttendance
+2026-03-27 03:10:50,164 [INFO]   Done: EmployeesAttendance — 49 rows
+2026-03-27 03:10:50,164 [INFO]   Loading: EmployeesSelection_byEntrance
+2026-03-27 03:10:50,195 [INFO]   Done: EmployeesSelection_byEntrance — 2 rows
+2026-03-27 03:10:50,195 [INFO]   Loading: Fact_Attendance_Event
+2026-03-27 03:10:50,222 [INFO]   Done: Fact_Attendance_Event — 49 rows
+2026-03-27 03:10:50,223 [INFO]   Loading: CreditCardsTypes
+2026-03-27 03:10:50,237 [INFO]   Done: CreditCardsTypes — 10 rows
+2026-03-27 03:10:50,237 [INFO] All tables loaded successfully.
+2026-03-27 03:13:23,985 [INFO] Connecting to SQL Server...
+2026-03-27 03:13:24,083 [INFO] Connecting to local Postgres...
+2026-03-27 03:13:24,204 [INFO] Discovered 490 tables to load.
+2026-03-27 03:13:24,204 [INFO]   Loading: Accounts
+2026-03-27 03:13:24,242 [INFO]   Done: Accounts — 18 rows
+2026-03-27 03:13:24,242 [INFO]   Loading: ActionsDTScardLines
+2026-03-27 03:13:24,259 [INFO]   Done: ActionsDTScardLines — 0 rows
+2026-03-27 03:13:24,259 [INFO]   Loading: ActionsDTScardLinesOld
+2026-03-27 03:13:24,271 [INFO]   Done: ActionsDTScardLinesOld — 0 rows
+2026-03-27 03:13:24,272 [INFO]   Loading: ActionsDTScardLinesOld1
+2026-03-27 03:13:24,285 [INFO]   Done: ActionsDTScardLinesOld1 — 0 rows
+2026-03-27 03:13:24,285 [INFO]   Loading: ActionsMultipassCardLines
+2026-03-27 03:13:24,297 [INFO]   Done: ActionsMultipassCardLines — 0 rows
+2026-03-27 03:13:24,297 [INFO]   Loading: ActionsPrepaidCards
+2026-03-27 03:13:24,320 [INFO]   Done: ActionsPrepaidCards — 134 rows
+2026-03-27 03:13:24,320 [INFO]   Loading: AdditionalPriceLists
+2026-03-27 03:13:24,335 [INFO]   Done: AdditionalPriceLists — 2 rows
+2026-03-27 03:13:24,335 [INFO]   Loading: AdditionalPriceLists1
+2026-03-27 03:13:24,346 [INFO]   Done: AdditionalPriceLists1 — 0 rows
+2026-03-27 03:13:24,346 [INFO]   Loading: Amounts
+2026-03-27 03:13:24,376 [INFO]   Done: Amounts — 1,999 rows
+2026-03-27 03:13:24,376 [INFO]   Loading: AsortimntimTable
+2026-03-27 03:13:24,394 [INFO]   Done: AsortimntimTable — 0 rows
+2026-03-27 03:13:24,394 [INFO]   Loading: BankAccounts
+2026-03-27 03:13:24,405 [INFO]   Done: BankAccounts — 1 rows
+2026-03-27 03:13:24,406 [INFO]   Loading: Banks
+2026-03-27 03:13:24,419 [INFO]   Done: Banks — 27 rows
+2026-03-27 03:13:24,419 [INFO]   Loading: BarcodeInputTmp
+2026-03-27 03:13:24,454 [INFO]   Done: BarcodeInputTmp — 1,010 rows
+2026-03-27 03:13:24,454 [INFO]   Loading: BarcodePrintingSettings
+2026-03-27 03:13:24,466 [INFO]   Done: BarcodePrintingSettings — 11 rows
+2026-03-27 03:13:24,467 [INFO]   Loading: BarcodePrints
+2026-03-27 03:13:24,475 [INFO]   Done: BarcodePrints — 0 rows
+2026-03-27 03:13:24,475 [INFO]   Loading: Barcode_Graphic_Labels
+2026-03-27 03:13:24,494 [INFO]   Done: Barcode_Graphic_Labels — 0 rows
+2026-03-27 03:13:24,494 [INFO]   Loading: Barcode_Label_Templates
+2026-03-27 03:13:24,502 [INFO]   Done: Barcode_Label_Templates — 0 rows
+2026-03-27 03:13:24,502 [INFO]   Loading: BdikotIniim_LpniAsbaL1_6
+2026-03-27 03:13:24,523 [INFO]   Done: BdikotIniim_LpniAsbaL1_6 — 0 rows
+2026-03-27 03:13:24,523 [INFO]   Loading: Bkra_Optika
+2026-03-27 03:13:24,531 [INFO]   Done: Bkra_Optika — 0 rows
+2026-03-27 03:13:24,532 [INFO]   Loading: BlobTable
+2026-03-27 03:13:24,544 [INFO]   Done: BlobTable — 2 rows
+2026-03-27 03:13:24,544 [INFO]   Loading: BrandChecks
+2026-03-27 03:13:24,557 [INFO]   Done: BrandChecks — 0 rows
+2026-03-27 03:13:24,557 [INFO]   Loading: Brands
+2026-03-27 03:13:24,566 [INFO]   Done: Brands — 0 rows
+2026-03-27 03:13:24,566 [INFO]   Loading: BusinessInvoice
+2026-03-27 03:13:24,579 [INFO]   Done: BusinessInvoice — 3 rows
+2026-03-27 03:13:24,579 [INFO]   Loading: CARD_PICTURES
+2026-03-27 03:13:24,590 [INFO]   Done: CARD_PICTURES — 0 rows
+2026-03-27 03:13:24,590 [INFO]   Loading: CC_DocsContinue
+2026-03-27 03:13:24,603 [INFO]   Done: CC_DocsContinue — 0 rows
+2026-03-27 03:13:24,604 [INFO]   Loading: Calendar
+2026-03-27 03:13:25,289 [INFO]   Done: Calendar — 40,541 rows
+2026-03-27 03:13:25,289 [INFO]   Loading: CampaignBundle
+2026-03-27 03:13:25,303 [INFO]   Done: CampaignBundle — 21 rows
+2026-03-27 03:13:25,303 [INFO]   Loading: CampaignFields
+2026-03-27 03:13:25,314 [INFO]   Done: CampaignFields — 77 rows
+2026-03-27 03:13:25,314 [INFO]   Loading: CampaignTypes
+2026-03-27 03:13:25,326 [INFO]   Done: CampaignTypes — 27 rows
+2026-03-27 03:13:25,326 [INFO]   Loading: CampaignTypes1
+2026-03-27 03:13:25,334 [INFO]   Done: CampaignTypes1 — 0 rows
+2026-03-27 03:13:25,335 [INFO]   Loading: CampaignVouchers
+2026-03-27 03:13:25,348 [INFO]   Done: CampaignVouchers — 0 rows
+2026-03-27 03:13:25,349 [INFO]   Loading: CampaignVouchers900
+2026-03-27 03:13:25,362 [INFO]   Done: CampaignVouchers900 — 0 rows
+2026-03-27 03:13:25,363 [INFO]   Loading: Campaigns
+2026-03-27 03:13:25,386 [INFO]   Done: Campaigns — 26 rows
+2026-03-27 03:13:25,387 [INFO]   Loading: Campaigns_tmp
+2026-03-27 03:13:25,410 [INFO]   Done: Campaigns_tmp — 26 rows
+2026-03-27 03:13:25,410 [INFO]   Loading: CanvasTypes
+2026-03-27 03:13:25,418 [INFO]   Done: CanvasTypes — 0 rows
+2026-03-27 03:13:25,419 [INFO]   Loading: CardClassPaymentTerm
+2026-03-27 03:13:25,427 [INFO]   Done: CardClassPaymentTerm — 0 rows
+2026-03-27 03:13:25,427 [INFO]   Loading: CardComments
+2026-03-27 03:13:25,436 [INFO]   Done: CardComments — 0 rows
+2026-03-27 03:13:25,436 [INFO]   Loading: CardGuarantees
+2026-03-27 03:13:25,451 [INFO]   Done: CardGuarantees — 0 rows
+2026-03-27 03:13:25,451 [INFO]   Loading: CardInterfaces
+2026-03-27 03:13:25,473 [INFO]   Done: CardInterfaces — 0 rows
+2026-03-27 03:13:25,473 [INFO]   Loading: Cards
+2026-03-27 03:13:25,503 [INFO]   Done: Cards — 27 rows
+2026-03-27 03:13:25,504 [INFO]   Loading: Cards1
+2026-03-27 03:13:25,516 [INFO]   Done: Cards1 — 0 rows
+2026-03-27 03:13:25,517 [INFO]   Loading: CardsAdditionalClass
+2026-03-27 03:13:25,545 [INFO]   Done: CardsAdditionalClass — 0 rows
+2026-03-27 03:13:25,550 [INFO]   Loading: CardsGroup
+2026-03-27 03:13:25,566 [INFO]   Done: CardsGroup — 4 rows
+2026-03-27 03:13:25,566 [INFO]   Loading: CardsRentalsContinue
+2026-03-27 03:13:25,576 [INFO]   Done: CardsRentalsContinue — 0 rows
+2026-03-27 03:13:25,577 [INFO]   Loading: Cards_continue
+2026-03-27 03:13:25,598 [INFO]   Done: Cards_continue — 48 rows
+2026-03-27 03:13:25,598 [INFO]   Loading: CartOrderLines
+2026-03-27 03:13:25,607 [INFO]   Done: CartOrderLines — 0 rows
+2026-03-27 03:13:25,607 [INFO]   Loading: CatalogChanges
+2026-03-27 03:13:25,615 [INFO]   Done: CatalogChanges — 0 rows
+2026-03-27 03:13:25,615 [INFO]   Loading: CategoriesTbl
+2026-03-27 03:13:25,622 [INFO]   Done: CategoriesTbl — 0 rows
+2026-03-27 03:13:25,622 [INFO]   Loading: CellPAYcardsType
+2026-03-27 03:13:25,630 [INFO]   Done: CellPAYcardsType — 0 rows
+2026-03-27 03:13:25,630 [INFO]   Loading: CellPayActions
+2026-03-27 03:13:25,639 [INFO]   Done: CellPayActions — 0 rows
+2026-03-27 03:13:25,640 [INFO]   Loading: CellPayErrors
+2026-03-27 03:13:25,647 [INFO]   Done: CellPayErrors — 0 rows
+2026-03-27 03:13:25,647 [INFO]   Loading: CerditCardByWebLog
+2026-03-27 03:13:25,656 [INFO]   Done: CerditCardByWebLog — 0 rows
+2026-03-27 03:13:25,657 [INFO]   Loading: ChangeHistory_tmp
+2026-03-27 03:13:25,667 [INFO]   Done: ChangeHistory_tmp — 0 rows
+2026-03-27 03:13:25,667 [INFO]   Loading: ChargeCardsAssignment
+2026-03-27 03:13:25,676 [INFO]   Done: ChargeCardsAssignment — 0 rows
+2026-03-27 03:13:25,676 [INFO]   Loading: Cities
+2026-03-27 03:13:25,683 [INFO]   Done: Cities — 0 rows
+2026-03-27 03:13:25,684 [INFO]   Loading: ClientMessageStatus
+2026-03-27 03:13:25,691 [INFO]   Done: ClientMessageStatus — 0 rows
+2026-03-27 03:13:25,691 [INFO]   Loading: ClientStatus_tmp
+2026-03-27 03:13:25,703 [INFO]   Done: ClientStatus_tmp — 0 rows
+2026-03-27 03:13:25,703 [INFO]   Loading: ClubCardsTypes
+2026-03-27 03:13:25,719 [INFO]   Done: ClubCardsTypes — 0 rows
+2026-03-27 03:13:25,719 [INFO]   Loading: CoinsRates
+2026-03-27 03:13:25,731 [INFO]   Done: CoinsRates — 3 rows
+2026-03-27 03:13:25,731 [INFO]   Loading: Coins_notes_details
+2026-03-27 03:13:25,743 [INFO]   Done: Coins_notes_details — 37 rows
+2026-03-27 03:13:25,743 [INFO]   Loading: Coins_notes_details1
+2026-03-27 03:13:25,752 [INFO]   Done: Coins_notes_details1 — 0 rows
+2026-03-27 03:13:25,752 [INFO]   Loading: Collections
+2026-03-27 03:13:25,760 [INFO]   Done: Collections — 0 rows
+2026-03-27 03:13:25,760 [INFO]   Loading: ColorMatrix
+2026-03-27 03:13:25,778 [INFO]   Done: ColorMatrix — 0 rows
+2026-03-27 03:13:25,778 [INFO]   Loading: Colors
+2026-03-27 03:13:25,786 [INFO]   Done: Colors — 1 rows
+2026-03-27 03:13:25,787 [INFO]   Loading: CombinedStoreInventory
+2026-03-27 03:13:25,796 [INFO]   Done: CombinedStoreInventory — 0 rows
+2026-03-27 03:13:25,797 [INFO]   Loading: CommandMovementType
+2026-03-27 03:13:25,808 [INFO]   Done: CommandMovementType — 0 rows
+2026-03-27 03:13:25,808 [INFO]   Loading: CommunicationControl
+2026-03-27 03:13:25,817 [INFO]   Done: CommunicationControl — 1 rows
+2026-03-27 03:13:25,817 [INFO]   Loading: Control
+2026-03-27 03:13:25,837 [INFO]   Done: Control — 2 rows
+2026-03-27 03:13:25,838 [INFO]   Loading: ConversionItems
+2026-03-27 03:13:25,849 [INFO]   Done: ConversionItems — 0 rows
+2026-03-27 03:13:25,849 [INFO]   Loading: ConversionsTbl
+2026-03-27 03:13:25,859 [INFO]   Done: ConversionsTbl — 0 rows
+2026-03-27 03:13:25,859 [INFO]   Loading: ConvertToTenderTypes
+2026-03-27 03:13:25,876 [INFO]   Done: ConvertToTenderTypes — 45 rows
+2026-03-27 03:13:25,876 [INFO]   Loading: ConvertingReceiptLinesContinue
+2026-03-27 03:13:25,886 [INFO]   Done: ConvertingReceiptLinesContinue — 0 rows
+2026-03-27 03:13:25,886 [INFO]   Loading: ConvertingTransitionalWarehouses
+2026-03-27 03:13:25,894 [INFO]   Done: ConvertingTransitionalWarehouses — 0 rows
+2026-03-27 03:13:25,894 [INFO]   Loading: CopiedCredits_HO
+2026-03-27 03:13:25,904 [INFO]   Done: CopiedCredits_HO — 0 rows
+2026-03-27 03:13:25,904 [INFO]   Loading: CopiesLog
+2026-03-27 03:13:25,914 [INFO]   Done: CopiesLog — 0 rows
+2026-03-27 03:13:25,914 [INFO]   Loading: CopyOfDocs24
+2026-03-27 03:13:25,927 [INFO]   Done: CopyOfDocs24 — 0 rows
+2026-03-27 03:13:25,927 [INFO]   Loading: CopyOfDocsLines25
+2026-03-27 03:13:25,936 [INFO]   Done: CopyOfDocsLines25 — 0 rows
+2026-03-27 03:13:25,937 [INFO]   Loading: CopyOfDocsLinesTrailer116
+2026-03-27 03:13:25,952 [INFO]   Done: CopyOfDocsLinesTrailer116 — 0 rows
+2026-03-27 03:13:25,952 [INFO]   Loading: CopyOfDocsTrailer115
+2026-03-27 03:13:25,966 [INFO]   Done: CopyOfDocsTrailer115 — 0 rows
+2026-03-27 03:13:25,966 [INFO]   Loading: Costing
+2026-03-27 03:13:25,974 [INFO]   Done: Costing — 0 rows
+2026-03-27 03:13:25,975 [INFO]   Loading: Countries
+2026-03-27 03:13:25,983 [INFO]   Done: Countries — 0 rows
+2026-03-27 03:13:25,984 [INFO]   Loading: CreditCardsTypes
+2026-03-27 03:13:26,007 [INFO]   Done: CreditCardsTypes — 10 rows
+2026-03-27 03:13:26,008 [INFO]   Loading: CreditInvoiceEOSeasonLines
+2026-03-27 03:13:26,018 [INFO]   Done: CreditInvoiceEOSeasonLines — 0 rows
+2026-03-27 03:13:26,018 [INFO]   Loading: CreditInvoicePrintRecover
+2026-03-27 03:13:26,042 [INFO]   Done: CreditInvoicePrintRecover — 0 rows
+2026-03-27 03:13:26,042 [INFO]   Loading: CreditInvoiceTable
+2026-03-27 03:13:26,052 [INFO]   Done: CreditInvoiceTable — 0 rows
+2026-03-27 03:13:26,052 [INFO]   Loading: CreditSalesReport
+2026-03-27 03:13:26,061 [INFO]   Done: CreditSalesReport — 0 rows
+2026-03-27 03:13:26,061 [INFO]   Loading: CreditSalesReport1
+2026-03-27 03:13:26,070 [INFO]   Done: CreditSalesReport1 — 0 rows
+2026-03-27 03:13:26,070 [INFO]   Loading: CreditTypes
+2026-03-27 03:13:26,082 [INFO]   Done: CreditTypes — 54 rows
+2026-03-27 03:13:26,082 [INFO]   Loading: CtlDif1
+2026-03-27 03:13:26,089 [INFO]   Done: CtlDif1 — 0 rows
+2026-03-27 03:13:26,089 [INFO]   Loading: CtlDif2
+2026-03-27 03:13:26,096 [INFO]   Done: CtlDif2 — 0 rows
+2026-03-27 03:13:26,096 [INFO]   Loading: CtlDif3
+2026-03-27 03:13:26,103 [INFO]   Done: CtlDif3 — 0 rows
+2026-03-27 03:13:26,103 [INFO]   Loading: CustomerClassByCreditCard
+2026-03-27 03:13:26,111 [INFO]   Done: CustomerClassByCreditCard — 0 rows
+2026-03-27 03:13:26,112 [INFO]   Loading: CustomerClubDeails
+2026-03-27 03:13:26,120 [INFO]   Done: CustomerClubDeails — 0 rows
+2026-03-27 03:13:26,120 [INFO]   Loading: CustomerMessagedCode
+2026-03-27 03:13:26,128 [INFO]   Done: CustomerMessagedCode — 0 rows
+2026-03-27 03:13:26,128 [INFO]   Loading: CustomerOrderLines
+2026-03-27 03:13:26,140 [INFO]   Done: CustomerOrderLines — 0 rows
+2026-03-27 03:13:26,140 [INFO]   Loading: CustomerOrderLines_345
+2026-03-27 03:13:26,152 [INFO]   Done: CustomerOrderLines_345 — 0 rows
+2026-03-27 03:13:26,152 [INFO]   Loading: CustomerOrdersHeaders
+2026-03-27 03:13:26,165 [INFO]   Done: CustomerOrdersHeaders — 0 rows
+2026-03-27 03:13:26,166 [INFO]   Loading: CustomerSubscriptionAssignment
+2026-03-27 03:13:26,178 [INFO]   Done: CustomerSubscriptionAssignment — 0 rows
+2026-03-27 03:13:26,178 [INFO]   Loading: CustomersLog
+2026-03-27 03:13:26,187 [INFO]   Done: CustomersLog — 0 rows
+2026-03-27 03:13:26,188 [INFO]   Loading: CustomersMovement
+2026-03-27 03:13:26,198 [INFO]   Done: CustomersMovement — 0 rows
+2026-03-27 03:13:26,198 [INFO]   Loading: DTSTransactions
+2026-03-27 03:13:26,209 [INFO]   Done: DTSTransactions — 0 rows
+2026-03-27 03:13:26,209 [INFO]   Loading: DailyAvailabilty
+2026-03-27 03:13:26,216 [INFO]   Done: DailyAvailabilty — 0 rows
+2026-03-27 03:13:26,217 [INFO]   Loading: DailyPOSsum
+2026-03-27 03:13:26,265 [INFO]   Done: DailyPOSsum — 93 rows
+2026-03-27 03:13:26,265 [INFO]   Loading: DailySales
+2026-03-27 03:13:26,275 [INFO]   Done: DailySales — 0 rows
+2026-03-27 03:13:26,276 [INFO]   Loading: DaysTypes
+2026-03-27 03:13:26,284 [INFO]   Done: DaysTypes — 3 rows
+2026-03-27 03:13:26,284 [INFO]   Loading: DebitErrors
+2026-03-27 03:13:26,293 [INFO]   Done: DebitErrors — 19 rows
+2026-03-27 03:13:26,293 [INFO]   Loading: DebitSettings
+2026-03-27 03:13:26,308 [INFO]   Done: DebitSettings — 0 rows
+2026-03-27 03:13:26,308 [INFO]   Loading: DebitTbl
+2026-03-27 03:13:26,317 [INFO]   Done: DebitTbl — 0 rows
+2026-03-27 03:13:26,317 [INFO]   Loading: DefectType
+2026-03-27 03:13:26,324 [INFO]   Done: DefectType — 0 rows
+2026-03-27 03:13:26,325 [INFO]   Loading: DefinitionsKeyValue
+2026-03-27 03:13:26,344 [INFO]   Done: DefinitionsKeyValue — 1 rows
+2026-03-27 03:13:26,344 [INFO]   Loading: Deliveries
+2026-03-27 03:13:26,354 [INFO]   Done: Deliveries — 0 rows
+2026-03-27 03:13:26,355 [INFO]   Loading: DepositLines
+2026-03-27 03:13:26,369 [INFO]   Done: DepositLines — 0 rows
+2026-03-27 03:13:26,369 [INFO]   Loading: Deposits
+2026-03-27 03:13:26,381 [INFO]   Done: Deposits — 0 rows
+2026-03-27 03:13:26,381 [INFO]   Loading: DepositsDrawerToSafe
+2026-03-27 03:13:26,419 [INFO]   Done: DepositsDrawerToSafe — 92 rows
+2026-03-27 03:13:26,419 [INFO]   Loading: Deposits_V852
+2026-03-27 03:13:26,430 [INFO]   Done: Deposits_V852 — 0 rows
+2026-03-27 03:13:26,430 [INFO]   Loading: DesignFiles
+2026-03-27 03:13:26,438 [INFO]   Done: DesignFiles — 0 rows
+2026-03-27 03:13:26,438 [INFO]   Loading: DifferenceOrderStatement
+2026-03-27 03:13:26,449 [INFO]   Done: DifferenceOrderStatement — 0 rows
+2026-03-27 03:13:26,449 [INFO]   Loading: DiscountNotesDefinitions
+2026-03-27 03:13:26,458 [INFO]   Done: DiscountNotesDefinitions — 0 rows
+2026-03-27 03:13:26,459 [INFO]   Loading: DiscountScales
+2026-03-27 03:13:26,466 [INFO]   Done: DiscountScales — 0 rows
+2026-03-27 03:13:26,467 [INFO]   Loading: DocumentHeaderDeliveryOrder
+2026-03-27 03:13:26,480 [INFO]   Done: DocumentHeaderDeliveryOrder — 0 rows
+2026-03-27 03:13:26,481 [INFO]   Loading: DocumentLines
+2026-03-27 03:13:28,000 [INFO]   Done: DocumentLines — 17,615 rows
+2026-03-27 03:13:28,000 [INFO]   Loading: DocumentLinesForCopy
+2026-03-27 03:13:28,011 [INFO]   Done: DocumentLinesForCopy — 0 rows
+2026-03-27 03:13:28,011 [INFO]   Loading: DocumentLinesPOSSuspendedTransmissions
+2026-03-27 03:13:28,026 [INFO]   Done: DocumentLinesPOSSuspendedTransmissions — 0 rows
+2026-03-27 03:13:28,027 [INFO]   Loading: DocumentRemarksHeader
+2026-03-27 03:13:28,035 [INFO]   Done: DocumentRemarksHeader — 0 rows
+2026-03-27 03:13:28,035 [INFO]   Loading: DocumentRemarksLines
+2026-03-27 03:13:28,043 [INFO]   Done: DocumentRemarksLines — 0 rows
+2026-03-27 03:13:28,043 [INFO]   Loading: DocumentTypeForIRS
+2026-03-27 03:13:28,052 [INFO]   Done: DocumentTypeForIRS — 0 rows
+2026-03-27 03:13:28,052 [INFO]   Loading: DocumentVersionMngmt
+2026-03-27 03:13:28,062 [INFO]   Done: DocumentVersionMngmt — 0 rows
+2026-03-27 03:13:28,062 [INFO]   Loading: Documents
+2026-03-27 03:13:29,438 [INFO]   Done: Documents — 9,379 rows
+2026-03-27 03:13:29,438 [INFO]   Loading: Documents2_continue
+2026-03-27 03:13:29,458 [INFO]   Done: Documents2_continue — 2 rows
+2026-03-27 03:13:29,458 [INFO]   Loading: DocumentsControl
+2026-03-27 03:13:29,492 [INFO]   Done: DocumentsControl — 89 rows
+2026-03-27 03:13:29,493 [INFO]   Loading: DocumentsLines_continue
+2026-03-27 03:13:32,870 [INFO]   Done: DocumentsLines_continue — 17,616 rows
+2026-03-27 03:13:32,870 [INFO]   Loading: DocumentsLines_continue1
+2026-03-27 03:13:32,883 [INFO]   Done: DocumentsLines_continue1 — 0 rows
+2026-03-27 03:13:32,883 [INFO]   Loading: DocumentsLines_pointOfSale
+2026-03-27 03:13:32,912 [INFO]   Done: DocumentsLines_pointOfSale — 0 rows
+2026-03-27 03:13:32,912 [INFO]   Loading: DocumentsSequence
+2026-03-27 03:13:32,929 [INFO]   Done: DocumentsSequence — 16 rows
+2026-03-27 03:13:32,930 [INFO]   Loading: DocumentsType
+2026-03-27 03:13:32,940 [INFO]   Done: DocumentsType — 12 rows
+2026-03-27 03:13:32,940 [INFO]   Loading: Documents_continue
+2026-03-27 03:13:34,331 [INFO]   Done: Documents_continue — 9,379 rows
+2026-03-27 03:13:34,331 [INFO]   Loading: DownloadManagerPacks
+2026-03-27 03:13:34,341 [INFO]   Done: DownloadManagerPacks — 0 rows
+2026-03-27 03:13:34,341 [INFO]   Loading: Dpok
+2026-03-27 03:13:34,349 [INFO]   Done: Dpok — 0 rows
+2026-03-27 03:13:34,350 [INFO]   Loading: DtsActions
+2026-03-27 03:13:34,361 [INFO]   Done: DtsActions — 0 rows
+2026-03-27 03:13:34,362 [INFO]   Loading: DtsActions1
+2026-03-27 03:13:34,375 [INFO]   Done: DtsActions1 — 0 rows
+2026-03-27 03:13:34,375 [INFO]   Loading: DtsActionsLog
+2026-03-27 03:13:34,387 [INFO]   Done: DtsActionsLog — 0 rows
+2026-03-27 03:13:34,387 [INFO]   Loading: DtsTbls
+2026-03-27 03:13:34,401 [INFO]   Done: DtsTbls — 27 rows
+2026-03-27 03:13:34,401 [INFO]   Loading: DtsTrans_tmp
+2026-03-27 03:13:34,413 [INFO]   Done: DtsTrans_tmp — 0 rows
+2026-03-27 03:13:34,413 [INFO]   Loading: ERN_LeumiMoveTransmission
+2026-03-27 03:13:34,428 [INFO]   Done: ERN_LeumiMoveTransmission — 0 rows
+2026-03-27 03:13:34,428 [INFO]   Loading: ERN_LeumiMoveTransmission1
+2026-03-27 03:13:34,444 [INFO]   Done: ERN_LeumiMoveTransmission1 — 0 rows
+2026-03-27 03:13:34,444 [INFO]   Loading: ERN_LeumiMoveTransmission_conver
+2026-03-27 03:13:34,459 [INFO]   Done: ERN_LeumiMoveTransmission_conver — 0 rows
+2026-03-27 03:13:34,460 [INFO]   Loading: ElectronicSignatures
+2026-03-27 03:13:34,469 [INFO]   Done: ElectronicSignatures — 0 rows
+2026-03-27 03:13:34,470 [INFO]   Loading: EmailOrderLines
+2026-03-27 03:13:34,485 [INFO]   Done: EmailOrderLines — 0 rows
+2026-03-27 03:13:34,485 [INFO]   Loading: EmailUsersSettings
+2026-03-27 03:13:34,496 [INFO]   Done: EmailUsersSettings — 0 rows
+2026-03-27 03:13:34,497 [INFO]   Loading: Email_OrderTitleNew
+2026-03-27 03:13:34,515 [INFO]   Done: Email_OrderTitleNew — 2 rows
+2026-03-27 03:13:34,515 [INFO]   Loading: Emergency_Number_Invoices
+2026-03-27 03:13:34,523 [INFO]   Done: Emergency_Number_Invoices — 0 rows
+2026-03-27 03:13:34,523 [INFO]   Loading: EmpCommissions
+2026-03-27 03:13:34,532 [INFO]   Done: EmpCommissions — 0 rows
+2026-03-27 03:13:34,532 [INFO]   Loading: EmpCommissions1
+2026-03-27 03:13:34,540 [INFO]   Done: EmpCommissions1 — 0 rows
+2026-03-27 03:13:34,540 [INFO]   Loading: EmpPermission
+2026-03-27 03:13:34,557 [INFO]   Done: EmpPermission — 315 rows
+2026-03-27 03:13:34,557 [INFO]   Loading: EmpStorePremiums
+2026-03-27 03:13:34,565 [INFO]   Done: EmpStorePremiums — 0 rows
+2026-03-27 03:13:34,565 [INFO]   Loading: EmployeesAttendance
+2026-03-27 03:13:34,592 [INFO]   Done: EmployeesAttendance — 49 rows
+2026-03-27 03:13:34,593 [INFO]   Loading: EmployeesMoreDetails
+2026-03-27 03:13:34,600 [INFO]   Done: EmployeesMoreDetails — 0 rows
+2026-03-27 03:13:34,600 [INFO]   Loading: EmployeesSelection_byEntrance
+2026-03-27 03:13:34,622 [INFO]   Done: EmployeesSelection_byEntrance — 2 rows
+2026-03-27 03:13:34,622 [INFO]   Loading: EmployeesType
+2026-03-27 03:13:34,629 [INFO]   Done: EmployeesType — 0 rows
+2026-03-27 03:13:34,629 [INFO]   Loading: Employees_Permission_Groups
+2026-03-27 03:13:34,638 [INFO]   Done: Employees_Permission_Groups — 0 rows
+2026-03-27 03:13:34,638 [INFO]   Loading: EmvCharge
+2026-03-27 03:13:35,289 [INFO]   Done: EmvCharge — 2,521 rows
+2026-03-27 03:13:35,290 [INFO]   Loading: EmvStatis
+2026-03-27 03:13:35,322 [INFO]   Done: EmvStatis — 208 rows
+2026-03-27 03:13:35,322 [INFO]   Loading: ErnChecksTbl
+2026-03-27 03:13:35,350 [INFO]   Done: ErnChecksTbl — 368 rows
+2026-03-27 03:13:35,350 [INFO]   Loading: ErrorMessageExternalTerminal
+2026-03-27 03:13:35,377 [INFO]   Done: ErrorMessageExternalTerminal — 546 rows
+2026-03-27 03:13:35,377 [INFO]   Loading: Error_ASH96
+2026-03-27 03:13:35,386 [INFO]   Done: Error_ASH96 — 138 rows
+2026-03-27 03:13:35,386 [INFO]   Loading: ErrorsLog
+2026-03-27 03:13:35,395 [INFO]   Done: ErrorsLog — 0 rows
+2026-03-27 03:13:35,395 [INFO]   Loading: EventsLog
+2026-03-27 03:13:35,406 [INFO]   Done: EventsLog — 0 rows
+2026-03-27 03:13:35,407 [INFO]   Loading: EventsType
+2026-03-27 03:13:35,415 [INFO]   Done: EventsType — 0 rows
+2026-03-27 03:13:35,415 [INFO]   Loading: ExemptionAndStorageFile
+2026-03-27 03:13:35,428 [INFO]   Done: ExemptionAndStorageFile — 0 rows
+2026-03-27 03:13:35,429 [INFO]   Loading: ExpectedFixes
+2026-03-27 03:13:35,439 [INFO]   Done: ExpectedFixes — 0 rows
+2026-03-27 03:13:35,439 [INFO]   Loading: Expenses
+2026-03-27 03:13:35,448 [INFO]   Done: Expenses — 0 rows
+2026-03-27 03:13:35,448 [INFO]   Loading: ExternalTerminalSettings
+2026-03-27 03:13:35,463 [INFO]   Done: ExternalTerminalSettings — 1 rows
+2026-03-27 03:13:35,464 [INFO]   Loading: EyesTesting_optic
+2026-03-27 03:13:35,484 [INFO]   Done: EyesTesting_optic — 0 rows
+2026-03-27 03:13:35,484 [INFO]   Loading: EyesTesting_opticOld
+2026-03-27 03:13:35,503 [INFO]   Done: EyesTesting_opticOld — 0 rows
+2026-03-27 03:13:35,503 [INFO]   Loading: Fact_Attendance_Event
+2026-03-27 03:13:35,530 [INFO]   Done: Fact_Attendance_Event — 49 rows
+2026-03-27 03:13:35,531 [INFO]   Loading: Fact_Sales
+2026-03-27 03:13:36,921 [INFO]   Done: Fact_Sales — 17,633 rows
+2026-03-27 03:13:36,921 [INFO]   Loading: Fact_Shifts
+2026-03-27 03:13:36,950 [INFO]   Done: Fact_Shifts — 24 rows
+2026-03-27 03:13:36,950 [INFO]   Loading: FieldDoc
+2026-03-27 03:13:36,957 [INFO]   Done: FieldDoc — 0 rows
+2026-03-27 03:13:36,958 [INFO]   Loading: FinancialMovementStatus
+2026-03-27 03:13:36,966 [INFO]   Done: FinancialMovementStatus — 0 rows
+2026-03-27 03:13:36,966 [INFO]   Loading: FingerPrintsCache
+2026-03-27 03:13:36,975 [INFO]   Done: FingerPrintsCache — 0 rows
+2026-03-27 03:13:36,975 [INFO]   Loading: FingerprintsFile
+2026-03-27 03:13:36,984 [INFO]   Done: FingerprintsFile — 0 rows
+2026-03-27 03:13:36,985 [INFO]   Loading: FingerprintsFile_old
+2026-03-27 03:13:36,993 [INFO]   Done: FingerprintsFile_old — 0 rows
+2026-03-27 03:13:36,993 [INFO]   Loading: FirstHoOnlineTransactionsTransmission
+2026-03-27 03:13:37,003 [INFO]   Done: FirstHoOnlineTransactionsTransmission — 0 rows
+2026-03-27 03:13:37,003 [INFO]   Loading: FiscalMovement
+2026-03-27 03:13:37,041 [INFO]   Done: FiscalMovement — 166 rows
+2026-03-27 03:13:37,042 [INFO]   Loading: FiscalMovementType
+2026-03-27 03:13:37,057 [INFO]   Done: FiscalMovementType — 15 rows
+2026-03-27 03:13:37,058 [INFO]   Loading: FiveLevelDbFile_tmp
+2026-03-27 03:13:37,070 [INFO]   Done: FiveLevelDbFile_tmp — 0 rows
+2026-03-27 03:13:37,070 [INFO]   Loading: FlightApproval
+2026-03-27 03:13:37,080 [INFO]   Done: FlightApproval — 0 rows
+2026-03-27 03:13:37,080 [INFO]   Loading: Flights
+2026-03-27 03:13:37,089 [INFO]   Done: Flights — 0 rows
+2026-03-27 03:13:37,089 [INFO]   Loading: Flow
+2026-03-27 03:13:37,097 [INFO]   Done: Flow — 0 rows
+2026-03-27 03:13:37,097 [INFO]   Loading: FocalLengths
+2026-03-27 03:13:37,107 [INFO]   Done: FocalLengths — 0 rows
+2026-03-27 03:13:37,107 [INFO]   Loading: FocalLengths1
+2026-03-27 03:13:37,116 [INFO]   Done: FocalLengths1 — 0 rows
+2026-03-27 03:13:37,116 [INFO]   Loading: FormHistoryStatus
+2026-03-27 03:13:37,126 [INFO]   Done: FormHistoryStatus — 0 rows
+2026-03-27 03:13:37,126 [INFO]   Loading: FormHistoryStatus1
+2026-03-27 03:13:37,135 [INFO]   Done: FormHistoryStatus1 — 0 rows
+2026-03-27 03:13:37,135 [INFO]   Loading: GAZITi
+2026-03-27 03:13:37,149 [INFO]   Done: GAZITi — 1 rows
+2026-03-27 03:13:37,150 [INFO]   Loading: GazitIActivityLog
+2026-03-27 03:13:37,161 [INFO]   Done: GazitIActivityLog — 0 rows
+2026-03-27 03:13:37,161 [INFO]   Loading: GazitITransactionWaitingForTransmission
+2026-03-27 03:13:37,170 [INFO]   Done: GazitITransactionWaitingForTransmission — 0 rows
+2026-03-27 03:13:37,170 [INFO]   Loading: GazitITypeOfCardList
+2026-03-27 03:13:37,186 [INFO]   Done: GazitITypeOfCardList — 0 rows
+2026-03-27 03:13:37,186 [INFO]   Loading: GazitiFuture
+2026-03-27 03:13:37,193 [INFO]   Done: GazitiFuture — 0 rows
+2026-03-27 03:13:37,193 [INFO]   Loading: GeneralCarrierFile
+2026-03-27 03:13:37,202 [INFO]   Done: GeneralCarrierFile — 0 rows
+2026-03-27 03:13:37,202 [INFO]   Loading: GeneralMenus
+2026-03-27 03:13:37,225 [INFO]   Done: GeneralMenus — 68 rows
+2026-03-27 03:13:37,225 [INFO]   Loading: GraphicDocumentsLogoSettings
+2026-03-27 03:13:37,233 [INFO]   Done: GraphicDocumentsLogoSettings — 0 rows
+2026-03-27 03:13:37,234 [INFO]   Loading: GroupsDesc
+2026-03-27 03:13:37,241 [INFO]   Done: GroupsDesc — 0 rows
+2026-03-27 03:13:37,241 [INFO]   Loading: GroupsSettings
+2026-03-27 03:13:37,248 [INFO]   Done: GroupsSettings — 0 rows
+2026-03-27 03:13:37,248 [INFO]   Loading: HistoricModification
+2026-03-27 03:13:37,258 [INFO]   Done: HistoricModification — 0 rows
+2026-03-27 03:13:37,258 [INFO]   Loading: Holidays
+2026-03-27 03:13:37,268 [INFO]   Done: Holidays — 44 rows
+2026-03-27 03:13:37,268 [INFO]   Loading: HolidaysTypes
+2026-03-27 03:13:37,276 [INFO]   Done: HolidaysTypes — 34 rows
+2026-03-27 03:13:37,276 [INFO]   Loading: HoursAmountsSlicing
+2026-03-27 03:13:37,283 [INFO]   Done: HoursAmountsSlicing — 2 rows
+2026-03-27 03:13:37,283 [INFO]   Loading: HoursReport_tmp
+2026-03-27 03:13:37,291 [INFO]   Done: HoursReport_tmp — 0 rows
+2026-03-27 03:13:37,292 [INFO]   Loading: INTERFACES_HEADER_LOGS
+2026-03-27 03:13:37,301 [INFO]   Done: INTERFACES_HEADER_LOGS — 0 rows
+2026-03-27 03:13:37,301 [INFO]   Loading: INTERFACES_LINES_LOGS
+2026-03-27 03:13:37,311 [INFO]   Done: INTERFACES_LINES_LOGS — 0 rows
+2026-03-27 03:13:37,311 [INFO]   Loading: IconsErrors
+2026-03-27 03:13:37,318 [INFO]   Done: IconsErrors — 0 rows
+2026-03-27 03:13:37,319 [INFO]   Loading: ImagesBundle
+2026-03-27 03:13:37,340 [INFO]   Done: ImagesBundle — 0 rows
+2026-03-27 03:13:37,340 [INFO]   Loading: InterfaceLog
+2026-03-27 03:13:38,373 [INFO]   Done: InterfaceLog — 19,025 rows
+2026-03-27 03:13:38,373 [INFO]   Loading: Interfaces
+2026-03-27 03:13:38,397 [INFO]   Done: Interfaces — 0 rows
+2026-03-27 03:13:38,397 [INFO]   Loading: InternalPhone
+2026-03-27 03:13:38,407 [INFO]   Done: InternalPhone — 0 rows
+2026-03-27 03:13:38,407 [INFO]   Loading: Inventory
+2026-03-27 03:13:38,558 [INFO]   Done: Inventory — 3,448 rows
+2026-03-27 03:13:38,558 [INFO]   Loading: InventoryByChainStores
+2026-03-27 03:13:38,566 [INFO]   Done: InventoryByChainStores — 0 rows
+2026-03-27 03:13:38,566 [INFO]   Loading: InventoryQuery_tmp
+2026-03-27 03:13:38,576 [INFO]   Done: InventoryQuery_tmp — 0 rows
+2026-03-27 03:13:38,577 [INFO]   Loading: InvoicePrintRecover
+2026-03-27 03:13:38,599 [INFO]   Done: InvoicePrintRecover — 0 rows
+2026-03-27 03:13:38,599 [INFO]   Loading: InvoicesDeliveryDetails
+2026-03-27 03:13:38,620 [INFO]   Done: InvoicesDeliveryDetails — 0 rows
+2026-03-27 03:13:38,621 [INFO]   Loading: InvoicesDeliveryDetails1
+2026-03-27 03:13:38,641 [INFO]   Done: InvoicesDeliveryDetails1 — 0 rows
+2026-03-27 03:13:38,641 [INFO]   Loading: IssuesPrint
+2026-03-27 03:13:38,651 [INFO]   Done: IssuesPrint — 0 rows
+2026-03-27 03:13:38,651 [INFO]   Loading: ItemDiscountTracking
+2026-03-27 03:13:38,661 [INFO]   Done: ItemDiscountTracking — 0 rows
+2026-03-27 03:13:38,662 [INFO]   Loading: ItemDiscountTracking_Temp
+2026-03-27 03:13:38,673 [INFO]   Done: ItemDiscountTracking_Temp — 0 rows
+2026-03-27 03:13:38,673 [INFO]   Loading: ItemTypeCategory
+2026-03-27 03:13:38,680 [INFO]   Done: ItemTypeCategory — 0 rows
+2026-03-27 03:13:38,680 [INFO]   Loading: ItemTypes
+2026-03-27 03:13:38,690 [INFO]   Done: ItemTypes — 27 rows
+2026-03-27 03:13:38,690 [INFO]   Loading: ItemTypesComments
+2026-03-27 03:13:38,697 [INFO]   Done: ItemTypesComments — 0 rows
+2026-03-27 03:13:38,697 [INFO]   Loading: ItemUnitSizes
+2026-03-27 03:13:38,705 [INFO]   Done: ItemUnitSizes — 0 rows
+2026-03-27 03:13:38,705 [INFO]   Loading: Items
+2026-03-27 03:13:39,117 [INFO]   Done: Items — 2,002 rows
+2026-03-27 03:13:39,117 [INFO]   Loading: ItemsAdditionalClass
+2026-03-27 03:13:39,126 [INFO]   Done: ItemsAdditionalClass — 0 rows
+2026-03-27 03:13:39,126 [INFO]   Loading: ItemsAndModelsImages
+2026-03-27 03:13:39,135 [INFO]   Done: ItemsAndModelsImages — 0 rows
+2026-03-27 03:13:39,135 [INFO]   Loading: ItemsBundle_package
+2026-03-27 03:13:39,147 [INFO]   Done: ItemsBundle_package — 62 rows
+2026-03-27 03:13:39,147 [INFO]   Loading: ItemsCatalogDetection
+2026-03-27 03:13:39,163 [INFO]   Done: ItemsCatalogDetection — 0 rows
+2026-03-27 03:13:39,163 [INFO]   Loading: ItemsInterfaces
+2026-03-27 03:13:39,199 [INFO]   Done: ItemsInterfaces — 0 rows
+2026-03-27 03:13:39,199 [INFO]   Loading: ItemsNoInventoryAvailableLog
+2026-03-27 03:13:39,209 [INFO]   Done: ItemsNoInventoryAvailableLog — 0 rows
+2026-03-27 03:13:39,209 [INFO]   Loading: ItemsRentAccount
+2026-03-27 03:13:39,224 [INFO]   Done: ItemsRentAccount — 0 rows
+2026-03-27 03:13:39,224 [INFO]   Loading: Items_tmp
+2026-03-27 03:13:39,232 [INFO]   Done: Items_tmp — 0 rows
+2026-03-27 03:13:39,232 [INFO]   Loading: JobOrderLines
+2026-03-27 03:13:39,244 [INFO]   Done: JobOrderLines — 0 rows
+2026-03-27 03:13:39,245 [INFO]   Loading: JobOrderTitle
+2026-03-27 03:13:39,257 [INFO]   Done: JobOrderTitle — 0 rows
+2026-03-27 03:13:39,257 [INFO]   Loading: JournalVaucherControl
+2026-03-27 03:13:39,271 [INFO]   Done: JournalVaucherControl — 0 rows
+2026-03-27 03:13:39,271 [INFO]   Loading: JournalVaucherHashavshevet
+2026-03-27 03:13:39,285 [INFO]   Done: JournalVaucherHashavshevet — 0 rows
+2026-03-27 03:13:39,285 [INFO]   Loading: JournalVoucherControlContinue
+2026-03-27 03:13:39,301 [INFO]   Done: JournalVoucherControlContinue — 0 rows
+2026-03-27 03:13:39,301 [INFO]   Loading: KitsMovementTable
+2026-03-27 03:13:39,312 [INFO]   Done: KitsMovementTable — 0 rows
+2026-03-27 03:13:39,312 [INFO]   Loading: Laundry
+2026-03-27 03:13:39,325 [INFO]   Done: Laundry — 0 rows
+2026-03-27 03:13:39,325 [INFO]   Loading: LendingCopies
+2026-03-27 03:13:39,340 [INFO]   Done: LendingCopies — 0 rows
+2026-03-27 03:13:39,341 [INFO]   Loading: LimitedChecksFile
+2026-03-27 03:13:39,351 [INFO]   Done: LimitedChecksFile — 0 rows
+2026-03-27 03:13:39,351 [INFO]   Loading: LinkCustomerToPayment
+2026-03-27 03:13:39,360 [INFO]   Done: LinkCustomerToPayment — 0 rows
+2026-03-27 03:13:39,360 [INFO]   Loading: LocationsWorkOrders
+2026-03-27 03:13:39,368 [INFO]   Done: LocationsWorkOrders — 0 rows
+2026-03-27 03:13:39,368 [INFO]   Loading: Locks
+2026-03-27 03:13:39,377 [INFO]   Done: Locks — 0 rows
+2026-03-27 03:13:39,378 [INFO]   Loading: LogRequestsForManagerApproval
+2026-03-27 03:13:39,387 [INFO]   Done: LogRequestsForManagerApproval — 0 rows
+2026-03-27 03:13:39,387 [INFO]   Loading: LoopJobs
+2026-03-27 03:13:39,395 [INFO]   Done: LoopJobs — 0 rows
+2026-03-27 03:13:39,395 [INFO]   Loading: LotNumbersPerItemID
+2026-03-27 03:13:39,405 [INFO]   Done: LotNumbersPerItemID — 0 rows
+2026-03-27 03:13:39,405 [INFO]   Loading: MasterSlaveSyncInfo
+2026-03-27 03:13:39,414 [INFO]   Done: MasterSlaveSyncInfo — 2 rows
+2026-03-27 03:13:39,414 [INFO]   Loading: MatrixReception_tmp
+2026-03-27 03:13:39,431 [INFO]   Done: MatrixReception_tmp — 0 rows
+2026-03-27 03:13:39,431 [INFO]   Loading: MatrixReportsProcessingFile
+2026-03-27 03:13:39,446 [INFO]   Done: MatrixReportsProcessingFile — 0 rows
+2026-03-27 03:13:39,446 [INFO]   Loading: MeansOfPaymentGroup
+2026-03-27 03:13:39,460 [INFO]   Done: MeansOfPaymentGroup — 0 rows
+2026-03-27 03:13:39,461 [INFO]   Loading: MeansOfPaymentGroup900
+2026-03-27 03:13:39,475 [INFO]   Done: MeansOfPaymentGroup900 — 0 rows
+2026-03-27 03:13:39,475 [INFO]   Loading: MeansOfPaymentsGroup
+2026-03-27 03:13:39,482 [INFO]   Done: MeansOfPaymentsGroup — 0 rows
+2026-03-27 03:13:39,483 [INFO]   Loading: MeetingAdditionalItems
+2026-03-27 03:13:39,490 [INFO]   Done: MeetingAdditionalItems — 0 rows
+2026-03-27 03:13:39,491 [INFO]   Loading: MeetingsFile
+2026-03-27 03:13:39,508 [INFO]   Done: MeetingsFile — 0 rows
+2026-03-27 03:13:39,508 [INFO]   Loading: MeetingsFile_854_855
+2026-03-27 03:13:39,523 [INFO]   Done: MeetingsFile_854_855 — 0 rows
+2026-03-27 03:13:39,523 [INFO]   Loading: MeetingsFile_855_856
+2026-03-27 03:13:39,539 [INFO]   Done: MeetingsFile_855_856 — 0 rows
+2026-03-27 03:13:39,539 [INFO]   Loading: MenusOnDemand
+2026-03-27 03:13:39,566 [INFO]   Done: MenusOnDemand — 253 rows
+2026-03-27 03:13:39,566 [INFO]   Loading: Messages
+2026-03-27 03:13:39,574 [INFO]   Done: Messages — 0 rows
+2026-03-27 03:13:39,574 [INFO]   Loading: MinInventoryForWarehouse
+2026-03-27 03:13:39,585 [INFO]   Done: MinInventoryForWarehouse — 2 rows
+2026-03-27 03:13:39,585 [INFO]   Loading: MkmErrors
+2026-03-27 03:13:39,596 [INFO]   Done: MkmErrors — 12 rows
+2026-03-27 03:13:39,596 [INFO]   Loading: ModelGroupLiminalStock
+2026-03-27 03:13:39,603 [INFO]   Done: ModelGroupLiminalStock — 0 rows
+2026-03-27 03:13:39,603 [INFO]   Loading: Models
+2026-03-27 03:13:39,617 [INFO]   Done: Models — 1 rows
+2026-03-27 03:13:39,618 [INFO]   Loading: ModelsFutureOrder
+2026-03-27 03:13:39,625 [INFO]   Done: ModelsFutureOrder — 0 rows
+2026-03-27 03:13:39,625 [INFO]   Loading: ModelsReceptionFromSupplier_D
+2026-03-27 03:13:39,641 [INFO]   Done: ModelsReceptionFromSupplier_D — 0 rows
+2026-03-27 03:13:39,641 [INFO]   Loading: ModelsReceptionFromSupplier_H
+2026-03-27 03:13:39,653 [INFO]   Done: ModelsReceptionFromSupplier_H — 0 rows
+2026-03-27 03:13:39,653 [INFO]   Loading: ModelsReceptionFromSupplier_H1
+2026-03-27 03:13:39,665 [INFO]   Done: ModelsReceptionFromSupplier_H1 — 0 rows
+2026-03-27 03:13:39,665 [INFO]   Loading: MoreInfo
+2026-03-27 03:13:39,678 [INFO]   Done: MoreInfo — 0 rows
+2026-03-27 03:13:39,678 [INFO]   Loading: MovieRent_tmp
+2026-03-27 03:13:39,685 [INFO]   Done: MovieRent_tmp — 0 rows
+2026-03-27 03:13:39,685 [INFO]   Loading: MultipassActions
+2026-03-27 03:13:39,698 [INFO]   Done: MultipassActions — 0 rows
+2026-03-27 03:13:39,698 [INFO]   Loading: MultipassActionsLog
+2026-03-27 03:13:39,713 [INFO]   Done: MultipassActionsLog — 0 rows
+2026-03-27 03:13:39,713 [INFO]   Loading: MultipassTbls
+2026-03-27 03:13:39,735 [INFO]   Done: MultipassTbls — 207 rows
+2026-03-27 03:13:39,736 [INFO]   Loading: Multiple_Barcode
+2026-03-27 03:13:39,742 [INFO]   Done: Multiple_Barcode — 0 rows
+2026-03-27 03:13:39,743 [INFO]   Loading: Names_tmp
+2026-03-27 03:13:39,749 [INFO]   Done: Names_tmp — 0 rows
+2026-03-27 03:13:39,749 [INFO]   Loading: NetworkInterrupts
+2026-03-27 03:13:39,757 [INFO]   Done: NetworkInterrupts — 2 rows
+2026-03-27 03:13:39,757 [INFO]   Loading: NetworkPortionsControl
+2026-03-27 03:13:39,765 [INFO]   Done: NetworkPortionsControl — 0 rows
+2026-03-27 03:13:39,765 [INFO]   Loading: NewTrack
+2026-03-27 03:13:39,775 [INFO]   Done: NewTrack — 0 rows
+2026-03-27 03:13:39,775 [INFO]   Loading: No101EmpForm
+2026-03-27 03:13:39,791 [INFO]   Done: No101EmpForm — 0 rows
+2026-03-27 03:13:39,791 [INFO]   Loading: NokchotObdim_shnaKodmt
+2026-03-27 03:13:39,799 [INFO]   Done: NokchotObdim_shnaKodmt — 0 rows
+2026-03-27 03:13:39,799 [INFO]   Loading: NonPaymentCause
+2026-03-27 03:13:39,806 [INFO]   Done: NonPaymentCause — 0 rows
+2026-03-27 03:13:39,806 [INFO]   Loading: NoticeToCustomerForOrder
+2026-03-27 03:13:39,816 [INFO]   Done: NoticeToCustomerForOrder — 0 rows
+2026-03-27 03:13:39,816 [INFO]   Loading: NoticeToCustomerForOrder1
+2026-03-27 03:13:39,824 [INFO]   Done: NoticeToCustomerForOrder1 — 0 rows
+2026-03-27 03:13:39,824 [INFO]   Loading: OldAttendance
+2026-03-27 03:13:39,832 [INFO]   Done: OldAttendance — 0 rows
+2026-03-27 03:13:39,832 [INFO]   Loading: OldControll
+2026-03-27 03:13:39,850 [INFO]   Done: OldControll — 0 rows
+2026-03-27 03:13:39,850 [INFO]   Loading: OldCustomerOrdersHeaders
+2026-03-27 03:13:39,862 [INFO]   Done: OldCustomerOrdersHeaders — 0 rows
+2026-03-27 03:13:39,862 [INFO]   Loading: OldDocuments
+2026-03-27 03:13:39,873 [INFO]   Done: OldDocuments — 0 rows
+2026-03-27 03:13:39,874 [INFO]   Loading: OldDocumentsCnt
+2026-03-27 03:13:39,888 [INFO]   Done: OldDocumentsCnt — 0 rows
+2026-03-27 03:13:39,888 [INFO]   Loading: OldDocumentsLines
+2026-03-27 03:13:39,898 [INFO]   Done: OldDocumentsLines — 0 rows
+2026-03-27 03:13:39,898 [INFO]   Loading: OldDocumentsLinesCnt
+2026-03-27 03:13:39,911 [INFO]   Done: OldDocumentsLinesCnt — 0 rows
+2026-03-27 03:13:39,911 [INFO]   Loading: OldDtsActions
+2026-03-27 03:13:39,923 [INFO]   Done: OldDtsActions — 0 rows
+2026-03-27 03:13:39,923 [INFO]   Loading: OldDtsActionsLog
+2026-03-27 03:13:39,935 [INFO]   Done: OldDtsActionsLog — 0 rows
+2026-03-27 03:13:39,935 [INFO]   Loading: OldGppActionsLog
+2026-03-27 03:13:39,946 [INFO]   Done: OldGppActionsLog — 0 rows
+2026-03-27 03:13:39,946 [INFO]   Loading: OldOrderBasketHeaders
+2026-03-27 03:13:39,955 [INFO]   Done: OldOrderBasketHeaders — 0 rows
+2026-03-27 03:13:39,955 [INFO]   Loading: OldPraxelTbl
+2026-03-27 03:13:39,970 [INFO]   Done: OldPraxelTbl — 0 rows
+2026-03-27 03:13:39,970 [INFO]   Loading: OldPraxelTbls
+2026-03-27 03:13:39,984 [INFO]   Done: OldPraxelTbls — 0 rows
+2026-03-27 03:13:39,984 [INFO]   Loading: OldReciepts
+2026-03-27 03:13:39,995 [INFO]   Done: OldReciepts — 0 rows
+2026-03-27 03:13:39,995 [INFO]   Loading: OldRecieptsCnt
+2026-03-27 03:13:40,007 [INFO]   Done: OldRecieptsCnt — 0 rows
+2026-03-27 03:13:40,007 [INFO]   Loading: OldRecieptsLines
+2026-03-27 03:13:40,019 [INFO]   Done: OldRecieptsLines — 0 rows
+2026-03-27 03:13:40,020 [INFO]   Loading: OldRecieptsLinesCnt
+2026-03-27 03:13:40,032 [INFO]   Done: OldRecieptsLinesCnt — 0 rows
+2026-03-27 03:13:40,033 [INFO]   Loading: OldTransPraxel
+2026-03-27 03:13:40,043 [INFO]   Done: OldTransPraxel — 0 rows
+2026-03-27 03:13:40,043 [INFO]   Loading: OldWayBill
+2026-03-27 03:13:40,057 [INFO]   Done: OldWayBill — 0 rows
+2026-03-27 03:13:40,058 [INFO]   Loading: OldWayBillHeaders
+2026-03-27 03:13:40,089 [INFO]   Done: OldWayBillHeaders — 83 rows
+2026-03-27 03:13:40,090 [INFO]   Loading: OldWayBillHeaders1
+2026-03-27 03:13:40,102 [INFO]   Done: OldWayBillHeaders1 — 0 rows
+2026-03-27 03:13:40,102 [INFO]   Loading: OldWayBillLines
+2026-03-27 03:13:40,113 [INFO]   Done: OldWayBillLines — 0 rows
+2026-03-27 03:13:40,113 [INFO]   Loading: OnAccountTransactionsBalance
+2026-03-27 03:13:40,122 [INFO]   Done: OnAccountTransactionsBalance — 0 rows
+2026-03-27 03:13:40,122 [INFO]   Loading: OnlineDocumentation
+2026-03-27 03:13:40,130 [INFO]   Done: OnlineDocumentation — 0 rows
+2026-03-27 03:13:40,130 [INFO]   Loading: OnlineTransactionsTransmission
+2026-03-27 03:13:42,234 [INFO]   Done: OnlineTransactionsTransmission — 10,255 rows
+2026-03-27 03:13:42,234 [INFO]   Loading: OpeningTimes
+2026-03-27 03:13:42,247 [INFO]   Done: OpeningTimes — 0 rows
+2026-03-27 03:13:42,247 [INFO]   Loading: OpticsPrescription
+2026-03-27 03:13:42,269 [INFO]   Done: OpticsPrescription — 0 rows
+2026-03-27 03:13:42,270 [INFO]   Loading: OpticsPrescriptionOld
+2026-03-27 03:13:42,289 [INFO]   Done: OpticsPrescriptionOld — 0 rows
+2026-03-27 03:13:42,289 [INFO]   Loading: Optics_CustomersTrailer
+2026-03-27 03:13:42,297 [INFO]   Done: Optics_CustomersTrailer — 0 rows
+2026-03-27 03:13:42,297 [INFO]   Loading: Optics_ItemsTrailer
+2026-03-27 03:13:42,308 [INFO]   Done: Optics_ItemsTrailer — 0 rows
+2026-03-27 03:13:42,309 [INFO]   Loading: OrderBasketHeaders
+2026-03-27 03:13:42,318 [INFO]   Done: OrderBasketHeaders — 0 rows
+2026-03-27 03:13:42,318 [INFO]   Loading: OrderDeclineCause
+2026-03-27 03:13:42,325 [INFO]   Done: OrderDeclineCause — 0 rows
+2026-03-27 03:13:42,325 [INFO]   Loading: OrderFormLines
+2026-03-27 03:13:42,334 [INFO]   Done: OrderFormLines — 0 rows
+2026-03-27 03:13:42,334 [INFO]   Loading: OrderFormLines1
+2026-03-27 03:13:42,344 [INFO]   Done: OrderFormLines1 — 0 rows
+2026-03-27 03:13:42,344 [INFO]   Loading: OrderModelsH_New
+2026-03-27 03:13:42,356 [INFO]   Done: OrderModelsH_New — 0 rows
+2026-03-27 03:13:42,356 [INFO]   Loading: OrderTypeClass
+2026-03-27 03:13:42,363 [INFO]   Done: OrderTypeClass — 0 rows
+2026-03-27 03:13:42,363 [INFO]   Loading: OrderTypes
+2026-03-27 03:13:42,371 [INFO]   Done: OrderTypes — 0 rows
+2026-03-27 03:13:42,371 [INFO]   Loading: OrderTypesComments
+2026-03-27 03:13:42,379 [INFO]   Done: OrderTypesComments — 0 rows
+2026-03-27 03:13:42,379 [INFO]   Loading: OrdermodelsD_New
+2026-03-27 03:13:42,396 [INFO]   Done: OrdermodelsD_New — 0 rows
+2026-03-27 03:13:42,396 [INFO]   Loading: OrdersTypes
+2026-03-27 03:13:42,404 [INFO]   Done: OrdersTypes — 0 rows
+2026-03-27 03:13:42,404 [INFO]   Loading: OrdersUpdateOnline
+2026-03-27 03:13:42,411 [INFO]   Done: OrdersUpdateOnline — 0 rows
+2026-03-27 03:13:42,411 [INFO]   Loading: Orders_tmp
+2026-03-27 03:13:42,418 [INFO]   Done: Orders_tmp — 0 rows
+2026-03-27 03:13:42,418 [INFO]   Loading: POSMovementToHashavshevet
+2026-03-27 03:13:42,430 [INFO]   Done: POSMovementToHashavshevet — 0 rows
+2026-03-27 03:13:42,431 [INFO]   Loading: POSPermanentMessages
+2026-03-27 03:13:42,438 [INFO]   Done: POSPermanentMessages — 0 rows
+2026-03-27 03:13:42,438 [INFO]   Loading: PUBLISHED_INTERFACES
+2026-03-27 03:13:42,446 [INFO]   Done: PUBLISHED_INTERFACES — 0 rows
+2026-03-27 03:13:42,446 [INFO]   Loading: PaymentDeposite
+2026-03-27 03:13:42,454 [INFO]   Done: PaymentDeposite — 0 rows
+2026-03-27 03:13:42,454 [INFO]   Loading: PaymentMethodMonitoring
+2026-03-27 03:13:42,477 [INFO]   Done: PaymentMethodMonitoring — 0 rows
+2026-03-27 03:13:42,477 [INFO]   Loading: PaymentMethodMonitoring1
+2026-03-27 03:13:42,491 [INFO]   Done: PaymentMethodMonitoring1 — 0 rows
+2026-03-27 03:13:42,491 [INFO]   Loading: PaymentMonitoring905
+2026-03-27 03:13:42,507 [INFO]   Done: PaymentMonitoring905 — 0 rows
+2026-03-27 03:13:42,507 [INFO]   Loading: PaymentTerms
+2026-03-27 03:13:42,513 [INFO]   Done: PaymentTerms — 0 rows
+2026-03-27 03:13:42,513 [INFO]   Loading: PaymentType
+2026-03-27 03:13:42,521 [INFO]   Done: PaymentType — 7 rows
+2026-03-27 03:13:42,522 [INFO]   Loading: PaymentsToSuppliers
+2026-03-27 03:13:42,530 [INFO]   Done: PaymentsToSuppliers — 0 rows
+2026-03-27 03:13:42,530 [INFO]   Loading: PersonalActionLog
+2026-03-27 03:13:42,554 [INFO]   Done: PersonalActionLog — 606 rows
+2026-03-27 03:13:42,554 [INFO]   Loading: PosCalculatorClosing
+2026-03-27 03:13:42,563 [INFO]   Done: PosCalculatorClosing — 0 rows
+2026-03-27 03:13:42,563 [INFO]   Loading: PosDocHeaders
+2026-03-27 03:13:42,583 [INFO]   Done: PosDocHeaders — 0 rows
+2026-03-27 03:13:42,584 [INFO]   Loading: PosStatement
+2026-03-27 03:13:42,593 [INFO]   Done: PosStatement — 0 rows
+2026-03-27 03:13:42,593 [INFO]   Loading: PosStatmentsLines
+2026-03-27 03:13:42,602 [INFO]   Done: PosStatmentsLines — 0 rows
+2026-03-27 03:13:42,603 [INFO]   Loading: PositionStatusTime
+2026-03-27 03:13:42,610 [INFO]   Done: PositionStatusTime — 0 rows
+2026-03-27 03:13:42,610 [INFO]   Loading: PostalTypes
+2026-03-27 03:13:42,620 [INFO]   Done: PostalTypes — 5 rows
+2026-03-27 03:13:42,620 [INFO]   Loading: PraxelTbls
+2026-03-27 03:13:42,667 [INFO]   Done: PraxelTbls — 121 rows
+2026-03-27 03:13:42,667 [INFO]   Loading: PraxellTablesCode
+2026-03-27 03:13:42,676 [INFO]   Done: PraxellTablesCode — 6 rows
+2026-03-27 03:13:42,676 [INFO]   Loading: Praxell_Log
+2026-03-27 03:13:42,685 [INFO]   Done: Praxell_Log — 0 rows
+2026-03-27 03:13:42,685 [INFO]   Loading: PrePaidCardsCampaign
+2026-03-27 03:13:42,695 [INFO]   Done: PrePaidCardsCampaign — 0 rows
+2026-03-27 03:13:42,695 [INFO]   Loading: Pre_PaidCardsAssign
+2026-03-27 03:13:42,703 [INFO]   Done: Pre_PaidCardsAssign — 0 rows
+2026-03-27 03:13:42,703 [INFO]   Loading: Pre_Paid_Prefixes
+2026-03-27 03:13:42,711 [INFO]   Done: Pre_Paid_Prefixes — 0 rows
+2026-03-27 03:13:42,712 [INFO]   Loading: Pre_Paid_Prefixes1
+2026-03-27 03:13:42,720 [INFO]   Done: Pre_Paid_Prefixes1 — 0 rows
+2026-03-27 03:13:42,720 [INFO]   Loading: Pre_Paid_Prefixes2
+2026-03-27 03:13:42,730 [INFO]   Done: Pre_Paid_Prefixes2 — 0 rows
+2026-03-27 03:13:42,730 [INFO]   Loading: PreparationInstructions
+2026-03-27 03:13:42,739 [INFO]   Done: PreparationInstructions — 1 rows
+2026-03-27 03:13:42,739 [INFO]   Loading: PriceChangeDetection
+2026-03-27 03:13:42,746 [INFO]   Done: PriceChangeDetection — 0 rows
+2026-03-27 03:13:42,746 [INFO]   Loading: PriceLists
+2026-03-27 03:13:42,756 [INFO]   Done: PriceLists — 4 rows
+2026-03-27 03:13:42,756 [INFO]   Loading: PricesChangeApproval
+2026-03-27 03:13:42,765 [INFO]   Done: PricesChangeApproval — 0 rows
+2026-03-27 03:13:42,765 [INFO]   Loading: PricesChanges
+2026-03-27 03:13:42,774 [INFO]   Done: PricesChanges — 0 rows
+2026-03-27 03:13:42,774 [INFO]   Loading: PricingProfitAndVat
+2026-03-27 03:13:42,785 [INFO]   Done: PricingProfitAndVat — 0 rows
+2026-03-27 03:13:42,785 [INFO]   Loading: PrinterConfigurationTable
+2026-03-27 03:13:42,796 [INFO]   Done: PrinterConfigurationTable — 12 rows
+2026-03-27 03:13:42,796 [INFO]   Loading: PrinterCustomCommands
+2026-03-27 03:13:42,803 [INFO]   Done: PrinterCustomCommands — 0 rows
+2026-03-27 03:13:42,804 [INFO]   Loading: PrinterSettingsControl
+2026-03-27 03:13:42,812 [INFO]   Done: PrinterSettingsControl — 7 rows
+2026-03-27 03:13:42,812 [INFO]   Loading: ProductionOpticOrderChangeCause
+2026-03-27 03:13:42,819 [INFO]   Done: ProductionOpticOrderChangeCause — 0 rows
+2026-03-27 03:13:42,820 [INFO]   Loading: ProductsSettings_optic
+2026-03-27 03:13:42,827 [INFO]   Done: ProductsSettings_optic — 0 rows
+2026-03-27 03:13:42,827 [INFO]   Loading: ProgramsList
+2026-03-27 03:13:42,858 [INFO]   Done: ProgramsList — 689 rows
+2026-03-27 03:13:42,858 [INFO]   Loading: ProgramsList1
+2026-03-27 03:13:42,866 [INFO]   Done: ProgramsList1 — 0 rows
+2026-03-27 03:13:42,866 [INFO]   Loading: PromisedToCustomer
+2026-03-27 03:13:42,873 [INFO]   Done: PromisedToCustomer — 0 rows
+2026-03-27 03:13:42,873 [INFO]   Loading: ProtoTypeMenus
+2026-03-27 03:13:42,880 [INFO]   Done: ProtoTypeMenus — 2 rows
+2026-03-27 03:13:42,881 [INFO]   Loading: PublishedCoupons_tmp
+2026-03-27 03:13:42,888 [INFO]   Done: PublishedCoupons_tmp — 0 rows
+2026-03-27 03:13:42,888 [INFO]   Loading: QaStatus
+2026-03-27 03:13:42,895 [INFO]   Done: QaStatus — 0 rows
+2026-03-27 03:13:42,895 [INFO]   Loading: RFIDActivityLog
+2026-03-27 03:13:42,905 [INFO]   Done: RFIDActivityLog — 0 rows
+2026-03-27 03:13:42,905 [INFO]   Loading: RFIDDocumentsLines
+2026-03-27 03:13:42,914 [INFO]   Done: RFIDDocumentsLines — 0 rows
+2026-03-27 03:13:42,914 [INFO]   Loading: RFIDInventoryLog
+2026-03-27 03:13:42,923 [INFO]   Done: RFIDInventoryLog — 0 rows
+2026-03-27 03:13:42,923 [INFO]   Loading: RFIDTempDocumentsLines
+2026-03-27 03:13:42,931 [INFO]   Done: RFIDTempDocumentsLines — 0 rows
+2026-03-27 03:13:42,931 [INFO]   Loading: RMSReceiptLinesHold
+2026-03-27 03:13:42,941 [INFO]   Done: RMSReceiptLinesHold — 0 rows
+2026-03-27 03:13:42,941 [INFO]   Loading: RMSTransaction
+2026-03-27 03:13:42,954 [INFO]   Done: RMSTransaction — 0 rows
+2026-03-27 03:13:42,954 [INFO]   Loading: ReceiptLines
+2026-03-27 03:13:44,653 [INFO]   Done: ReceiptLines — 13,631 rows
+2026-03-27 03:13:44,654 [INFO]   Loading: ReceiptLines_continue
+2026-03-27 03:13:46,317 [INFO]   Done: ReceiptLines_continue — 13,631 rows
+2026-03-27 03:13:46,317 [INFO]   Loading: ReceiptPrintRecover
+2026-03-27 03:13:46,342 [INFO]   Done: ReceiptPrintRecover — 0 rows
+2026-03-27 03:13:46,343 [INFO]   Loading: ReceiptTitle_continue
+2026-03-27 03:13:47,547 [INFO]   Done: ReceiptTitle_continue — 9,379 rows
+2026-03-27 03:13:47,547 [INFO]   Loading: Receipts
+2026-03-27 03:13:48,596 [INFO]   Done: Receipts — 9,380 rows
+2026-03-27 03:13:48,597 [INFO]   Loading: ReferemceValidationAlerts
+2026-03-27 03:13:48,606 [INFO]   Done: ReferemceValidationAlerts — 0 rows
+2026-03-27 03:13:48,606 [INFO]   Loading: RefundMethods
+2026-03-27 03:13:48,615 [INFO]   Done: RefundMethods — 0 rows
+2026-03-27 03:13:48,615 [INFO]   Loading: RefundOriginalTendersAmountItems
+2026-03-27 03:13:48,626 [INFO]   Done: RefundOriginalTendersAmountItems — 0 rows
+2026-03-27 03:13:48,626 [INFO]   Loading: ReleaseVersion
+2026-03-27 03:13:48,635 [INFO]   Done: ReleaseVersion — 65 rows
+2026-03-27 03:13:48,635 [INFO]   Loading: RentTypes
+2026-03-27 03:13:48,644 [INFO]   Done: RentTypes — 0 rows
+2026-03-27 03:13:48,644 [INFO]   Loading: ReportsProcessingFile
+2026-03-27 03:13:48,658 [INFO]   Done: ReportsProcessingFile — 0 rows
+2026-03-27 03:13:48,658 [INFO]   Loading: ReportsProcessingFile_216BTRV
+2026-03-27 03:13:48,681 [INFO]   Done: ReportsProcessingFile_216BTRV — 0 rows
+2026-03-27 03:13:48,681 [INFO]   Loading: Reports_tmp
+2026-03-27 03:13:48,693 [INFO]   Done: Reports_tmp — 0 rows
+2026-03-27 03:13:48,693 [INFO]   Loading: RequestReferenceFromTaxAuthority
+2026-03-27 03:13:48,704 [INFO]   Done: RequestReferenceFromTaxAuthority — 0 rows
+2026-03-27 03:13:48,704 [INFO]   Loading: RestCanceledItemsLog
+2026-03-27 03:13:48,715 [INFO]   Done: RestCanceledItemsLog — 0 rows
+2026-03-27 03:13:48,715 [INFO]   Loading: RestaurantControl
+2026-03-27 03:13:48,730 [INFO]   Done: RestaurantControl — 2 rows
+2026-03-27 03:13:48,731 [INFO]   Loading: RestaurantItems_continue
+2026-03-27 03:13:48,827 [INFO]   Done: RestaurantItems_continue — 1,167 rows
+2026-03-27 03:13:48,827 [INFO]   Loading: RestaurantLayouts
+2026-03-27 03:13:48,834 [INFO]   Done: RestaurantLayouts — 0 rows
+2026-03-27 03:13:48,834 [INFO]   Loading: ReturnSerialRecovery
+2026-03-27 03:13:48,842 [INFO]   Done: ReturnSerialRecovery — 0 rows
+2026-03-27 03:13:48,843 [INFO]   Loading: Reward
+2026-03-27 03:13:48,850 [INFO]   Done: Reward — 0 rows
+2026-03-27 03:13:48,851 [INFO]   Loading: Rulers
+2026-03-27 03:13:48,864 [INFO]   Done: Rulers — 0 rows
+2026-03-27 03:13:48,864 [INFO]   Loading: SLAVE_PraxellTransactionsTable
+2026-03-27 03:13:48,878 [INFO]   Done: SLAVE_PraxellTransactionsTable — 0 rows
+2026-03-27 03:13:48,879 [INFO]   Loading: SafeCashTransactions
+2026-03-27 03:13:48,889 [INFO]   Done: SafeCashTransactions — 0 rows
+2026-03-27 03:13:48,889 [INFO]   Loading: SafeCasheTransactionsForFutureCare
+2026-03-27 03:13:48,899 [INFO]   Done: SafeCasheTransactionsForFutureCare — 0 rows
+2026-03-27 03:13:48,899 [INFO]   Loading: SaleItems
+2026-03-27 03:13:48,906 [INFO]   Done: SaleItems — 0 rows
+2026-03-27 03:13:48,906 [INFO]   Loading: SaleItems_local
+2026-03-27 03:13:48,913 [INFO]   Done: SaleItems_local — 0 rows
+2026-03-27 03:13:48,913 [INFO]   Loading: SalesAgreementsComments_tmp
+2026-03-27 03:13:48,921 [INFO]   Done: SalesAgreementsComments_tmp — 0 rows
+2026-03-27 03:13:48,922 [INFO]   Loading: SalesAmountsSlicing
+2026-03-27 03:13:48,930 [INFO]   Done: SalesAmountsSlicing — 0 rows
+2026-03-27 03:13:48,930 [INFO]   Loading: SaveNoLaundry
+2026-03-27 03:13:48,938 [INFO]   Done: SaveNoLaundry — 0 rows
+2026-03-27 03:13:48,938 [INFO]   Loading: SelectedToppings
+2026-03-27 03:13:48,946 [INFO]   Done: SelectedToppings — 0 rows
+2026-03-27 03:13:48,947 [INFO]   Loading: SerialItemLiminalStock
+2026-03-27 03:13:48,955 [INFO]   Done: SerialItemLiminalStock — 0 rows
+2026-03-27 03:13:48,955 [INFO]   Loading: SerialItemsRecord
+2026-03-27 03:13:48,968 [INFO]   Done: SerialItemsRecord — 0 rows
+2026-03-27 03:13:48,968 [INFO]   Loading: SerialLines_customerCreditCard
+2026-03-27 03:13:48,978 [INFO]   Done: SerialLines_customerCreditCard — 0 rows
+2026-03-27 03:13:48,978 [INFO]   Loading: ServiceCallDocuments
+2026-03-27 03:13:48,987 [INFO]   Done: ServiceCallDocuments — 0 rows
+2026-03-27 03:13:48,987 [INFO]   Loading: ServiceCallInfo
+2026-03-27 03:13:48,995 [INFO]   Done: ServiceCallInfo — 0 rows
+2026-03-27 03:13:48,995 [INFO]   Loading: ServiceCalls
+2026-03-27 03:13:49,011 [INFO]   Done: ServiceCalls — 0 rows
+2026-03-27 03:13:49,011 [INFO]   Loading: ServiceDiscountCause
+2026-03-27 03:13:49,018 [INFO]   Done: ServiceDiscountCause — 0 rows
+2026-03-27 03:13:49,019 [INFO]   Loading: ServiceDocType
+2026-03-27 03:13:49,028 [INFO]   Done: ServiceDocType — 12 rows
+2026-03-27 03:13:49,028 [INFO]   Loading: ServiceDocumentsLines
+2026-03-27 03:13:49,041 [INFO]   Done: ServiceDocumentsLines — 0 rows
+2026-03-27 03:13:49,042 [INFO]   Loading: ServiceDocuments_headline
+2026-03-27 03:13:49,054 [INFO]   Done: ServiceDocuments_headline — 0 rows
+2026-03-27 03:13:49,054 [INFO]   Loading: ServiceDocuments_invoice
+2026-03-27 03:13:49,063 [INFO]   Done: ServiceDocuments_invoice — 0 rows
+2026-03-27 03:13:49,063 [INFO]   Loading: ServiceDocuments_parts
+2026-03-27 03:13:49,075 [INFO]   Done: ServiceDocuments_parts — 0 rows
+2026-03-27 03:13:49,075 [INFO]   Loading: ServiceForm
+2026-03-27 03:13:49,091 [INFO]   Done: ServiceForm — 0 rows
+2026-03-27 03:13:49,091 [INFO]   Loading: ServiceForm1
+2026-03-27 03:13:49,105 [INFO]   Done: ServiceForm1 — 0 rows
+2026-03-27 03:13:49,106 [INFO]   Loading: ServiceInfoDefinitions
+2026-03-27 03:13:49,114 [INFO]   Done: ServiceInfoDefinitions — 0 rows
+2026-03-27 03:13:49,114 [INFO]   Loading: SetItems
+2026-03-27 03:13:49,123 [INFO]   Done: SetItems — 0 rows
+2026-03-27 03:13:49,123 [INFO]   Loading: Settings
+2026-03-27 03:13:49,160 [INFO]   Done: Settings — 1,031 rows
+2026-03-27 03:13:49,161 [INFO]   Loading: SettingsControl
+2026-03-27 03:13:49,193 [INFO]   Done: SettingsControl — 439 rows
+2026-03-27 03:13:49,193 [INFO]   Loading: SettingsProfile
+2026-03-27 03:13:49,202 [INFO]   Done: SettingsProfile — 0 rows
+2026-03-27 03:13:49,202 [INFO]   Loading: SharedReleaseVersion
+2026-03-27 03:13:49,209 [INFO]   Done: SharedReleaseVersion — 0 rows
+2026-03-27 03:13:49,210 [INFO]   Loading: Shifts
+2026-03-27 03:13:49,217 [INFO]   Done: Shifts — 1 rows
+2026-03-27 03:13:49,217 [INFO]   Loading: ShvaTbls
+2026-03-27 03:13:49,230 [INFO]   Done: ShvaTbls — 105 rows
+2026-03-27 03:13:49,230 [INFO]   Loading: SingleValueLock
+2026-03-27 03:13:49,237 [INFO]   Done: SingleValueLock — 0 rows
+2026-03-27 03:13:49,237 [INFO]   Loading: SizeMatrixExternalProgram
+2026-03-27 03:13:49,245 [INFO]   Done: SizeMatrixExternalProgram — 0 rows
+2026-03-27 03:13:49,245 [INFO]   Loading: SolutionFixes
+2026-03-27 03:13:49,255 [INFO]   Done: SolutionFixes — 0 rows
+2026-03-27 03:13:49,255 [INFO]   Loading: Spares
+2026-03-27 03:13:49,262 [INFO]   Done: Spares — 0 rows
+2026-03-27 03:13:49,263 [INFO]   Loading: SpecialTasksBonus
+2026-03-27 03:13:49,270 [INFO]   Done: SpecialTasksBonus — 0 rows
+2026-03-27 03:13:49,270 [INFO]   Loading: StandartsFile
+2026-03-27 03:13:49,283 [INFO]   Done: StandartsFile — 0 rows
+2026-03-27 03:13:49,283 [INFO]   Loading: StatisSHVAfile
+2026-03-27 03:13:49,452 [INFO]   Done: StatisSHVAfile — 842 rows
+2026-03-27 03:13:49,452 [INFO]   Loading: Status
+2026-03-27 03:13:49,461 [INFO]   Done: Status — 0 rows
+2026-03-27 03:13:49,461 [INFO]   Loading: StatusClass
+2026-03-27 03:13:49,468 [INFO]   Done: StatusClass — 0 rows
+2026-03-27 03:13:49,469 [INFO]   Loading: StatusState
+2026-03-27 03:13:49,476 [INFO]   Done: StatusState — 0 rows
+2026-03-27 03:13:49,476 [INFO]   Loading: StockMovement
+2026-03-27 03:13:49,488 [INFO]   Done: StockMovement — 0 rows
+2026-03-27 03:13:49,488 [INFO]   Loading: StockMovementCode
+2026-03-27 03:13:49,497 [INFO]   Done: StockMovementCode — 9 rows
+2026-03-27 03:13:49,497 [INFO]   Loading: StockMovementFile
+2026-03-27 03:13:49,506 [INFO]   Done: StockMovementFile — 1 rows
+2026-03-27 03:13:49,506 [INFO]   Loading: StockMovementTmp
+2026-03-27 03:13:49,519 [INFO]   Done: StockMovementTmp — 0 rows
+2026-03-27 03:13:49,519 [INFO]   Loading: StoresByChain
+2026-03-27 03:13:49,527 [INFO]   Done: StoresByChain — 0 rows
+2026-03-27 03:13:49,527 [INFO]   Loading: StoresInCampaign
+2026-03-27 03:13:49,537 [INFO]   Done: StoresInCampaign — 0 rows
+2026-03-27 03:13:49,537 [INFO]   Loading: Streets
+2026-03-27 03:13:49,545 [INFO]   Done: Streets — 0 rows
+2026-03-27 03:13:49,546 [INFO]   Loading: SubscribersType
+2026-03-27 03:13:49,557 [INFO]   Done: SubscribersType — 0 rows
+2026-03-27 03:13:49,557 [INFO]   Loading: SuppliersProfitMultiplier
+2026-03-27 03:13:49,564 [INFO]   Done: SuppliersProfitMultiplier — 0 rows
+2026-03-27 03:13:49,564 [INFO]   Loading: SupplyModelTbl
+2026-03-27 03:13:49,572 [INFO]   Done: SupplyModelTbl — 0 rows
+2026-03-27 03:13:49,572 [INFO]   Loading: SupplyModel_tmp
+2026-03-27 03:13:49,580 [INFO]   Done: SupplyModel_tmp — 0 rows
+2026-03-27 03:13:49,580 [INFO]   Loading: SystemAgent_tmp
+2026-03-27 03:13:49,589 [INFO]   Done: SystemAgent_tmp — 0 rows
+2026-03-27 03:13:49,589 [INFO]   Loading: TaxAuthorityDefinitions
+2026-03-27 03:13:49,597 [INFO]   Done: TaxAuthorityDefinitions — 0 rows
+2026-03-27 03:13:49,597 [INFO]   Loading: TblTbls
+2026-03-27 03:13:49,611 [INFO]   Done: TblTbls — 138 rows
+2026-03-27 03:13:49,612 [INFO]   Loading: TechSupportLog
+2026-03-27 03:13:49,620 [INFO]   Done: TechSupportLog — 0 rows
+2026-03-27 03:13:49,620 [INFO]   Loading: TempGeneralMenus
+2026-03-27 03:13:49,631 [INFO]   Done: TempGeneralMenus — 0 rows
+2026-03-27 03:13:49,632 [INFO]   Loading: TerminalsAndReceiptVouchers
+2026-03-27 03:13:49,701 [INFO]   Done: TerminalsAndReceiptVouchers — 2,520 rows
+2026-03-27 03:13:49,701 [INFO]   Loading: TimeQuery_tmp
+2026-03-27 03:13:49,714 [INFO]   Done: TimeQuery_tmp — 0 rows
+2026-03-27 03:13:49,714 [INFO]   Loading: Topics
+2026-03-27 03:13:49,724 [INFO]   Done: Topics — 0 rows
+2026-03-27 03:13:49,725 [INFO]   Loading: Topics1
+2026-03-27 03:13:49,733 [INFO]   Done: Topics1 — 0 rows
+2026-03-27 03:13:49,733 [INFO]   Loading: ToppingsItem
+2026-03-27 03:13:49,742 [INFO]   Done: ToppingsItem — 0 rows
+2026-03-27 03:13:49,742 [INFO]   Loading: Track
+2026-03-27 03:13:49,752 [INFO]   Done: Track — 0 rows
+2026-03-27 03:13:49,752 [INFO]   Loading: Track2CreditCards
+2026-03-27 03:13:49,760 [INFO]   Done: Track2CreditCards — 0 rows
+2026-03-27 03:13:49,760 [INFO]   Loading: TracksCustomerIDInDocRows
+2026-03-27 03:13:49,769 [INFO]   Done: TracksCustomerIDInDocRows — 0 rows
+2026-03-27 03:13:49,769 [INFO]   Loading: TradeInVouchers
+2026-03-27 03:13:49,781 [INFO]   Done: TradeInVouchers — 0 rows
+2026-03-27 03:13:49,781 [INFO]   Loading: Trans
+2026-03-27 03:13:49,791 [INFO]   Done: Trans — 0 rows
+2026-03-27 03:13:49,792 [INFO]   Loading: TransLog_tmp
+2026-03-27 03:13:49,803 [INFO]   Done: TransLog_tmp — 0 rows
+2026-03-27 03:13:49,803 [INFO]   Loading: UnitSizesDetails
+2026-03-27 03:13:49,813 [INFO]   Done: UnitSizesDetails — 0 rows
+2026-03-27 03:13:49,813 [INFO]   Loading: UserPermisson
+2026-03-27 03:13:49,821 [INFO]   Done: UserPermisson — 0 rows
+2026-03-27 03:13:49,821 [INFO]   Loading: VeriCardActionsLog
+2026-03-27 03:13:49,833 [INFO]   Done: VeriCardActionsLog — 0 rows
+2026-03-27 03:13:49,833 [INFO]   Loading: VeriCardClubs
+2026-03-27 03:13:49,843 [INFO]   Done: VeriCardClubs — 0 rows
+2026-03-27 03:13:49,844 [INFO]   Loading: VeriCardTbls
+2026-03-27 03:13:49,860 [INFO]   Done: VeriCardTbls — 40 rows
+2026-03-27 03:13:49,860 [INFO]   Loading: ViewFile
+2026-03-27 03:13:49,872 [INFO]   Done: ViewFile — 26 rows
+2026-03-27 03:13:49,872 [INFO]   Loading: Visit_tmp
+2026-03-27 03:13:49,880 [INFO]   Done: Visit_tmp — 0 rows
+2026-03-27 03:13:49,881 [INFO]   Loading: VouchersIdentifyMechanism
+2026-03-27 03:13:49,893 [INFO]   Done: VouchersIdentifyMechanism — 0 rows
+2026-03-27 03:13:49,893 [INFO]   Loading: WSLog
+2026-03-27 03:13:49,903 [INFO]   Done: WSLog — 0 rows
+2026-03-27 03:13:49,903 [INFO]   Loading: WayBillDestinations
+2026-03-27 03:13:49,911 [INFO]   Done: WayBillDestinations — 0 rows
+2026-03-27 03:13:49,911 [INFO]   Loading: WayBillHeader
+2026-03-27 03:13:49,943 [INFO]   Done: WayBillHeader — 83 rows
+2026-03-27 03:13:49,944 [INFO]   Loading: WayBillLines
+2026-03-27 03:13:50,028 [INFO]   Done: WayBillLines — 714 rows
+2026-03-27 03:13:50,028 [INFO]   Loading: WayBillLines1
+2026-03-27 03:13:50,038 [INFO]   Done: WayBillLines1 — 0 rows
+2026-03-27 03:13:50,038 [INFO]   Loading: WayBillLines_NewLines
+2026-03-27 03:13:50,046 [INFO]   Done: WayBillLines_NewLines — 0 rows
+2026-03-27 03:13:50,046 [INFO]   Loading: WayBillMenu
+2026-03-27 03:13:50,064 [INFO]   Done: WayBillMenu — 8 rows
+2026-03-27 03:13:50,064 [INFO]   Loading: WayBillMenu1
+2026-03-27 03:13:50,076 [INFO]   Done: WayBillMenu1 — 0 rows
+2026-03-27 03:13:50,076 [INFO]   Loading: WebServiceQueryLog
+2026-03-27 03:13:50,084 [INFO]   Done: WebServiceQueryLog — 0 rows
+2026-03-27 03:13:50,084 [INFO]   Loading: WeeklyWorkPlan
+2026-03-27 03:13:50,093 [INFO]   Done: WeeklyWorkPlan — 0 rows
+2026-03-27 03:13:50,093 [INFO]   Loading: WorkSchedule
+2026-03-27 03:13:50,102 [INFO]   Done: WorkSchedule — 0 rows
+2026-03-27 03:13:50,102 [INFO]   Loading: WorkstationType
+2026-03-27 03:13:50,110 [INFO]   Done: WorkstationType — 4 rows
+2026-03-27 03:13:50,111 [INFO]   Loading: Workstations
+2026-03-27 03:13:50,124 [INFO]   Done: Workstations — 3 rows
+2026-03-27 03:13:50,124 [INFO]   Loading: tmpCardsForFatherClient
+2026-03-27 03:13:50,144 [INFO]   Done: tmpCardsForFatherClient — 0 rows
+2026-03-27 03:13:50,145 [INFO]   Loading: tmpInvoiceItemIDOptics
+2026-03-27 03:13:50,154 [INFO]   Done: tmpInvoiceItemIDOptics — 0 rows
+2026-03-27 03:13:50,154 [INFO]   Loading: tmpSelectOptician
+2026-03-27 03:13:50,162 [INFO]   Done: tmpSelectOptician — 0 rows
+2026-03-27 03:13:50,162 [INFO] All tables loaded successfully.
+2026-03-27 03:13:58,429 [INFO] Connecting to SQL Server...
+2026-03-27 03:13:58,524 [INFO] Connecting to local Postgres...
+2026-03-27 03:13:58,650 [INFO] Discovered 490 tables to load.
+2026-03-27 03:13:58,650 [INFO]   Loading: Accounts
+2026-03-27 03:13:58,739 [INFO]   Done: Accounts — 18 rows
+2026-03-27 03:13:58,739 [INFO]   Loading: ActionsDTScardLines
+2026-03-27 03:13:58,769 [INFO]   Done: ActionsDTScardLines — 0 rows
+2026-03-27 03:13:58,769 [INFO]   Loading: ActionsDTScardLinesOld
+2026-03-27 03:13:58,792 [INFO]   Done: ActionsDTScardLinesOld — 0 rows
+2026-03-27 03:13:58,792 [INFO]   Loading: ActionsDTScardLinesOld1
+2026-03-27 03:13:58,816 [INFO]   Done: ActionsDTScardLinesOld1 — 0 rows
+2026-03-27 03:13:58,816 [INFO]   Loading: ActionsMultipassCardLines
+2026-03-27 03:13:58,840 [INFO]   Done: ActionsMultipassCardLines — 0 rows
+2026-03-27 03:13:58,840 [INFO]   Loading: ActionsPrepaidCards
+2026-03-27 03:13:58,874 [INFO]   Done: ActionsPrepaidCards — 134 rows
+2026-03-27 03:13:58,874 [INFO]   Loading: AdditionalPriceLists
+2026-03-27 03:13:58,902 [INFO]   Done: AdditionalPriceLists — 2 rows
+2026-03-27 03:13:58,902 [INFO]   Loading: AdditionalPriceLists1
+2026-03-27 03:13:58,925 [INFO]   Done: AdditionalPriceLists1 — 0 rows
+2026-03-27 03:13:58,925 [INFO]   Loading: Amounts
+2026-03-27 03:13:58,968 [INFO]   Done: Amounts — 1,999 rows
+2026-03-27 03:13:58,968 [INFO]   Loading: AsortimntimTable
+2026-03-27 03:13:58,998 [INFO]   Done: AsortimntimTable — 0 rows
+2026-03-27 03:13:58,998 [INFO]   Loading: BankAccounts
+2026-03-27 03:13:59,022 [INFO]   Done: BankAccounts — 1 rows
+2026-03-27 03:13:59,022 [INFO]   Loading: Banks
+2026-03-27 03:13:59,048 [INFO]   Done: Banks — 27 rows
+2026-03-27 03:13:59,048 [INFO]   Loading: BarcodeInputTmp
+2026-03-27 03:13:59,097 [INFO]   Done: BarcodeInputTmp — 1,010 rows
+2026-03-27 03:13:59,097 [INFO]   Loading: BarcodePrintingSettings
+2026-03-27 03:13:59,123 [INFO]   Done: BarcodePrintingSettings — 11 rows
+2026-03-27 03:13:59,123 [INFO]   Loading: BarcodePrints
+2026-03-27 03:13:59,144 [INFO]   Done: BarcodePrints — 0 rows
+2026-03-27 03:13:59,144 [INFO]   Loading: Barcode_Graphic_Labels
+2026-03-27 03:13:59,176 [INFO]   Done: Barcode_Graphic_Labels — 0 rows
+2026-03-27 03:13:59,176 [INFO]   Loading: Barcode_Label_Templates
+2026-03-27 03:13:59,197 [INFO]   Done: Barcode_Label_Templates — 0 rows
+2026-03-27 03:13:59,197 [INFO]   Loading: BdikotIniim_LpniAsbaL1_6
+2026-03-27 03:13:59,231 [INFO]   Done: BdikotIniim_LpniAsbaL1_6 — 0 rows
+2026-03-27 03:13:59,231 [INFO]   Loading: Bkra_Optika
+2026-03-27 03:13:59,252 [INFO]   Done: Bkra_Optika — 0 rows
+2026-03-27 03:13:59,252 [INFO]   Loading: BlobTable
+2026-03-27 03:13:59,277 [INFO]   Done: BlobTable — 2 rows
+2026-03-27 03:13:59,277 [INFO]   Loading: BrandChecks
+2026-03-27 03:13:59,303 [INFO]   Done: BrandChecks — 0 rows
+2026-03-27 03:13:59,303 [INFO]   Loading: Brands
+2026-03-27 03:13:59,324 [INFO]   Done: Brands — 0 rows
+2026-03-27 03:13:59,324 [INFO]   Loading: BusinessInvoice
+2026-03-27 03:13:59,346 [INFO]   Done: BusinessInvoice — 3 rows
+2026-03-27 03:13:59,346 [INFO]   Loading: CARD_PICTURES
+2026-03-27 03:13:59,370 [INFO]   Done: CARD_PICTURES — 0 rows
+2026-03-27 03:13:59,370 [INFO]   Loading: CC_DocsContinue
+2026-03-27 03:13:59,395 [INFO]   Done: CC_DocsContinue — 0 rows
+2026-03-27 03:13:59,395 [INFO]   Loading: Calendar
+2026-03-27 03:14:00,028 [INFO]   Done: Calendar — 40,541 rows
+2026-03-27 03:14:00,028 [INFO]   Loading: CampaignBundle
+2026-03-27 03:14:00,057 [INFO]   Done: CampaignBundle — 21 rows
+2026-03-27 03:14:00,057 [INFO]   Loading: CampaignFields
+2026-03-27 03:14:00,081 [INFO]   Done: CampaignFields — 77 rows
+2026-03-27 03:14:00,081 [INFO]   Loading: CampaignTypes
+2026-03-27 03:14:00,108 [INFO]   Done: CampaignTypes — 27 rows
+2026-03-27 03:14:00,108 [INFO]   Loading: CampaignTypes1
+2026-03-27 03:14:00,130 [INFO]   Done: CampaignTypes1 — 0 rows
+2026-03-27 03:14:00,130 [INFO]   Loading: CampaignVouchers
+2026-03-27 03:14:00,158 [INFO]   Done: CampaignVouchers — 0 rows
+2026-03-27 03:14:00,158 [INFO]   Loading: CampaignVouchers900
+2026-03-27 03:14:00,184 [INFO]   Done: CampaignVouchers900 — 0 rows
+2026-03-27 03:14:00,185 [INFO]   Loading: Campaigns
+2026-03-27 03:14:00,220 [INFO]   Done: Campaigns — 26 rows
+2026-03-27 03:14:00,220 [INFO]   Loading: Campaigns_tmp
+2026-03-27 03:14:00,257 [INFO]   Done: Campaigns_tmp — 26 rows
+2026-03-27 03:14:00,258 [INFO]   Loading: CanvasTypes
+2026-03-27 03:14:00,279 [INFO]   Done: CanvasTypes — 0 rows
+2026-03-27 03:14:00,279 [INFO]   Loading: CardClassPaymentTerm
+2026-03-27 03:14:00,300 [INFO]   Done: CardClassPaymentTerm — 0 rows
+2026-03-27 03:14:00,300 [INFO]   Loading: CardComments
+2026-03-27 03:14:00,323 [INFO]   Done: CardComments — 0 rows
+2026-03-27 03:14:00,323 [INFO]   Loading: CardGuarantees
+2026-03-27 03:14:00,352 [INFO]   Done: CardGuarantees — 0 rows
+2026-03-27 03:14:00,352 [INFO]   Loading: CardInterfaces
+2026-03-27 03:14:00,389 [INFO]   Done: CardInterfaces — 0 rows
+2026-03-27 03:14:00,389 [INFO]   Loading: Cards
+2026-03-27 03:14:00,435 [INFO]   Done: Cards — 27 rows
+2026-03-27 03:14:00,436 [INFO]   Loading: Cards1
+2026-03-27 03:14:00,462 [INFO]   Done: Cards1 — 0 rows
+2026-03-27 03:14:00,463 [INFO]   Loading: CardsAdditionalClass
+2026-03-27 03:14:00,484 [INFO]   Done: CardsAdditionalClass — 0 rows
+2026-03-27 03:14:00,484 [INFO]   Loading: CardsGroup
+2026-03-27 03:14:00,509 [INFO]   Done: CardsGroup — 4 rows
+2026-03-27 03:14:00,509 [INFO]   Loading: CardsRentalsContinue
+2026-03-27 03:14:00,531 [INFO]   Done: CardsRentalsContinue — 0 rows
+2026-03-27 03:14:00,531 [INFO]   Loading: Cards_continue
+2026-03-27 03:14:00,563 [INFO]   Done: Cards_continue — 48 rows
+2026-03-27 03:14:00,563 [INFO]   Loading: CartOrderLines
+2026-03-27 03:14:00,585 [INFO]   Done: CartOrderLines — 0 rows
+2026-03-27 03:14:00,585 [INFO]   Loading: CatalogChanges
+2026-03-27 03:14:00,605 [INFO]   Done: CatalogChanges — 0 rows
+2026-03-27 03:14:00,605 [INFO]   Loading: CategoriesTbl
+2026-03-27 03:14:00,625 [INFO]   Done: CategoriesTbl — 0 rows
+2026-03-27 03:14:00,625 [INFO]   Loading: CellPAYcardsType
+2026-03-27 03:14:00,645 [INFO]   Done: CellPAYcardsType — 0 rows
+2026-03-27 03:14:00,645 [INFO]   Loading: CellPayActions
+2026-03-27 03:14:00,668 [INFO]   Done: CellPayActions — 0 rows
+2026-03-27 03:14:00,668 [INFO]   Loading: CellPayErrors
+2026-03-27 03:14:00,687 [INFO]   Done: CellPayErrors — 0 rows
+2026-03-27 03:14:00,688 [INFO]   Loading: CerditCardByWebLog
+2026-03-27 03:14:00,710 [INFO]   Done: CerditCardByWebLog — 0 rows
+2026-03-27 03:14:00,711 [INFO]   Loading: ChangeHistory_tmp
+2026-03-27 03:14:00,734 [INFO]   Done: ChangeHistory_tmp — 0 rows
+2026-03-27 03:14:00,734 [INFO]   Loading: ChargeCardsAssignment
+2026-03-27 03:14:00,754 [INFO]   Done: ChargeCardsAssignment — 0 rows
+2026-03-27 03:14:00,755 [INFO]   Loading: Cities
+2026-03-27 03:14:00,774 [INFO]   Done: Cities — 0 rows
+2026-03-27 03:14:00,774 [INFO]   Loading: ClientMessageStatus
+2026-03-27 03:14:00,794 [INFO]   Done: ClientMessageStatus — 0 rows
+2026-03-27 03:14:00,794 [INFO]   Loading: ClientStatus_tmp
+2026-03-27 03:14:00,817 [INFO]   Done: ClientStatus_tmp — 0 rows
+2026-03-27 03:14:00,817 [INFO]   Loading: ClubCardsTypes
+2026-03-27 03:14:00,846 [INFO]   Done: ClubCardsTypes — 0 rows
+2026-03-27 03:14:00,846 [INFO]   Loading: CoinsRates
+2026-03-27 03:14:00,870 [INFO]   Done: CoinsRates — 3 rows
+2026-03-27 03:14:00,871 [INFO]   Loading: Coins_notes_details
+2026-03-27 03:14:00,894 [INFO]   Done: Coins_notes_details — 37 rows
+2026-03-27 03:14:00,895 [INFO]   Loading: Coins_notes_details1
+2026-03-27 03:14:00,915 [INFO]   Done: Coins_notes_details1 — 0 rows
+2026-03-27 03:14:00,915 [INFO]   Loading: Collections
+2026-03-27 03:14:00,936 [INFO]   Done: Collections — 0 rows
+2026-03-27 03:14:00,936 [INFO]   Loading: ColorMatrix
+2026-03-27 03:14:00,967 [INFO]   Done: ColorMatrix — 0 rows
+2026-03-27 03:14:00,967 [INFO]   Loading: Colors
+2026-03-27 03:14:00,987 [INFO]   Done: Colors — 1 rows
+2026-03-27 03:14:00,987 [INFO]   Loading: CombinedStoreInventory
+2026-03-27 03:14:01,008 [INFO]   Done: CombinedStoreInventory — 0 rows
+2026-03-27 03:14:01,008 [INFO]   Loading: CommandMovementType
+2026-03-27 03:14:01,029 [INFO]   Done: CommandMovementType — 0 rows
+2026-03-27 03:14:01,029 [INFO]   Loading: CommunicationControl
+2026-03-27 03:14:01,052 [INFO]   Done: CommunicationControl — 1 rows
+2026-03-27 03:14:01,052 [INFO]   Loading: Control
+2026-03-27 03:14:01,091 [INFO]   Done: Control — 2 rows
+2026-03-27 03:14:01,092 [INFO]   Loading: ConversionItems
+2026-03-27 03:14:01,115 [INFO]   Done: ConversionItems — 0 rows
+2026-03-27 03:14:01,116 [INFO]   Loading: ConversionsTbl
+2026-03-27 03:14:01,139 [INFO]   Done: ConversionsTbl — 0 rows
+2026-03-27 03:14:01,139 [INFO]   Loading: ConvertToTenderTypes
+2026-03-27 03:14:01,169 [INFO]   Done: ConvertToTenderTypes — 45 rows
+2026-03-27 03:14:01,169 [INFO]   Loading: ConvertingReceiptLinesContinue
+2026-03-27 03:14:01,191 [INFO]   Done: ConvertingReceiptLinesContinue — 0 rows
+2026-03-27 03:14:01,191 [INFO]   Loading: ConvertingTransitionalWarehouses
+2026-03-27 03:14:01,211 [INFO]   Done: ConvertingTransitionalWarehouses — 0 rows
+2026-03-27 03:14:01,211 [INFO]   Loading: CopiedCredits_HO
+2026-03-27 03:14:01,233 [INFO]   Done: CopiedCredits_HO — 0 rows
+2026-03-27 03:14:01,234 [INFO]   Loading: CopiesLog
+2026-03-27 03:14:01,256 [INFO]   Done: CopiesLog — 0 rows
+2026-03-27 03:14:01,256 [INFO]   Loading: CopyOfDocs24
+2026-03-27 03:14:01,281 [INFO]   Done: CopyOfDocs24 — 0 rows
+2026-03-27 03:14:01,281 [INFO]   Loading: CopyOfDocsLines25
+2026-03-27 03:14:01,302 [INFO]   Done: CopyOfDocsLines25 — 0 rows
+2026-03-27 03:14:01,303 [INFO]   Loading: CopyOfDocsLinesTrailer116
+2026-03-27 03:14:01,330 [INFO]   Done: CopyOfDocsLinesTrailer116 — 0 rows
+2026-03-27 03:14:01,330 [INFO]   Loading: CopyOfDocsTrailer115
+2026-03-27 03:14:01,357 [INFO]   Done: CopyOfDocsTrailer115 — 0 rows
+2026-03-27 03:14:01,357 [INFO]   Loading: Costing
+2026-03-27 03:14:01,377 [INFO]   Done: Costing — 0 rows
+2026-03-27 03:14:01,377 [INFO]   Loading: Countries
+2026-03-27 03:14:01,398 [INFO]   Done: Countries — 0 rows
+2026-03-27 03:14:01,398 [INFO]   Loading: CreditCardsTypes
+2026-03-27 03:14:01,420 [INFO]   Done: CreditCardsTypes — 10 rows
+2026-03-27 03:14:01,420 [INFO]   Loading: CreditInvoiceEOSeasonLines
+2026-03-27 03:14:01,443 [INFO]   Done: CreditInvoiceEOSeasonLines — 0 rows
+2026-03-27 03:14:01,443 [INFO]   Loading: CreditInvoicePrintRecover
+2026-03-27 03:14:01,481 [INFO]   Done: CreditInvoicePrintRecover — 0 rows
+2026-03-27 03:14:01,481 [INFO]   Loading: CreditInvoiceTable
+2026-03-27 03:14:01,503 [INFO]   Done: CreditInvoiceTable — 0 rows
+2026-03-27 03:14:01,503 [INFO]   Loading: CreditSalesReport
+2026-03-27 03:14:01,524 [INFO]   Done: CreditSalesReport — 0 rows
+2026-03-27 03:14:01,525 [INFO]   Loading: CreditSalesReport1
+2026-03-27 03:14:01,546 [INFO]   Done: CreditSalesReport1 — 0 rows
+2026-03-27 03:14:01,546 [INFO]   Loading: CreditTypes
+2026-03-27 03:14:01,570 [INFO]   Done: CreditTypes — 54 rows
+2026-03-27 03:14:01,570 [INFO]   Loading: CtlDif1
+2026-03-27 03:14:01,590 [INFO]   Done: CtlDif1 — 0 rows
+2026-03-27 03:14:01,590 [INFO]   Loading: CtlDif2
+2026-03-27 03:14:01,609 [INFO]   Done: CtlDif2 — 0 rows
+2026-03-27 03:14:01,609 [INFO]   Loading: CtlDif3
+2026-03-27 03:14:01,631 [INFO]   Done: CtlDif3 — 0 rows
+2026-03-27 03:14:01,631 [INFO]   Loading: CustomerClassByCreditCard
+2026-03-27 03:14:01,652 [INFO]   Done: CustomerClassByCreditCard — 0 rows
+2026-03-27 03:14:01,653 [INFO]   Loading: CustomerClubDeails
+2026-03-27 03:14:01,674 [INFO]   Done: CustomerClubDeails — 0 rows
+2026-03-27 03:14:01,674 [INFO]   Loading: CustomerMessagedCode
+2026-03-27 03:14:01,694 [INFO]   Done: CustomerMessagedCode — 0 rows
+2026-03-27 03:14:01,694 [INFO]   Loading: CustomerOrderLines
+2026-03-27 03:14:01,719 [INFO]   Done: CustomerOrderLines — 0 rows
+2026-03-27 03:14:01,719 [INFO]   Loading: CustomerOrderLines_345
+2026-03-27 03:14:01,744 [INFO]   Done: CustomerOrderLines_345 — 0 rows
+2026-03-27 03:14:01,745 [INFO]   Loading: CustomerOrdersHeaders
+2026-03-27 03:14:01,769 [INFO]   Done: CustomerOrdersHeaders — 0 rows
+2026-03-27 03:14:01,769 [INFO]   Loading: CustomerSubscriptionAssignment
+2026-03-27 03:14:01,794 [INFO]   Done: CustomerSubscriptionAssignment — 0 rows
+2026-03-27 03:14:01,794 [INFO]   Loading: CustomersLog
+2026-03-27 03:14:01,816 [INFO]   Done: CustomersLog — 0 rows
+2026-03-27 03:14:01,816 [INFO]   Loading: CustomersMovement
+2026-03-27 03:14:01,838 [INFO]   Done: CustomersMovement — 0 rows
+2026-03-27 03:14:01,838 [INFO]   Loading: DTSTransactions
+2026-03-27 03:14:01,861 [INFO]   Done: DTSTransactions — 0 rows
+2026-03-27 03:14:01,861 [INFO]   Loading: DailyAvailabilty
+2026-03-27 03:14:01,881 [INFO]   Done: DailyAvailabilty — 0 rows
+2026-03-27 03:14:01,881 [INFO]   Loading: DailyPOSsum
+2026-03-27 03:14:01,927 [INFO]   Done: DailyPOSsum — 93 rows
+2026-03-27 03:14:01,927 [INFO]   Loading: DailySales
+2026-03-27 03:14:01,950 [INFO]   Done: DailySales — 0 rows
+2026-03-27 03:14:01,950 [INFO]   Loading: DaysTypes
+2026-03-27 03:14:01,971 [INFO]   Done: DaysTypes — 3 rows
+2026-03-27 03:14:01,971 [INFO]   Loading: DebitErrors
+2026-03-27 03:14:01,993 [INFO]   Done: DebitErrors — 19 rows
+2026-03-27 03:14:01,993 [INFO]   Loading: DebitSettings
+2026-03-27 03:14:02,020 [INFO]   Done: DebitSettings — 0 rows
+2026-03-27 03:14:02,020 [INFO]   Loading: DebitTbl
+2026-03-27 03:14:02,043 [INFO]   Done: DebitTbl — 0 rows
+2026-03-27 03:14:02,043 [INFO]   Loading: DefectType
+2026-03-27 03:14:02,064 [INFO]   Done: DefectType — 0 rows
+2026-03-27 03:14:02,064 [INFO]   Loading: DefinitionsKeyValue
+2026-03-27 03:14:02,094 [INFO]   Done: DefinitionsKeyValue — 1 rows
+2026-03-27 03:14:02,095 [INFO]   Loading: Deliveries
+2026-03-27 03:14:02,119 [INFO]   Done: Deliveries — 0 rows
+2026-03-27 03:14:02,119 [INFO]   Loading: DepositLines
+2026-03-27 03:14:02,144 [INFO]   Done: DepositLines — 0 rows
+2026-03-27 03:14:02,145 [INFO]   Loading: Deposits
+2026-03-27 03:14:02,171 [INFO]   Done: Deposits — 0 rows
+2026-03-27 03:14:02,171 [INFO]   Loading: DepositsDrawerToSafe
+2026-03-27 03:14:02,223 [INFO]   Done: DepositsDrawerToSafe — 92 rows
+2026-03-27 03:14:02,223 [INFO]   Loading: Deposits_V852
+2026-03-27 03:14:02,247 [INFO]   Done: Deposits_V852 — 0 rows
+2026-03-27 03:14:02,247 [INFO]   Loading: DesignFiles
+2026-03-27 03:14:02,268 [INFO]   Done: DesignFiles — 0 rows
+2026-03-27 03:14:02,268 [INFO]   Loading: DifferenceOrderStatement
+2026-03-27 03:14:02,291 [INFO]   Done: DifferenceOrderStatement — 0 rows
+2026-03-27 03:14:02,291 [INFO]   Loading: DiscountNotesDefinitions
+2026-03-27 03:14:02,312 [INFO]   Done: DiscountNotesDefinitions — 0 rows
+2026-03-27 03:14:02,312 [INFO]   Loading: DiscountScales
+2026-03-27 03:14:02,332 [INFO]   Done: DiscountScales — 0 rows
+2026-03-27 03:14:02,332 [INFO]   Loading: DocumentHeaderDeliveryOrder
+2026-03-27 03:14:02,363 [INFO]   Done: DocumentHeaderDeliveryOrder — 0 rows
+2026-03-27 03:14:02,364 [INFO]   Loading: DocumentLines
+2026-03-27 03:14:03,839 [INFO]   Done: DocumentLines — 17,615 rows
+2026-03-27 03:14:03,839 [INFO]   Loading: DocumentLinesForCopy
+2026-03-27 03:14:03,861 [INFO]   Done: DocumentLinesForCopy — 0 rows
+2026-03-27 03:14:03,861 [INFO]   Loading: DocumentLinesPOSSuspendedTransmissions
+2026-03-27 03:14:03,890 [INFO]   Done: DocumentLinesPOSSuspendedTransmissions — 0 rows
+2026-03-27 03:14:03,890 [INFO]   Loading: DocumentRemarksHeader
+2026-03-27 03:14:03,910 [INFO]   Done: DocumentRemarksHeader — 0 rows
+2026-03-27 03:14:03,910 [INFO]   Loading: DocumentRemarksLines
+2026-03-27 03:14:03,931 [INFO]   Done: DocumentRemarksLines — 0 rows
+2026-03-27 03:14:03,931 [INFO]   Loading: DocumentTypeForIRS
+2026-03-27 03:14:03,951 [INFO]   Done: DocumentTypeForIRS — 0 rows
+2026-03-27 03:14:03,952 [INFO]   Loading: DocumentVersionMngmt
+2026-03-27 03:14:03,974 [INFO]   Done: DocumentVersionMngmt — 0 rows
+2026-03-27 03:14:03,974 [INFO]   Loading: Documents
+2026-03-27 03:14:05,270 [INFO]   Done: Documents — 9,379 rows
+2026-03-27 03:14:05,270 [INFO]   Loading: Documents2_continue
+2026-03-27 03:14:05,302 [INFO]   Done: Documents2_continue — 2 rows
+2026-03-27 03:14:05,302 [INFO]   Loading: DocumentsControl
+2026-03-27 03:14:05,346 [INFO]   Done: DocumentsControl — 89 rows
+2026-03-27 03:14:05,346 [INFO]   Loading: DocumentsLines_continue
+2026-03-27 03:14:08,540 [INFO]   Done: DocumentsLines_continue — 17,616 rows
+2026-03-27 03:14:08,540 [INFO]   Loading: DocumentsLines_continue1
+2026-03-27 03:14:08,567 [INFO]   Done: DocumentsLines_continue1 — 0 rows
+2026-03-27 03:14:08,567 [INFO]   Loading: DocumentsLines_pointOfSale
+2026-03-27 03:14:08,610 [INFO]   Done: DocumentsLines_pointOfSale — 0 rows
+2026-03-27 03:14:08,610 [INFO]   Loading: DocumentsSequence
+2026-03-27 03:14:08,638 [INFO]   Done: DocumentsSequence — 16 rows
+2026-03-27 03:14:08,638 [INFO]   Loading: DocumentsType
+2026-03-27 03:14:08,660 [INFO]   Done: DocumentsType — 12 rows
+2026-03-27 03:14:08,660 [INFO]   Loading: Documents_continue
+2026-03-27 03:14:10,089 [INFO]   Done: Documents_continue — 9,379 rows
+2026-03-27 03:14:10,090 [INFO]   Loading: DownloadManagerPacks
+2026-03-27 03:14:10,111 [INFO]   Done: DownloadManagerPacks — 0 rows
+2026-03-27 03:14:10,112 [INFO]   Loading: Dpok
+2026-03-27 03:14:10,133 [INFO]   Done: Dpok — 0 rows
+2026-03-27 03:14:10,133 [INFO]   Loading: DtsActions
+2026-03-27 03:14:10,158 [INFO]   Done: DtsActions — 0 rows
+2026-03-27 03:14:10,158 [INFO]   Loading: DtsActions1
+2026-03-27 03:14:10,183 [INFO]   Done: DtsActions1 — 0 rows
+2026-03-27 03:14:10,183 [INFO]   Loading: DtsActionsLog
+2026-03-27 03:14:10,208 [INFO]   Done: DtsActionsLog — 0 rows
+2026-03-27 03:14:10,208 [INFO]   Loading: DtsTbls
+2026-03-27 03:14:10,236 [INFO]   Done: DtsTbls — 27 rows
+2026-03-27 03:14:10,236 [INFO]   Loading: DtsTrans_tmp
+2026-03-27 03:14:10,260 [INFO]   Done: DtsTrans_tmp — 0 rows
+2026-03-27 03:14:10,260 [INFO]   Loading: ERN_LeumiMoveTransmission
+2026-03-27 03:14:10,289 [INFO]   Done: ERN_LeumiMoveTransmission — 0 rows
+2026-03-27 03:14:10,289 [INFO]   Loading: ERN_LeumiMoveTransmission1
+2026-03-27 03:14:10,317 [INFO]   Done: ERN_LeumiMoveTransmission1 — 0 rows
+2026-03-27 03:14:10,317 [INFO]   Loading: ERN_LeumiMoveTransmission_conver
+2026-03-27 03:14:10,347 [INFO]   Done: ERN_LeumiMoveTransmission_conver — 0 rows
+2026-03-27 03:14:10,347 [INFO]   Loading: ElectronicSignatures
+2026-03-27 03:14:10,370 [INFO]   Done: ElectronicSignatures — 0 rows
+2026-03-27 03:14:10,370 [INFO]   Loading: EmailOrderLines
+2026-03-27 03:14:10,397 [INFO]   Done: EmailOrderLines — 0 rows
+2026-03-27 03:14:10,397 [INFO]   Loading: EmailUsersSettings
+2026-03-27 03:14:10,418 [INFO]   Done: EmailUsersSettings — 0 rows
+2026-03-27 03:14:10,418 [INFO]   Loading: Email_OrderTitleNew
+2026-03-27 03:14:10,450 [INFO]   Done: Email_OrderTitleNew — 2 rows
+2026-03-27 03:14:10,450 [INFO]   Loading: Emergency_Number_Invoices
+2026-03-27 03:14:10,470 [INFO]   Done: Emergency_Number_Invoices — 0 rows
+2026-03-27 03:14:10,470 [INFO]   Loading: EmpCommissions
+2026-03-27 03:14:10,491 [INFO]   Done: EmpCommissions — 0 rows
+2026-03-27 03:14:10,491 [INFO]   Loading: EmpCommissions1
+2026-03-27 03:14:10,512 [INFO]   Done: EmpCommissions1 — 0 rows
+2026-03-27 03:14:10,512 [INFO]   Loading: EmpPermission
+2026-03-27 03:14:10,540 [INFO]   Done: EmpPermission — 315 rows
+2026-03-27 03:14:10,540 [INFO]   Loading: EmpStorePremiums
+2026-03-27 03:14:10,561 [INFO]   Done: EmpStorePremiums — 0 rows
+2026-03-27 03:14:10,561 [INFO]   Loading: EmployeesAttendance
+2026-03-27 03:14:10,587 [INFO]   Done: EmployeesAttendance — 49 rows
+2026-03-27 03:14:10,587 [INFO]   Loading: EmployeesMoreDetails
+2026-03-27 03:14:10,606 [INFO]   Done: EmployeesMoreDetails — 0 rows
+2026-03-27 03:14:10,606 [INFO]   Loading: EmployeesSelection_byEntrance
+2026-03-27 03:14:10,629 [INFO]   Done: EmployeesSelection_byEntrance — 2 rows
+2026-03-27 03:14:10,629 [INFO]   Loading: EmployeesType
+2026-03-27 03:14:10,648 [INFO]   Done: EmployeesType — 0 rows
+2026-03-27 03:14:10,649 [INFO]   Loading: Employees_Permission_Groups
+2026-03-27 03:14:10,669 [INFO]   Done: Employees_Permission_Groups — 0 rows
+2026-03-27 03:14:10,669 [INFO]   Loading: EmvCharge
+2026-03-27 03:14:11,242 [INFO]   Done: EmvCharge — 2,521 rows
+2026-03-27 03:14:11,242 [INFO]   Loading: EmvStatis
+2026-03-27 03:14:11,287 [INFO]   Done: EmvStatis — 208 rows
+2026-03-27 03:14:11,287 [INFO]   Loading: ErnChecksTbl
+2026-03-27 03:14:11,324 [INFO]   Done: ErnChecksTbl — 368 rows
+2026-03-27 03:14:11,324 [INFO]   Loading: ErrorMessageExternalTerminal
+2026-03-27 03:14:11,364 [INFO]   Done: ErrorMessageExternalTerminal — 546 rows
+2026-03-27 03:14:11,365 [INFO]   Loading: Error_ASH96
+2026-03-27 03:14:11,389 [INFO]   Done: Error_ASH96 — 138 rows
+2026-03-27 03:14:11,389 [INFO]   Loading: ErrorsLog
+2026-03-27 03:14:11,413 [INFO]   Done: ErrorsLog — 0 rows
+2026-03-27 03:14:11,413 [INFO]   Loading: EventsLog
+2026-03-27 03:14:11,438 [INFO]   Done: EventsLog — 0 rows
+2026-03-27 03:14:11,438 [INFO]   Loading: EventsType
+2026-03-27 03:14:11,459 [INFO]   Done: EventsType — 0 rows
+2026-03-27 03:14:11,459 [INFO]   Loading: ExemptionAndStorageFile
+2026-03-27 03:14:11,485 [INFO]   Done: ExemptionAndStorageFile — 0 rows
+2026-03-27 03:14:11,485 [INFO]   Loading: ExpectedFixes
+2026-03-27 03:14:11,507 [INFO]   Done: ExpectedFixes — 0 rows
+2026-03-27 03:14:11,507 [INFO]   Loading: Expenses
+2026-03-27 03:14:11,529 [INFO]   Done: Expenses — 0 rows
+2026-03-27 03:14:11,529 [INFO]   Loading: ExternalTerminalSettings
+2026-03-27 03:14:11,557 [INFO]   Done: ExternalTerminalSettings — 1 rows
+2026-03-27 03:14:11,557 [INFO]   Loading: EyesTesting_optic
+2026-03-27 03:14:11,591 [INFO]   Done: EyesTesting_optic — 0 rows
+2026-03-27 03:14:11,591 [INFO]   Loading: EyesTesting_opticOld
+2026-03-27 03:14:11,624 [INFO]   Done: EyesTesting_opticOld — 0 rows
+2026-03-27 03:14:11,625 [INFO]   Loading: Fact_Attendance_Event
+2026-03-27 03:14:11,651 [INFO]   Done: Fact_Attendance_Event — 49 rows
+2026-03-27 03:14:11,651 [INFO]   Loading: Fact_Sales
+2026-03-27 03:14:12,995 [INFO]   Done: Fact_Sales — 17,633 rows
+2026-03-27 03:14:12,996 [INFO]   Loading: Fact_Shifts
+2026-03-27 03:14:13,027 [INFO]   Done: Fact_Shifts — 24 rows
+2026-03-27 03:14:13,027 [INFO]   Loading: FieldDoc
+2026-03-27 03:14:13,048 [INFO]   Done: FieldDoc — 0 rows
+2026-03-27 03:14:13,048 [INFO]   Loading: FinancialMovementStatus
+2026-03-27 03:14:13,070 [INFO]   Done: FinancialMovementStatus — 0 rows
+2026-03-27 03:14:13,070 [INFO]   Loading: FingerPrintsCache
+2026-03-27 03:14:13,091 [INFO]   Done: FingerPrintsCache — 0 rows
+2026-03-27 03:14:13,091 [INFO]   Loading: FingerprintsFile
+2026-03-27 03:14:13,113 [INFO]   Done: FingerprintsFile — 0 rows
+2026-03-27 03:14:13,113 [INFO]   Loading: FingerprintsFile_old
+2026-03-27 03:14:13,133 [INFO]   Done: FingerprintsFile_old — 0 rows
+2026-03-27 03:14:13,133 [INFO]   Loading: FirstHoOnlineTransactionsTransmission
+2026-03-27 03:14:13,155 [INFO]   Done: FirstHoOnlineTransactionsTransmission — 0 rows
+2026-03-27 03:14:13,155 [INFO]   Loading: FiscalMovement
+2026-03-27 03:14:13,205 [INFO]   Done: FiscalMovement — 166 rows
+2026-03-27 03:14:13,205 [INFO]   Loading: FiscalMovementType
+2026-03-27 03:14:13,234 [INFO]   Done: FiscalMovementType — 15 rows
+2026-03-27 03:14:13,234 [INFO]   Loading: FiveLevelDbFile_tmp
+2026-03-27 03:14:13,258 [INFO]   Done: FiveLevelDbFile_tmp — 0 rows
+2026-03-27 03:14:13,258 [INFO]   Loading: FlightApproval
+2026-03-27 03:14:13,281 [INFO]   Done: FlightApproval — 0 rows
+2026-03-27 03:14:13,281 [INFO]   Loading: Flights
+2026-03-27 03:14:13,301 [INFO]   Done: Flights — 0 rows
+2026-03-27 03:14:13,301 [INFO]   Loading: Flow
+2026-03-27 03:14:13,323 [INFO]   Done: Flow — 0 rows
+2026-03-27 03:14:13,323 [INFO]   Loading: FocalLengths
+2026-03-27 03:14:13,345 [INFO]   Done: FocalLengths — 0 rows
+2026-03-27 03:14:13,345 [INFO]   Loading: FocalLengths1
+2026-03-27 03:14:13,369 [INFO]   Done: FocalLengths1 — 0 rows
+2026-03-27 03:14:13,369 [INFO]   Loading: FormHistoryStatus
+2026-03-27 03:14:13,390 [INFO]   Done: FormHistoryStatus — 0 rows
+2026-03-27 03:14:13,390 [INFO]   Loading: FormHistoryStatus1
+2026-03-27 03:14:13,412 [INFO]   Done: FormHistoryStatus1 — 0 rows
+2026-03-27 03:14:13,412 [INFO]   Loading: GAZITi
+2026-03-27 03:14:13,441 [INFO]   Done: GAZITi — 1 rows
+2026-03-27 03:14:13,441 [INFO]   Loading: GazitIActivityLog
+2026-03-27 03:14:13,464 [INFO]   Done: GazitIActivityLog — 0 rows
+2026-03-27 03:14:13,464 [INFO]   Loading: GazitITransactionWaitingForTransmission
+2026-03-27 03:14:13,486 [INFO]   Done: GazitITransactionWaitingForTransmission — 0 rows
+2026-03-27 03:14:13,486 [INFO]   Loading: GazitITypeOfCardList
+2026-03-27 03:14:13,518 [INFO]   Done: GazitITypeOfCardList — 0 rows
+2026-03-27 03:14:13,518 [INFO]   Loading: GazitiFuture
+2026-03-27 03:14:13,538 [INFO]   Done: GazitiFuture — 0 rows
+2026-03-27 03:14:13,538 [INFO]   Loading: GeneralCarrierFile
+2026-03-27 03:14:13,559 [INFO]   Done: GeneralCarrierFile — 0 rows
+2026-03-27 03:14:13,560 [INFO]   Loading: GeneralMenus
+2026-03-27 03:14:13,594 [INFO]   Done: GeneralMenus — 68 rows
+2026-03-27 03:14:13,594 [INFO]   Loading: GraphicDocumentsLogoSettings
+2026-03-27 03:14:13,615 [INFO]   Done: GraphicDocumentsLogoSettings — 0 rows
+2026-03-27 03:14:13,615 [INFO]   Loading: GroupsDesc
+2026-03-27 03:14:13,636 [INFO]   Done: GroupsDesc — 0 rows
+2026-03-27 03:14:13,636 [INFO]   Loading: GroupsSettings
+2026-03-27 03:14:13,655 [INFO]   Done: GroupsSettings — 0 rows
+2026-03-27 03:14:13,656 [INFO]   Loading: HistoricModification
+2026-03-27 03:14:13,677 [INFO]   Done: HistoricModification — 0 rows
+2026-03-27 03:14:13,678 [INFO]   Loading: Holidays
+2026-03-27 03:14:13,701 [INFO]   Done: Holidays — 44 rows
+2026-03-27 03:14:13,701 [INFO]   Loading: HolidaysTypes
+2026-03-27 03:14:13,721 [INFO]   Done: HolidaysTypes — 34 rows
+2026-03-27 03:14:13,721 [INFO]   Loading: HoursAmountsSlicing
+2026-03-27 03:14:13,740 [INFO]   Done: HoursAmountsSlicing — 2 rows
+2026-03-27 03:14:13,740 [INFO]   Loading: HoursReport_tmp
+2026-03-27 03:14:13,761 [INFO]   Done: HoursReport_tmp — 0 rows
+2026-03-27 03:14:13,761 [INFO]   Loading: INTERFACES_HEADER_LOGS
+2026-03-27 03:14:13,782 [INFO]   Done: INTERFACES_HEADER_LOGS — 0 rows
+2026-03-27 03:14:13,783 [INFO]   Loading: INTERFACES_LINES_LOGS
+2026-03-27 03:14:13,805 [INFO]   Done: INTERFACES_LINES_LOGS — 0 rows
+2026-03-27 03:14:13,805 [INFO]   Loading: IconsErrors
+2026-03-27 03:14:13,825 [INFO]   Done: IconsErrors — 0 rows
+2026-03-27 03:14:13,825 [INFO]   Loading: ImagesBundle
+2026-03-27 03:14:13,861 [INFO]   Done: ImagesBundle — 0 rows
+2026-03-27 03:14:13,861 [INFO]   Loading: InterfaceLog
+2026-03-27 03:14:14,855 [INFO]   Done: InterfaceLog — 19,025 rows
+2026-03-27 03:14:14,855 [INFO]   Loading: Interfaces
+2026-03-27 03:14:14,894 [INFO]   Done: Interfaces — 0 rows
+2026-03-27 03:14:14,895 [INFO]   Loading: InternalPhone
+2026-03-27 03:14:14,916 [INFO]   Done: InternalPhone — 0 rows
+2026-03-27 03:14:14,916 [INFO]   Loading: Inventory
+2026-03-27 03:14:15,058 [INFO]   Done: Inventory — 3,448 rows
+2026-03-27 03:14:15,058 [INFO]   Loading: InventoryByChainStores
+2026-03-27 03:14:15,079 [INFO]   Done: InventoryByChainStores — 0 rows
+2026-03-27 03:14:15,079 [INFO]   Loading: InventoryQuery_tmp
+2026-03-27 03:14:15,101 [INFO]   Done: InventoryQuery_tmp — 0 rows
+2026-03-27 03:14:15,102 [INFO]   Loading: InvoicePrintRecover
+2026-03-27 03:14:15,137 [INFO]   Done: InvoicePrintRecover — 0 rows
+2026-03-27 03:14:15,137 [INFO]   Loading: InvoicesDeliveryDetails
+2026-03-27 03:14:15,169 [INFO]   Done: InvoicesDeliveryDetails — 0 rows
+2026-03-27 03:14:15,169 [INFO]   Loading: InvoicesDeliveryDetails1
+2026-03-27 03:14:15,200 [INFO]   Done: InvoicesDeliveryDetails1 — 0 rows
+2026-03-27 03:14:15,201 [INFO]   Loading: IssuesPrint
+2026-03-27 03:14:15,222 [INFO]   Done: IssuesPrint — 0 rows
+2026-03-27 03:14:15,222 [INFO]   Loading: ItemDiscountTracking
+2026-03-27 03:14:15,245 [INFO]   Done: ItemDiscountTracking — 0 rows
+2026-03-27 03:14:15,245 [INFO]   Loading: ItemDiscountTracking_Temp
+2026-03-27 03:14:15,269 [INFO]   Done: ItemDiscountTracking_Temp — 0 rows
+2026-03-27 03:14:15,269 [INFO]   Loading: ItemTypeCategory
+2026-03-27 03:14:15,288 [INFO]   Done: ItemTypeCategory — 0 rows
+2026-03-27 03:14:15,288 [INFO]   Loading: ItemTypes
+2026-03-27 03:14:15,309 [INFO]   Done: ItemTypes — 27 rows
+2026-03-27 03:14:15,309 [INFO]   Loading: ItemTypesComments
+2026-03-27 03:14:15,328 [INFO]   Done: ItemTypesComments — 0 rows
+2026-03-27 03:14:15,329 [INFO]   Loading: ItemUnitSizes
+2026-03-27 03:14:15,348 [INFO]   Done: ItemUnitSizes — 0 rows
+2026-03-27 03:14:15,348 [INFO]   Loading: Items
+2026-03-27 03:14:15,757 [INFO]   Done: Items — 2,002 rows
+2026-03-27 03:14:15,757 [INFO]   Loading: ItemsAdditionalClass
+2026-03-27 03:14:15,777 [INFO]   Done: ItemsAdditionalClass — 0 rows
+2026-03-27 03:14:15,777 [INFO]   Loading: ItemsAndModelsImages
+2026-03-27 03:14:15,798 [INFO]   Done: ItemsAndModelsImages — 0 rows
+2026-03-27 03:14:15,798 [INFO]   Loading: ItemsBundle_package
+2026-03-27 03:14:15,821 [INFO]   Done: ItemsBundle_package — 62 rows
+2026-03-27 03:14:15,821 [INFO]   Loading: ItemsCatalogDetection
+2026-03-27 03:14:15,848 [INFO]   Done: ItemsCatalogDetection — 0 rows
+2026-03-27 03:14:15,848 [INFO]   Loading: ItemsInterfaces
+2026-03-27 03:14:15,897 [INFO]   Done: ItemsInterfaces — 0 rows
+2026-03-27 03:14:15,897 [INFO]   Loading: ItemsNoInventoryAvailableLog
+2026-03-27 03:14:15,919 [INFO]   Done: ItemsNoInventoryAvailableLog — 0 rows
+2026-03-27 03:14:15,919 [INFO]   Loading: ItemsRentAccount
+2026-03-27 03:14:15,945 [INFO]   Done: ItemsRentAccount — 0 rows
+2026-03-27 03:14:15,945 [INFO]   Loading: Items_tmp
+2026-03-27 03:14:15,965 [INFO]   Done: Items_tmp — 0 rows
+2026-03-27 03:14:15,965 [INFO]   Loading: JobOrderLines
+2026-03-27 03:14:15,988 [INFO]   Done: JobOrderLines — 0 rows
+2026-03-27 03:14:15,989 [INFO]   Loading: JobOrderTitle
+2026-03-27 03:14:16,013 [INFO]   Done: JobOrderTitle — 0 rows
+2026-03-27 03:14:16,013 [INFO]   Loading: JournalVaucherControl
+2026-03-27 03:14:16,039 [INFO]   Done: JournalVaucherControl — 0 rows
+2026-03-27 03:14:16,039 [INFO]   Loading: JournalVaucherHashavshevet
+2026-03-27 03:14:16,065 [INFO]   Done: JournalVaucherHashavshevet — 0 rows
+2026-03-27 03:14:16,065 [INFO]   Loading: JournalVoucherControlContinue
+2026-03-27 03:14:16,092 [INFO]   Done: JournalVoucherControlContinue — 0 rows
+2026-03-27 03:14:16,092 [INFO]   Loading: KitsMovementTable
+2026-03-27 03:14:16,114 [INFO]   Done: KitsMovementTable — 0 rows
+2026-03-27 03:14:16,114 [INFO]   Loading: Laundry
+2026-03-27 03:14:16,140 [INFO]   Done: Laundry — 0 rows
+2026-03-27 03:14:16,140 [INFO]   Loading: LendingCopies
+2026-03-27 03:14:16,167 [INFO]   Done: LendingCopies — 0 rows
+2026-03-27 03:14:16,167 [INFO]   Loading: LimitedChecksFile
+2026-03-27 03:14:16,191 [INFO]   Done: LimitedChecksFile — 0 rows
+2026-03-27 03:14:16,191 [INFO]   Loading: LinkCustomerToPayment
+2026-03-27 03:14:16,213 [INFO]   Done: LinkCustomerToPayment — 0 rows
+2026-03-27 03:14:16,213 [INFO]   Loading: LocationsWorkOrders
+2026-03-27 03:14:16,234 [INFO]   Done: LocationsWorkOrders — 0 rows
+2026-03-27 03:14:16,234 [INFO]   Loading: Locks
+2026-03-27 03:14:16,257 [INFO]   Done: Locks — 0 rows
+2026-03-27 03:14:16,257 [INFO]   Loading: LogRequestsForManagerApproval
+2026-03-27 03:14:16,278 [INFO]   Done: LogRequestsForManagerApproval — 0 rows
+2026-03-27 03:14:16,278 [INFO]   Loading: LoopJobs
+2026-03-27 03:14:16,298 [INFO]   Done: LoopJobs — 0 rows
+2026-03-27 03:14:16,298 [INFO]   Loading: LotNumbersPerItemID
+2026-03-27 03:14:16,319 [INFO]   Done: LotNumbersPerItemID — 0 rows
+2026-03-27 03:14:16,319 [INFO]   Loading: MasterSlaveSyncInfo
+2026-03-27 03:14:16,340 [INFO]   Done: MasterSlaveSyncInfo — 2 rows
+2026-03-27 03:14:16,340 [INFO]   Loading: MatrixReception_tmp
+2026-03-27 03:14:16,370 [INFO]   Done: MatrixReception_tmp — 0 rows
+2026-03-27 03:14:16,370 [INFO]   Loading: MatrixReportsProcessingFile
+2026-03-27 03:14:16,396 [INFO]   Done: MatrixReportsProcessingFile — 0 rows
+2026-03-27 03:14:16,396 [INFO]   Loading: MeansOfPaymentGroup
+2026-03-27 03:14:16,424 [INFO]   Done: MeansOfPaymentGroup — 0 rows
+2026-03-27 03:14:16,425 [INFO]   Loading: MeansOfPaymentGroup900
+2026-03-27 03:14:16,452 [INFO]   Done: MeansOfPaymentGroup900 — 0 rows
+2026-03-27 03:14:16,452 [INFO]   Loading: MeansOfPaymentsGroup
+2026-03-27 03:14:16,471 [INFO]   Done: MeansOfPaymentsGroup — 0 rows
+2026-03-27 03:14:16,471 [INFO]   Loading: MeetingAdditionalItems
+2026-03-27 03:14:16,492 [INFO]   Done: MeetingAdditionalItems — 0 rows
+2026-03-27 03:14:16,492 [INFO]   Loading: MeetingsFile
+2026-03-27 03:14:16,524 [INFO]   Done: MeetingsFile — 0 rows
+2026-03-27 03:14:16,525 [INFO]   Loading: MeetingsFile_854_855
+2026-03-27 03:14:16,551 [INFO]   Done: MeetingsFile_854_855 — 0 rows
+2026-03-27 03:14:16,551 [INFO]   Loading: MeetingsFile_855_856
+2026-03-27 03:14:16,583 [INFO]   Done: MeetingsFile_855_856 — 0 rows
+2026-03-27 03:14:16,583 [INFO]   Loading: MenusOnDemand
+2026-03-27 03:14:16,620 [INFO]   Done: MenusOnDemand — 253 rows
+2026-03-27 03:14:16,620 [INFO]   Loading: Messages
+2026-03-27 03:14:16,639 [INFO]   Done: Messages — 0 rows
+2026-03-27 03:14:16,639 [INFO]   Loading: MinInventoryForWarehouse
+2026-03-27 03:14:16,664 [INFO]   Done: MinInventoryForWarehouse — 2 rows
+2026-03-27 03:14:16,664 [INFO]   Loading: MkmErrors
+2026-03-27 03:14:16,688 [INFO]   Done: MkmErrors — 12 rows
+2026-03-27 03:14:16,688 [INFO]   Loading: ModelGroupLiminalStock
+2026-03-27 03:14:16,709 [INFO]   Done: ModelGroupLiminalStock — 0 rows
+2026-03-27 03:14:16,709 [INFO]   Loading: Models
+2026-03-27 03:14:16,736 [INFO]   Done: Models — 1 rows
+2026-03-27 03:14:16,736 [INFO]   Loading: ModelsFutureOrder
+2026-03-27 03:14:16,756 [INFO]   Done: ModelsFutureOrder — 0 rows
+2026-03-27 03:14:16,756 [INFO]   Loading: ModelsReceptionFromSupplier_D
+2026-03-27 03:14:16,783 [INFO]   Done: ModelsReceptionFromSupplier_D — 0 rows
+2026-03-27 03:14:16,783 [INFO]   Loading: ModelsReceptionFromSupplier_H
+2026-03-27 03:14:16,807 [INFO]   Done: ModelsReceptionFromSupplier_H — 0 rows
+2026-03-27 03:14:16,807 [INFO]   Loading: ModelsReceptionFromSupplier_H1
+2026-03-27 03:14:16,831 [INFO]   Done: ModelsReceptionFromSupplier_H1 — 0 rows
+2026-03-27 03:14:16,831 [INFO]   Loading: MoreInfo
+2026-03-27 03:14:16,858 [INFO]   Done: MoreInfo — 0 rows
+2026-03-27 03:14:16,858 [INFO]   Loading: MovieRent_tmp
+2026-03-27 03:14:16,878 [INFO]   Done: MovieRent_tmp — 0 rows
+2026-03-27 03:14:16,878 [INFO]   Loading: MultipassActions
+2026-03-27 03:14:16,935 [INFO]   Done: MultipassActions — 0 rows
+2026-03-27 03:14:16,935 [INFO]   Loading: MultipassActionsLog
+2026-03-27 03:14:16,963 [INFO]   Done: MultipassActionsLog — 0 rows
+2026-03-27 03:14:16,963 [INFO]   Loading: MultipassTbls
+2026-03-27 03:14:17,000 [INFO]   Done: MultipassTbls — 207 rows
+2026-03-27 03:14:17,000 [INFO]   Loading: Multiple_Barcode
+2026-03-27 03:14:17,020 [INFO]   Done: Multiple_Barcode — 0 rows
+2026-03-27 03:14:17,020 [INFO]   Loading: Names_tmp
+2026-03-27 03:14:17,041 [INFO]   Done: Names_tmp — 0 rows
+2026-03-27 03:14:17,041 [INFO]   Loading: NetworkInterrupts
+2026-03-27 03:14:17,063 [INFO]   Done: NetworkInterrupts — 2 rows
+2026-03-27 03:14:17,063 [INFO]   Loading: NetworkPortionsControl
+2026-03-27 03:14:17,085 [INFO]   Done: NetworkPortionsControl — 0 rows
+2026-03-27 03:14:17,086 [INFO]   Loading: NewTrack
+2026-03-27 03:14:17,108 [INFO]   Done: NewTrack — 0 rows
+2026-03-27 03:14:17,108 [INFO]   Loading: No101EmpForm
+2026-03-27 03:14:17,139 [INFO]   Done: No101EmpForm — 0 rows
+2026-03-27 03:14:17,139 [INFO]   Loading: NokchotObdim_shnaKodmt
+2026-03-27 03:14:17,161 [INFO]   Done: NokchotObdim_shnaKodmt — 0 rows
+2026-03-27 03:14:17,161 [INFO]   Loading: NonPaymentCause
+2026-03-27 03:14:17,182 [INFO]   Done: NonPaymentCause — 0 rows
+2026-03-27 03:14:17,182 [INFO]   Loading: NoticeToCustomerForOrder
+2026-03-27 03:14:17,204 [INFO]   Done: NoticeToCustomerForOrder — 0 rows
+2026-03-27 03:14:17,204 [INFO]   Loading: NoticeToCustomerForOrder1
+2026-03-27 03:14:17,226 [INFO]   Done: NoticeToCustomerForOrder1 — 0 rows
+2026-03-27 03:14:17,226 [INFO]   Loading: OldAttendance
+2026-03-27 03:14:17,247 [INFO]   Done: OldAttendance — 0 rows
+2026-03-27 03:14:17,248 [INFO]   Loading: OldControll
+2026-03-27 03:14:17,280 [INFO]   Done: OldControll — 0 rows
+2026-03-27 03:14:17,280 [INFO]   Loading: OldCustomerOrdersHeaders
+2026-03-27 03:14:17,304 [INFO]   Done: OldCustomerOrdersHeaders — 0 rows
+2026-03-27 03:14:17,305 [INFO]   Loading: OldDocuments
+2026-03-27 03:14:17,331 [INFO]   Done: OldDocuments — 0 rows
+2026-03-27 03:14:17,331 [INFO]   Loading: OldDocumentsCnt
+2026-03-27 03:14:17,357 [INFO]   Done: OldDocumentsCnt — 0 rows
+2026-03-27 03:14:17,357 [INFO]   Loading: OldDocumentsLines
+2026-03-27 03:14:17,379 [INFO]   Done: OldDocumentsLines — 0 rows
+2026-03-27 03:14:17,380 [INFO]   Loading: OldDocumentsLinesCnt
+2026-03-27 03:14:17,407 [INFO]   Done: OldDocumentsLinesCnt — 0 rows
+2026-03-27 03:14:17,407 [INFO]   Loading: OldDtsActions
+2026-03-27 03:14:17,432 [INFO]   Done: OldDtsActions — 0 rows
+2026-03-27 03:14:17,432 [INFO]   Loading: OldDtsActionsLog
+2026-03-27 03:14:17,456 [INFO]   Done: OldDtsActionsLog — 0 rows
+2026-03-27 03:14:17,456 [INFO]   Loading: OldGppActionsLog
+2026-03-27 03:14:17,481 [INFO]   Done: OldGppActionsLog — 0 rows
+2026-03-27 03:14:17,481 [INFO]   Loading: OldOrderBasketHeaders
+2026-03-27 03:14:17,502 [INFO]   Done: OldOrderBasketHeaders — 0 rows
+2026-03-27 03:14:17,502 [INFO]   Loading: OldPraxelTbl
+2026-03-27 03:14:17,529 [INFO]   Done: OldPraxelTbl — 0 rows
+2026-03-27 03:14:17,530 [INFO]   Loading: OldPraxelTbls
+2026-03-27 03:14:17,556 [INFO]   Done: OldPraxelTbls — 0 rows
+2026-03-27 03:14:17,556 [INFO]   Loading: OldReciepts
+2026-03-27 03:14:17,582 [INFO]   Done: OldReciepts — 0 rows
+2026-03-27 03:14:17,582 [INFO]   Loading: OldRecieptsCnt
+2026-03-27 03:14:17,607 [INFO]   Done: OldRecieptsCnt — 0 rows
+2026-03-27 03:14:17,607 [INFO]   Loading: OldRecieptsLines
+2026-03-27 03:14:17,634 [INFO]   Done: OldRecieptsLines — 0 rows
+2026-03-27 03:14:17,634 [INFO]   Loading: OldRecieptsLinesCnt
+2026-03-27 03:14:17,660 [INFO]   Done: OldRecieptsLinesCnt — 0 rows
+2026-03-27 03:14:17,660 [INFO]   Loading: OldTransPraxel
+2026-03-27 03:14:17,684 [INFO]   Done: OldTransPraxel — 0 rows
+2026-03-27 03:14:17,684 [INFO]   Loading: OldWayBill
+2026-03-27 03:14:17,714 [INFO]   Done: OldWayBill — 0 rows
+2026-03-27 03:14:17,714 [INFO]   Loading: OldWayBillHeaders
+2026-03-27 03:14:17,757 [INFO]   Done: OldWayBillHeaders — 83 rows
+2026-03-27 03:14:17,757 [INFO]   Loading: OldWayBillHeaders1
+2026-03-27 03:14:17,781 [INFO]   Done: OldWayBillHeaders1 — 0 rows
+2026-03-27 03:14:17,781 [INFO]   Loading: OldWayBillLines
+2026-03-27 03:14:17,804 [INFO]   Done: OldWayBillLines — 0 rows
+2026-03-27 03:14:17,804 [INFO]   Loading: OnAccountTransactionsBalance
+2026-03-27 03:14:17,825 [INFO]   Done: OnAccountTransactionsBalance — 0 rows
+2026-03-27 03:14:17,825 [INFO]   Loading: OnlineDocumentation
+2026-03-27 03:14:17,845 [INFO]   Done: OnlineDocumentation — 0 rows
+2026-03-27 03:14:17,845 [INFO]   Loading: OnlineTransactionsTransmission
+2026-03-27 03:14:19,721 [INFO]   Done: OnlineTransactionsTransmission — 10,255 rows
+2026-03-27 03:14:19,721 [INFO]   Loading: OpeningTimes
+2026-03-27 03:14:19,750 [INFO]   Done: OpeningTimes — 0 rows
+2026-03-27 03:14:19,750 [INFO]   Loading: OpticsPrescription
+2026-03-27 03:14:19,790 [INFO]   Done: OpticsPrescription — 0 rows
+2026-03-27 03:14:19,790 [INFO]   Loading: OpticsPrescriptionOld
+2026-03-27 03:14:19,841 [INFO]   Done: OpticsPrescriptionOld — 0 rows
+2026-03-27 03:14:19,841 [INFO]   Loading: Optics_CustomersTrailer
+2026-03-27 03:14:19,931 [INFO]   Done: Optics_CustomersTrailer — 0 rows
+2026-03-27 03:14:19,931 [INFO]   Loading: Optics_ItemsTrailer
+2026-03-27 03:14:19,962 [INFO]   Done: Optics_ItemsTrailer — 0 rows
+2026-03-27 03:14:19,963 [INFO]   Loading: OrderBasketHeaders
+2026-03-27 03:14:19,987 [INFO]   Done: OrderBasketHeaders — 0 rows
+2026-03-27 03:14:19,988 [INFO]   Loading: OrderDeclineCause
+2026-03-27 03:14:20,011 [INFO]   Done: OrderDeclineCause — 0 rows
+2026-03-27 03:14:20,011 [INFO]   Loading: OrderFormLines
+2026-03-27 03:14:20,037 [INFO]   Done: OrderFormLines — 0 rows
+2026-03-27 03:14:20,037 [INFO]   Loading: OrderFormLines1
+2026-03-27 03:14:20,065 [INFO]   Done: OrderFormLines1 — 0 rows
+2026-03-27 03:14:20,065 [INFO]   Loading: OrderModelsH_New
+2026-03-27 03:14:20,091 [INFO]   Done: OrderModelsH_New — 0 rows
+2026-03-27 03:14:20,091 [INFO]   Loading: OrderTypeClass
+2026-03-27 03:14:20,110 [INFO]   Done: OrderTypeClass — 0 rows
+2026-03-27 03:14:20,110 [INFO]   Loading: OrderTypes
+2026-03-27 03:14:20,129 [INFO]   Done: OrderTypes — 0 rows
+2026-03-27 03:14:20,129 [INFO]   Loading: OrderTypesComments
+2026-03-27 03:14:20,149 [INFO]   Done: OrderTypesComments — 0 rows
+2026-03-27 03:14:20,150 [INFO]   Loading: OrdermodelsD_New
+2026-03-27 03:14:20,180 [INFO]   Done: OrdermodelsD_New — 0 rows
+2026-03-27 03:14:20,181 [INFO]   Loading: OrdersTypes
+2026-03-27 03:14:20,200 [INFO]   Done: OrdersTypes — 0 rows
+2026-03-27 03:14:20,200 [INFO]   Loading: OrdersUpdateOnline
+2026-03-27 03:14:20,220 [INFO]   Done: OrdersUpdateOnline — 0 rows
+2026-03-27 03:14:20,220 [INFO]   Loading: Orders_tmp
+2026-03-27 03:14:20,239 [INFO]   Done: Orders_tmp — 0 rows
+2026-03-27 03:14:20,239 [INFO]   Loading: POSMovementToHashavshevet
+2026-03-27 03:14:20,263 [INFO]   Done: POSMovementToHashavshevet — 0 rows
+2026-03-27 03:14:20,263 [INFO]   Loading: POSPermanentMessages
+2026-03-27 03:14:20,282 [INFO]   Done: POSPermanentMessages — 0 rows
+2026-03-27 03:14:20,282 [INFO]   Loading: PUBLISHED_INTERFACES
+2026-03-27 03:14:20,302 [INFO]   Done: PUBLISHED_INTERFACES — 0 rows
+2026-03-27 03:14:20,303 [INFO]   Loading: PaymentDeposite
+2026-03-27 03:14:20,342 [INFO]   Done: PaymentDeposite — 0 rows
+2026-03-27 03:14:20,343 [INFO]   Loading: PaymentMethodMonitoring
+2026-03-27 03:14:20,453 [INFO]   Done: PaymentMethodMonitoring — 0 rows
+2026-03-27 03:14:20,454 [INFO]   Loading: PaymentMethodMonitoring1
+2026-03-27 03:14:20,510 [INFO]   Done: PaymentMethodMonitoring1 — 0 rows
+2026-03-27 03:14:20,510 [INFO]   Loading: PaymentMonitoring905
+2026-03-27 03:14:20,569 [INFO]   Done: PaymentMonitoring905 — 0 rows
+2026-03-27 03:14:20,569 [INFO]   Loading: PaymentTerms
+2026-03-27 03:14:20,610 [INFO]   Done: PaymentTerms — 0 rows
+2026-03-27 03:14:20,610 [INFO]   Loading: PaymentType
+2026-03-27 03:14:20,653 [INFO]   Done: PaymentType — 7 rows
+2026-03-27 03:14:20,654 [INFO]   Loading: PaymentsToSuppliers
+2026-03-27 03:14:20,684 [INFO]   Done: PaymentsToSuppliers — 0 rows
+2026-03-27 03:14:20,684 [INFO]   Loading: PersonalActionLog
+2026-03-27 03:14:20,719 [INFO]   Done: PersonalActionLog — 606 rows
+2026-03-27 03:14:20,719 [INFO]   Loading: PosCalculatorClosing
+2026-03-27 03:14:20,740 [INFO]   Done: PosCalculatorClosing — 0 rows
+2026-03-27 03:14:20,741 [INFO]   Loading: PosDocHeaders
+2026-03-27 03:14:20,777 [INFO]   Done: PosDocHeaders — 0 rows
+2026-03-27 03:14:20,777 [INFO]   Loading: PosStatement
+2026-03-27 03:14:20,802 [INFO]   Done: PosStatement — 0 rows
+2026-03-27 03:14:20,802 [INFO]   Loading: PosStatmentsLines
+2026-03-27 03:14:20,826 [INFO]   Done: PosStatmentsLines — 0 rows
+2026-03-27 03:14:20,826 [INFO]   Loading: PositionStatusTime
+2026-03-27 03:14:20,845 [INFO]   Done: PositionStatusTime — 0 rows
+2026-03-27 03:14:20,845 [INFO]   Loading: PostalTypes
+2026-03-27 03:14:20,867 [INFO]   Done: PostalTypes — 5 rows
+2026-03-27 03:14:20,867 [INFO]   Loading: PraxelTbls
+2026-03-27 03:14:20,931 [INFO]   Done: PraxelTbls — 121 rows
+2026-03-27 03:14:20,931 [INFO]   Loading: PraxellTablesCode
+2026-03-27 03:14:20,954 [INFO]   Done: PraxellTablesCode — 6 rows
+2026-03-27 03:14:20,954 [INFO]   Loading: Praxell_Log
+2026-03-27 03:14:20,979 [INFO]   Done: Praxell_Log — 0 rows
+2026-03-27 03:14:20,979 [INFO]   Loading: PrePaidCardsCampaign
+2026-03-27 03:14:21,005 [INFO]   Done: PrePaidCardsCampaign — 0 rows
+2026-03-27 03:14:21,005 [INFO]   Loading: Pre_PaidCardsAssign
+2026-03-27 03:14:21,026 [INFO]   Done: Pre_PaidCardsAssign — 0 rows
+2026-03-27 03:14:21,026 [INFO]   Loading: Pre_Paid_Prefixes
+2026-03-27 03:14:21,047 [INFO]   Done: Pre_Paid_Prefixes — 0 rows
+2026-03-27 03:14:21,047 [INFO]   Loading: Pre_Paid_Prefixes1
+2026-03-27 03:14:21,070 [INFO]   Done: Pre_Paid_Prefixes1 — 0 rows
+2026-03-27 03:14:21,070 [INFO]   Loading: Pre_Paid_Prefixes2
+2026-03-27 03:14:21,093 [INFO]   Done: Pre_Paid_Prefixes2 — 0 rows
+2026-03-27 03:14:21,093 [INFO]   Loading: PreparationInstructions
+2026-03-27 03:14:21,115 [INFO]   Done: PreparationInstructions — 1 rows
+2026-03-27 03:14:21,116 [INFO]   Loading: PriceChangeDetection
+2026-03-27 03:14:21,138 [INFO]   Done: PriceChangeDetection — 0 rows
+2026-03-27 03:14:21,138 [INFO]   Loading: PriceLists
+2026-03-27 03:14:21,165 [INFO]   Done: PriceLists — 4 rows
+2026-03-27 03:14:21,165 [INFO]   Loading: PricesChangeApproval
+2026-03-27 03:14:21,189 [INFO]   Done: PricesChangeApproval — 0 rows
+2026-03-27 03:14:21,189 [INFO]   Loading: PricesChanges
+2026-03-27 03:14:21,214 [INFO]   Done: PricesChanges — 0 rows
+2026-03-27 03:14:21,214 [INFO]   Loading: PricingProfitAndVat
+2026-03-27 03:14:21,243 [INFO]   Done: PricingProfitAndVat — 0 rows
+2026-03-27 03:14:21,243 [INFO]   Loading: PrinterConfigurationTable
+2026-03-27 03:14:21,269 [INFO]   Done: PrinterConfigurationTable — 12 rows
+2026-03-27 03:14:21,269 [INFO]   Loading: PrinterCustomCommands
+2026-03-27 03:14:21,290 [INFO]   Done: PrinterCustomCommands — 0 rows
+2026-03-27 03:14:21,290 [INFO]   Loading: PrinterSettingsControl
+2026-03-27 03:14:21,311 [INFO]   Done: PrinterSettingsControl — 7 rows
+2026-03-27 03:14:21,311 [INFO]   Loading: ProductionOpticOrderChangeCause
+2026-03-27 03:14:21,330 [INFO]   Done: ProductionOpticOrderChangeCause — 0 rows
+2026-03-27 03:14:21,330 [INFO]   Loading: ProductsSettings_optic
+2026-03-27 03:14:21,350 [INFO]   Done: ProductsSettings_optic — 0 rows
+2026-03-27 03:14:21,350 [INFO]   Loading: ProgramsList
+2026-03-27 03:14:21,393 [INFO]   Done: ProgramsList — 689 rows
+2026-03-27 03:14:21,394 [INFO]   Loading: ProgramsList1
+2026-03-27 03:14:21,418 [INFO]   Done: ProgramsList1 — 0 rows
+2026-03-27 03:14:21,418 [INFO]   Loading: PromisedToCustomer
+2026-03-27 03:14:21,441 [INFO]   Done: PromisedToCustomer — 0 rows
+2026-03-27 03:14:21,441 [INFO]   Loading: ProtoTypeMenus
+2026-03-27 03:14:21,466 [INFO]   Done: ProtoTypeMenus — 2 rows
+2026-03-27 03:14:21,467 [INFO]   Loading: PublishedCoupons_tmp
+2026-03-27 03:14:21,490 [INFO]   Done: PublishedCoupons_tmp — 0 rows
+2026-03-27 03:14:21,491 [INFO]   Loading: QaStatus
+2026-03-27 03:14:21,512 [INFO]   Done: QaStatus — 0 rows
+2026-03-27 03:14:21,512 [INFO]   Loading: RFIDActivityLog
+2026-03-27 03:14:21,537 [INFO]   Done: RFIDActivityLog — 0 rows
+2026-03-27 03:14:21,537 [INFO]   Loading: RFIDDocumentsLines
+2026-03-27 03:14:21,559 [INFO]   Done: RFIDDocumentsLines — 0 rows
+2026-03-27 03:14:21,559 [INFO]   Loading: RFIDInventoryLog
+2026-03-27 03:14:21,579 [INFO]   Done: RFIDInventoryLog — 0 rows
+2026-03-27 03:14:21,579 [INFO]   Loading: RFIDTempDocumentsLines
+2026-03-27 03:14:21,600 [INFO]   Done: RFIDTempDocumentsLines — 0 rows
+2026-03-27 03:14:21,600 [INFO]   Loading: RMSReceiptLinesHold
+2026-03-27 03:14:21,621 [INFO]   Done: RMSReceiptLinesHold — 0 rows
+2026-03-27 03:14:21,621 [INFO]   Loading: RMSTransaction
+2026-03-27 03:14:21,650 [INFO]   Done: RMSTransaction — 0 rows
+2026-03-27 03:14:21,650 [INFO]   Loading: ReceiptLines
+2026-03-27 03:14:23,410 [INFO]   Done: ReceiptLines — 13,631 rows
+2026-03-27 03:14:23,410 [INFO]   Loading: ReceiptLines_continue
+2026-03-27 03:14:25,065 [INFO]   Done: ReceiptLines_continue — 13,631 rows
+2026-03-27 03:14:25,065 [INFO]   Loading: ReceiptPrintRecover
+2026-03-27 03:14:25,100 [INFO]   Done: ReceiptPrintRecover — 0 rows
+2026-03-27 03:14:25,100 [INFO]   Loading: ReceiptTitle_continue
+2026-03-27 03:14:26,368 [INFO]   Done: ReceiptTitle_continue — 9,379 rows
+2026-03-27 03:14:26,368 [INFO]   Loading: Receipts
+2026-03-27 03:14:27,420 [INFO]   Done: Receipts — 9,380 rows
+2026-03-27 03:14:27,420 [INFO]   Loading: ReferemceValidationAlerts
+2026-03-27 03:14:27,441 [INFO]   Done: ReferemceValidationAlerts — 0 rows
+2026-03-27 03:14:27,442 [INFO]   Loading: RefundMethods
+2026-03-27 03:14:27,463 [INFO]   Done: RefundMethods — 0 rows
+2026-03-27 03:14:27,463 [INFO]   Loading: RefundOriginalTendersAmountItems
+2026-03-27 03:14:27,485 [INFO]   Done: RefundOriginalTendersAmountItems — 0 rows
+2026-03-27 03:14:27,485 [INFO]   Loading: ReleaseVersion
+2026-03-27 03:14:27,507 [INFO]   Done: ReleaseVersion — 65 rows
+2026-03-27 03:14:27,507 [INFO]   Loading: RentTypes
+2026-03-27 03:14:27,528 [INFO]   Done: RentTypes — 0 rows
+2026-03-27 03:14:27,528 [INFO]   Loading: ReportsProcessingFile
+2026-03-27 03:14:27,555 [INFO]   Done: ReportsProcessingFile — 0 rows
+2026-03-27 03:14:27,555 [INFO]   Loading: ReportsProcessingFile_216BTRV
+2026-03-27 03:14:27,625 [INFO]   Done: ReportsProcessingFile_216BTRV — 0 rows
+2026-03-27 03:14:27,625 [INFO]   Loading: Reports_tmp
+2026-03-27 03:14:27,651 [INFO]   Done: Reports_tmp — 0 rows
+2026-03-27 03:14:27,651 [INFO]   Loading: RequestReferenceFromTaxAuthority
+2026-03-27 03:14:27,672 [INFO]   Done: RequestReferenceFromTaxAuthority — 0 rows
+2026-03-27 03:14:27,672 [INFO]   Loading: RestCanceledItemsLog
+2026-03-27 03:14:27,695 [INFO]   Done: RestCanceledItemsLog — 0 rows
+2026-03-27 03:14:27,695 [INFO]   Loading: RestaurantControl
+2026-03-27 03:14:27,723 [INFO]   Done: RestaurantControl — 2 rows
+2026-03-27 03:14:27,723 [INFO]   Loading: RestaurantItems_continue
+2026-03-27 03:14:27,828 [INFO]   Done: RestaurantItems_continue — 1,167 rows
+2026-03-27 03:14:27,828 [INFO]   Loading: RestaurantLayouts
+2026-03-27 03:14:27,847 [INFO]   Done: RestaurantLayouts — 0 rows
+2026-03-27 03:14:27,847 [INFO]   Loading: ReturnSerialRecovery
+2026-03-27 03:14:27,868 [INFO]   Done: ReturnSerialRecovery — 0 rows
+2026-03-27 03:14:27,868 [INFO]   Loading: Reward
+2026-03-27 03:14:27,889 [INFO]   Done: Reward — 0 rows
+2026-03-27 03:14:27,889 [INFO]   Loading: Rulers
+2026-03-27 03:14:27,915 [INFO]   Done: Rulers — 0 rows
+2026-03-27 03:14:27,915 [INFO]   Loading: SLAVE_PraxellTransactionsTable
+2026-03-27 03:14:27,942 [INFO]   Done: SLAVE_PraxellTransactionsTable — 0 rows
+2026-03-27 03:14:27,942 [INFO]   Loading: SafeCashTransactions
+2026-03-27 03:14:27,965 [INFO]   Done: SafeCashTransactions — 0 rows
+2026-03-27 03:14:27,965 [INFO]   Loading: SafeCasheTransactionsForFutureCare
+2026-03-27 03:14:27,986 [INFO]   Done: SafeCasheTransactionsForFutureCare — 0 rows
+2026-03-27 03:14:27,986 [INFO]   Loading: SaleItems
+2026-03-27 03:14:28,005 [INFO]   Done: SaleItems — 0 rows
+2026-03-27 03:14:28,005 [INFO]   Loading: SaleItems_local
+2026-03-27 03:14:28,024 [INFO]   Done: SaleItems_local — 0 rows
+2026-03-27 03:14:28,024 [INFO]   Loading: SalesAgreementsComments_tmp
+2026-03-27 03:14:28,044 [INFO]   Done: SalesAgreementsComments_tmp — 0 rows
+2026-03-27 03:14:28,044 [INFO]   Loading: SalesAmountsSlicing
+2026-03-27 03:14:28,066 [INFO]   Done: SalesAmountsSlicing — 0 rows
+2026-03-27 03:14:28,066 [INFO]   Loading: SaveNoLaundry
+2026-03-27 03:14:28,086 [INFO]   Done: SaveNoLaundry — 0 rows
+2026-03-27 03:14:28,086 [INFO]   Loading: SelectedToppings
+2026-03-27 03:14:28,108 [INFO]   Done: SelectedToppings — 0 rows
+2026-03-27 03:14:28,108 [INFO]   Loading: SerialItemLiminalStock
+2026-03-27 03:14:28,129 [INFO]   Done: SerialItemLiminalStock — 0 rows
+2026-03-27 03:14:28,129 [INFO]   Loading: SerialItemsRecord
+2026-03-27 03:14:28,154 [INFO]   Done: SerialItemsRecord — 0 rows
+2026-03-27 03:14:28,154 [INFO]   Loading: SerialLines_customerCreditCard
+2026-03-27 03:14:28,176 [INFO]   Done: SerialLines_customerCreditCard — 0 rows
+2026-03-27 03:14:28,176 [INFO]   Loading: ServiceCallDocuments
+2026-03-27 03:14:28,197 [INFO]   Done: ServiceCallDocuments — 0 rows
+2026-03-27 03:14:28,197 [INFO]   Loading: ServiceCallInfo
+2026-03-27 03:14:28,216 [INFO]   Done: ServiceCallInfo — 0 rows
+2026-03-27 03:14:28,216 [INFO]   Loading: ServiceCalls
+2026-03-27 03:14:28,246 [INFO]   Done: ServiceCalls — 0 rows
+2026-03-27 03:14:28,246 [INFO]   Loading: ServiceDiscountCause
+2026-03-27 03:14:28,265 [INFO]   Done: ServiceDiscountCause — 0 rows
+2026-03-27 03:14:28,265 [INFO]   Loading: ServiceDocType
+2026-03-27 03:14:28,286 [INFO]   Done: ServiceDocType — 12 rows
+2026-03-27 03:14:28,286 [INFO]   Loading: ServiceDocumentsLines
+2026-03-27 03:14:28,314 [INFO]   Done: ServiceDocumentsLines — 0 rows
+2026-03-27 03:14:28,314 [INFO]   Loading: ServiceDocuments_headline
+2026-03-27 03:14:28,338 [INFO]   Done: ServiceDocuments_headline — 0 rows
+2026-03-27 03:14:28,338 [INFO]   Loading: ServiceDocuments_invoice
+2026-03-27 03:14:28,359 [INFO]   Done: ServiceDocuments_invoice — 0 rows
+2026-03-27 03:14:28,359 [INFO]   Loading: ServiceDocuments_parts
+2026-03-27 03:14:28,384 [INFO]   Done: ServiceDocuments_parts — 0 rows
+2026-03-27 03:14:28,385 [INFO]   Loading: ServiceForm
+2026-03-27 03:14:28,412 [INFO]   Done: ServiceForm — 0 rows
+2026-03-27 03:14:28,412 [INFO]   Loading: ServiceForm1
+2026-03-27 03:14:28,438 [INFO]   Done: ServiceForm1 — 0 rows
+2026-03-27 03:14:28,438 [INFO]   Loading: ServiceInfoDefinitions
+2026-03-27 03:14:28,458 [INFO]   Done: ServiceInfoDefinitions — 0 rows
+2026-03-27 03:14:28,458 [INFO]   Loading: SetItems
+2026-03-27 03:14:28,480 [INFO]   Done: SetItems — 0 rows
+2026-03-27 03:14:28,480 [INFO]   Loading: Settings
+2026-03-27 03:14:28,530 [INFO]   Done: Settings — 1,031 rows
+2026-03-27 03:14:28,530 [INFO]   Loading: SettingsControl
+2026-03-27 03:14:28,574 [INFO]   Done: SettingsControl — 439 rows
+2026-03-27 03:14:28,575 [INFO]   Loading: SettingsProfile
+2026-03-27 03:14:28,595 [INFO]   Done: SettingsProfile — 0 rows
+2026-03-27 03:14:28,595 [INFO]   Loading: SharedReleaseVersion
+2026-03-27 03:14:28,614 [INFO]   Done: SharedReleaseVersion — 0 rows
+2026-03-27 03:14:28,615 [INFO]   Loading: Shifts
+2026-03-27 03:14:28,635 [INFO]   Done: Shifts — 1 rows
+2026-03-27 03:14:28,635 [INFO]   Loading: ShvaTbls
+2026-03-27 03:14:28,660 [INFO]   Done: ShvaTbls — 105 rows
+2026-03-27 03:14:28,660 [INFO]   Loading: SingleValueLock
+2026-03-27 03:14:28,679 [INFO]   Done: SingleValueLock — 0 rows
+2026-03-27 03:14:28,679 [INFO]   Loading: SizeMatrixExternalProgram
+2026-03-27 03:14:28,699 [INFO]   Done: SizeMatrixExternalProgram — 0 rows
+2026-03-27 03:14:28,699 [INFO]   Loading: SolutionFixes
+2026-03-27 03:14:28,720 [INFO]   Done: SolutionFixes — 0 rows
+2026-03-27 03:14:28,721 [INFO]   Loading: Spares
+2026-03-27 03:14:28,740 [INFO]   Done: Spares — 0 rows
+2026-03-27 03:14:28,740 [INFO]   Loading: SpecialTasksBonus
+2026-03-27 03:14:28,760 [INFO]   Done: SpecialTasksBonus — 0 rows
+2026-03-27 03:14:28,760 [INFO]   Loading: StandartsFile
+2026-03-27 03:14:28,786 [INFO]   Done: StandartsFile — 0 rows
+2026-03-27 03:14:28,786 [INFO]   Loading: StatisSHVAfile
+2026-03-27 03:14:28,958 [INFO]   Done: StatisSHVAfile — 842 rows
+2026-03-27 03:14:28,958 [INFO]   Loading: Status
+2026-03-27 03:14:28,982 [INFO]   Done: Status — 0 rows
+2026-03-27 03:14:28,982 [INFO]   Loading: StatusClass
+2026-03-27 03:14:29,001 [INFO]   Done: StatusClass — 0 rows
+2026-03-27 03:14:29,001 [INFO]   Loading: StatusState
+2026-03-27 03:14:29,021 [INFO]   Done: StatusState — 0 rows
+2026-03-27 03:14:29,021 [INFO]   Loading: StockMovement
+2026-03-27 03:14:29,045 [INFO]   Done: StockMovement — 0 rows
+2026-03-27 03:14:29,045 [INFO]   Loading: StockMovementCode
+2026-03-27 03:14:29,065 [INFO]   Done: StockMovementCode — 9 rows
+2026-03-27 03:14:29,065 [INFO]   Loading: StockMovementFile
+2026-03-27 03:14:29,087 [INFO]   Done: StockMovementFile — 1 rows
+2026-03-27 03:14:29,087 [INFO]   Loading: StockMovementTmp
+2026-03-27 03:14:29,114 [INFO]   Done: StockMovementTmp — 0 rows
+2026-03-27 03:14:29,114 [INFO]   Loading: StoresByChain
+2026-03-27 03:14:29,137 [INFO]   Done: StoresByChain — 0 rows
+2026-03-27 03:14:29,137 [INFO]   Loading: StoresInCampaign
+2026-03-27 03:14:29,158 [INFO]   Done: StoresInCampaign — 0 rows
+2026-03-27 03:14:29,158 [INFO]   Loading: Streets
+2026-03-27 03:14:29,179 [INFO]   Done: Streets — 0 rows
+2026-03-27 03:14:29,179 [INFO]   Loading: SubscribersType
+2026-03-27 03:14:29,202 [INFO]   Done: SubscribersType — 0 rows
+2026-03-27 03:14:29,203 [INFO]   Loading: SuppliersProfitMultiplier
+2026-03-27 03:14:29,223 [INFO]   Done: SuppliersProfitMultiplier — 0 rows
+2026-03-27 03:14:29,223 [INFO]   Loading: SupplyModelTbl
+2026-03-27 03:14:29,242 [INFO]   Done: SupplyModelTbl — 0 rows
+2026-03-27 03:14:29,243 [INFO]   Loading: SupplyModel_tmp
+2026-03-27 03:14:29,262 [INFO]   Done: SupplyModel_tmp — 0 rows
+2026-03-27 03:14:29,263 [INFO]   Loading: SystemAgent_tmp
+2026-03-27 03:14:29,282 [INFO]   Done: SystemAgent_tmp — 0 rows
+2026-03-27 03:14:29,282 [INFO]   Loading: TaxAuthorityDefinitions
+2026-03-27 03:14:29,303 [INFO]   Done: TaxAuthorityDefinitions — 0 rows
+2026-03-27 03:14:29,303 [INFO]   Loading: TblTbls
+2026-03-27 03:14:29,330 [INFO]   Done: TblTbls — 138 rows
+2026-03-27 03:14:29,331 [INFO]   Loading: TechSupportLog
+2026-03-27 03:14:29,351 [INFO]   Done: TechSupportLog — 0 rows
+2026-03-27 03:14:29,351 [INFO]   Loading: TempGeneralMenus
+2026-03-27 03:14:29,377 [INFO]   Done: TempGeneralMenus — 0 rows
+2026-03-27 03:14:29,378 [INFO]   Loading: TerminalsAndReceiptVouchers
+2026-03-27 03:14:29,461 [INFO]   Done: TerminalsAndReceiptVouchers — 2,520 rows
+2026-03-27 03:14:29,461 [INFO]   Loading: TimeQuery_tmp
+2026-03-27 03:14:29,487 [INFO]   Done: TimeQuery_tmp — 0 rows
+2026-03-27 03:14:29,487 [INFO]   Loading: Topics
+2026-03-27 03:14:29,512 [INFO]   Done: Topics — 0 rows
+2026-03-27 03:14:29,512 [INFO]   Loading: Topics1
+2026-03-27 03:14:29,533 [INFO]   Done: Topics1 — 0 rows
+2026-03-27 03:14:29,533 [INFO]   Loading: ToppingsItem
+2026-03-27 03:14:29,555 [INFO]   Done: ToppingsItem — 0 rows
+2026-03-27 03:14:29,555 [INFO]   Loading: Track
+2026-03-27 03:14:29,580 [INFO]   Done: Track — 0 rows
+2026-03-27 03:14:29,580 [INFO]   Loading: Track2CreditCards
+2026-03-27 03:14:29,601 [INFO]   Done: Track2CreditCards — 0 rows
+2026-03-27 03:14:29,601 [INFO]   Loading: TracksCustomerIDInDocRows
+2026-03-27 03:14:29,625 [INFO]   Done: TracksCustomerIDInDocRows — 0 rows
+2026-03-27 03:14:29,625 [INFO]   Loading: TradeInVouchers
+2026-03-27 03:14:29,651 [INFO]   Done: TradeInVouchers — 0 rows
+2026-03-27 03:14:29,651 [INFO]   Loading: Trans
+2026-03-27 03:14:29,674 [INFO]   Done: Trans — 0 rows
+2026-03-27 03:14:29,674 [INFO]   Loading: TransLog_tmp
+2026-03-27 03:14:29,698 [INFO]   Done: TransLog_tmp — 0 rows
+2026-03-27 03:14:29,699 [INFO]   Loading: UnitSizesDetails
+2026-03-27 03:14:29,721 [INFO]   Done: UnitSizesDetails — 0 rows
+2026-03-27 03:14:29,721 [INFO]   Loading: UserPermisson
+2026-03-27 03:14:29,743 [INFO]   Done: UserPermisson — 0 rows
+2026-03-27 03:14:29,743 [INFO]   Loading: VeriCardActionsLog
+2026-03-27 03:14:29,768 [INFO]   Done: VeriCardActionsLog — 0 rows
+2026-03-27 03:14:29,768 [INFO]   Loading: VeriCardClubs
+2026-03-27 03:14:29,791 [INFO]   Done: VeriCardClubs — 0 rows
+2026-03-27 03:14:29,791 [INFO]   Loading: VeriCardTbls
+2026-03-27 03:14:29,833 [INFO]   Done: VeriCardTbls — 40 rows
+2026-03-27 03:14:29,833 [INFO]   Loading: ViewFile
+2026-03-27 03:14:29,861 [INFO]   Done: ViewFile — 26 rows
+2026-03-27 03:14:29,861 [INFO]   Loading: Visit_tmp
+2026-03-27 03:14:29,882 [INFO]   Done: Visit_tmp — 0 rows
+2026-03-27 03:14:29,882 [INFO]   Loading: VouchersIdentifyMechanism
+2026-03-27 03:14:29,907 [INFO]   Done: VouchersIdentifyMechanism — 0 rows
+2026-03-27 03:14:29,907 [INFO]   Loading: WSLog
+2026-03-27 03:14:29,929 [INFO]   Done: WSLog — 0 rows
+2026-03-27 03:14:29,929 [INFO]   Loading: WayBillDestinations
+2026-03-27 03:14:29,950 [INFO]   Done: WayBillDestinations — 0 rows
+2026-03-27 03:14:29,950 [INFO]   Loading: WayBillHeader
+2026-03-27 03:14:29,994 [INFO]   Done: WayBillHeader — 83 rows
+2026-03-27 03:14:29,994 [INFO]   Loading: WayBillLines
+2026-03-27 03:14:30,090 [INFO]   Done: WayBillLines — 714 rows
+2026-03-27 03:14:30,090 [INFO]   Loading: WayBillLines1
+2026-03-27 03:14:30,113 [INFO]   Done: WayBillLines1 — 0 rows
+2026-03-27 03:14:30,113 [INFO]   Loading: WayBillLines_NewLines
+2026-03-27 03:14:30,133 [INFO]   Done: WayBillLines_NewLines — 0 rows
+2026-03-27 03:14:30,133 [INFO]   Loading: WayBillMenu
+2026-03-27 03:14:30,164 [INFO]   Done: WayBillMenu — 8 rows
+2026-03-27 03:14:30,164 [INFO]   Loading: WayBillMenu1
+2026-03-27 03:14:30,188 [INFO]   Done: WayBillMenu1 — 0 rows
+2026-03-27 03:14:30,188 [INFO]   Loading: WebServiceQueryLog
+2026-03-27 03:14:30,209 [INFO]   Done: WebServiceQueryLog — 0 rows
+2026-03-27 03:14:30,209 [INFO]   Loading: WeeklyWorkPlan
+2026-03-27 03:14:30,232 [INFO]   Done: WeeklyWorkPlan — 0 rows
+2026-03-27 03:14:30,232 [INFO]   Loading: WorkSchedule
+2026-03-27 03:14:30,252 [INFO]   Done: WorkSchedule — 0 rows
+2026-03-27 03:14:30,252 [INFO]   Loading: WorkstationType
+2026-03-27 03:14:30,274 [INFO]   Done: WorkstationType — 4 rows
+2026-03-27 03:14:30,274 [INFO]   Loading: Workstations
+2026-03-27 03:14:30,300 [INFO]   Done: Workstations — 3 rows
+2026-03-27 03:14:30,300 [INFO]   Loading: tmpCardsForFatherClient
+2026-03-27 03:14:30,335 [INFO]   Done: tmpCardsForFatherClient — 0 rows
+2026-03-27 03:14:30,335 [INFO]   Loading: tmpInvoiceItemIDOptics
+2026-03-27 03:14:30,356 [INFO]   Done: tmpInvoiceItemIDOptics — 0 rows
+2026-03-27 03:14:30,356 [INFO]   Loading: tmpSelectOptician
+2026-03-27 03:14:30,377 [INFO]   Done: tmpSelectOptician — 0 rows
+2026-03-27 03:14:30,377 [INFO] All tables loaded successfully.

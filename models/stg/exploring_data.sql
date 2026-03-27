@@ -1,17 +1,18 @@
 
 {{
   config(
-    materialized = 'view',
+    materialized = 'table',
     )
 }}
 
 SELECT 
-    t.name AS table_name,
-    SUM(p.rows) AS row_count
-FROM sys.tables t
-JOIN sys.partitions p 
-    ON t.object_id = p.object_id
-WHERE p.index_id IN (0,1)
-GROUP BY t.name
-ORDER BY row_count DESC;
+    relname AS table_name,
+    n_live_tup AS row_count
+FROM pg_stat_user_tables
+ORDER BY row_count DESC
+
+{# SELECT 
+   *
+FROM pg_stat_user_tables
+ORDER BY row_count DESC #}
 

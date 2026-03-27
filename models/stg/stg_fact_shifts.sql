@@ -1,70 +1,68 @@
-{{ config(materialized='view') }}
+{{ config(materialized='table') }}
 
 
 WITH OrderedAttendance AS (
     SELECT
-        Employee_ID,
-		Employee_Name,
-        MovementType,
-        AttendanceDateTime,
-        SourceSequence,
+        employee_id,
+        employee_name,
+        movementtype,
+        attendancedatetime,
+        sourcesequence,
 
         ROW_NUMBER() OVER (
-            PARTITION BY Employee_ID
-            ORDER BY AttendanceDateTime
+            PARTITION BY employee_id
+            ORDER BY attendancedatetime
         ) AS rn
-    FROM {{ source('store_data', 'Fact_Attendance_Event') }}
-    WHERE MovementType IN (1, 2, 91, 92)
+    FROM {{ source('store_data', 'fact_attendance_event') }}
+    WHERE movementtype IN (1, 2, 91, 92)
 )
 SELECT
-    i.Employee_ID
-	,i.Employee_Name
+     i.employee_id
+    ,i.employee_name
 
-	--,FORMAT(CAST(i.AttendanceDateTime AS TIME), N'hh\:mm') as ShiftStartTime
-	--,FORMAT(CAST(o.AttendanceDateTime AS TIME), N'hh\:mm') as ShiftEndTime
+    ,i.attendancedatetime::date AS shiftdate
 
-    ,CAST(i.AttendanceDateTime AS DATE) AS ShiftDate
+    ,to_char(i.attendancedatetime::time, 'HH24:MI') AS shift_start_time
+    ,to_char(o.attendancedatetime::time, 'HH24:MI') AS shift_end_time
 
+    ,lpad(
+        (EXTRACT(EPOCH FROM (o.attendancedatetime - i.attendancedatetime))::int / 60 / 60)::text,
+        2, '0'
+     ) || ':' ||
+     lpad(
+        (EXTRACT(EPOCH FROM (o.attendancedatetime - i.attendancedatetime))::int / 60 % 60)::text,
+        2, '0'
+     ) AS shiftduration_hhmm
 
-	,FORMAT(CAST(i.AttendanceDateTime AS TIME), N'hh\:mm') AS Shift_Start_Time
-	,FORMAT(CAST(o.AttendanceDateTime AS TIME), N'hh\:mm') AS Shift_End_Time
-	
-    ,RIGHT('00' + CAST(DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime) / 60 AS VARCHAR(2)), 2)
-			+ ':' +
-	RIGHT('00' + CAST(DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime) % 60 AS VARCHAR(2)), 2)
-     AS ShiftDuration_HHMM
-    
-    ,DATEPART(HOUR, i.AttendanceDateTime) AS ShiftStartHour
-    ,DATEPART(HOUR, o.AttendanceDateTime) AS ShiftEndHour
+    ,EXTRACT(HOUR FROM i.attendancedatetime)::int AS shiftstarttour
+    ,EXTRACT(HOUR FROM o.attendancedatetime)::int AS shiftendtour
 
-    ,DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime)
-        AS ShiftDurationMinutes
-    
-    ,CAST(
-        DATEDIFF(MINUTE, i.AttendanceDateTime, o.AttendanceDateTime) / 60.0
-        AS DECIMAL(5,2)
-    ) AS ShiftDurationHours
+    ,EXTRACT(EPOCH FROM (o.attendancedatetime - i.attendancedatetime))::int / 60
+        AS shiftdurationminutes
 
+    ,ROUND(
+        (EXTRACT(EPOCH FROM (o.attendancedatetime - i.attendancedatetime)) / 3600)::numeric,
+        2
+    ) AS shiftdurationhours
 
-    ,i.SourceSequence AS StartSequence
-    ,o.SourceSequence AS EndSequence
-
-    ,CASE
-        WHEN CAST(i.AttendanceDateTime AS DATE)
-           <> CAST(o.AttendanceDateTime AS DATE)
-        THEN 1 ELSE 0
-    END AS IsCrossMidnight
+    ,i.sourcesequence AS startsequence
+    ,o.sourcesequence AS endsequence
 
     ,CASE
-        WHEN i.MovementType IN (91, 92)
-          OR o.MovementType IN (91, 92)
+        WHEN i.attendancedatetime::date <> o.attendancedatetime::date
         THEN 1 ELSE 0
-    END AS IsManualCorrection
+    END AS iscrossmidnight
+
+    ,CASE
+        WHEN i.movementtype IN (91, 92)
+          OR o.movementtype IN (91, 92)
+        THEN 1 ELSE 0
+    END AS ismanualcorrection
 
 FROM OrderedAttendance i
 JOIN OrderedAttendance o
-  ON i.Employee_ID = o.Employee_ID
+  ON i.employee_id = o.employee_id
   AND o.rn = i.rn + 1
-WHERE i.MovementType IN (1, 91)   -- IN
-  AND o.MovementType IN (2, 92);  -- OUT #}
+WHERE i.movementtype IN (1, 91)   -- IN
+  AND o.movementtype IN (2, 92)  -- OUT
 

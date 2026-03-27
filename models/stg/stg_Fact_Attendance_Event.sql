@@ -1,29 +1,26 @@
-{{ config(materialized='view') }}
+{{ config(materialized='table') }}
 
 
 SELECT
-    Emplyee_ID,
-	en.LongName,
-    MovementType,
+    e.emplyee_id,
+    en.longname,
+    movementtype,
 
     -- Date + HourTime (seconds since midnight)
-    DATEADD(SECOND, HourTime, CAST(DateSetting AS DATETIME)) AS AttendanceDateTime,
+    datesetting::timestamp + (hourtime || ' seconds')::interval AS attendancedatetime,
 
-    CAST(DateSetting AS DATE) AS AttendanceDate,
+    datesetting::date AS attendancedate,
 
-    CAST(
-        DATEADD(SECOND, HourTime, '00:00:00')
-        AS TIME
-    ) AS AttendanceTime,
+    (make_time(0, 0, 0) + (hourtime || ' seconds')::interval)::time AS attendancetime,
 
-    HourTime / 3600 AS HourOfDay,
+    hourtime / 3600 AS hourofday,
 
-    HourTime / 60 AS MinuteOfDay,
+    hourtime / 60 AS minuteofday,
 
-    AttendanceRecordingType,
-    FRONT_OFFICE,
+    attendancerecordingtype,
+    front_office,
     e.s__sequence,
-    Mark,
-    Exceeded
-FROM {{ source('store_data', 'EmployeesAttendance') }} e
-left join {{ source('store_data', 'EmployeesSelection_byEntrance') }} en on e.Emplyee_ID = en.EmplyeeNumber;
+    mark,
+    exceeded
+FROM {{ source('store_data', 'employeesattendance') }} e
+left join {{ source('store_data', 'employeesselection_byentrance') }} en on e.emplyee_id = en.emplyeenumber
