@@ -2034,3 +2034,1005 @@ RESTORE DATABASE is terminating abnormally.
 2026-03-27 03:14:30,356 [INFO]   Loading: tmpSelectOptician
 2026-03-27 03:14:30,377 [INFO]   Done: tmpSelectOptician — 0 rows
 2026-03-27 03:14:30,377 [INFO] All tables loaded successfully.
+2026-03-27 16:59:10,843 [INFO] Connecting to local Postgres...
+2026-03-27 16:59:10,988 [INFO] Connecting to Supabase...
+2026-03-27 16:59:12,909 [INFO] Found 499 tables to push to Supabase.
+2026-03-27 16:59:12,909 [INFO]   Uploading: accounts
+2026-03-27 16:59:13,524 [INFO]   Done: accounts — 18 rows
+2026-03-27 16:59:13,525 [INFO]   Uploading: actionsdtscardlines
+2026-03-27 16:59:14,008 [INFO]   Done: actionsdtscardlines — 0 rows
+2026-03-27 16:59:14,008 [INFO]   Uploading: actionsdtscardlinesold
+2026-03-27 16:59:14,490 [INFO]   Done: actionsdtscardlinesold — 0 rows
+2026-03-27 16:59:14,490 [INFO]   Uploading: actionsdtscardlinesold1
+2026-03-27 16:59:14,880 [INFO]   Done: actionsdtscardlinesold1 — 0 rows
+2026-03-27 16:59:14,881 [INFO]   Uploading: actionsmultipasscardlines
+2026-03-27 16:59:15,326 [INFO]   Done: actionsmultipasscardlines — 0 rows
+2026-03-27 16:59:15,326 [INFO]   Uploading: actionsprepaidcards
+2026-03-27 16:59:15,818 [INFO]   Done: actionsprepaidcards — 134 rows
+2026-03-27 16:59:15,818 [INFO]   Uploading: additionalpricelists
+2026-03-27 16:59:16,324 [INFO]   Done: additionalpricelists — 2 rows
+2026-03-27 16:59:16,325 [INFO]   Uploading: additionalpricelists1
+2026-03-27 16:59:16,789 [INFO]   Done: additionalpricelists1 — 0 rows
+2026-03-27 16:59:16,791 [INFO]   Uploading: amounts
+2026-03-27 16:59:17,595 [INFO]   Done: amounts — 1,999 rows
+2026-03-27 16:59:17,597 [INFO]   Uploading: asortimntimtable
+2026-03-27 16:59:18,106 [INFO]   Done: asortimntimtable — 0 rows
+2026-03-27 16:59:18,106 [INFO]   Uploading: bankaccounts
+2026-03-27 16:59:18,656 [INFO]   Done: bankaccounts — 1 rows
+2026-03-27 16:59:18,656 [INFO]   Uploading: banks
+2026-03-27 16:59:19,226 [INFO]   Done: banks — 27 rows
+2026-03-27 16:59:19,227 [INFO]   Uploading: barcode_graphic_labels
+2026-03-27 16:59:19,726 [INFO]   Done: barcode_graphic_labels — 0 rows
+2026-03-27 16:59:19,726 [INFO]   Uploading: barcode_label_templates
+2026-03-27 16:59:20,186 [INFO]   Done: barcode_label_templates — 0 rows
+2026-03-27 16:59:20,186 [INFO]   Uploading: barcodeinputtmp
+2026-03-27 16:59:20,899 [INFO]   Done: barcodeinputtmp — 1,010 rows
+2026-03-27 16:59:20,899 [INFO]   Uploading: barcodeprintingsettings
+2026-03-27 16:59:21,417 [INFO]   Done: barcodeprintingsettings — 11 rows
+2026-03-27 16:59:21,417 [INFO]   Uploading: barcodeprints
+2026-03-27 16:59:21,864 [INFO]   Done: barcodeprints — 0 rows
+2026-03-27 16:59:21,864 [INFO]   Uploading: bdikotiniim_lpniasbal1_6
+2026-03-27 16:59:22,287 [INFO]   Done: bdikotiniim_lpniasbal1_6 — 0 rows
+2026-03-27 16:59:22,287 [INFO]   Uploading: bkra_optika
+2026-03-27 16:59:22,732 [INFO]   Done: bkra_optika — 0 rows
+2026-03-27 16:59:22,733 [INFO]   Uploading: blobtable
+2026-03-27 16:59:23,277 [INFO]   Done: blobtable — 2 rows
+2026-03-27 16:59:23,277 [INFO]   Uploading: brandchecks
+2026-03-27 16:59:23,757 [INFO]   Done: brandchecks — 0 rows
+2026-03-27 16:59:23,757 [INFO]   Uploading: brands
+2026-03-27 16:59:24,201 [INFO]   Done: brands — 0 rows
+2026-03-27 16:59:24,201 [INFO]   Uploading: businessinvoice
+2026-03-27 16:59:24,756 [INFO]   Done: businessinvoice — 3 rows
+2026-03-27 16:59:24,756 [INFO]   Uploading: calendar
+2026-03-27 16:59:31,039 [INFO]   Done: calendar — 40,541 rows
+2026-03-27 16:59:31,039 [INFO]   Uploading: campaignbundle
+2026-03-27 16:59:31,625 [INFO]   Done: campaignbundle — 21 rows
+2026-03-27 16:59:31,626 [INFO]   Uploading: campaignfields
+2026-03-27 16:59:32,169 [INFO]   Done: campaignfields — 77 rows
+2026-03-27 16:59:32,170 [INFO]   Uploading: campaigns
+2026-03-27 16:59:32,784 [INFO]   Done: campaigns — 26 rows
+2026-03-27 16:59:32,784 [INFO]   Uploading: campaigns_tmp
+2026-03-27 16:59:33,367 [INFO]   Done: campaigns_tmp — 26 rows
+2026-03-27 16:59:33,368 [INFO]   Uploading: campaigntypes
+2026-03-27 16:59:33,921 [INFO]   Done: campaigntypes — 27 rows
+2026-03-27 16:59:33,921 [INFO]   Uploading: campaigntypes1
+2026-03-27 16:59:34,371 [INFO]   Done: campaigntypes1 — 0 rows
+2026-03-27 16:59:34,386 [INFO]   Uploading: campaignvouchers
+2026-03-27 16:59:34,873 [INFO]   Done: campaignvouchers — 0 rows
+2026-03-27 16:59:34,873 [INFO]   Uploading: campaignvouchers900
+2026-03-27 16:59:35,272 [INFO]   Done: campaignvouchers900 — 0 rows
+2026-03-27 16:59:35,288 [INFO]   Uploading: canvastypes
+2026-03-27 16:59:35,741 [INFO]   Done: canvastypes — 0 rows
+2026-03-27 16:59:35,741 [INFO]   Uploading: card_pictures
+2026-03-27 16:59:36,203 [INFO]   Done: card_pictures — 0 rows
+2026-03-27 16:59:36,203 [INFO]   Uploading: cardclasspaymentterm
+2026-03-27 16:59:36,671 [INFO]   Done: cardclasspaymentterm — 0 rows
+2026-03-27 16:59:36,671 [INFO]   Uploading: cardcomments
+2026-03-27 16:59:37,051 [INFO]   Done: cardcomments — 0 rows
+2026-03-27 16:59:37,067 [INFO]   Uploading: cardguarantees
+2026-03-27 16:59:37,456 [INFO]   Done: cardguarantees — 0 rows
+2026-03-27 16:59:37,456 [INFO]   Uploading: cardinterfaces
+2026-03-27 16:59:37,852 [INFO]   Done: cardinterfaces — 0 rows
+2026-03-27 16:59:37,852 [INFO]   Uploading: cards
+2026-03-27 16:59:38,412 [INFO]   Done: cards — 27 rows
+2026-03-27 16:59:38,413 [INFO]   Uploading: cards1
+2026-03-27 16:59:38,836 [INFO]   Done: cards1 — 0 rows
+2026-03-27 16:59:38,836 [INFO]   Uploading: cards_continue
+2026-03-27 16:59:39,391 [INFO]   Done: cards_continue — 48 rows
+2026-03-27 16:59:39,392 [INFO]   Uploading: cardsadditionalclass
+2026-03-27 16:59:39,833 [INFO]   Done: cardsadditionalclass — 0 rows
+2026-03-27 16:59:39,833 [INFO]   Uploading: cardsgroup
+2026-03-27 16:59:40,329 [INFO]   Done: cardsgroup — 4 rows
+2026-03-27 16:59:40,329 [INFO]   Uploading: cardsrentalscontinue
+2026-03-27 16:59:40,872 [INFO]   Done: cardsrentalscontinue — 0 rows
+2026-03-27 16:59:40,873 [INFO]   Uploading: cartorderlines
+2026-03-27 16:59:41,282 [INFO]   Done: cartorderlines — 0 rows
+2026-03-27 16:59:41,283 [INFO]   Uploading: catalogchanges
+2026-03-27 16:59:41,732 [INFO]   Done: catalogchanges — 0 rows
+2026-03-27 16:59:41,732 [INFO]   Uploading: categoriestbl
+2026-03-27 16:59:42,175 [INFO]   Done: categoriestbl — 0 rows
+2026-03-27 16:59:42,175 [INFO]   Uploading: cc_docscontinue
+2026-03-27 16:59:42,681 [INFO]   Done: cc_docscontinue — 0 rows
+2026-03-27 16:59:42,682 [INFO]   Uploading: cellpayactions
+2026-03-27 16:59:43,139 [INFO]   Done: cellpayactions — 0 rows
+2026-03-27 16:59:43,140 [INFO]   Uploading: cellpaycardstype
+2026-03-27 16:59:43,580 [INFO]   Done: cellpaycardstype — 0 rows
+2026-03-27 16:59:43,592 [INFO]   Uploading: cellpayerrors
+2026-03-27 16:59:44,032 [INFO]   Done: cellpayerrors — 0 rows
+2026-03-27 16:59:44,033 [INFO]   Uploading: cerditcardbyweblog
+2026-03-27 16:59:44,435 [INFO]   Done: cerditcardbyweblog — 0 rows
+2026-03-27 16:59:44,435 [INFO]   Uploading: changehistory_tmp
+2026-03-27 16:59:44,900 [INFO]   Done: changehistory_tmp — 0 rows
+2026-03-27 16:59:44,900 [INFO]   Uploading: chargecardsassignment
+2026-03-27 16:59:45,296 [INFO]   Done: chargecardsassignment — 0 rows
+2026-03-27 16:59:45,296 [INFO]   Uploading: cities
+2026-03-27 16:59:45,670 [INFO]   Done: cities — 0 rows
+2026-03-27 16:59:45,670 [INFO]   Uploading: clientmessagestatus
+2026-03-27 16:59:46,127 [INFO]   Done: clientmessagestatus — 0 rows
+2026-03-27 16:59:46,128 [INFO]   Uploading: clientstatus_tmp
+2026-03-27 16:59:46,602 [INFO]   Done: clientstatus_tmp — 0 rows
+2026-03-27 16:59:46,602 [INFO]   Uploading: clubcardstypes
+2026-03-27 16:59:47,114 [INFO]   Done: clubcardstypes — 0 rows
+2026-03-27 16:59:47,114 [INFO]   Uploading: coins_notes_details
+2026-03-27 16:59:47,602 [INFO]   Done: coins_notes_details — 37 rows
+2026-03-27 16:59:47,603 [INFO]   Uploading: coins_notes_details1
+2026-03-27 16:59:48,039 [INFO]   Done: coins_notes_details1 — 0 rows
+2026-03-27 16:59:48,039 [INFO]   Uploading: coinsrates
+2026-03-27 16:59:48,534 [INFO]   Done: coinsrates — 3 rows
+2026-03-27 16:59:48,534 [INFO]   Uploading: collections
+2026-03-27 16:59:48,984 [INFO]   Done: collections — 0 rows
+2026-03-27 16:59:48,984 [INFO]   Uploading: colormatrix
+2026-03-27 16:59:49,399 [INFO]   Done: colormatrix — 0 rows
+2026-03-27 16:59:49,399 [INFO]   Uploading: colors
+2026-03-27 16:59:49,871 [INFO]   Done: colors — 1 rows
+2026-03-27 16:59:49,872 [INFO]   Uploading: combinedstoreinventory
+2026-03-27 16:59:50,252 [INFO]   Done: combinedstoreinventory — 0 rows
+2026-03-27 16:59:50,252 [INFO]   Uploading: commandmovementtype
+2026-03-27 16:59:50,644 [INFO]   Done: commandmovementtype — 0 rows
+2026-03-27 16:59:50,646 [INFO]   Uploading: communicationcontrol
+2026-03-27 16:59:51,181 [INFO]   Done: communicationcontrol — 1 rows
+2026-03-27 16:59:51,182 [INFO]   Uploading: control
+2026-03-27 16:59:51,733 [INFO]   Done: control — 2 rows
+2026-03-27 16:59:51,734 [INFO]   Uploading: conversionitems
+2026-03-27 16:59:52,205 [INFO]   Done: conversionitems — 0 rows
+2026-03-27 16:59:52,206 [INFO]   Uploading: conversionstbl
+2026-03-27 16:59:52,673 [INFO]   Done: conversionstbl — 0 rows
+2026-03-27 16:59:52,674 [INFO]   Uploading: convertingreceiptlinescontinue
+2026-03-27 16:59:53,144 [INFO]   Done: convertingreceiptlinescontinue — 0 rows
+2026-03-27 16:59:53,145 [INFO]   Uploading: convertingtransitionalwarehouses
+2026-03-27 16:59:53,581 [INFO]   Done: convertingtransitionalwarehouses — 0 rows
+2026-03-27 16:59:53,581 [INFO]   Uploading: converttotendertypes
+2026-03-27 16:59:54,173 [INFO]   Done: converttotendertypes — 45 rows
+2026-03-27 16:59:54,174 [INFO]   Uploading: copiedcredits_ho
+2026-03-27 16:59:54,628 [INFO]   Done: copiedcredits_ho — 0 rows
+2026-03-27 16:59:54,628 [INFO]   Uploading: copieslog
+2026-03-27 16:59:55,085 [INFO]   Done: copieslog — 0 rows
+2026-03-27 16:59:55,086 [INFO]   Uploading: copyofdocs24
+2026-03-27 16:59:55,585 [INFO]   Done: copyofdocs24 — 0 rows
+2026-03-27 16:59:55,586 [INFO]   Uploading: copyofdocslines25
+2026-03-27 16:59:56,041 [INFO]   Done: copyofdocslines25 — 0 rows
+2026-03-27 16:59:56,042 [INFO]   Uploading: copyofdocslinestrailer116
+2026-03-27 16:59:56,553 [INFO]   Done: copyofdocslinestrailer116 — 0 rows
+2026-03-27 16:59:56,554 [INFO]   Uploading: copyofdocstrailer115
+2026-03-27 16:59:57,049 [INFO]   Done: copyofdocstrailer115 — 0 rows
+2026-03-27 16:59:57,050 [INFO]   Uploading: costing
+2026-03-27 16:59:57,505 [INFO]   Done: costing — 0 rows
+2026-03-27 16:59:57,505 [INFO]   Uploading: countries
+2026-03-27 16:59:57,895 [INFO]   Done: countries — 0 rows
+2026-03-27 16:59:57,896 [INFO]   Uploading: creditcardstypes
+2026-03-27 16:59:58,437 [INFO]   Done: creditcardstypes — 10 rows
+2026-03-27 16:59:58,437 [INFO]   Uploading: creditinvoiceeoseasonlines
+2026-03-27 16:59:58,911 [INFO]   Done: creditinvoiceeoseasonlines — 0 rows
+2026-03-27 16:59:58,911 [INFO]   Uploading: creditinvoiceprintrecover
+2026-03-27 16:59:59,346 [INFO]   Done: creditinvoiceprintrecover — 0 rows
+2026-03-27 16:59:59,346 [INFO]   Uploading: creditinvoicetable
+2026-03-27 16:59:59,727 [INFO]   Done: creditinvoicetable — 0 rows
+2026-03-27 16:59:59,727 [INFO]   Uploading: creditsalesreport
+2026-03-27 17:00:00,110 [INFO]   Done: creditsalesreport — 0 rows
+2026-03-27 17:00:00,111 [INFO]   Uploading: creditsalesreport1
+2026-03-27 17:00:00,497 [INFO]   Done: creditsalesreport1 — 0 rows
+2026-03-27 17:00:00,498 [INFO]   Uploading: credittypes
+2026-03-27 17:00:00,971 [INFO]   Done: credittypes — 54 rows
+2026-03-27 17:00:00,971 [INFO]   Uploading: ctldif1
+2026-03-27 17:00:01,346 [INFO]   Done: ctldif1 — 0 rows
+2026-03-27 17:00:01,346 [INFO]   Uploading: ctldif2
+2026-03-27 17:00:01,725 [INFO]   Done: ctldif2 — 0 rows
+2026-03-27 17:00:01,725 [INFO]   Uploading: ctldif3
+2026-03-27 17:00:02,105 [INFO]   Done: ctldif3 — 0 rows
+2026-03-27 17:00:02,105 [INFO]   Uploading: customerclassbycreditcard
+2026-03-27 17:00:02,480 [INFO]   Done: customerclassbycreditcard — 0 rows
+2026-03-27 17:00:02,480 [INFO]   Uploading: customerclubdeails
+2026-03-27 17:00:02,929 [INFO]   Done: customerclubdeails — 0 rows
+2026-03-27 17:00:02,929 [INFO]   Uploading: customermessagedcode
+2026-03-27 17:00:03,330 [INFO]   Done: customermessagedcode — 0 rows
+2026-03-27 17:00:03,330 [INFO]   Uploading: customerorderlines
+2026-03-27 17:00:03,815 [INFO]   Done: customerorderlines — 0 rows
+2026-03-27 17:00:03,815 [INFO]   Uploading: customerorderlines_345
+2026-03-27 17:00:04,210 [INFO]   Done: customerorderlines_345 — 0 rows
+2026-03-27 17:00:04,212 [INFO]   Uploading: customerordersheaders
+2026-03-27 17:00:04,663 [INFO]   Done: customerordersheaders — 0 rows
+2026-03-27 17:00:04,664 [INFO]   Uploading: customerslog
+2026-03-27 17:00:05,127 [INFO]   Done: customerslog — 0 rows
+2026-03-27 17:00:05,128 [INFO]   Uploading: customersmovement
+2026-03-27 17:00:05,596 [INFO]   Done: customersmovement — 0 rows
+2026-03-27 17:00:05,596 [INFO]   Uploading: customersubscriptionassignment
+2026-03-27 17:00:06,069 [INFO]   Done: customersubscriptionassignment — 0 rows
+2026-03-27 17:00:06,069 [INFO]   Uploading: dailyavailabilty
+2026-03-27 17:00:06,511 [INFO]   Done: dailyavailabilty — 0 rows
+2026-03-27 17:00:06,511 [INFO]   Uploading: dailypossum
+2026-03-27 17:00:07,140 [INFO]   Done: dailypossum — 93 rows
+2026-03-27 17:00:07,140 [INFO]   Uploading: dailysales
+2026-03-27 17:00:07,550 [INFO]   Done: dailysales — 0 rows
+2026-03-27 17:00:07,552 [INFO]   Uploading: daystypes
+2026-03-27 17:00:08,081 [INFO]   Done: daystypes — 3 rows
+2026-03-27 17:00:08,082 [INFO]   Uploading: debiterrors
+2026-03-27 17:00:08,562 [INFO]   Done: debiterrors — 19 rows
+2026-03-27 17:00:08,562 [INFO]   Uploading: debitsettings
+2026-03-27 17:00:09,069 [INFO]   Done: debitsettings — 0 rows
+2026-03-27 17:00:09,070 [INFO]   Uploading: debittbl
+2026-03-27 17:00:09,517 [INFO]   Done: debittbl — 0 rows
+2026-03-27 17:00:09,517 [INFO]   Uploading: defecttype
+2026-03-27 17:00:09,966 [INFO]   Done: defecttype — 0 rows
+2026-03-27 17:00:09,968 [INFO]   Uploading: definitionskeyvalue
+2026-03-27 17:00:10,648 [INFO]   Done: definitionskeyvalue — 1 rows
+2026-03-27 17:00:10,649 [INFO]   Uploading: deliveries
+2026-03-27 17:00:11,122 [INFO]   Done: deliveries — 0 rows
+2026-03-27 17:00:11,123 [INFO]   Uploading: depositlines
+2026-03-27 17:00:11,626 [INFO]   Done: depositlines — 0 rows
+2026-03-27 17:00:11,626 [INFO]   Uploading: deposits
+2026-03-27 17:00:12,125 [INFO]   Done: deposits — 0 rows
+2026-03-27 17:00:12,126 [INFO]   Uploading: deposits_v852
+2026-03-27 17:00:12,594 [INFO]   Done: deposits_v852 — 0 rows
+2026-03-27 17:00:12,595 [INFO]   Uploading: depositsdrawertosafe
+2026-03-27 17:00:13,128 [INFO]   Done: depositsdrawertosafe — 92 rows
+2026-03-27 17:00:13,129 [INFO]   Uploading: designfiles
+2026-03-27 17:00:13,515 [INFO]   Done: designfiles — 0 rows
+2026-03-27 17:00:13,515 [INFO]   Uploading: differenceorderstatement
+2026-03-27 17:00:13,962 [INFO]   Done: differenceorderstatement — 0 rows
+2026-03-27 17:00:13,963 [INFO]   Uploading: discountnotesdefinitions
+2026-03-27 17:00:14,409 [INFO]   Done: discountnotesdefinitions — 0 rows
+2026-03-27 17:00:14,410 [INFO]   Uploading: discountscales
+2026-03-27 17:00:14,860 [INFO]   Done: discountscales — 0 rows
+2026-03-27 17:00:14,861 [INFO]   Uploading: documentheaderdeliveryorder
+2026-03-27 17:00:15,258 [INFO]   Done: documentheaderdeliveryorder — 0 rows
+2026-03-27 17:00:15,258 [INFO]   Uploading: documentlines
+2026-03-27 17:00:20,159 [INFO]   Done: documentlines — 17,615 rows
+2026-03-27 17:00:20,159 [INFO]   Uploading: documentlinesforcopy
+2026-03-27 17:00:20,562 [INFO]   Done: documentlinesforcopy — 0 rows
+2026-03-27 17:00:20,562 [INFO]   Uploading: documentlinespossuspendedtransmissions
+2026-03-27 17:00:21,070 [INFO]   Done: documentlinespossuspendedtransmissions — 0 rows
+2026-03-27 17:00:21,070 [INFO]   Uploading: documentremarksheader
+2026-03-27 17:00:21,527 [INFO]   Done: documentremarksheader — 0 rows
+2026-03-27 17:00:21,528 [INFO]   Uploading: documentremarkslines
+2026-03-27 17:00:21,977 [INFO]   Done: documentremarkslines — 0 rows
+2026-03-27 17:00:21,978 [INFO]   Uploading: documents
+2026-03-27 17:00:25,926 [INFO]   Done: documents — 9,379 rows
+2026-03-27 17:00:25,926 [INFO]   Uploading: documents2_continue
+2026-03-27 17:00:26,506 [INFO]   Done: documents2_continue — 2 rows
+2026-03-27 17:00:26,506 [INFO]   Uploading: documents_continue
+2026-03-27 17:00:30,657 [INFO]   Done: documents_continue — 9,379 rows
+2026-03-27 17:00:30,658 [INFO]   Uploading: documentscontrol
+2026-03-27 17:00:31,195 [INFO]   Done: documentscontrol — 89 rows
+2026-03-27 17:00:31,196 [INFO]   Uploading: documentslines_continue
+2026-03-27 17:00:40,003 [INFO]   Done: documentslines_continue — 17,616 rows
+2026-03-27 17:00:40,003 [INFO]   Uploading: documentslines_continue1
+2026-03-27 17:00:40,510 [INFO]   Done: documentslines_continue1 — 0 rows
+2026-03-27 17:00:40,511 [INFO]   Uploading: documentslines_pointofsale
+2026-03-27 17:00:41,106 [INFO]   Done: documentslines_pointofsale — 0 rows
+2026-03-27 17:00:41,106 [INFO]   Uploading: documentssequence
+2026-03-27 17:00:41,680 [INFO]   Done: documentssequence — 16 rows
+2026-03-27 17:00:41,680 [INFO]   Uploading: documentstype
+2026-03-27 17:00:42,238 [INFO]   Done: documentstype — 12 rows
+2026-03-27 17:00:42,239 [INFO]   Uploading: documenttypeforirs
+2026-03-27 17:00:42,657 [INFO]   Done: documenttypeforirs — 0 rows
+2026-03-27 17:00:42,658 [INFO]   Uploading: documentversionmngmt
+2026-03-27 17:00:43,121 [INFO]   Done: documentversionmngmt — 0 rows
+2026-03-27 17:00:43,122 [INFO]   Uploading: downloadmanagerpacks
+2026-03-27 17:00:43,585 [INFO]   Done: downloadmanagerpacks — 0 rows
+2026-03-27 17:00:43,586 [INFO]   Uploading: dpok
+2026-03-27 17:00:44,054 [INFO]   Done: dpok — 0 rows
+2026-03-27 17:00:44,054 [INFO]   Uploading: dtsactions
+2026-03-27 17:00:44,541 [INFO]   Done: dtsactions — 0 rows
+2026-03-27 17:00:44,542 [INFO]   Uploading: dtsactions1
+2026-03-27 17:00:45,037 [INFO]   Done: dtsactions1 — 0 rows
+2026-03-27 17:00:45,038 [INFO]   Uploading: dtsactionslog
+2026-03-27 17:00:45,515 [INFO]   Done: dtsactionslog — 0 rows
+2026-03-27 17:00:45,516 [INFO]   Uploading: dtstbls
+2026-03-27 17:00:46,088 [INFO]   Done: dtstbls — 27 rows
+2026-03-27 17:00:46,088 [INFO]   Uploading: dtstrans_tmp
+2026-03-27 17:00:46,488 [INFO]   Done: dtstrans_tmp — 0 rows
+2026-03-27 17:00:46,488 [INFO]   Uploading: dtstransactions
+2026-03-27 17:00:46,954 [INFO]   Done: dtstransactions — 0 rows
+2026-03-27 17:00:46,954 [INFO]   Uploading: electronicsignatures
+2026-03-27 17:00:47,421 [INFO]   Done: electronicsignatures — 0 rows
+2026-03-27 17:00:47,421 [INFO]   Uploading: email_ordertitlenew
+2026-03-27 17:00:47,928 [INFO]   Done: email_ordertitlenew — 2 rows
+2026-03-27 17:00:47,928 [INFO]   Uploading: emailorderlines
+2026-03-27 17:00:48,385 [INFO]   Done: emailorderlines — 0 rows
+2026-03-27 17:00:48,386 [INFO]   Uploading: emailuserssettings
+2026-03-27 17:00:48,840 [INFO]   Done: emailuserssettings — 0 rows
+2026-03-27 17:00:48,841 [INFO]   Uploading: emergency_number_invoices
+2026-03-27 17:00:49,287 [INFO]   Done: emergency_number_invoices — 0 rows
+2026-03-27 17:00:49,287 [INFO]   Uploading: empcommissions
+2026-03-27 17:00:49,737 [INFO]   Done: empcommissions — 0 rows
+2026-03-27 17:00:49,737 [INFO]   Uploading: empcommissions1
+2026-03-27 17:00:50,193 [INFO]   Done: empcommissions1 — 0 rows
+2026-03-27 17:00:50,193 [INFO]   Uploading: employees_permission_groups
+2026-03-27 17:00:50,655 [INFO]   Done: employees_permission_groups — 0 rows
+2026-03-27 17:00:50,655 [INFO]   Uploading: employeesattendance
+2026-03-27 17:00:51,148 [INFO]   Done: employeesattendance — 49 rows
+2026-03-27 17:00:51,150 [INFO]   Uploading: employeesmoredetails
+2026-03-27 17:00:51,589 [INFO]   Done: employeesmoredetails — 0 rows
+2026-03-27 17:00:51,589 [INFO]   Uploading: employeesselection_byentrance
+2026-03-27 17:00:52,136 [INFO]   Done: employeesselection_byentrance — 2 rows
+2026-03-27 17:00:52,152 [INFO]   Uploading: employeestype
+2026-03-27 17:00:52,602 [INFO]   Done: employeestype — 0 rows
+2026-03-27 17:00:52,602 [INFO]   Uploading: emppermission
+2026-03-27 17:00:53,081 [INFO]   Done: emppermission — 315 rows
+2026-03-27 17:00:53,081 [INFO]   Uploading: empstorepremiums
+2026-03-27 17:00:53,451 [INFO]   Done: empstorepremiums — 0 rows
+2026-03-27 17:00:53,451 [INFO]   Uploading: emvcharge
+2026-03-27 17:00:56,237 [INFO]   Done: emvcharge — 2,521 rows
+2026-03-27 17:00:56,253 [INFO]   Uploading: emvstatis
+2026-03-27 17:00:56,826 [INFO]   Done: emvstatis — 208 rows
+2026-03-27 17:00:56,827 [INFO]   Uploading: ern_leumimovetransmission
+2026-03-27 17:00:57,237 [INFO]   Done: ern_leumimovetransmission — 0 rows
+2026-03-27 17:00:57,237 [INFO]   Uploading: ern_leumimovetransmission1
+2026-03-27 17:00:57,724 [INFO]   Done: ern_leumimovetransmission1 — 0 rows
+2026-03-27 17:00:57,726 [INFO]   Uploading: ern_leumimovetransmission_conver
+2026-03-27 17:00:58,231 [INFO]   Done: ern_leumimovetransmission_conver — 0 rows
+2026-03-27 17:00:58,231 [INFO]   Uploading: erncheckstbl
+2026-03-27 17:00:58,855 [INFO]   Done: erncheckstbl — 368 rows
+2026-03-27 17:00:58,856 [INFO]   Uploading: error_ash96
+2026-03-27 17:00:59,397 [INFO]   Done: error_ash96 — 138 rows
+2026-03-27 17:00:59,398 [INFO]   Uploading: errormessageexternalterminal
+2026-03-27 17:00:59,919 [INFO]   Done: errormessageexternalterminal — 546 rows
+2026-03-27 17:00:59,919 [INFO]   Uploading: errorslog
+2026-03-27 17:01:00,315 [INFO]   Done: errorslog — 0 rows
+2026-03-27 17:01:00,316 [INFO]   Uploading: eventslog
+2026-03-27 17:01:00,785 [INFO]   Done: eventslog — 0 rows
+2026-03-27 17:01:00,785 [INFO]   Uploading: eventstype
+2026-03-27 17:01:01,218 [INFO]   Done: eventstype — 0 rows
+2026-03-27 17:01:01,218 [INFO]   Uploading: exemptionandstoragefile
+2026-03-27 17:01:01,730 [INFO]   Done: exemptionandstoragefile — 0 rows
+2026-03-27 17:01:01,730 [INFO]   Uploading: expectedfixes
+2026-03-27 17:01:02,194 [INFO]   Done: expectedfixes — 0 rows
+2026-03-27 17:01:02,195 [INFO]   Uploading: expenses
+2026-03-27 17:01:02,656 [INFO]   Done: expenses — 0 rows
+2026-03-27 17:01:02,656 [INFO]   Uploading: exploring_data
+2026-03-27 17:01:03,205 [INFO]   Done: exploring_data — 499 rows
+2026-03-27 17:01:03,205 [INFO]   Uploading: externalterminalsettings
+2026-03-27 17:01:03,795 [INFO]   Done: externalterminalsettings — 1 rows
+2026-03-27 17:01:03,796 [INFO]   Uploading: eyestesting_optic
+2026-03-27 17:01:04,331 [INFO]   Done: eyestesting_optic — 0 rows
+2026-03-27 17:01:04,331 [INFO]   Uploading: eyestesting_opticold
+2026-03-27 17:01:04,880 [INFO]   Done: eyestesting_opticold — 0 rows
+2026-03-27 17:01:04,880 [INFO]   Uploading: fact_attendance_event
+2026-03-27 17:01:05,382 [INFO]   Done: fact_attendance_event — 49 rows
+2026-03-27 17:01:05,382 [INFO]   Uploading: fact_sales
+2026-03-27 17:01:10,986 [INFO]   Done: fact_sales — 17,633 rows
+2026-03-27 17:01:10,986 [INFO]   Uploading: fact_shifts
+2026-03-27 17:01:11,512 [INFO]   Done: fact_shifts — 24 rows
+2026-03-27 17:01:11,513 [INFO]   Uploading: fielddoc
+2026-03-27 17:01:11,966 [INFO]   Done: fielddoc — 0 rows
+2026-03-27 17:01:11,966 [INFO]   Uploading: financialmovementstatus
+2026-03-27 17:01:12,385 [INFO]   Done: financialmovementstatus — 0 rows
+2026-03-27 17:01:12,385 [INFO]   Uploading: fingerprintscache
+2026-03-27 17:01:12,818 [INFO]   Done: fingerprintscache — 0 rows
+2026-03-27 17:01:12,818 [INFO]   Uploading: fingerprintsfile
+2026-03-27 17:01:13,276 [INFO]   Done: fingerprintsfile — 0 rows
+2026-03-27 17:01:13,277 [INFO]   Uploading: fingerprintsfile_old
+2026-03-27 17:01:13,717 [INFO]   Done: fingerprintsfile_old — 0 rows
+2026-03-27 17:01:13,718 [INFO]   Uploading: firsthoonlinetransactionstransmission
+2026-03-27 17:01:14,160 [INFO]   Done: firsthoonlinetransactionstransmission — 0 rows
+2026-03-27 17:01:14,160 [INFO]   Uploading: fiscalmovement
+2026-03-27 17:01:14,755 [INFO]   Done: fiscalmovement — 166 rows
+2026-03-27 17:01:14,756 [INFO]   Uploading: fiscalmovementtype
+2026-03-27 17:01:15,263 [INFO]   Done: fiscalmovementtype — 15 rows
+2026-03-27 17:01:15,264 [INFO]   Uploading: fiveleveldbfile_tmp
+2026-03-27 17:01:15,725 [INFO]   Done: fiveleveldbfile_tmp — 0 rows
+2026-03-27 17:01:15,726 [INFO]   Uploading: flightapproval
+2026-03-27 17:01:16,183 [INFO]   Done: flightapproval — 0 rows
+2026-03-27 17:01:16,183 [INFO]   Uploading: flights
+2026-03-27 17:01:16,631 [INFO]   Done: flights — 0 rows
+2026-03-27 17:01:16,633 [INFO]   Uploading: flow
+2026-03-27 17:01:17,090 [INFO]   Done: flow — 0 rows
+2026-03-27 17:01:17,091 [INFO]   Uploading: focallengths
+2026-03-27 17:01:17,547 [INFO]   Done: focallengths — 0 rows
+2026-03-27 17:01:17,547 [INFO]   Uploading: focallengths1
+2026-03-27 17:01:18,019 [INFO]   Done: focallengths1 — 0 rows
+2026-03-27 17:01:18,019 [INFO]   Uploading: formhistorystatus
+2026-03-27 17:01:18,416 [INFO]   Done: formhistorystatus — 0 rows
+2026-03-27 17:01:18,416 [INFO]   Uploading: formhistorystatus1
+2026-03-27 17:01:18,887 [INFO]   Done: formhistorystatus1 — 0 rows
+2026-03-27 17:01:18,888 [INFO]   Uploading: gaziti
+2026-03-27 17:01:19,446 [INFO]   Done: gaziti — 1 rows
+2026-03-27 17:01:19,446 [INFO]   Uploading: gazitiactivitylog
+2026-03-27 17:01:19,913 [INFO]   Done: gazitiactivitylog — 0 rows
+2026-03-27 17:01:19,913 [INFO]   Uploading: gazitifuture
+2026-03-27 17:01:20,349 [INFO]   Done: gazitifuture — 0 rows
+2026-03-27 17:01:20,349 [INFO]   Uploading: gazititransactionwaitingfortransmission
+2026-03-27 17:01:20,817 [INFO]   Done: gazititransactionwaitingfortransmission — 0 rows
+2026-03-27 17:01:20,817 [INFO]   Uploading: gazititypeofcardlist
+2026-03-27 17:01:21,353 [INFO]   Done: gazititypeofcardlist — 0 rows
+2026-03-27 17:01:21,355 [INFO]   Uploading: generalcarrierfile
+2026-03-27 17:01:21,758 [INFO]   Done: generalcarrierfile — 0 rows
+2026-03-27 17:01:21,758 [INFO]   Uploading: generalmenus
+2026-03-27 17:01:22,349 [INFO]   Done: generalmenus — 68 rows
+2026-03-27 17:01:22,349 [INFO]   Uploading: graphicdocumentslogosettings
+2026-03-27 17:01:22,801 [INFO]   Done: graphicdocumentslogosettings — 0 rows
+2026-03-27 17:01:22,801 [INFO]   Uploading: groupsdesc
+2026-03-27 17:01:23,238 [INFO]   Done: groupsdesc — 0 rows
+2026-03-27 17:01:23,238 [INFO]   Uploading: groupssettings
+2026-03-27 17:01:23,611 [INFO]   Done: groupssettings — 0 rows
+2026-03-27 17:01:23,611 [INFO]   Uploading: historicmodification
+2026-03-27 17:01:24,070 [INFO]   Done: historicmodification — 0 rows
+2026-03-27 17:01:24,070 [INFO]   Uploading: holidays
+2026-03-27 17:01:24,611 [INFO]   Done: holidays — 44 rows
+2026-03-27 17:01:24,611 [INFO]   Uploading: holidaystypes
+2026-03-27 17:01:25,143 [INFO]   Done: holidaystypes — 34 rows
+2026-03-27 17:01:25,159 [INFO]   Uploading: hoursamountsslicing
+2026-03-27 17:01:25,687 [INFO]   Done: hoursamountsslicing — 2 rows
+2026-03-27 17:01:25,688 [INFO]   Uploading: hoursreport_tmp
+2026-03-27 17:01:26,128 [INFO]   Done: hoursreport_tmp — 0 rows
+2026-03-27 17:01:26,128 [INFO]   Uploading: iconserrors
+2026-03-27 17:01:26,580 [INFO]   Done: iconserrors — 0 rows
+2026-03-27 17:01:26,580 [INFO]   Uploading: imagesbundle
+2026-03-27 17:01:27,109 [INFO]   Done: imagesbundle — 0 rows
+2026-03-27 17:01:27,109 [INFO]   Uploading: interfacelog
+2026-03-27 17:01:32,456 [INFO]   Done: interfacelog — 19,025 rows
+2026-03-27 17:01:32,456 [INFO]   Uploading: interfaces
+2026-03-27 17:01:33,004 [INFO]   Done: interfaces — 0 rows
+2026-03-27 17:01:33,005 [INFO]   Uploading: interfaces_header_logs
+2026-03-27 17:01:33,445 [INFO]   Done: interfaces_header_logs — 0 rows
+2026-03-27 17:01:33,445 [INFO]   Uploading: interfaces_lines_logs
+2026-03-27 17:01:33,904 [INFO]   Done: interfaces_lines_logs — 0 rows
+2026-03-27 17:01:33,920 [INFO]   Uploading: internalphone
+2026-03-27 17:01:34,341 [INFO]   Done: internalphone — 0 rows
+2026-03-27 17:01:34,341 [INFO]   Uploading: inventory
+2026-03-27 17:01:35,530 [INFO]   Done: inventory — 3,448 rows
+2026-03-27 17:01:35,530 [INFO]   Uploading: inventorybychainstores
+2026-03-27 17:01:35,962 [INFO]   Done: inventorybychainstores — 0 rows
+2026-03-27 17:01:35,962 [INFO]   Uploading: inventoryquery_tmp
+2026-03-27 17:01:36,378 [INFO]   Done: inventoryquery_tmp — 0 rows
+2026-03-27 17:01:36,378 [INFO]   Uploading: invoiceprintrecover
+2026-03-27 17:01:36,911 [INFO]   Done: invoiceprintrecover — 0 rows
+2026-03-27 17:01:36,911 [INFO]   Uploading: invoicesdeliverydetails
+2026-03-27 17:01:37,398 [INFO]   Done: invoicesdeliverydetails — 0 rows
+2026-03-27 17:01:37,398 [INFO]   Uploading: invoicesdeliverydetails1
+2026-03-27 17:01:37,958 [INFO]   Done: invoicesdeliverydetails1 — 0 rows
+2026-03-27 17:01:37,958 [INFO]   Uploading: issuesprint
+2026-03-27 17:01:38,412 [INFO]   Done: issuesprint — 0 rows
+2026-03-27 17:01:38,412 [INFO]   Uploading: itemdiscounttracking
+2026-03-27 17:01:38,880 [INFO]   Done: itemdiscounttracking — 0 rows
+2026-03-27 17:01:38,880 [INFO]   Uploading: itemdiscounttracking_temp
+2026-03-27 17:01:39,365 [INFO]   Done: itemdiscounttracking_temp — 0 rows
+2026-03-27 17:01:39,365 [INFO]   Uploading: items
+2026-03-27 17:01:41,093 [INFO]   Done: items — 2,002 rows
+2026-03-27 17:01:41,093 [INFO]   Uploading: items_exploration
+2026-03-27 17:01:41,644 [INFO]   Done: items_exploration — 5 rows
+2026-03-27 17:01:41,645 [INFO]   Uploading: items_tmp
+2026-03-27 17:01:42,075 [INFO]   Done: items_tmp — 0 rows
+2026-03-27 17:01:42,075 [INFO]   Uploading: itemsadditionalclass
+2026-03-27 17:01:42,508 [INFO]   Done: itemsadditionalclass — 0 rows
+2026-03-27 17:01:42,508 [INFO]   Uploading: itemsandmodelsimages
+2026-03-27 17:01:42,964 [INFO]   Done: itemsandmodelsimages — 0 rows
+2026-03-27 17:01:42,964 [INFO]   Uploading: itemsbundle_package
+2026-03-27 17:01:43,478 [INFO]   Done: itemsbundle_package — 62 rows
+2026-03-27 17:01:43,478 [INFO]   Uploading: itemscatalogdetection
+2026-03-27 17:01:43,978 [INFO]   Done: itemscatalogdetection — 0 rows
+2026-03-27 17:01:43,978 [INFO]   Uploading: itemsinterfaces
+2026-03-27 17:01:44,590 [INFO]   Done: itemsinterfaces — 0 rows
+2026-03-27 17:01:44,590 [INFO]   Uploading: itemsnoinventoryavailablelog
+2026-03-27 17:01:45,042 [INFO]   Done: itemsnoinventoryavailablelog — 0 rows
+2026-03-27 17:01:45,042 [INFO]   Uploading: itemsrentaccount
+2026-03-27 17:01:45,447 [INFO]   Done: itemsrentaccount — 0 rows
+2026-03-27 17:01:45,464 [INFO]   Uploading: itemtypecategory
+2026-03-27 17:01:45,899 [INFO]   Done: itemtypecategory — 0 rows
+2026-03-27 17:01:45,899 [INFO]   Uploading: itemtypes
+2026-03-27 17:01:46,415 [INFO]   Done: itemtypes — 27 rows
+2026-03-27 17:01:46,415 [INFO]   Uploading: itemtypescomments
+2026-03-27 17:01:46,853 [INFO]   Done: itemtypescomments — 0 rows
+2026-03-27 17:01:46,853 [INFO]   Uploading: itemunitsizes
+2026-03-27 17:01:47,306 [INFO]   Done: itemunitsizes — 0 rows
+2026-03-27 17:01:47,306 [INFO]   Uploading: joborderlines
+2026-03-27 17:01:47,766 [INFO]   Done: joborderlines — 0 rows
+2026-03-27 17:01:47,766 [INFO]   Uploading: jobordertitle
+2026-03-27 17:01:48,242 [INFO]   Done: jobordertitle — 0 rows
+2026-03-27 17:01:48,242 [INFO]   Uploading: journalvauchercontrol
+2026-03-27 17:01:48,630 [INFO]   Done: journalvauchercontrol — 0 rows
+2026-03-27 17:01:48,630 [INFO]   Uploading: journalvaucherhashavshevet
+2026-03-27 17:01:49,125 [INFO]   Done: journalvaucherhashavshevet — 0 rows
+2026-03-27 17:01:49,125 [INFO]   Uploading: journalvouchercontrolcontinue
+2026-03-27 17:01:49,610 [INFO]   Done: journalvouchercontrolcontinue — 0 rows
+2026-03-27 17:01:49,610 [INFO]   Uploading: kitsmovementtable
+2026-03-27 17:01:50,075 [INFO]   Done: kitsmovementtable — 0 rows
+2026-03-27 17:01:50,075 [INFO]   Uploading: laundry
+2026-03-27 17:01:50,528 [INFO]   Done: laundry — 0 rows
+2026-03-27 17:01:50,528 [INFO]   Uploading: lendingcopies
+2026-03-27 17:01:51,020 [INFO]   Done: lendingcopies — 0 rows
+2026-03-27 17:01:51,020 [INFO]   Uploading: limitedchecksfile
+2026-03-27 17:01:51,450 [INFO]   Done: limitedchecksfile — 0 rows
+2026-03-27 17:01:51,450 [INFO]   Uploading: linkcustomertopayment
+2026-03-27 17:01:51,902 [INFO]   Done: linkcustomertopayment — 0 rows
+2026-03-27 17:01:51,902 [INFO]   Uploading: locationsworkorders
+2026-03-27 17:01:52,292 [INFO]   Done: locationsworkorders — 0 rows
+2026-03-27 17:01:52,305 [INFO]   Uploading: locks
+2026-03-27 17:01:52,672 [INFO]   Done: locks — 0 rows
+2026-03-27 17:01:52,672 [INFO]   Uploading: logrequestsformanagerapproval
+2026-03-27 17:01:53,060 [INFO]   Done: logrequestsformanagerapproval — 0 rows
+2026-03-27 17:01:53,060 [INFO]   Uploading: loopjobs
+2026-03-27 17:01:53,426 [INFO]   Done: loopjobs — 0 rows
+2026-03-27 17:01:53,440 [INFO]   Uploading: lotnumbersperitemid
+2026-03-27 17:01:53,857 [INFO]   Done: lotnumbersperitemid — 0 rows
+2026-03-27 17:01:53,858 [INFO]   Uploading: masterslavesyncinfo
+2026-03-27 17:01:54,392 [INFO]   Done: masterslavesyncinfo — 2 rows
+2026-03-27 17:01:54,393 [INFO]   Uploading: matrixreception_tmp
+2026-03-27 17:01:54,886 [INFO]   Done: matrixreception_tmp — 0 rows
+2026-03-27 17:01:54,887 [INFO]   Uploading: matrixreportsprocessingfile
+2026-03-27 17:01:55,395 [INFO]   Done: matrixreportsprocessingfile — 0 rows
+2026-03-27 17:01:55,395 [INFO]   Uploading: meansofpaymentgroup
+2026-03-27 17:01:55,916 [INFO]   Done: meansofpaymentgroup — 0 rows
+2026-03-27 17:01:55,917 [INFO]   Uploading: meansofpaymentgroup900
+2026-03-27 17:01:56,423 [INFO]   Done: meansofpaymentgroup900 — 0 rows
+2026-03-27 17:01:56,424 [INFO]   Uploading: meansofpaymentsgroup
+2026-03-27 17:01:56,857 [INFO]   Done: meansofpaymentsgroup — 0 rows
+2026-03-27 17:01:56,857 [INFO]   Uploading: meetingadditionalitems
+2026-03-27 17:01:57,319 [INFO]   Done: meetingadditionalitems — 0 rows
+2026-03-27 17:01:57,320 [INFO]   Uploading: meetingsfile
+2026-03-27 17:01:57,869 [INFO]   Done: meetingsfile — 0 rows
+2026-03-27 17:01:57,870 [INFO]   Uploading: meetingsfile_854_855
+2026-03-27 17:01:58,375 [INFO]   Done: meetingsfile_854_855 — 0 rows
+2026-03-27 17:01:58,376 [INFO]   Uploading: meetingsfile_855_856
+2026-03-27 17:01:58,920 [INFO]   Done: meetingsfile_855_856 — 0 rows
+2026-03-27 17:01:58,922 [INFO]   Uploading: menusondemand
+2026-03-27 17:01:59,545 [INFO]   Done: menusondemand — 253 rows
+2026-03-27 17:01:59,545 [INFO]   Uploading: messages
+2026-03-27 17:01:59,987 [INFO]   Done: messages — 0 rows
+2026-03-27 17:01:59,988 [INFO]   Uploading: mininventoryforwarehouse
+2026-03-27 17:02:00,517 [INFO]   Done: mininventoryforwarehouse — 2 rows
+2026-03-27 17:02:00,518 [INFO]   Uploading: mkmerrors
+2026-03-27 17:02:01,069 [INFO]   Done: mkmerrors — 12 rows
+2026-03-27 17:02:01,070 [INFO]   Uploading: modelgroupliminalstock
+2026-03-27 17:02:01,505 [INFO]   Done: modelgroupliminalstock — 0 rows
+2026-03-27 17:02:01,505 [INFO]   Uploading: models
+2026-03-27 17:02:02,006 [INFO]   Done: models — 1 rows
+2026-03-27 17:02:02,006 [INFO]   Uploading: modelsfutureorder
+2026-03-27 17:02:02,454 [INFO]   Done: modelsfutureorder — 0 rows
+2026-03-27 17:02:02,454 [INFO]   Uploading: modelsreceptionfromsupplier_d
+2026-03-27 17:02:02,865 [INFO]   Done: modelsreceptionfromsupplier_d — 0 rows
+2026-03-27 17:02:02,866 [INFO]   Uploading: modelsreceptionfromsupplier_h
+2026-03-27 17:02:03,420 [INFO]   Done: modelsreceptionfromsupplier_h — 0 rows
+2026-03-27 17:02:03,421 [INFO]   Uploading: modelsreceptionfromsupplier_h1
+2026-03-27 17:02:03,800 [INFO]   Done: modelsreceptionfromsupplier_h1 — 0 rows
+2026-03-27 17:02:03,800 [INFO]   Uploading: moreinfo
+2026-03-27 17:02:04,194 [INFO]   Done: moreinfo — 0 rows
+2026-03-27 17:02:04,196 [INFO]   Uploading: movierent_tmp
+2026-03-27 17:02:04,617 [INFO]   Done: movierent_tmp — 0 rows
+2026-03-27 17:02:04,617 [INFO]   Uploading: multipassactions
+2026-03-27 17:02:05,123 [INFO]   Done: multipassactions — 0 rows
+2026-03-27 17:02:05,124 [INFO]   Uploading: multipassactionslog
+2026-03-27 17:02:05,608 [INFO]   Done: multipassactionslog — 0 rows
+2026-03-27 17:02:05,608 [INFO]   Uploading: multipasstbls
+2026-03-27 17:02:06,202 [INFO]   Done: multipasstbls — 207 rows
+2026-03-27 17:02:06,202 [INFO]   Uploading: multiple_barcode
+2026-03-27 17:02:06,586 [INFO]   Done: multiple_barcode — 0 rows
+2026-03-27 17:02:06,586 [INFO]   Uploading: my_first_dbt_model
+2026-03-27 17:02:07,053 [INFO]   Done: my_first_dbt_model — 2 rows
+2026-03-27 17:02:07,054 [INFO]   Uploading: names_tmp
+2026-03-27 17:02:07,489 [INFO]   Done: names_tmp — 0 rows
+2026-03-27 17:02:07,489 [INFO]   Uploading: networkinterrupts
+2026-03-27 17:02:07,961 [INFO]   Done: networkinterrupts — 2 rows
+2026-03-27 17:02:07,962 [INFO]   Uploading: networkportionscontrol
+2026-03-27 17:02:08,382 [INFO]   Done: networkportionscontrol — 0 rows
+2026-03-27 17:02:08,383 [INFO]   Uploading: newtrack
+2026-03-27 17:02:08,763 [INFO]   Done: newtrack — 0 rows
+2026-03-27 17:02:08,763 [INFO]   Uploading: no101empform
+2026-03-27 17:02:09,219 [INFO]   Done: no101empform — 0 rows
+2026-03-27 17:02:09,220 [INFO]   Uploading: nokchotobdim_shnakodmt
+2026-03-27 17:02:09,669 [INFO]   Done: nokchotobdim_shnakodmt — 0 rows
+2026-03-27 17:02:09,670 [INFO]   Uploading: nonpaymentcause
+2026-03-27 17:02:10,105 [INFO]   Done: nonpaymentcause — 0 rows
+2026-03-27 17:02:10,105 [INFO]   Uploading: noticetocustomerfororder
+2026-03-27 17:02:10,497 [INFO]   Done: noticetocustomerfororder — 0 rows
+2026-03-27 17:02:10,498 [INFO]   Uploading: noticetocustomerfororder1
+2026-03-27 17:02:10,953 [INFO]   Done: noticetocustomerfororder1 — 0 rows
+2026-03-27 17:02:10,954 [INFO]   Uploading: oldattendance
+2026-03-27 17:02:11,399 [INFO]   Done: oldattendance — 0 rows
+2026-03-27 17:02:11,400 [INFO]   Uploading: oldcontroll
+2026-03-27 17:02:11,913 [INFO]   Done: oldcontroll — 0 rows
+2026-03-27 17:02:11,913 [INFO]   Uploading: oldcustomerordersheaders
+2026-03-27 17:02:12,384 [INFO]   Done: oldcustomerordersheaders — 0 rows
+2026-03-27 17:02:12,384 [INFO]   Uploading: olddocuments
+2026-03-27 17:02:12,870 [INFO]   Done: olddocuments — 0 rows
+2026-03-27 17:02:12,870 [INFO]   Uploading: olddocumentscnt
+2026-03-27 17:02:13,379 [INFO]   Done: olddocumentscnt — 0 rows
+2026-03-27 17:02:13,380 [INFO]   Uploading: olddocumentslines
+2026-03-27 17:02:13,829 [INFO]   Done: olddocumentslines — 0 rows
+2026-03-27 17:02:13,830 [INFO]   Uploading: olddocumentslinescnt
+2026-03-27 17:02:14,319 [INFO]   Done: olddocumentslinescnt — 0 rows
+2026-03-27 17:02:14,319 [INFO]   Uploading: olddtsactions
+2026-03-27 17:02:14,732 [INFO]   Done: olddtsactions — 0 rows
+2026-03-27 17:02:14,732 [INFO]   Uploading: olddtsactionslog
+2026-03-27 17:02:15,206 [INFO]   Done: olddtsactionslog — 0 rows
+2026-03-27 17:02:15,206 [INFO]   Uploading: oldgppactionslog
+2026-03-27 17:02:15,681 [INFO]   Done: oldgppactionslog — 0 rows
+2026-03-27 17:02:15,682 [INFO]   Uploading: oldorderbasketheaders
+2026-03-27 17:02:16,129 [INFO]   Done: oldorderbasketheaders — 0 rows
+2026-03-27 17:02:16,129 [INFO]   Uploading: oldpraxeltbl
+2026-03-27 17:02:16,529 [INFO]   Done: oldpraxeltbl — 0 rows
+2026-03-27 17:02:16,530 [INFO]   Uploading: oldpraxeltbls
+2026-03-27 17:02:17,019 [INFO]   Done: oldpraxeltbls — 0 rows
+2026-03-27 17:02:17,020 [INFO]   Uploading: oldreciepts
+2026-03-27 17:02:17,455 [INFO]   Done: oldreciepts — 0 rows
+2026-03-27 17:02:17,456 [INFO]   Uploading: oldrecieptscnt
+2026-03-27 17:02:17,917 [INFO]   Done: oldrecieptscnt — 0 rows
+2026-03-27 17:02:17,932 [INFO]   Uploading: oldrecieptslines
+2026-03-27 17:02:18,417 [INFO]   Done: oldrecieptslines — 0 rows
+2026-03-27 17:02:18,417 [INFO]   Uploading: oldrecieptslinescnt
+2026-03-27 17:02:18,883 [INFO]   Done: oldrecieptslinescnt — 0 rows
+2026-03-27 17:02:18,899 [INFO]   Uploading: oldtranspraxel
+2026-03-27 17:02:19,359 [INFO]   Done: oldtranspraxel — 0 rows
+2026-03-27 17:02:19,360 [INFO]   Uploading: oldwaybill
+2026-03-27 17:02:19,867 [INFO]   Done: oldwaybill — 0 rows
+2026-03-27 17:02:19,867 [INFO]   Uploading: oldwaybillheaders
+2026-03-27 17:02:20,529 [INFO]   Done: oldwaybillheaders — 83 rows
+2026-03-27 17:02:20,530 [INFO]   Uploading: oldwaybillheaders1
+2026-03-27 17:02:21,011 [INFO]   Done: oldwaybillheaders1 — 0 rows
+2026-03-27 17:02:21,012 [INFO]   Uploading: oldwaybilllines
+2026-03-27 17:02:21,465 [INFO]   Done: oldwaybilllines — 0 rows
+2026-03-27 17:02:21,465 [INFO]   Uploading: onaccounttransactionsbalance
+2026-03-27 17:02:21,915 [INFO]   Done: onaccounttransactionsbalance — 0 rows
+2026-03-27 17:02:21,916 [INFO]   Uploading: onlinedocumentation
+2026-03-27 17:02:22,359 [INFO]   Done: onlinedocumentation — 0 rows
+2026-03-27 17:02:22,360 [INFO]   Uploading: onlinetransactionstransmission
+2026-03-27 17:02:30,800 [INFO]   Done: onlinetransactionstransmission — 10,255 rows
+2026-03-27 17:02:30,801 [INFO]   Uploading: openingtimes
+2026-03-27 17:02:31,263 [INFO]   Done: openingtimes — 0 rows
+2026-03-27 17:02:31,263 [INFO]   Uploading: optics_customerstrailer
+2026-03-27 17:02:31,667 [INFO]   Done: optics_customerstrailer — 0 rows
+2026-03-27 17:02:31,667 [INFO]   Uploading: optics_itemstrailer
+2026-03-27 17:02:32,127 [INFO]   Done: optics_itemstrailer — 0 rows
+2026-03-27 17:02:32,127 [INFO]   Uploading: opticsprescription
+2026-03-27 17:02:32,566 [INFO]   Done: opticsprescription — 0 rows
+2026-03-27 17:02:32,566 [INFO]   Uploading: opticsprescriptionold
+2026-03-27 17:02:33,017 [INFO]   Done: opticsprescriptionold — 0 rows
+2026-03-27 17:02:33,017 [INFO]   Uploading: orderbasketheaders
+2026-03-27 17:02:33,412 [INFO]   Done: orderbasketheaders — 0 rows
+2026-03-27 17:02:33,414 [INFO]   Uploading: orderdeclinecause
+2026-03-27 17:02:33,852 [INFO]   Done: orderdeclinecause — 0 rows
+2026-03-27 17:02:33,853 [INFO]   Uploading: orderformlines
+2026-03-27 17:02:34,304 [INFO]   Done: orderformlines — 0 rows
+2026-03-27 17:02:34,305 [INFO]   Uploading: orderformlines1
+2026-03-27 17:02:34,760 [INFO]   Done: orderformlines1 — 0 rows
+2026-03-27 17:02:34,761 [INFO]   Uploading: ordermodelsd_new
+2026-03-27 17:02:35,290 [INFO]   Done: ordermodelsd_new — 0 rows
+2026-03-27 17:02:35,291 [INFO]   Uploading: ordermodelsh_new
+2026-03-27 17:02:35,746 [INFO]   Done: ordermodelsh_new — 0 rows
+2026-03-27 17:02:35,761 [INFO]   Uploading: orders_tmp
+2026-03-27 17:02:36,206 [INFO]   Done: orders_tmp — 0 rows
+2026-03-27 17:02:36,207 [INFO]   Uploading: orderstypes
+2026-03-27 17:02:36,645 [INFO]   Done: orderstypes — 0 rows
+2026-03-27 17:02:36,645 [INFO]   Uploading: ordersupdateonline
+2026-03-27 17:02:37,097 [INFO]   Done: ordersupdateonline — 0 rows
+2026-03-27 17:02:37,097 [INFO]   Uploading: ordertypeclass
+2026-03-27 17:02:37,468 [INFO]   Done: ordertypeclass — 0 rows
+2026-03-27 17:02:37,469 [INFO]   Uploading: ordertypes
+2026-03-27 17:02:37,908 [INFO]   Done: ordertypes — 0 rows
+2026-03-27 17:02:37,909 [INFO]   Uploading: ordertypescomments
+2026-03-27 17:02:38,343 [INFO]   Done: ordertypescomments — 0 rows
+2026-03-27 17:02:38,343 [INFO]   Uploading: paymentdeposite
+2026-03-27 17:02:38,786 [INFO]   Done: paymentdeposite — 0 rows
+2026-03-27 17:02:38,786 [INFO]   Uploading: paymentmethodmonitoring
+2026-03-27 17:02:39,319 [INFO]   Done: paymentmethodmonitoring — 0 rows
+2026-03-27 17:02:39,319 [INFO]   Uploading: paymentmethodmonitoring1
+2026-03-27 17:02:39,834 [INFO]   Done: paymentmethodmonitoring1 — 0 rows
+2026-03-27 17:02:39,834 [INFO]   Uploading: paymentmonitoring905
+2026-03-27 17:02:40,335 [INFO]   Done: paymentmonitoring905 — 0 rows
+2026-03-27 17:02:40,335 [INFO]   Uploading: paymentstosuppliers
+2026-03-27 17:02:40,784 [INFO]   Done: paymentstosuppliers — 0 rows
+2026-03-27 17:02:40,784 [INFO]   Uploading: paymentterms
+2026-03-27 17:02:41,208 [INFO]   Done: paymentterms — 0 rows
+2026-03-27 17:02:41,208 [INFO]   Uploading: paymenttype
+2026-03-27 17:02:41,740 [INFO]   Done: paymenttype — 7 rows
+2026-03-27 17:02:41,740 [INFO]   Uploading: personalactionlog
+2026-03-27 17:02:42,289 [INFO]   Done: personalactionlog — 606 rows
+2026-03-27 17:02:42,289 [INFO]   Uploading: poscalculatorclosing
+2026-03-27 17:02:42,742 [INFO]   Done: poscalculatorclosing — 0 rows
+2026-03-27 17:02:42,742 [INFO]   Uploading: posdocheaders
+2026-03-27 17:02:43,306 [INFO]   Done: posdocheaders — 0 rows
+2026-03-27 17:02:43,306 [INFO]   Uploading: positionstatustime
+2026-03-27 17:02:43,743 [INFO]   Done: positionstatustime — 0 rows
+2026-03-27 17:02:43,743 [INFO]   Uploading: posmovementtohashavshevet
+2026-03-27 17:02:44,218 [INFO]   Done: posmovementtohashavshevet — 0 rows
+2026-03-27 17:02:44,219 [INFO]   Uploading: pospermanentmessages
+2026-03-27 17:02:44,631 [INFO]   Done: pospermanentmessages — 0 rows
+2026-03-27 17:02:44,631 [INFO]   Uploading: posstatement
+2026-03-27 17:02:45,077 [INFO]   Done: posstatement — 0 rows
+2026-03-27 17:02:45,077 [INFO]   Uploading: posstatmentslines
+2026-03-27 17:02:45,466 [INFO]   Done: posstatmentslines — 0 rows
+2026-03-27 17:02:45,466 [INFO]   Uploading: postaltypes
+2026-03-27 17:02:45,998 [INFO]   Done: postaltypes — 5 rows
+2026-03-27 17:02:45,998 [INFO]   Uploading: praxell_log
+2026-03-27 17:02:46,451 [INFO]   Done: praxell_log — 0 rows
+2026-03-27 17:02:46,451 [INFO]   Uploading: praxelltablescode
+2026-03-27 17:02:46,984 [INFO]   Done: praxelltablescode — 6 rows
+2026-03-27 17:02:46,984 [INFO]   Uploading: praxeltbls
+2026-03-27 17:02:47,659 [INFO]   Done: praxeltbls — 121 rows
+2026-03-27 17:02:47,659 [INFO]   Uploading: pre_paid_prefixes
+2026-03-27 17:02:48,097 [INFO]   Done: pre_paid_prefixes — 0 rows
+2026-03-27 17:02:48,097 [INFO]   Uploading: pre_paid_prefixes1
+2026-03-27 17:02:48,533 [INFO]   Done: pre_paid_prefixes1 — 0 rows
+2026-03-27 17:02:48,533 [INFO]   Uploading: pre_paid_prefixes2
+2026-03-27 17:02:48,988 [INFO]   Done: pre_paid_prefixes2 — 0 rows
+2026-03-27 17:02:48,988 [INFO]   Uploading: pre_paidcardsassign
+2026-03-27 17:02:49,423 [INFO]   Done: pre_paidcardsassign — 0 rows
+2026-03-27 17:02:49,423 [INFO]   Uploading: prepaidcardscampaign
+2026-03-27 17:02:50,004 [INFO]   Done: prepaidcardscampaign — 0 rows
+2026-03-27 17:02:50,004 [INFO]   Uploading: preparationinstructions
+2026-03-27 17:02:50,534 [INFO]   Done: preparationinstructions — 1 rows
+2026-03-27 17:02:50,534 [INFO]   Uploading: pricechangedetection
+2026-03-27 17:02:50,971 [INFO]   Done: pricechangedetection — 0 rows
+2026-03-27 17:02:50,971 [INFO]   Uploading: pricelists
+2026-03-27 17:02:51,475 [INFO]   Done: pricelists — 4 rows
+2026-03-27 17:02:51,476 [INFO]   Uploading: priceschangeapproval
+2026-03-27 17:02:51,918 [INFO]   Done: priceschangeapproval — 0 rows
+2026-03-27 17:02:51,919 [INFO]   Uploading: priceschanges
+2026-03-27 17:02:52,360 [INFO]   Done: priceschanges — 0 rows
+2026-03-27 17:02:52,360 [INFO]   Uploading: pricingprofitandvat
+2026-03-27 17:02:52,824 [INFO]   Done: pricingprofitandvat — 0 rows
+2026-03-27 17:02:52,824 [INFO]   Uploading: printerconfigurationtable
+2026-03-27 17:02:53,415 [INFO]   Done: printerconfigurationtable — 12 rows
+2026-03-27 17:02:53,416 [INFO]   Uploading: printercustomcommands
+2026-03-27 17:02:53,834 [INFO]   Done: printercustomcommands — 0 rows
+2026-03-27 17:02:53,834 [INFO]   Uploading: printersettingscontrol
+2026-03-27 17:02:54,358 [INFO]   Done: printersettingscontrol — 7 rows
+2026-03-27 17:02:54,358 [INFO]   Uploading: productionopticorderchangecause
+2026-03-27 17:02:54,795 [INFO]   Done: productionopticorderchangecause — 0 rows
+2026-03-27 17:02:54,795 [INFO]   Uploading: productssettings_optic
+2026-03-27 17:02:55,230 [INFO]   Done: productssettings_optic — 0 rows
+2026-03-27 17:02:55,230 [INFO]   Uploading: programslist
+2026-03-27 17:02:55,859 [INFO]   Done: programslist — 689 rows
+2026-03-27 17:02:55,859 [INFO]   Uploading: programslist1
+2026-03-27 17:02:56,252 [INFO]   Done: programslist1 — 0 rows
+2026-03-27 17:02:56,252 [INFO]   Uploading: promisedtocustomer
+2026-03-27 17:02:56,684 [INFO]   Done: promisedtocustomer — 0 rows
+2026-03-27 17:02:56,684 [INFO]   Uploading: prototypemenus
+2026-03-27 17:02:57,201 [INFO]   Done: prototypemenus — 2 rows
+2026-03-27 17:02:57,201 [INFO]   Uploading: published_interfaces
+2026-03-27 17:02:57,654 [INFO]   Done: published_interfaces — 0 rows
+2026-03-27 17:02:57,654 [INFO]   Uploading: publishedcoupons_tmp
+2026-03-27 17:02:58,098 [INFO]   Done: publishedcoupons_tmp — 0 rows
+2026-03-27 17:02:58,099 [INFO]   Uploading: qastatus
+2026-03-27 17:02:58,525 [INFO]   Done: qastatus — 0 rows
+2026-03-27 17:02:58,525 [INFO]   Uploading: receiptlines
+2026-03-27 17:03:04,029 [INFO]   Done: receiptlines — 13,631 rows
+2026-03-27 17:03:04,029 [INFO]   Uploading: receiptlines_continue
+2026-03-27 17:03:08,080 [INFO]   Done: receiptlines_continue — 13,631 rows
+2026-03-27 17:03:08,080 [INFO]   Uploading: receiptprintrecover
+2026-03-27 17:03:08,555 [INFO]   Done: receiptprintrecover — 0 rows
+2026-03-27 17:03:08,571 [INFO]   Uploading: receipts
+2026-03-27 17:03:11,803 [INFO]   Done: receipts — 9,380 rows
+2026-03-27 17:03:11,803 [INFO]   Uploading: receipttitle_continue
+2026-03-27 17:03:15,270 [INFO]   Done: receipttitle_continue — 9,379 rows
+2026-03-27 17:03:15,270 [INFO]   Uploading: referemcevalidationalerts
+2026-03-27 17:03:15,721 [INFO]   Done: referemcevalidationalerts — 0 rows
+2026-03-27 17:03:15,721 [INFO]   Uploading: refundmethods
+2026-03-27 17:03:16,185 [INFO]   Done: refundmethods — 0 rows
+2026-03-27 17:03:16,185 [INFO]   Uploading: refundoriginaltendersamountitems
+2026-03-27 17:03:16,560 [INFO]   Done: refundoriginaltendersamountitems — 0 rows
+2026-03-27 17:03:16,560 [INFO]   Uploading: releaseversion
+2026-03-27 17:03:17,107 [INFO]   Done: releaseversion — 65 rows
+2026-03-27 17:03:17,107 [INFO]   Uploading: renttypes
+2026-03-27 17:03:17,544 [INFO]   Done: renttypes — 0 rows
+2026-03-27 17:03:17,544 [INFO]   Uploading: reports_tmp
+2026-03-27 17:03:18,029 [INFO]   Done: reports_tmp — 0 rows
+2026-03-27 17:03:18,029 [INFO]   Uploading: reportsprocessingfile
+2026-03-27 17:03:18,513 [INFO]   Done: reportsprocessingfile — 0 rows
+2026-03-27 17:03:18,513 [INFO]   Uploading: reportsprocessingfile_216btrv
+2026-03-27 17:03:19,052 [INFO]   Done: reportsprocessingfile_216btrv — 0 rows
+2026-03-27 17:03:19,052 [INFO]   Uploading: requestreferencefromtaxauthority
+2026-03-27 17:03:19,451 [INFO]   Done: requestreferencefromtaxauthority — 0 rows
+2026-03-27 17:03:19,451 [INFO]   Uploading: restaurantcontrol
+2026-03-27 17:03:20,032 [INFO]   Done: restaurantcontrol — 2 rows
+2026-03-27 17:03:20,032 [INFO]   Uploading: restaurantitems_continue
+2026-03-27 17:03:20,965 [INFO]   Done: restaurantitems_continue — 1,167 rows
+2026-03-27 17:03:20,981 [INFO]   Uploading: restaurantlayouts
+2026-03-27 17:03:21,404 [INFO]   Done: restaurantlayouts — 0 rows
+2026-03-27 17:03:21,404 [INFO]   Uploading: restcanceleditemslog
+2026-03-27 17:03:21,871 [INFO]   Done: restcanceleditemslog — 0 rows
+2026-03-27 17:03:21,871 [INFO]   Uploading: returnserialrecovery
+2026-03-27 17:03:22,309 [INFO]   Done: returnserialrecovery — 0 rows
+2026-03-27 17:03:22,309 [INFO]   Uploading: reward
+2026-03-27 17:03:22,742 [INFO]   Done: reward — 0 rows
+2026-03-27 17:03:22,742 [INFO]   Uploading: rfidactivitylog
+2026-03-27 17:03:23,212 [INFO]   Done: rfidactivitylog — 0 rows
+2026-03-27 17:03:23,212 [INFO]   Uploading: rfiddocumentslines
+2026-03-27 17:03:23,673 [INFO]   Done: rfiddocumentslines — 0 rows
+2026-03-27 17:03:23,674 [INFO]   Uploading: rfidinventorylog
+2026-03-27 17:03:24,109 [INFO]   Done: rfidinventorylog — 0 rows
+2026-03-27 17:03:24,109 [INFO]   Uploading: rfidtempdocumentslines
+2026-03-27 17:03:24,564 [INFO]   Done: rfidtempdocumentslines — 0 rows
+2026-03-27 17:03:24,565 [INFO]   Uploading: rmsreceiptlineshold
+2026-03-27 17:03:25,020 [INFO]   Done: rmsreceiptlineshold — 0 rows
+2026-03-27 17:03:25,021 [INFO]   Uploading: rmstransaction
+2026-03-27 17:03:25,506 [INFO]   Done: rmstransaction — 0 rows
+2026-03-27 17:03:25,506 [INFO]   Uploading: rulers
+2026-03-27 17:03:25,898 [INFO]   Done: rulers — 0 rows
+2026-03-27 17:03:25,898 [INFO]   Uploading: safecashetransactionsforfuturecare
+2026-03-27 17:03:26,358 [INFO]   Done: safecashetransactionsforfuturecare — 0 rows
+2026-03-27 17:03:26,359 [INFO]   Uploading: safecashtransactions
+2026-03-27 17:03:26,822 [INFO]   Done: safecashtransactions — 0 rows
+2026-03-27 17:03:26,823 [INFO]   Uploading: saleitems
+2026-03-27 17:03:27,258 [INFO]   Done: saleitems — 0 rows
+2026-03-27 17:03:27,259 [INFO]   Uploading: saleitems_local
+2026-03-27 17:03:27,678 [INFO]   Done: saleitems_local — 0 rows
+2026-03-27 17:03:27,679 [INFO]   Uploading: salesagreementscomments_tmp
+2026-03-27 17:03:28,116 [INFO]   Done: salesagreementscomments_tmp — 0 rows
+2026-03-27 17:03:28,117 [INFO]   Uploading: salesamountsslicing
+2026-03-27 17:03:28,570 [INFO]   Done: salesamountsslicing — 0 rows
+2026-03-27 17:03:28,571 [INFO]   Uploading: savenolaundry
+2026-03-27 17:03:28,996 [INFO]   Done: savenolaundry — 0 rows
+2026-03-27 17:03:28,996 [INFO]   Uploading: selectedtoppings
+2026-03-27 17:03:29,433 [INFO]   Done: selectedtoppings — 0 rows
+2026-03-27 17:03:29,449 [INFO]   Uploading: serialitemliminalstock
+2026-03-27 17:03:29,888 [INFO]   Done: serialitemliminalstock — 0 rows
+2026-03-27 17:03:29,889 [INFO]   Uploading: serialitemsrecord
+2026-03-27 17:03:30,368 [INFO]   Done: serialitemsrecord — 0 rows
+2026-03-27 17:03:30,369 [INFO]   Uploading: seriallines_customercreditcard
+2026-03-27 17:03:30,824 [INFO]   Done: seriallines_customercreditcard — 0 rows
+2026-03-27 17:03:30,824 [INFO]   Uploading: servicecalldocuments
+2026-03-27 17:03:31,239 [INFO]   Done: servicecalldocuments — 0 rows
+2026-03-27 17:03:31,241 [INFO]   Uploading: servicecallinfo
+2026-03-27 17:03:31,656 [INFO]   Done: servicecallinfo — 0 rows
+2026-03-27 17:03:31,656 [INFO]   Uploading: servicecalls
+2026-03-27 17:03:32,161 [INFO]   Done: servicecalls — 0 rows
+2026-03-27 17:03:32,161 [INFO]   Uploading: servicediscountcause
+2026-03-27 17:03:32,529 [INFO]   Done: servicediscountcause — 0 rows
+2026-03-27 17:03:32,529 [INFO]   Uploading: servicedoctype
+2026-03-27 17:03:33,061 [INFO]   Done: servicedoctype — 12 rows
+2026-03-27 17:03:33,077 [INFO]   Uploading: servicedocuments_headline
+2026-03-27 17:03:33,545 [INFO]   Done: servicedocuments_headline — 0 rows
+2026-03-27 17:03:33,545 [INFO]   Uploading: servicedocuments_invoice
+2026-03-27 17:03:33,987 [INFO]   Done: servicedocuments_invoice — 0 rows
+2026-03-27 17:03:33,997 [INFO]   Uploading: servicedocuments_parts
+2026-03-27 17:03:34,474 [INFO]   Done: servicedocuments_parts — 0 rows
+2026-03-27 17:03:34,475 [INFO]   Uploading: servicedocumentslines
+2026-03-27 17:03:34,966 [INFO]   Done: servicedocumentslines — 0 rows
+2026-03-27 17:03:34,966 [INFO]   Uploading: serviceform
+2026-03-27 17:03:35,378 [INFO]   Done: serviceform — 0 rows
+2026-03-27 17:03:35,378 [INFO]   Uploading: serviceform1
+2026-03-27 17:03:35,866 [INFO]   Done: serviceform1 — 0 rows
+2026-03-27 17:03:35,866 [INFO]   Uploading: serviceinfodefinitions
+2026-03-27 17:03:36,304 [INFO]   Done: serviceinfodefinitions — 0 rows
+2026-03-27 17:03:36,304 [INFO]   Uploading: setitems
+2026-03-27 17:03:36,707 [INFO]   Done: setitems — 0 rows
+2026-03-27 17:03:36,707 [INFO]   Uploading: settings
+2026-03-27 17:03:37,446 [INFO]   Done: settings — 1,031 rows
+2026-03-27 17:03:37,446 [INFO]   Uploading: settingscontrol
+2026-03-27 17:03:38,084 [INFO]   Done: settingscontrol — 439 rows
+2026-03-27 17:03:38,086 [INFO]   Uploading: settingsprofile
+2026-03-27 17:03:38,528 [INFO]   Done: settingsprofile — 0 rows
+2026-03-27 17:03:38,529 [INFO]   Uploading: sharedreleaseversion
+2026-03-27 17:03:38,959 [INFO]   Done: sharedreleaseversion — 0 rows
+2026-03-27 17:03:38,959 [INFO]   Uploading: shifts
+2026-03-27 17:03:39,493 [INFO]   Done: shifts — 1 rows
+2026-03-27 17:03:39,493 [INFO]   Uploading: shvatbls
+2026-03-27 17:03:40,048 [INFO]   Done: shvatbls — 105 rows
+2026-03-27 17:03:40,048 [INFO]   Uploading: singlevaluelock
+2026-03-27 17:03:40,465 [INFO]   Done: singlevaluelock — 0 rows
+2026-03-27 17:03:40,465 [INFO]   Uploading: sizematrixexternalprogram
+2026-03-27 17:03:40,920 [INFO]   Done: sizematrixexternalprogram — 0 rows
+2026-03-27 17:03:40,921 [INFO]   Uploading: slave_praxelltransactionstable
+2026-03-27 17:03:41,410 [INFO]   Done: slave_praxelltransactionstable — 0 rows
+2026-03-27 17:03:41,412 [INFO]   Uploading: solutionfixes
+2026-03-27 17:03:41,866 [INFO]   Done: solutionfixes — 0 rows
+2026-03-27 17:03:41,867 [INFO]   Uploading: spares
+2026-03-27 17:03:42,304 [INFO]   Done: spares — 0 rows
+2026-03-27 17:03:42,304 [INFO]   Uploading: specialtasksbonus
+2026-03-27 17:03:42,690 [INFO]   Done: specialtasksbonus — 0 rows
+2026-03-27 17:03:42,690 [INFO]   Uploading: standartsfile
+2026-03-27 17:03:43,171 [INFO]   Done: standartsfile — 0 rows
+2026-03-27 17:03:43,171 [INFO]   Uploading: statisshvafile
+2026-03-27 17:03:44,059 [INFO]   Done: statisshvafile — 842 rows
+2026-03-27 17:03:44,059 [INFO]   Uploading: status
+2026-03-27 17:03:44,511 [INFO]   Done: status — 0 rows
+2026-03-27 17:03:44,512 [INFO]   Uploading: statusclass
+2026-03-27 17:03:44,947 [INFO]   Done: statusclass — 0 rows
+2026-03-27 17:03:44,948 [INFO]   Uploading: statusstate
+2026-03-27 17:03:45,378 [INFO]   Done: statusstate — 0 rows
+2026-03-27 17:03:45,380 [INFO]   Uploading: stg_Fact_Attendance_Event
+2026-03-27 17:03:46,008 [INFO]   Done: stg_Fact_Attendance_Event — 49 rows
+2026-03-27 17:03:46,009 [INFO]   Uploading: stg_fact_inventory
+2026-03-27 17:03:47,178 [INFO]   Done: stg_fact_inventory — 3,448 rows
+2026-03-27 17:03:47,178 [INFO]   Uploading: stg_fact_sales_p
+2026-03-27 17:03:52,262 [INFO]   Done: stg_fact_sales_p — 17,633 rows
+2026-03-27 17:03:52,262 [INFO]   Uploading: stg_fact_shifts
+2026-03-27 17:03:52,742 [INFO]   Done: stg_fact_shifts — 24 rows
+2026-03-27 17:03:52,742 [INFO]   Uploading: stg_items
+2026-03-27 17:03:54,350 [INFO]   Done: stg_items — 2,002 rows
+2026-03-27 17:03:54,350 [INFO]   Uploading: stg_test_01
+2026-03-27 17:03:55,789 [INFO]   Done: stg_test_01 — 2,002 rows
+2026-03-27 17:03:55,789 [INFO]   Uploading: stockmovement
+2026-03-27 17:03:56,198 [INFO]   Done: stockmovement — 0 rows
+2026-03-27 17:03:56,198 [INFO]   Uploading: stockmovementcode
+2026-03-27 17:03:56,725 [INFO]   Done: stockmovementcode — 9 rows
+2026-03-27 17:03:56,725 [INFO]   Uploading: stockmovementfile
+2026-03-27 17:03:57,256 [INFO]   Done: stockmovementfile — 1 rows
+2026-03-27 17:03:57,256 [INFO]   Uploading: stockmovementtmp
+2026-03-27 17:03:57,647 [INFO]   Done: stockmovementtmp — 0 rows
+2026-03-27 17:03:57,647 [INFO]   Uploading: storesbychain
+2026-03-27 17:03:58,084 [INFO]   Done: storesbychain — 0 rows
+2026-03-27 17:03:58,084 [INFO]   Uploading: storesincampaign
+2026-03-27 17:03:58,535 [INFO]   Done: storesincampaign — 0 rows
+2026-03-27 17:03:58,535 [INFO]   Uploading: streets
+2026-03-27 17:03:58,957 [INFO]   Done: streets — 0 rows
+2026-03-27 17:03:58,957 [INFO]   Uploading: subscriberstype
+2026-03-27 17:03:59,435 [INFO]   Done: subscriberstype — 0 rows
+2026-03-27 17:03:59,435 [INFO]   Uploading: suppliersprofitmultiplier
+2026-03-27 17:03:59,859 [INFO]   Done: suppliersprofitmultiplier — 0 rows
+2026-03-27 17:03:59,859 [INFO]   Uploading: supplymodel_tmp
+2026-03-27 17:04:00,301 [INFO]   Done: supplymodel_tmp — 0 rows
+2026-03-27 17:04:00,302 [INFO]   Uploading: supplymodeltbl
+2026-03-27 17:04:00,715 [INFO]   Done: supplymodeltbl — 0 rows
+2026-03-27 17:04:00,715 [INFO]   Uploading: systemagent_tmp
+2026-03-27 17:04:01,151 [INFO]   Done: systemagent_tmp — 0 rows
+2026-03-27 17:04:01,151 [INFO]   Uploading: taxauthoritydefinitions
+2026-03-27 17:04:01,539 [INFO]   Done: taxauthoritydefinitions — 0 rows
+2026-03-27 17:04:01,539 [INFO]   Uploading: tbltbls
+2026-03-27 17:04:02,088 [INFO]   Done: tbltbls — 138 rows
+2026-03-27 17:04:02,088 [INFO]   Uploading: techsupportlog
+2026-03-27 17:04:02,524 [INFO]   Done: techsupportlog — 0 rows
+2026-03-27 17:04:02,524 [INFO]   Uploading: tempgeneralmenus
+2026-03-27 17:04:03,012 [INFO]   Done: tempgeneralmenus — 0 rows
+2026-03-27 17:04:03,014 [INFO]   Uploading: terminalsandreceiptvouchers
+2026-03-27 17:04:03,880 [INFO]   Done: terminalsandreceiptvouchers — 2,520 rows
+2026-03-27 17:04:03,880 [INFO]   Uploading: timequery_tmp
+2026-03-27 17:04:04,300 [INFO]   Done: timequery_tmp — 0 rows
+2026-03-27 17:04:04,300 [INFO]   Uploading: tmpcardsforfatherclient
+2026-03-27 17:04:04,795 [INFO]   Done: tmpcardsforfatherclient — 0 rows
+2026-03-27 17:04:04,795 [INFO]   Uploading: tmpinvoiceitemidoptics
+2026-03-27 17:04:05,232 [INFO]   Done: tmpinvoiceitemidoptics — 0 rows
+2026-03-27 17:04:05,232 [INFO]   Uploading: tmpselectoptician
+2026-03-27 17:04:05,622 [INFO]   Done: tmpselectoptician — 0 rows
+2026-03-27 17:04:05,622 [INFO]   Uploading: topics
+2026-03-27 17:04:06,091 [INFO]   Done: topics — 0 rows
+2026-03-27 17:04:06,091 [INFO]   Uploading: topics1
+2026-03-27 17:04:06,487 [INFO]   Done: topics1 — 0 rows
+2026-03-27 17:04:06,488 [INFO]   Uploading: toppingsitem
+2026-03-27 17:04:06,926 [INFO]   Done: toppingsitem — 0 rows
+2026-03-27 17:04:06,926 [INFO]   Uploading: track
+2026-03-27 17:04:07,379 [INFO]   Done: track — 0 rows
+2026-03-27 17:04:07,379 [INFO]   Uploading: track2creditcards
+2026-03-27 17:04:07,817 [INFO]   Done: track2creditcards — 0 rows
+2026-03-27 17:04:07,817 [INFO]   Uploading: trackscustomeridindocrows
+2026-03-27 17:04:08,198 [INFO]   Done: trackscustomeridindocrows — 0 rows
+2026-03-27 17:04:08,208 [INFO]   Uploading: tradeinvouchers
+2026-03-27 17:04:08,659 [INFO]   Done: tradeinvouchers — 0 rows
+2026-03-27 17:04:08,659 [INFO]   Uploading: trans
+2026-03-27 17:04:09,133 [INFO]   Done: trans — 0 rows
+2026-03-27 17:04:09,133 [INFO]   Uploading: translog_tmp
+2026-03-27 17:04:09,600 [INFO]   Done: translog_tmp — 0 rows
+2026-03-27 17:04:09,601 [INFO]   Uploading: unitsizesdetails
+2026-03-27 17:04:09,983 [INFO]   Done: unitsizesdetails — 0 rows
+2026-03-27 17:04:09,984 [INFO]   Uploading: userpermisson
+2026-03-27 17:04:10,425 [INFO]   Done: userpermisson — 0 rows
+2026-03-27 17:04:10,426 [INFO]   Uploading: vericardactionslog
+2026-03-27 17:04:10,891 [INFO]   Done: vericardactionslog — 0 rows
+2026-03-27 17:04:10,891 [INFO]   Uploading: vericardclubs
+2026-03-27 17:04:11,343 [INFO]   Done: vericardclubs — 0 rows
+2026-03-27 17:04:11,344 [INFO]   Uploading: vericardtbls
+2026-03-27 17:04:11,878 [INFO]   Done: vericardtbls — 40 rows
+2026-03-27 17:04:11,878 [INFO]   Uploading: viewfile
+2026-03-27 17:04:12,349 [INFO]   Done: viewfile — 26 rows
+2026-03-27 17:04:12,350 [INFO]   Uploading: visit_tmp
+2026-03-27 17:04:12,790 [INFO]   Done: visit_tmp — 0 rows
+2026-03-27 17:04:12,790 [INFO]   Uploading: vouchersidentifymechanism
+2026-03-27 17:04:13,182 [INFO]   Done: vouchersidentifymechanism — 0 rows
+2026-03-27 17:04:13,183 [INFO]   Uploading: waybilldestinations
+2026-03-27 17:04:13,587 [INFO]   Done: waybilldestinations — 0 rows
+2026-03-27 17:04:13,588 [INFO]   Uploading: waybillheader
+2026-03-27 17:04:14,263 [INFO]   Done: waybillheader — 83 rows
+2026-03-27 17:04:14,264 [INFO]   Uploading: waybilllines
+2026-03-27 17:04:15,034 [INFO]   Done: waybilllines — 714 rows
+2026-03-27 17:04:15,035 [INFO]   Uploading: waybilllines1
+2026-03-27 17:04:15,481 [INFO]   Done: waybilllines1 — 0 rows
+2026-03-27 17:04:15,482 [INFO]   Uploading: waybilllines_newlines
+2026-03-27 17:04:15,927 [INFO]   Done: waybilllines_newlines — 0 rows
+2026-03-27 17:04:15,928 [INFO]   Uploading: waybillmenu
+2026-03-27 17:04:16,516 [INFO]   Done: waybillmenu — 8 rows
+2026-03-27 17:04:16,517 [INFO]   Uploading: waybillmenu1
+2026-03-27 17:04:16,997 [INFO]   Done: waybillmenu1 — 0 rows
+2026-03-27 17:04:16,998 [INFO]   Uploading: webservicequerylog
+2026-03-27 17:04:17,443 [INFO]   Done: webservicequerylog — 0 rows
+2026-03-27 17:04:17,443 [INFO]   Uploading: weeklyworkplan
+2026-03-27 17:04:18,085 [INFO]   Done: weeklyworkplan — 0 rows
+2026-03-27 17:04:18,086 [INFO]   Uploading: workschedule
+2026-03-27 17:04:18,527 [INFO]   Done: workschedule — 0 rows
+2026-03-27 17:04:18,528 [INFO]   Uploading: workstations
+2026-03-27 17:04:19,099 [INFO]   Done: workstations — 3 rows
+2026-03-27 17:04:19,100 [INFO]   Uploading: workstationtype
+2026-03-27 17:04:19,629 [INFO]   Done: workstationtype — 4 rows
+2026-03-27 17:04:19,630 [INFO]   Uploading: wslog
+2026-03-27 17:04:20,083 [INFO]   Done: wslog — 0 rows
+2026-03-27 17:04:20,083 [INFO] All tables loaded to Supabase successfully.

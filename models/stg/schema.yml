@@ -46,7 +46,6 @@ models:
 
 sources:
   - name: store_data
-    database: store_local
     schema: raw
     tables:
       - name: items
