@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: int_sales__line_items
+    description: "Planned reusable sales line model that standardizes one row per sold item line from documents, lines, and payment context."
+    columns:
+      - name: document_id
+        description: "Transaction document identifier."
+        data_tests:
+          - not_null
+      - name: receipt_date
+        description: "Business date of the sale."
+      - name: item_id
+        description: "Product identifier sold on the line."
+        data_tests:
+          - not_null
+      - name: quantity
+        description: "Net quantity on the sales line."
+      - name: net_sales_amount
+        description: "Net sales amount after return handling when implemented."
+      - name: is_return
+        description: "Flag indicating whether the line is a return."
+
+  - name: int_sales__daily_product
+    description: "Planned daily product sales aggregation used by inventory, demand, and reporting models."
+    columns:
+      - name: sale_date
+        description: "Date of the product sales aggregation."
+        data_tests:
+          - not_null
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+      - name: sold_qty
+        description: "Net quantity sold for the product on the day."
+      - name: net_sales_amount
+        description: "Net sales amount for the product on the day."
+
+  - name: int_sales__daily_store
+    description: "Planned daily store-level sales summary for operational and executive reporting."
+    columns:
+      - name: sale_date
+        description: "Date of the store sales aggregation."
+        data_tests:
+          - not_null
+      - name: total_sales_amount
+        description: "Total sales amount for the day."
+      - name: total_units_sold
+        description: "Total units sold for the day."
+      - name: ticket_count
+        description: "Number of transactions for the day."
+
+  - name: int_sales__returns
+    description: "Planned returns-focused model that isolates return behavior for downstream net sales logic."
+    columns:
+      - name: document_id
+        description: "Return document identifier."
+        data_tests:
+          - not_null
+      - name: item_id
+        description: "Returned product identifier."
+        data_tests:
+          - not_null
+      - name: return_qty
+        description: "Quantity returned for the product."
+      - name: return_amount
+        description: "Amount associated with the return."

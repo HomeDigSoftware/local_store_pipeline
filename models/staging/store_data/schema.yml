@@ -1,0 +1,7 @@
+
+version: 2
+
+# Legacy placeholder.
+# Source and model definitions for the staging layer were moved to:
+# - _store_data__sources.yml
+# - _store_data__models.yml

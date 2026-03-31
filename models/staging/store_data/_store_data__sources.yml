@@ -1,0 +1,136 @@
+version: 2
+
+sources:
+  - name: store_data
+    description: "Raw retail POS source tables loaded from the store operational system."
+    schema: raw
+    tables:
+      - name: items
+        description: "Raw product master table containing item attributes, prices, and category references."
+        columns:
+          - name: item_id
+            description: "Product identifier in the source system."
+            data_tests:
+              - not_null
+              - unique
+          - name: itemdesc
+            description: "Raw product description from the POS system."
+
+      - name: documents
+        description: "Sales document headers representing receipts or transaction documents."
+        columns:
+          - name: document_id
+            description: "Primary identifier of the transaction document."
+            data_tests:
+              - not_null
+              - unique
+          - name: recordingdate
+            description: "Business date on which the document was recorded."
+            data_tests:
+              - not_null
+
+      - name: documentlines
+        description: "Line-level transaction details for each sales document."
+        columns:
+          - name: document_id
+            description: "Foreign key to the transaction header."
+            data_tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('store_data', 'documents')
+                    field: document_id
+          - name: item_id
+            description: "Product identifier sold on the line."
+            data_tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('store_data', 'items')
+                    field: item_id
+
+      - name: receiptlines
+        description: "Receipt-level payment and settlement details linked to documents."
+        columns:
+          - name: receipt_id
+            description: "Identifier linking the payment record to the document."
+            data_tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('store_data', 'documents')
+                    field: document_id
+          - name: paymenttype
+            description: "Source payment type code."
+
+      - name: inventory
+        description: "Current inventory and stock position by product."
+        columns:
+          - name: item_id
+            description: "Product identifier in inventory records."
+            data_tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('store_data', 'items')
+                    field: item_id
+          - name: inventorybalance
+            description: "Current balance quantity according to the source system."
+
+      - name: employeesattendance
+        description: "Raw employee attendance punches used to derive shifts and work hours."
+        columns:
+          - name: emplyee_id
+            description: "Employee identifier as stored in the source system."
+            data_tests:
+              - not_null
+          - name: datesetting
+            description: "Attendance event date."
+            data_tests:
+              - not_null
+          - name: hourtime
+            description: "Seconds since midnight for the attendance event time."
+            data_tests:
+              - not_null
+          - name: movementtype
+            description: "Attendance movement code such as in, out, or correction."
+
+      - name: employeesselection_byentrance
+        description: "Employee reference table used to enrich attendance events with employee names."
+        columns:
+          - name: emplyeenumber
+            description: "Employee identifier used to join attendance records to employee names."
+
+      - name: creditcardstypes
+        description: "Reference table for card type descriptions used in payment analysis."
+        columns:
+          - name: creditcardtype
+            description: "Card type code from the payment system."
+          - name: carddesc
+            description: "Readable description of the card type."
+
+      - name: itemtypes
+        description: "Reference table for product category or item type descriptions."
+        columns:
+          - name: type_id
+            description: "Product type identifier."
+          - name: typedesc
+            description: "Readable product type description."
+
+      - name: dailypossum
+        description: "Raw daily POS summary table reserved for future reporting models."
+
+      - name: vw_pos_cash_receipts
+        description: "Raw cash receipt view reserved for future reconciliation or payment analysis."
+
+      - name: fact_sales
+        description: "Raw fact-style sales table identified during source discovery."
+
+      - name: fact_shifts
+        description: "Raw fact-style employee shifts table identified during source discovery."
+
+      - name: calendar
+        description: "Raw calendar table available in the source system."
+
+      - name: fact_attendance_event
+        description: "Raw fact-style attendance event table available for future modeling."

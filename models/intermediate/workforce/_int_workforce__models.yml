@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: stg_fact_shifts
+    description: "Legacy shift derivation model retained during the migration from staging to intermediate."
+    columns:
+      - name: employee_id
+        description: "Employee identifier."
+      - name: shiftdate
+        description: "Date of the shift."
+      - name: shiftdurationminutes
+        description: "Shift duration in minutes."
+      - name: shiftdurationhours
+        description: "Shift duration in hours."
+
+  - name: int_workforce__attendance_events_clean
+    description: "Planned cleaned attendance event model that standardizes punch records before shift pairing."
+    columns:
+      - name: employee_id
+        description: "Employee identifier."
+        data_tests:
+          - not_null
+      - name: attendance_datetime
+        description: "Standardized attendance event timestamp."
+        data_tests:
+          - not_null
+      - name: movement_type
+        description: "Normalized attendance movement type."
+
+  - name: int_workforce__shifts
+    description: "Planned workforce shift model that pairs attendance in and out events into shift sessions."
+    columns:
+      - name: employee_id
+        description: "Employee identifier."
+        data_tests:
+          - not_null
+      - name: shift_date
+        description: "Date attributed to the shift."
+        data_tests:
+          - not_null
+      - name: shift_start_time
+        description: "Start time of the shift."
+      - name: shift_end_time
+        description: "End time of the shift."
+      - name: shift_duration_minutes
+        description: "Duration of the shift in minutes."
+      - name: shift_duration_hours
+        description: "Duration of the shift in hours."
+
+  - name: int_workforce__daily_employee_hours
+    description: "Planned daily employee hours aggregation derived from cleaned shift sessions."
+    columns:
+      - name: shift_date
+        description: "Date of the employee hours aggregation."
+        data_tests:
+          - not_null
+      - name: employee_id
+        description: "Employee identifier."
+        data_tests:
+          - not_null
+      - name: total_shift_hours
+        description: "Total hours worked by the employee on the day."
+      - name: shift_count
+        description: "Number of shifts attributed to the employee on the day."

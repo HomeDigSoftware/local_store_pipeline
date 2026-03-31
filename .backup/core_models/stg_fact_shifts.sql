@@ -8,7 +8,11 @@ WITH OrderedAttendance AS (
         movementtype,
         attendancedatetime,
         sourcesequence,
-
+        case 
+            when movementtype in (1, 91) then  ' IN'
+            when movementtype in (2, 92) then  ' OUT'
+        else 'UNKNOWN'
+            end as action_type,
         ROW_NUMBER() OVER (
             PARTITION BY employee_id
             ORDER BY attendancedatetime
@@ -21,7 +25,6 @@ SELECT
     ,i.employee_name
 
     ,i.attendancedatetime::date AS shiftdate
-
     ,to_char(i.attendancedatetime::time, 'HH24:MI') AS shift_start_time
     ,to_char(o.attendancedatetime::time, 'HH24:MI') AS shift_end_time
 

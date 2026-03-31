@@ -2,3 +2,6 @@
 target/
 dbt_packages/
 logs/
+
+DBT_PORTFOLIO_UPGRADE_GUIDE.md
+sql_server_profily_setup.md

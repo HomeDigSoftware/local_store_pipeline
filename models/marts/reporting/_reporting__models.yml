@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: rpt_daily_sales
+    description: "Planned daily sales reporting model for business monitoring and dashboard delivery."
+    columns:
+      - name: sale_date
+        description: "Date of the report grain."
+        data_tests:
+          - not_null
+      - name: total_sales_amount
+        description: "Total sales amount for the day."
+      - name: total_units_sold
+        description: "Total units sold for the day."
+      - name: ticket_count
+        description: "Number of transactions for the day."
+
+  - name: rpt_product_velocity
+    description: "Planned product velocity reporting model for stock coverage and movement analysis."
+    columns:
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+      - name: current_inventory_qty
+        description: "Current inventory quantity used in the report."
+      - name: sold_qty_30d
+        description: "Units sold over the last 30 days."
+      - name: days_of_cover_30d
+        description: "Estimated days of stock coverage based on recent velocity."
+      - name: velocity_band
+        description: "Movement speed classification for the product."
+
+  - name: rpt_inventory_risk
+    description: "Planned inventory exception report that highlights stockout risk, overstock, and dead stock."
+    columns:
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+      - name: stock_status
+        description: "Inventory risk classification."
+      - name: current_inventory_qty
+        description: "Current inventory quantity."
+      - name: days_of_cover_30d
+        description: "Inventory coverage in days based on recent sales."
+
+  - name: rpt_employee_productivity
+    description: "Planned workforce productivity report connecting worked hours to business output."
+    columns:
+      - name: employee_id
+        description: "Employee identifier."
+        data_tests:
+          - not_null
+      - name: shift_date
+        description: "Date of the productivity record."
+        data_tests:
+          - not_null
+      - name: hours_worked
+        description: "Hours worked by the employee on the day."
+      - name: sales_per_hour
+        description: "Sales productivity metric when attribution is implemented."

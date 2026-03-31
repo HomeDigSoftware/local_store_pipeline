@@ -1,0 +1,107 @@
+version: 2
+
+models:
+  - name: stg_fact_sales_p
+    description: "Current staging model that joins sales headers, lines, and payment details into one sales transaction layer."
+    columns:
+      - name: document_id
+        description: "Transaction document identifier."
+        data_tests:
+          - not_null
+      - name: receiptdate
+        description: "Date of the sale."
+        data_tests:
+          - not_null
+      - name: item_id
+        description: "Product identifier sold on the transaction line."
+        data_tests:
+          - not_null
+      - name: quantity
+        description: "Quantity sold on the transaction line."
+      - name: iscredit
+        description: "Flag indicating that the payment type is credit."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: isreturn
+        description: "Flag indicating that the document represents a return."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: stg_fact_inventory
+    description: "Current staging model that enriches inventory balances with product attributes and category information."
+    columns:
+      - name: item_id
+        description: "Product identifier in the inventory snapshot."
+        data_tests:
+          - not_null
+      - name: inventorybalance
+        description: "Current source inventory balance."
+      - name: itemdesc
+        description: "Product description joined from the items table."
+      - name: category
+        description: "Readable product category from the item type reference."
+      - name: sale_price
+        description: "Current sale price from the product master."
+      - name: cost
+        description: "Unit cost from the product master."
+
+  - name: stg_items
+    description: "Current product staging model that passes through item attributes from the raw items table."
+    columns:
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+          - unique
+      - name: dbt_loaded_at
+        description: "Timestamp when the row was loaded by dbt."
+        data_tests:
+          - not_null
+      - name: dbt_source_relation
+        description: "Technical column documenting the model lineage."
+
+  - name: stg_fact_attendance_event
+    description: "Current attendance staging model that converts raw punch fields into usable timestamps and event attributes."
+    columns:
+      - name: attendancedate
+        description: "Date of the attendance event."
+        data_tests:
+          - not_null
+      - name: attendancedatetime
+        description: "Timestamp of the attendance event."
+        data_tests:
+          - not_null
+      - name: emplyee_id
+        description: "Employee identifier on the attendance event."
+        data_tests:
+          - not_null
+      - name: movementtype
+        description: "Attendance movement code."
+
+  - name: stg_store_data__documents
+    description: "Planned source-aligned staging model for sales document headers."
+
+  - name: stg_store_data__document_lines
+    description: "Planned source-aligned staging model for sales document line items."
+
+  - name: stg_store_data__receipt_lines
+    description: "Planned source-aligned staging model for receipt payment lines."
+
+  - name: stg_store_data__items
+    description: "Planned source-aligned staging model for the items master table."
+
+  - name: stg_store_data__inventory
+    description: "Planned source-aligned staging model for inventory balances."
+
+  - name: stg_store_data__attendance_events
+    description: "Planned source-aligned staging model for attendance events."
+
+  - name: stg_store_data__employees
+    description: "Planned staging model for employee reference data."
+
+  - name: stg_store_data__item_types
+    description: "Planned staging model for item type reference data."

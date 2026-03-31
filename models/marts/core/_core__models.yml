@@ -1,0 +1,87 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "Conformed calendar dimension used across sales, inventory, and workforce marts."
+    columns:
+      - name: date_day
+        description: "Calendar date at the grain of the dimension."
+        data_tests:
+          - not_null
+          - unique
+
+  - name: dim_product
+    description: "Planned business-facing product dimension built from curated product and category attributes."
+    columns:
+      - name: product_key
+        description: "Surrogate key of the product dimension."
+      - name: item_id
+        description: "Business key of the product."
+        data_tests:
+          - not_null
+      - name: item_name
+        description: "Readable product name."
+      - name: category_name
+        description: "Readable product category."
+
+  - name: dim_employee
+    description: "Planned business-facing employee dimension built from attendance and employee reference data."
+    columns:
+      - name: employee_key
+        description: "Surrogate key of the employee dimension."
+      - name: employee_id
+        description: "Business key of the employee."
+        data_tests:
+          - not_null
+      - name: employee_name
+        description: "Readable employee name."
+
+  - name: fct_sales
+    description: "Planned core sales fact table for product-level transaction analytics."
+    columns:
+      - name: sales_key
+        description: "Surrogate key of the sales fact."
+      - name: receipt_date
+        description: "Date of the sale."
+        data_tests:
+          - not_null
+      - name: item_id
+        description: "Product identifier sold on the fact row."
+        data_tests:
+          - not_null
+      - name: quantity
+        description: "Net quantity sold."
+      - name: net_sales_amount
+        description: "Net sales amount for the fact row."
+
+  - name: fct_inventory_snapshot
+    description: "Planned inventory snapshot fact table for stock analysis over time."
+    columns:
+      - name: snapshot_date
+        description: "Date of the inventory snapshot."
+        data_tests:
+          - not_null
+      - name: item_id
+        description: "Product identifier in the snapshot."
+        data_tests:
+          - not_null
+      - name: current_inventory_qty
+        description: "Current inventory quantity at snapshot time."
+      - name: stock_status
+        description: "Stock health classification at snapshot time."
+
+  - name: fct_employee_shift
+    description: "Planned workforce fact table for shift analysis and productivity reporting."
+    columns:
+      - name: shift_key
+        description: "Surrogate key of the shift fact."
+      - name: employee_id
+        description: "Employee identifier."
+        data_tests:
+          - not_null
+      - name: shift_date
+        description: "Date of the shift."
+        data_tests:
+          - not_null
+      - name: shift_duration_hours
+        description: "Total shift hours for the fact row."

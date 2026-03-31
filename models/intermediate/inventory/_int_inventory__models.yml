@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: int_inventory__current_stock
+    description: "Planned canonical inventory model that exposes one trusted current stock view per product."
+    columns:
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+      - name: current_inventory_qty
+        description: "Current trusted stock quantity for the product."
+      - name: counted_inventory_qty
+        description: "Counted inventory quantity when available."
+      - name: inventory_gap_qty
+        description: "Difference between system and counted inventory when implemented."
+
+  - name: int_inventory__stock_health
+    description: "Planned inventory health classification model used to identify stock risk, overstock, and dead stock."
+    columns:
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+      - name: stock_status
+        description: "Business classification of stock health."
+      - name: current_inventory_qty
+        description: "Current stock quantity used in the health calculation."
+      - name: days_of_cover_30d
+        description: "Inventory coverage in days based on recent sales velocity."
+
+  - name: int_inventory__product_velocity
+    description: "Planned product velocity model that measures sales speed against available inventory."
+    columns:
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+      - name: current_inventory_qty
+        description: "Current inventory quantity used in the velocity calculation."
+      - name: sold_qty_7d
+        description: "Units sold over the last 7 days."
+      - name: sold_qty_30d
+        description: "Units sold over the last 30 days."
+      - name: avg_daily_sales_30d
+        description: "Average daily units sold over the last 30 days."
+      - name: sales_inventory_ratio_30d
+        description: "Ratio between recent sales and current inventory."
+      - name: days_of_cover_30d
+        description: "Estimated number of days the current stock will cover at the recent sales pace."
+      - name: velocity_band
+        description: "Business label for the product movement speed."
