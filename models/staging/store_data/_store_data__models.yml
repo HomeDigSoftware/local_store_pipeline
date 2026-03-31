@@ -83,13 +83,64 @@ models:
         description: "Attendance movement code."
 
   - name: stg_store_data__documents
-    description: "Planned source-aligned staging model for sales document headers."
+    description: "Source-aligned staging model for sales document headers with standardized date, time, and amount fields."
+    columns:
+      - name: document_id
+        description: "Transaction document identifier from the POS source."
+        data_tests:
+          - not_null
+      - name: receipt_date
+        description: "Business date on which the document was recorded."
+        data_tests:
+          - not_null
+      - name: receipt_datetime
+        description: "Timestamp built from the document date and the source print time in seconds."
+      - name: receipt_time
+        description: "Formatted document time as HH24:MI:SS."
+      - name: document_type
+        description: "Raw source document type code."
+      - name: total_amount_inc_vat
+        description: "Document total including VAT."
+      - name: source_sequence
+        description: "Technical source sequence used for lineage and ordering."
 
   - name: stg_store_data__document_lines
-    description: "Planned source-aligned staging model for sales document line items."
+    description: "Source-aligned staging model for sales document line items with standardized product, quantity, and amount fields."
+    columns:
+      - name: document_id
+        description: "Transaction document identifier linking the line to its header."
+        data_tests:
+          - not_null
+      - name: item_id
+        description: "Product identifier sold on the line item."
+        data_tests:
+          - not_null
+      - name: item_name
+        description: "Raw product description captured on the transaction line."
+      - name: quantity
+        description: "Sold quantity recorded on the transaction line."
+      - name: line_total_inc_vat
+        description: "Line total amount including VAT."
 
   - name: stg_store_data__receipt_lines
-    description: "Planned source-aligned staging model for receipt payment lines."
+    description: "Source-aligned staging model for receipt payment lines with standardized payment attributes."
+    columns:
+      - name: document_id
+        description: "Transaction document identifier linking the payment row to the document header."
+        data_tests:
+          - not_null
+      - name: payment_type
+        description: "Raw source payment type code."
+      - name: is_credit
+        description: "Flag indicating whether the payment type is credit based on the source payment code."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: credit_card_type
+        description: "Raw source credit card type code when present."
+      - name: account_number_moreinfo
+        description: "Raw account or settlement indicator retained for downstream filtering and payment logic."
 
   - name: stg_store_data__items
     description: "Planned source-aligned staging model for the items master table."
