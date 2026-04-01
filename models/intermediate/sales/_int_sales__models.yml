@@ -2,24 +2,48 @@ version: 2
 
 models:
   - name: int_sales__line_items
-    description: "Planned reusable sales line model that standardizes one row per sold item line from documents, lines, and payment context."
+    description: "Reusable sales line model that standardizes one row per sold item line from staged document headers, lines, and payment context."
     columns:
       - name: document_id
         description: "Transaction document identifier."
         data_tests:
           - not_null
+      - name: receipt_datetime
+        description: "Timestamp of the transaction built in the document staging layer."
       - name: receipt_date
         description: "Business date of the sale."
+        data_tests:
+          - not_null
       - name: item_id
         description: "Product identifier sold on the line."
         data_tests:
           - not_null
+      - name: item_name
+        description: "Product description captured on the transaction line."
       - name: quantity
         description: "Net quantity on the sales line."
-      - name: net_sales_amount
-        description: "Net sales amount after return handling when implemented."
+      - name: line_total_inc_vat
+        description: "Line-level sales amount including VAT."
+      - name: receipt_total_inc_vat
+        description: "Full receipt total including VAT from the document header."
+      - name: payment_type
+        description: "Payment type selected from the receipt payment context."
+      - name: is_credit
+        description: "Flag indicating whether the payment was credit."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: credit_card_type
+        description: "Credit card type code when available."
       - name: is_return
-        description: "Flag indicating whether the line is a return."
+        description: "Flag indicating whether the document total is negative."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: source_sequence
+        description: "Technical source sequence carried from the document header."
 
   - name: int_sales__daily_product
     description: "Planned daily product sales aggregation used by inventory, demand, and reporting models."
