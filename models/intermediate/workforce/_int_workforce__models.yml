@@ -28,7 +28,7 @@ models:
         description: "Normalized attendance movement type."
 
   - name: int_workforce__shifts
-    description: "Planned workforce shift model that pairs attendance in and out events into shift sessions."
+    description: "Workforce shift model that pairs staged attendance in and out events into shift sessions."
     columns:
       - name: employee_id
         description: "Employee identifier."
