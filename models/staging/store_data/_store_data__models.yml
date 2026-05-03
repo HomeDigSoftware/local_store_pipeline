@@ -114,16 +114,96 @@ models:
         description: "Raw account or settlement indicator retained for downstream filtering and payment logic."
 
   - name: stg_store_data__items
-    description: "Planned source-aligned staging model for the items master table."
+    description: "Source-aligned staging model for the items master table with standardized naming and unit economics fields."
+    columns:
+      - name: item_id
+        description: "Product identifier from the source system."
+        data_tests:
+          - not_null
+          - unique
+      - name: item_name
+        description: "Readable product description from the item master."
+      - name: item_type_id
+        description: "Product type identifier from the source item master."
+      - name: cost_per_unit
+        description: "Unit cost excluding VAT from the source item master."
+      - name: cost_per_unit_inc_vat
+        description: "Unit cost including VAT based on the current source calculation."
+      - name: sale_price
+        description: "Unit sale price from the source item master."
+      - name: profit_per_unit_inc_vat
+        description: "Unit sale price minus unit cost including VAT."
 
   - name: stg_store_data__inventory
-    description: "Planned source-aligned staging model for inventory balances."
+    description: "Source-aligned staging model for the current inventory snapshot with standardized quantity, category, and unit economics fields."
+    columns:
+      - name: item_id
+        description: "Product identifier in the current inventory snapshot."
+        data_tests:
+          - not_null
+      - name: opening_inventory_qty
+        description: "Opening stock quantity from the source inventory snapshot."
+      - name: inventory_balance_qty
+        description: "Current inventory balance quantity from the source system."
+      - name: counted_inventory_qty
+        description: "Counted inventory quantity from the source snapshot when available."
+      - name: product_category_id
+        description: "Product category identifier from the item master."
+      - name: product_category_name
+        description: "Readable product category name from the item type reference."
+      - name: item_name
+        description: "Readable product description from the item master."
+      - name: unit_cost
+        description: "Unit cost excluding VAT from the item master."
+      - name: unit_cost_inc_vat
+        description: "Unit cost including VAT based on the current source calculation."
+      - name: unit_sale_price
+        description: "Unit sale price from the item master."
+      - name: profit_per_unit_inc_vat
+        description: "Unit sale price minus unit cost including VAT."
 
   - name: stg_store_data__attendance_events
-    description: "Planned source-aligned staging model for attendance events."
+    description: "Source-aligned staging model for attendance events with standardized employee, date, time, and recording fields."
+    columns:
+      - name: employee_id
+        description: "Employee identifier from the attendance source system."
+        data_tests:
+          - not_null
+      - name: employee_name
+        description: "Readable employee name from the employee reference table when available."
+      - name: attendance_date
+        description: "Attendance event date from the source record."
+        data_tests:
+          - not_null
+      - name: attendance_time
+        description: "Attendance event time built from seconds since midnight."
+      - name: attendance_datetime
+        description: "Full attendance timestamp built from the event date and hourtime fields."
+        data_tests:
+          - not_null
+      - name: movement_type
+        description: "Raw attendance movement code such as in, out, or correction."
+      - name: recording_type
+        description: "Attendance recording type from the source system."
+      - name: source_sequence
+        description: "Technical source sequence used for lineage and ordering."
 
   - name: stg_store_data__employees
-    description: "Planned staging model for employee reference data."
+    description: "Source-aligned staging model for employee reference data with standardized identifier and name fields."
+    columns:
+      - name: employee_id
+        description: "Employee identifier from the source employee reference table."
+        data_tests:
+          - not_null
+      - name: employee_name
+        description: "Readable employee name from the source employee reference table."
 
   - name: stg_store_data__item_types
-    description: "Planned staging model for item type reference data."
+    description: "Source-aligned staging model for item type reference data with standardized identifier and name fields."
+    columns:
+      - name: item_type_id
+        description: "Product type identifier from the source reference table."
+        data_tests:
+          - not_null
+      - name: item_type_name
+        description: "Readable product type description from the source reference table."

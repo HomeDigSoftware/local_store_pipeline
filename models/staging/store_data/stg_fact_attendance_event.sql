@@ -1,31 +1,34 @@
 {{ config(materialized='table') }}
 
+with staged_attendance_events as (
+    select *
+    from {{ ref('stg_store_data__attendance_events') }}
+)
 
 SELECT
-    datesetting::date AS attendancedate,
+    attendance_date AS attendancedate,
     case 
-        when movementtype in (1, 91) then  ' IN'
-        when movementtype in (2, 92) then  ' OUT'
+        when movement_type in (1, 91) then  ' IN'
+        when movement_type in (2, 92) then  ' OUT'
         else 'UNKNOWN'
     end as action_type,
-    (make_time(0, 0, 0) + (hourtime || ' seconds')::interval)::time AS attendancetime,
-    datesetting::timestamp + (hourtime || ' seconds')::interval AS attendancedatetime,
-    e.emplyee_id,
-    en.longname,
-    movementtype,
+    attendance_time AS attendancetime,
+    attendance_datetime AS attendancedatetime,
+    employee_id as emplyee_id,
+    employee_name as longname,
+    movement_type as movementtype,
 
     -- Date + HourTime (seconds since midnight)
 
 
 
-    hourtime / 3600 AS hourofday,
+    extract(hour from attendance_time) AS hourofday,
 
-    hourtime / 60 AS minuteofday,
+    ((extract(hour from attendance_time) * 60) + extract(minute from attendance_time)) AS minuteofday,
 
-    attendancerecordingtype,
+    recording_type as attendancerecordingtype,
     front_office,
-    e.s__sequence,
+    source_sequence as s__sequence,
     mark,
     exceeded
-FROM {{ source('store_data', 'employeesattendance') }} e
-left join {{ source('store_data', 'employeesselection_byentrance') }} en on e.emplyee_id = en.emplyeenumber
+FROM staged_attendance_events
