@@ -1,35 +1,6 @@
 version: 2
 
 models:
-  - name: stg_fact_sales_p
-    description: "Current staging model that joins sales headers, lines, and payment details into one sales transaction layer."
-    columns:
-      - name: document_id
-        description: "Transaction document identifier."
-        data_tests:
-          - not_null
-      - name: receiptdate
-        description: "Date of the sale."
-        data_tests:
-          - not_null
-      - name: item_id
-        description: "Product identifier sold on the transaction line."
-        data_tests:
-          - not_null
-      - name: quantity
-        description: "Quantity sold on the transaction line."
-      - name: iscredit
-        description: "Flag indicating that the payment type is credit."
-        data_tests:
-          - accepted_values:
-              arguments:
-                values: [0, 1]
-      - name: isreturn
-        description: "Flag indicating that the document represents a return."
-        data_tests:
-          - accepted_values:
-              arguments:
-                values: [0, 1]
 
   - name: stg_fact_inventory
     description: "Current staging model that enriches inventory balances with product attributes and category information."

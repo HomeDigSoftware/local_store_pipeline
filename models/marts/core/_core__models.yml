@@ -37,10 +37,12 @@ models:
         description: "Readable employee name."
 
   - name: fct_sales
-    description: "Planned core sales fact table for product-level transaction analytics."
+    description: "Core sales fact table built from int_sales__line_items for product-level transaction analytics."
     columns:
       - name: sales_key
         description: "Surrogate key of the sales fact."
+        data_tests:
+          - not_null
       - name: receipt_date
         description: "Date of the sale."
         data_tests:
@@ -53,6 +55,12 @@ models:
         description: "Net quantity sold."
       - name: net_sales_amount
         description: "Net sales amount for the fact row."
+      - name: gross_sales_amount
+        description: "Receipt-level total amount including VAT from the source document."
+      - name: is_return
+        description: "Flag indicating whether the source document is a return."
+      - name: payment_type
+        description: "Payment type associated with the transaction."
 
   - name: fct_inventory_snapshot
     description: "Planned inventory snapshot fact table for stock analysis over time."

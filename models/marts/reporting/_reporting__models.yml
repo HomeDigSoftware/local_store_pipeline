@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: rpt_daily_sales
-    description: "Planned daily sales reporting model for business monitoring and dashboard delivery."
+    description: "Daily sales reporting model built from the downstream sales intermediate layer for monitoring and dashboard delivery."
     columns:
       - name: sale_date
         description: "Date of the report grain."
@@ -14,6 +14,8 @@ models:
         description: "Total units sold for the day."
       - name: ticket_count
         description: "Number of transactions for the day."
+      - name: avg_ticket_amount
+        description: "Average sales amount per transaction for the day."
 
   - name: rpt_product_velocity
     description: "Planned product velocity reporting model for stock coverage and movement analysis."

@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{# {{ config(materialized='table') }}
 
 
 WITH OrderedAttendance AS (
@@ -68,4 +68,4 @@ JOIN OrderedAttendance o
   AND o.rn = i.rn + 1
 WHERE i.movementtype IN (1, 91)   -- IN
   AND o.movementtype IN (2, 92)  -- OUT
-
+ #}
