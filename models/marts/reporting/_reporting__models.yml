@@ -60,7 +60,7 @@ models:
         description: "Movement speed classification carried into the risk report."
 
   - name: rpt_employee_productivity
-    description: "Workforce productivity report that exposes daily worked time per employee and reserves a sales productivity field for future attribution logic."
+    description: "Workforce productivity report that exposes daily worked time per employee and populates sales productivity using hour-share attribution at the daily store level."
     columns:
       - name: employee_id
         description: "Employee identifier."
@@ -78,5 +78,7 @@ models:
         description: "Hours worked by the employee on the day."
       - name: shift_count
         description: "Number of shifts attributed to the employee on the day."
+      - name: sales_amount
+        description: "Attributed sales amount allocated to the employee from daily store sales."
       - name: sales_per_hour
-        description: "Sales productivity metric when attribution is implemented."
+        description: "Attributed sales divided by hours worked on the day."

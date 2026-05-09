@@ -1,8 +1,8 @@
 {{ config(materialized='table') }}
 
-with daily_employee_hours as (
+with daily_sales_attribution as (
 	select *
-	from {{ ref('int_workforce__daily_employee_hours') }}
+	from {{ ref('int_workforce__daily_sales_attribution') }}
 ),
 
 employees as (
@@ -12,16 +12,17 @@ employees as (
 
 employee_productivity_report as (
 	select
-		daily_employee_hours.shift_date,
-		daily_employee_hours.employee_id,
+		daily_sales_attribution.shift_date,
+		daily_sales_attribution.employee_id,
 		employees.employee_name,
-		daily_employee_hours.total_shift_minutes,
-		daily_employee_hours.total_shift_hours as hours_worked,
-		daily_employee_hours.shift_count,
-		cast(null as numeric(18, 2)) as sales_per_hour
-	from daily_employee_hours
+		daily_sales_attribution.total_shift_minutes,
+		daily_sales_attribution.total_shift_hours as hours_worked,
+		daily_sales_attribution.shift_count,
+		daily_sales_attribution.attributed_sales_amount as sales_amount,
+		daily_sales_attribution.sales_per_hour
+	from daily_sales_attribution
 	left join employees
-		on daily_employee_hours.employee_id = employees.employee_id
+		on daily_sales_attribution.employee_id = employees.employee_id
 )
 
 select *

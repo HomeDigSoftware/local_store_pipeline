@@ -58,3 +58,27 @@ models:
         description: "Total hours worked by the employee on the day."
       - name: shift_count
         description: "Number of shifts attributed to the employee on the day."
+
+  - name: int_workforce__daily_sales_attribution
+    description: "Daily workforce attribution model that allocates store sales to employees based on their share of worked hours on the same day."
+    columns:
+      - name: shift_date
+        description: "Date of the attribution record."
+        data_tests:
+          - not_null
+      - name: employee_id
+        description: "Employee identifier receiving the attributed sales share."
+        data_tests:
+          - not_null
+      - name: total_shift_minutes
+        description: "Total worked time in minutes for the employee on the day."
+      - name: total_shift_hours
+        description: "Total worked time in hours for the employee on the day."
+      - name: store_sales_amount
+        description: "Total store sales amount on the same day before attribution."
+      - name: labor_share_ratio
+        description: "Employee share of worked hours out of all worked hours on the same day."
+      - name: attributed_sales_amount
+        description: "Store sales allocated to the employee using the labor share ratio."
+      - name: sales_per_hour
+        description: "Attributed sales divided by the employee hours worked on the day."
