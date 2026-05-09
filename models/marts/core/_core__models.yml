@@ -63,7 +63,7 @@ models:
         description: "Payment type associated with the transaction."
 
   - name: fct_inventory_snapshot
-    description: "Planned inventory snapshot fact table for stock analysis over time."
+    description: "Inventory snapshot fact table for stock analysis over time, built from the latest curated stock health model at run date."
     columns:
       - name: snapshot_date
         description: "Date of the inventory snapshot."
@@ -77,6 +77,10 @@ models:
         description: "Current inventory quantity at snapshot time."
       - name: stock_status
         description: "Stock health classification at snapshot time."
+      - name: days_of_cover_30d
+        description: "Estimated number of days current stock will cover based on recent sales pace."
+      - name: velocity_band
+        description: "Movement speed classification derived from recent sales velocity."
 
   - name: fct_employee_shift
     description: "Planned workforce fact table for shift analysis and productivity reporting."
