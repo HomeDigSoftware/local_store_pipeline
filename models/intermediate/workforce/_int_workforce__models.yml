@@ -1,18 +1,6 @@
 version: 2
 
 models:
-  - name: stg_fact_shifts
-    description: "Legacy shift derivation model retained during the migration from staging to intermediate."
-    columns:
-      - name: employee_id
-        description: "Employee identifier."
-      - name: shiftdate
-        description: "Date of the shift."
-      - name: shiftdurationminutes
-        description: "Shift duration in minutes."
-      - name: shiftdurationhours
-        description: "Shift duration in hours."
-
   - name: int_workforce__attendance_events_clean
     description: "Cleaned attendance event model that standardizes punch records before shift pairing."
     columns:

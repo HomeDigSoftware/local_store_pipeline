@@ -18,14 +18,20 @@ models:
         description: "Average sales amount per transaction for the day."
 
   - name: rpt_product_velocity
-    description: "Planned product velocity reporting model for stock coverage and movement analysis."
+    description: "Product velocity reporting model for stock coverage and movement analysis built from the inventory snapshot fact."
     columns:
+      - name: snapshot_date
+        description: "Date of the inventory snapshot used for the report row."
+        data_tests:
+          - not_null
       - name: item_id
         description: "Product identifier."
         data_tests:
           - not_null
       - name: current_inventory_qty
         description: "Current inventory quantity used in the report."
+      - name: sold_qty_7d
+        description: "Units sold over the last 7 days."
       - name: sold_qty_30d
         description: "Units sold over the last 30 days."
       - name: days_of_cover_30d
@@ -34,8 +40,12 @@ models:
         description: "Movement speed classification for the product."
 
   - name: rpt_inventory_risk
-    description: "Planned inventory exception report that highlights stockout risk, overstock, and dead stock."
+    description: "Inventory exception report that highlights stockout risk, overstock, and dead stock from the inventory snapshot fact."
     columns:
+      - name: snapshot_date
+        description: "Date of the inventory snapshot used for the report row."
+        data_tests:
+          - not_null
       - name: item_id
         description: "Product identifier."
         data_tests:
@@ -46,9 +56,11 @@ models:
         description: "Current inventory quantity."
       - name: days_of_cover_30d
         description: "Inventory coverage in days based on recent sales."
+      - name: velocity_band
+        description: "Movement speed classification carried into the risk report."
 
   - name: rpt_employee_productivity
-    description: "Planned workforce productivity report connecting worked hours to business output."
+    description: "Workforce productivity report that exposes daily worked time per employee and reserves a sales productivity field for future attribution logic."
     columns:
       - name: employee_id
         description: "Employee identifier."
@@ -58,7 +70,13 @@ models:
         description: "Date of the productivity record."
         data_tests:
           - not_null
+      - name: employee_name
+        description: "Readable employee name from the employee dimension."
+      - name: total_shift_minutes
+        description: "Total worked time in minutes for the employee on the day."
       - name: hours_worked
         description: "Hours worked by the employee on the day."
+      - name: shift_count
+        description: "Number of shifts attributed to the employee on the day."
       - name: sales_per_hour
         description: "Sales productivity metric when attribution is implemented."

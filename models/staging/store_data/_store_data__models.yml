@@ -2,57 +2,6 @@ version: 2
 
 models:
 
-  - name: stg_fact_inventory
-    description: "Current staging model that enriches inventory balances with product attributes and category information."
-    columns:
-      - name: item_id
-        description: "Product identifier in the inventory snapshot."
-        data_tests:
-          - not_null
-      - name: inventorybalance
-        description: "Current source inventory balance."
-      - name: itemdesc
-        description: "Product description joined from the items table."
-      - name: category
-        description: "Readable product category from the item type reference."
-      - name: sale_price
-        description: "Current sale price from the product master."
-      - name: cost
-        description: "Unit cost from the product master."
-
-  - name: stg_items
-    description: "Current product staging model that passes through item attributes from the raw items table."
-    columns:
-      - name: item_id
-        description: "Product identifier."
-        data_tests:
-          - not_null
-          - unique
-      - name: dbt_loaded_at
-        description: "Timestamp when the row was loaded by dbt."
-        data_tests:
-          - not_null
-      - name: dbt_source_relation
-        description: "Technical column documenting the model lineage."
-
-  - name: stg_fact_attendance_event
-    description: "Current attendance staging model that converts raw punch fields into usable timestamps and event attributes."
-    columns:
-      - name: attendancedate
-        description: "Date of the attendance event."
-        data_tests:
-          - not_null
-      - name: attendancedatetime
-        description: "Timestamp of the attendance event."
-        data_tests:
-          - not_null
-      - name: emplyee_id
-        description: "Employee identifier on the attendance event."
-        data_tests:
-          - not_null
-      - name: movementtype
-        description: "Attendance movement code."
-
   - name: stg_store_data__documents
     description: "Source-aligned staging model for sales document headers with standardized date, time, and amount fields."
     columns:
