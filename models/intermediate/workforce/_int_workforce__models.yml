@@ -14,21 +14,27 @@ models:
         description: "Shift duration in hours."
 
   - name: int_workforce__attendance_events_clean
-    description: "Planned cleaned attendance event model that standardizes punch records before shift pairing."
+    description: "Cleaned attendance event model that standardizes punch records before shift pairing."
     columns:
       - name: employee_id
         description: "Employee identifier."
         data_tests:
           - not_null
+      - name: attendance_date
+        description: "Attendance event date."
       - name: attendance_datetime
         description: "Standardized attendance event timestamp."
         data_tests:
           - not_null
       - name: movement_type
         description: "Normalized attendance movement type."
+      - name: action_type
+        description: "Normalized event direction as IN, OUT, or UNKNOWN."
+      - name: is_manual_correction
+        description: "Flag indicating the event came from a manual correction code."
 
   - name: int_workforce__shifts
-    description: "Workforce shift model that pairs staged attendance in and out events into shift sessions."
+    description: "Workforce shift model that pairs cleaned attendance in and out events into shift sessions."
     columns:
       - name: employee_id
         description: "Employee identifier."
@@ -48,7 +54,7 @@ models:
         description: "Duration of the shift in hours."
 
   - name: int_workforce__daily_employee_hours
-    description: "Planned daily employee hours aggregation derived from cleaned shift sessions."
+    description: "Daily employee hours aggregation derived from cleaned shift sessions."
     columns:
       - name: shift_date
         description: "Date of the employee hours aggregation."
@@ -58,6 +64,8 @@ models:
         description: "Employee identifier."
         data_tests:
           - not_null
+      - name: total_shift_minutes
+        description: "Total worked time in minutes for the employee on the day."
       - name: total_shift_hours
         description: "Total hours worked by the employee on the day."
       - name: shift_count

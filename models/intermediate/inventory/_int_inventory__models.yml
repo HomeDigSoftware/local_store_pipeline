@@ -2,21 +2,27 @@ version: 2
 
 models:
   - name: int_inventory__current_stock
-    description: "Planned canonical inventory model that exposes one trusted current stock view per product."
+    description: "Canonical inventory model that exposes one trusted current stock view per product."
     columns:
       - name: item_id
         description: "Product identifier."
         data_tests:
           - not_null
+      - name: item_name
+        description: "Readable product name from the staged item master."
       - name: current_inventory_qty
         description: "Current trusted stock quantity for the product."
       - name: counted_inventory_qty
         description: "Counted inventory quantity when available."
       - name: inventory_gap_qty
-        description: "Difference between system and counted inventory when implemented."
+        description: "Difference between counted inventory and system inventory balance when a count exists."
+      - name: inventory_value_cost
+        description: "Inventory value at unit cost based on the trusted current quantity."
+      - name: inventory_value_retail
+        description: "Inventory value at sale price based on the trusted current quantity."
 
   - name: int_inventory__stock_health
-    description: "Planned inventory health classification model used to identify stock risk, overstock, and dead stock."
+    description: "Inventory health classification model used to identify stock risk, overstock, and dead stock."
     columns:
       - name: item_id
         description: "Product identifier."
@@ -28,9 +34,11 @@ models:
         description: "Current stock quantity used in the health calculation."
       - name: days_of_cover_30d
         description: "Inventory coverage in days based on recent sales velocity."
+      - name: velocity_band
+        description: "Sales movement label carried forward from the product velocity model."
 
   - name: int_inventory__product_velocity
-    description: "Planned product velocity model that measures sales speed against available inventory."
+    description: "Product velocity model that measures sales speed against available inventory."
     columns:
       - name: item_id
         description: "Product identifier."

@@ -80,17 +80,25 @@ models:
         description: "Number of transactions for the day."
 
   - name: int_sales__returns
-    description: "Planned returns-focused model that isolates return behavior for downstream net sales logic."
+    description: "Returns-focused model that isolates returned sales lines for downstream net sales logic."
     columns:
       - name: document_id
         description: "Return document identifier."
         data_tests:
           - not_null
+      - name: receipt_date
+        description: "Business date of the return."
       - name: item_id
         description: "Returned product identifier."
         data_tests:
           - not_null
+      - name: item_name
+        description: "Returned product description captured on the line."
       - name: return_qty
         description: "Quantity returned for the product."
       - name: return_amount
         description: "Amount associated with the return."
+      - name: payment_type
+        description: "Payment type associated with the returned document."
+      - name: is_credit
+        description: "Flag indicating whether the return document used credit payment."

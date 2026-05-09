@@ -3,7 +3,7 @@
 
 with staged_attendance_events as (
     select *
-    from {{ ref('stg_store_data__attendance_events') }}
+    from {{ ref('int_workforce__attendance_events_clean') }}
 ),
 
 OrderedAttendance AS (
@@ -13,17 +13,12 @@ OrderedAttendance AS (
         movement_type,
         attendance_datetime,
         source_sequence,
-        case 
-            when movement_type in (1, 91) then  ' IN'
-            when movement_type in (2, 92) then  ' OUT'
-        else 'UNKNOWN'
-            end as action_type,
+        action_type,
         ROW_NUMBER() OVER (
             PARTITION BY employee_id
             ORDER BY attendance_datetime
         ) AS rn
     FROM staged_attendance_events
-    WHERE movement_type IN (1, 2, 91, 92)
 )
 SELECT
      i.employee_id
