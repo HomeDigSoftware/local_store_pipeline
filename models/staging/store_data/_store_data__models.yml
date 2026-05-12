@@ -80,6 +80,11 @@ models:
         description: "Unit cost including VAT based on the current source calculation."
       - name: sale_price
         description: "Unit sale price from the source item master."
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 0
+                row_condition: "sale_price is not null"
       - name: profit_per_unit_inc_vat
         description: "Unit sale price minus unit cost including VAT."
 

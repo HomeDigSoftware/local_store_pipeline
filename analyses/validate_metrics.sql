@@ -1,0 +1,1 @@
+select count(*) as populated_rows_count from {{ ref('rpt_product_performance_30d') }} where sales_amount_30d > 0 or units_sold_30d > 0 or ticket_count_30d > 0; select item_id, item_name, sales_amount_30d from {{ ref('rpt_product_performance_30d') }} order by sales_amount_30d desc limit 5;

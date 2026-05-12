@@ -82,3 +82,78 @@ models:
         description: "Attributed sales amount allocated to the employee from daily store sales."
       - name: sales_per_hour
         description: "Attributed sales divided by hours worked on the day."
+
+  - name: rpt_inventory_actions
+    description: "Inventory action report that translates stock risk and velocity metrics into replenishment and cleanup recommendations."
+    columns:
+      - name: snapshot_date
+        description: "Snapshot date used for the inventory action row."
+        data_tests:
+          - not_null
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+      - name: stock_status
+        description: "Resolved stock status including healthy items."
+      - name: reorder_flag
+        description: "Flag indicating the item should be reordered soon or immediately."
+      - name: action_priority
+        description: "Priority ranking of the recommended action."
+      - name: recommended_action
+        description: "Suggested next action for the item."
+
+  - name: rpt_product_performance_30d
+    description: "Thirty-day product performance report combining sales, estimated gross profit, and inventory efficiency metrics."
+    columns:
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+          - unique
+      - name: sales_amount_30d
+        description: "Net sales amount over the last 30 days."
+      - name: units_sold_30d
+        description: "Units sold over the last 30 days."
+      - name: estimated_gross_profit_30d
+        description: "Estimated gross profit over the last 30 days using current profit per unit."
+      - name: current_inventory_qty
+        description: "Current on-hand inventory quantity."
+      - name: stock_status
+        description: "Current stock status carried from the inventory action model."
+
+  - name: rpt_executive_summary_daily
+    description: "Daily executive summary that combines store sales with snapshot-based inventory risk counts."
+    columns:
+      - name: sale_date
+        description: "Date of the summary row."
+        data_tests:
+          - not_null
+          - unique
+      - name: total_sales_amount
+        description: "Total sales amount for the day."
+      - name: out_of_stock_count
+        description: "Count of products out of stock on the snapshot date matching the day."
+      - name: stockout_risk_count
+        description: "Count of products with stockout risk on the snapshot date matching the day."
+      - name: avg_days_of_cover_30d
+        description: "Average days of cover across inventory items for the snapshot date matching the day."
+
+  - name: rpt_sales_trend_daily
+    description: "Daily sales trend report with calendar attributes and period-over-period comparisons."
+    columns:
+      - name: sale_date
+        description: "Date of the trend row."
+        data_tests:
+          - not_null
+          - unique
+      - name: day_of_week_name
+        description: "Readable day of week name."
+      - name: total_sales_amount
+        description: "Total sales amount for the day."
+      - name: sales_prev_day
+        description: "Sales amount from the previous day."
+      - name: sales_prev_week_same_day
+        description: "Sales amount from the same weekday in the prior week."
+      - name: sales_7d_avg
+        description: "Rolling seven-day average sales amount."
