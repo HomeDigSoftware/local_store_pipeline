@@ -8,16 +8,23 @@ Install dependencies:
 
 import sys
 import logging
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 import pandas as pd
 import sqlalchemy
 
 # ── Configuration ──────────────────────────────────────────────────────────────
-LOCAL_PG_URL   = "postgresql://postgres:240683@localhost:5432/store_local"
-SUPABASE_URL   = "postgresql://postgres:0esDq0g6ULubjyyv@db.wbppbatntprwjakmyumn.supabase.co:5432/postgres"
-SOURCE_SCHEMA  = "raw"
-TARGET_SCHEMA  = "raw"
+LOCAL_PG_URL  = (
+    f"postgresql://{os.environ['PG_USER']}:{os.environ['PG_PASSWORD']}"
+    f"@{os.environ['PG_HOST']}:{os.environ['PG_PORT']}/{os.environ['PG_DATABASE']}"
+)
+SUPABASE_URL  = os.environ["SUPABASE_URL"]
+SOURCE_SCHEMA = "raw"
+TARGET_SCHEMA = "raw"
 # ───────────────────────────────────────────────────────────────────────────────
 
 logging.basicConfig(

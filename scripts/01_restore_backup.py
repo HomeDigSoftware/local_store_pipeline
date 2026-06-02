@@ -11,14 +11,18 @@ Requirements:
 import subprocess
 import sys
 import logging
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 # ── Configuration ──────────────────────────────────────────────────────────────
-SERVER      = r"DESKTOP-E7P613O\STORE_DATA"
-DATABASE    = "POS_SANDBOX"
-USER        = "tzaf"
-PASSWORD    = "240683"
-BACKUP_FILE = r"f:\.DATA-Analyst-Coures\.shlomy_store\store_date_ETL\store_date_21_03_26\MSSQL_POS_DB.bak"   # <-- update this path
+SERVER      = os.environ["MSSQL_SERVER"]
+DATABASE    = os.environ["MSSQL_DATABASE"]
+USER        = os.environ["MSSQL_USER"]
+PASSWORD    = os.environ["MSSQL_PASSWORD"]
+BACKUP_FILE = os.environ["BACKUP_FILE"]
 # ───────────────────────────────────────────────────────────────────────────────
 
 logging.basicConfig(

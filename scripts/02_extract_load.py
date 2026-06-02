@@ -1,33 +1,60 @@
 """
 Step 2 — Extract all source tables from SQL Server → load to local Postgres (raw schema).
 Run this script via Task Scheduler after 01_restore_backup.py completes.
+When enabled, it first generates synthetic invoices in SQL Server so the daily load includes fresh simulated activity.
 
 Install dependencies:
   uv add pyodbc pandas sqlalchemy psycopg2-binary
 """
 
 import sys
+import argparse
 import logging
+import subprocess
+import os
+from datetime import date, timedelta
 import pyodbc
 import pandas as pd
 import sqlalchemy
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 # ── Configuration ──────────────────────────────────────────────────────────────
+MSSQL_SERVER   = os.environ["MSSQL_SERVER"]
+MSSQL_DATABASE = os.environ["MSSQL_DATABASE"]
+MSSQL_USER     = os.environ["MSSQL_USER"]
+MSSQL_PASSWORD = os.environ["MSSQL_PASSWORD"]
+BACKUP_FILE    = os.environ["BACKUP_FILE"]
+
 MSSQL_CONN_STR = (
     "DRIVER={ODBC Driver 17 for SQL Server};"
-    r"SERVER=DESKTOP-E7P613O\STORE_DATA;"
-    "DATABASE=POS_SANDBOX;"
-    "UID=tzaf;PWD=240683;"
+    f"SERVER={MSSQL_SERVER};"
+    f"DATABASE={MSSQL_DATABASE};"
+    f"UID={MSSQL_USER};PWD={MSSQL_PASSWORD};"
 )
 
-PG_URL    = "postgresql://postgres:240683@localhost:5432/store_local"  # <-- update db name
+PG_URL    = (
+    f"postgresql://{os.environ['PG_USER']}:{os.environ['PG_PASSWORD']}"
+    f"@{os.environ['PG_HOST']}:{os.environ['PG_PORT']}/{os.environ['PG_DATABASE']}"
+)
 PG_SCHEMA = "raw"
 
 # Tables to skip (views or tables that don't exist in the backup)
 SKIP_TABLES = {
     "vw_pos_cash_receipts",
 }
+
+ENABLE_SYNTHETIC_INVOICES = True
+SYNTHETIC_INVOICE_COUNT = 35
+SYNTHETIC_MIN_LINES = 1
+SYNTHETIC_MAX_LINES = 5
+SYNTHETIC_CREDIT_RATE = 0.22
+SYNTHETIC_RETURN_RATE = 0.03
+SYNTHETIC_DISCOUNT_RATE = 0.17
+SYNTHETIC_UPDATE_INVENTORY = True
+SYNTHETIC_SEED = 42
 # ───────────────────────────────────────────────────────────────────────────────
 
 logging.basicConfig(
@@ -41,7 +68,70 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
-def extract_and_load():
+def run_synthetic_generation(date_override: str | None = None):
+    if not ENABLE_SYNTHETIC_INVOICES:
+        log.info("Synthetic invoice generation is disabled.")
+        return
+
+    script_path = Path(__file__).parent / "generate_synthetic_invoices.py"
+
+    # Use the day after the last recordingdate in SQL Server so data is always continuous
+    if date_override:
+        target_date = date_override
+        log.info("Using overridden date for synthetic generation: %s", target_date)
+    else:   
+        try:
+            _conn = pyodbc.connect(MSSQL_CONN_STR)
+            _cur = _conn.cursor()
+            _cur.execute("SELECT CAST(MAX(Recordingdate) AS DATE) FROM dbo.Documents")
+            _row = _cur.fetchone()
+            _conn.close()
+            if _row and _row[0]:
+                target_date = (_row[0] + timedelta(days=1)).isoformat()
+            else:
+                target_date = date.today().isoformat()
+        except Exception as _e:
+            log.warning("Could not query MAX(recordingdate), falling back to today: %s", _e)
+            target_date = date.today().isoformat()
+
+    log.info("Synthetic invoices will be generated for: %s", target_date)
+    command = [
+        sys.executable,
+        str(script_path),
+        "--date",
+        target_date,
+        "--invoice-count",
+        str(SYNTHETIC_INVOICE_COUNT),
+        "--min-lines",
+        str(SYNTHETIC_MIN_LINES),
+        "--max-lines",
+        str(SYNTHETIC_MAX_LINES),
+        "--credit-rate",
+        str(SYNTHETIC_CREDIT_RATE),
+        "--return-rate",
+        str(SYNTHETIC_RETURN_RATE),
+        "--discount-rate",
+        str(SYNTHETIC_DISCOUNT_RATE),
+        "--seed",
+        str(SYNTHETIC_SEED),
+        "--commit",
+    ]
+    if SYNTHETIC_UPDATE_INVENTORY:
+        command.append("--update-inventory")
+
+    log.info("Generating synthetic invoices before extraction...")
+    result = subprocess.run(command, capture_output=True, text=True)
+    if result.returncode != 0:
+        log.error("Synthetic invoice generation failed.\n%s", result.stderr.strip())
+        raise RuntimeError("Synthetic invoice generation failed.")
+
+    for line in result.stdout.splitlines():
+        log.info("  synthetic: %s", line)
+
+
+def extract_and_load(date_override: str | None = None):
+    run_synthetic_generation(date_override)
+
     log.info("Connecting to SQL Server...")
     mssql = pyodbc.connect(MSSQL_CONN_STR)
 
@@ -92,5 +182,40 @@ def extract_and_load():
         log.info("All tables loaded successfully.")
 
 
+def save_backup():
+    """Overwrite the .bak file with the current DB state so tomorrow's restore includes today's synthetic data."""
+    backup_path = Path(BACKUP_FILE)
+    backup_path.parent.mkdir(parents=True, exist_ok=True)
+
+    sql = (
+        f"BACKUP DATABASE [{MSSQL_DATABASE}] "
+        f"TO DISK=N'{BACKUP_FILE}' "
+        f"WITH FORMAT, INIT, COMPRESSION, STATS=10;"
+    )
+
+    log.info("Saving SQL Server backup to: %s", BACKUP_FILE)
+    result = subprocess.run(
+        ["sqlcmd", "-S", MSSQL_SERVER, "-U", MSSQL_USER, "-P", MSSQL_PASSWORD, "-Q", sql],
+        capture_output=True,
+        text=True,
+    )
+
+    if result.returncode != 0:
+        log.error("SQL Server backup failed.\n%s", result.stderr.strip())
+        raise RuntimeError("SQL Server backup failed.")
+
+    log.info("Backup saved successfully.\n%s", result.stdout.strip())
+
+
 if __name__ == "__main__":
-    extract_and_load()
+    parser = argparse.ArgumentParser(description="Extract SQL Server → Postgres")
+    parser.add_argument(
+        "date",
+        nargs="?",            # אופציונלי
+        default=None,
+        help="Target date for synthetic invoices in YYYY-MM-DD format (e.g. 2026-03-21). "
+             "If omitted, uses MAX(Recordingdate)+1 from the database.",
+    )
+    args = parser.parse_args()
+    extract_and_load(date_override=args.date)
+    save_backup()

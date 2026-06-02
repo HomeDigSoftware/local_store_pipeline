@@ -2,9 +2,11 @@
 target/
 dbt_packages/
 logs/
+.env
 
 DBT_PORTFOLIO_UPGRADE_GUIDE.md
 sql_server_profily_setup.md
 project_progres.md
 REPORTING_TABLE_BACKLOG.md
 DASHBOARD_IMPLEMENTATION_SPEC.md
+all_used_tables.md

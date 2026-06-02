@@ -1,6 +1,14 @@
 {
     "dbt.perspectiveTheme": "Vintage",
     "chat.tools.terminal.autoApprove": {
-        "uv": true
+        "uv": true,
+        "table": true,
+        "type_str": true,
+        "row.CHARACTER_MAXIMUM_LENGTH": true,
+        "row.COLUMN_NAME": true,
+        "/^@'\nimport pyodbc\n\nconn = pyodbc\\.connect\\(\"DRIVER=\\{ODBC Driver 17 for SQL Server\\};SERVER=DESKTOP-E7P613O\\\\\\\\STORE_DATA;DATABASE=POS_SANDBOX;UID=tzaf;PWD=240683;\"\\)\ncursor = conn\\.cursor\\(\\)\n\ncursor\\.execute\\(\"SELECT TABLE_NAME FROM INFORMATION_SCHEMA\\.TABLES WHERE TABLE_SCHEMA = 'dbo'\"\\)\nall_tables = \\[row\\.TABLE_NAME for row in cursor\\.fetchall\\(\\)\\]\nfor t in all_tables:\n    print\\(t\\)\n\nconn\\.close\\(\\)\n'@ \\| python \\| Select-String -Pattern \"docu\\|recei\\|inv\\|item\\|emp\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     }
 }
