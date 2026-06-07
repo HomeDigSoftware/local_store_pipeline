@@ -157,3 +157,106 @@ models:
         description: "Sales amount from the same weekday in the prior week."
       - name: sales_7d_avg
         description: "Rolling seven-day average sales amount."
+
+  - name: rpt_payment_mix_daily
+    description: "Daily payment method breakdown showing revenue and ticket share per payment type."
+    columns:
+      - name: receipt_date
+        description: "Date of the payment record."
+        data_tests:
+          - not_null
+      - name: payment_type
+        description: "Payment method code."
+        data_tests:
+          - not_null
+      - name: is_credit
+        description: "Flag indicating credit-based payment."
+      - name: sales_amount
+        description: "Total sales amount for the date and payment type."
+      - name: ticket_count
+        description: "Number of distinct transactions for the date and payment type."
+      - name: units_sold
+        description: "Total units sold for the date and payment type."
+      - name: payment_sales_share
+        description: "Percentage share of daily revenue attributed to this payment type."
+      - name: payment_ticket_share
+        description: "Percentage share of daily transactions attributed to this payment type."
+
+  - name: rpt_returns_analysis_daily
+    description: "Daily return analysis by product showing return quantities, amounts, and ticket counts."
+    columns:
+      - name: receipt_date
+        description: "Date of the return."
+        data_tests:
+          - not_null
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+      - name: item_name
+        description: "Product name."
+      - name: product_category_id
+        description: "Product category identifier."
+      - name: product_category_name
+        description: "Product category name."
+      - name: return_qty
+        description: "Total units returned (positive value)."
+      - name: return_amount
+        description: "Total return value in ILS (positive value)."
+      - name: return_ticket_count
+        description: "Number of distinct return transactions."
+
+  - name: rpt_sales_by_hour
+    description: "Hourly sales breakdown by date showing revenue, ticket count, and units sold per hour."
+    columns:
+      - name: receipt_date
+        description: "Date of the sales record."
+        data_tests:
+          - not_null
+      - name: sales_hour
+        description: "Hour of the day (0-23)."
+        data_tests:
+          - not_null
+      - name: day_of_week_name
+        description: "Readable day of week name."
+      - name: sales_amount
+        description: "Total sales amount for the hour."
+      - name: ticket_count
+        description: "Number of distinct transactions in the hour."
+      - name: units_sold
+        description: "Total units sold in the hour."
+      - name: avg_ticket_amount
+        description: "Average basket value for the hour."
+
+  - name: rpt_category_performance_30d
+    description: "Thirty-day category performance report aggregating product sales, estimated profit, and inventory risk by category."
+    columns:
+      - name: product_category_id
+        description: "Product category identifier."
+        data_tests:
+          - not_null
+          - unique
+      - name: product_category_name
+        description: "Product category name."
+      - name: sales_amount_30d
+        description: "Total net sales amount over the last 30 days for the category."
+      - name: units_sold_30d
+        description: "Total units sold over the last 30 days for the category."
+      - name: ticket_count_30d
+        description: "Total transactions over the last 30 days for the category."
+      - name: estimated_gross_profit_30d
+        description: "Estimated gross profit over the last 30 days for the category."
+      - name: avg_days_of_cover_30d
+        description: "Average days of stock coverage across products in the category."
+      - name: out_of_stock_count
+        description: "Number of products out of stock in the category."
+      - name: stockout_risk_count
+        description: "Number of products at stockout risk in the category."
+      - name: dead_stock_count
+        description: "Number of dead stock products in the category."
+      - name: overstock_count
+        description: "Number of overstocked products in the category."
+      - name: category_sales_rank_30d
+        description: "Rank of the category by 30-day sales amount."
+      - name: category_profit_rank_30d
+        description: "Rank of the category by 30-day estimated gross profit."

@@ -43,6 +43,7 @@ MSSQL_URL = URL.create(
 )
 
 SCRIPT_02 = Path(__file__).parent / "02_extract_load_03.py"
+SCRIPT_03 = Path(__file__).parent / "03_load_to_supabase.py"
 # ───────────────────────────────────────────────────────────────────────────────
 
 logging.basicConfig(
@@ -172,6 +173,7 @@ def main() -> None:
         ok = _run_one_iteration(i, iterations)
         if ok:
             success_count += 1
+            
         else:
             log.error("Backfill loop aborted after %d successful iteration(s).", success_count)
             break
@@ -183,6 +185,16 @@ def main() -> None:
     print("╚" + "═" * 58 + "╝")
     print()
 
+    if success_count < iterations:
+        log.warning("Skipping Supabase load — backfill did not complete successfully.")
+        return
+
+    log.info("Running 03_load_to_supabase.py …")
+    result = subprocess.run([sys.executable, str(SCRIPT_03)])
+
+    if result.returncode != 0:
+        log.error("03_load_to_supabase.py exited with code %d.", result.returncode)
+        return
 
 if __name__ == "__main__":
     main()
