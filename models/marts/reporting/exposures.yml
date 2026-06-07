@@ -1,0 +1,65 @@
+version: 2
+
+exposures:
+
+  - name: store_analytics_dashboard
+    label: "Store Analytics Dashboard"
+    type: dashboard
+    maturity: high
+    description: >
+      Main business dashboard for the store owner and manager.
+      Covers daily sales performance, inventory health, product rankings,
+      payment mix, returns analysis, hourly sales patterns,
+      and employee productivity — all powered by the store pipeline dbt models.
+
+    depends_on:
+      - ref('rpt_daily_sales')
+      - ref('rpt_sales_trend_daily')
+      - ref('rpt_executive_summary_daily')
+      - ref('rpt_payment_mix_daily')
+      - ref('rpt_sales_by_hour')
+      - ref('rpt_returns_analysis_daily')
+      - ref('rpt_inventory_risk')
+      - ref('rpt_inventory_actions')
+      - ref('rpt_product_performance_30d')
+      - ref('rpt_product_velocity')
+      - ref('rpt_category_performance_30d')
+      - ref('rpt_employee_productivity')
+
+    owner:
+      name: Shlomy
+      email: tzaf24@gmail.com
+
+  - name: inventory_action_report
+    label: "Inventory Action Report"
+    type: analysis
+    maturity: medium
+    description: >
+      Operational report for the store manager to take daily action on inventory.
+      Shows which products need immediate reordering, which are overstocked,
+      and which are dead stock candidates — with a clear priority ranking.
+
+    depends_on:
+      - ref('rpt_inventory_actions')
+      - ref('rpt_inventory_risk')
+      - ref('rpt_product_velocity')
+
+    owner:
+      name: Shlomy
+      email: tzaf24@gmail.com
+
+  - name: employee_productivity_report
+    label: "Employee Productivity Report"
+    type: analysis
+    maturity: medium
+    description: >
+      Daily workforce productivity report attributing store sales to employees
+      based on their worked hours. Used to evaluate staff performance and
+      identify high and low productivity patterns over time.
+
+    depends_on:
+      - ref('rpt_employee_productivity')
+
+    owner:
+      name: Shlomy
+      email: tzaf24@gmail.com
