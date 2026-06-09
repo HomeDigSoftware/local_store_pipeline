@@ -313,6 +313,7 @@ def extract_and_load(date_override: str | None = None) -> None:
                 mssql_engine,
             )
             df.columns = [c.lower() for c in df.columns]
+            df['_pipeline_loaded_at'] = pd.Timestamp.now() 
             df.to_sql(
                 table.lower(),
                 pg_engine,

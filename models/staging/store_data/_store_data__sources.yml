@@ -18,6 +18,10 @@ sources:
 
       - name: documents
         description: "Sales document headers representing receipts or transaction documents."
+        loaded_at_field: _pipeline_loaded_at  
+        freshness:
+          warn_after:  {count: 1, period: day}
+          error_after: {count: 2, period: day}  
         columns:
           - name: document_id
             description: "Primary identifier of the transaction document."
@@ -25,12 +29,16 @@ sources:
               - not_null
               - unique
           - name: recordingdate
-            description: "Business date on which the document was recorded."
+            description: "Business date on which the document was recorded (YYYYMMDD char format)."
             data_tests:
               - not_null
 
       - name: documentlines
         description: "Line-level transaction details for each sales document."
+        loaded_at_field: _pipeline_loaded_at
+        freshness:
+          warn_after:  {count: 1, period: day}
+          error_after: {count: 2, period: day}  
         columns:
           - name: document_id
             description: "Foreign key to the transaction header."
@@ -79,6 +87,10 @@ sources:
 
       - name: employeesattendance
         description: "Raw employee attendance punches used to derive shifts and work hours."
+        loaded_at_field: update_datetime
+        freshness:
+          warn_after: {count: 1, period: day}
+          error_after: {count: 2, period: day}
         columns:
           - name: emplyee_id
             description: "Employee identifier as stored in the source system."
@@ -94,6 +106,8 @@ sources:
               - not_null
           - name: movementtype
             description: "Attendance movement code such as in, out, or correction."
+          - name: update_datetime
+            description: "System timestamp of the last update to this attendance record."
 
       - name: employeesselection_byentrance
         description: "Employee reference table used to enrich attendance events with employee names."
