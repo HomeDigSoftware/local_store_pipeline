@@ -1,4 +1,4 @@
-
+# ❌ NOT USED 10-06-26  (superseded by generate_synthetic_invoices_03.py — kept as reference only)
 
 """
 Generate synthetic retail invoices directly in SQL Server source tables used by the dbt pipeline.

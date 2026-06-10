@@ -1,3 +1,4 @@
+# ✅ IN DATA PIPE_LINE 10-06-26  (run manually once before starting the backfill loop)
 """
 Step 1 — Restore SQL Server .bak backup file using sqlcmd.
 Run this script via Task Scheduler before 02_extract_load.py.

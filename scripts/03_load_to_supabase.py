@@ -1,3 +1,4 @@
+# ✅ IN DATA PIPE_LINE 10-06-26  (called by 04_backfill_loop.py after all iterations complete)
 """
 Step 3 — Push all tables from local Postgres (store_local.raw) → Supabase (postgres.raw).
 Run this after 02_extract_load.py, before dbt run --target prod.

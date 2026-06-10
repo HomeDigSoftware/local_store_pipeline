@@ -1,3 +1,4 @@
+# ✅ IN DATA PIPE_LINE 10-06-26  (called by 04_backfill_loop.py — main extract script)
 """
 Step 2 v03 — Extract SQL Server → Postgres with automatic inventory replenishment.
 
@@ -70,15 +71,30 @@ BACKUP_FILE    = os.environ["BACKUP_FILE"]
 
 # ── Synthetic invoice generation ───────────────────────────────────────────────
 
-ENABLE_SYNTHETIC_INVOICES = True
-SYNTHETIC_INVOICE_COUNT   = 105
-SYNTHETIC_MIN_LINES       = 1
-SYNTHETIC_MAX_LINES       = 5
-SYNTHETIC_CREDIT_RATE     = 0.22
-SYNTHETIC_RETURN_RATE     = 0.03
-SYNTHETIC_DISCOUNT_RATE   = 0.17
+ENABLE_SYNTHETIC_INVOICES  = True
+SYNTHETIC_INVOICE_COUNT    = 85
+SYNTHETIC_MIN_LINES        = 1
+SYNTHETIC_MAX_LINES        = 5
+SYNTHETIC_CREDIT_RATE      = 0.22
+SYNTHETIC_RETURN_RATE      = 0.03
+SYNTHETIC_DISCOUNT_RATE    = 0.17
 SYNTHETIC_UPDATE_INVENTORY = True
-SYNTHETIC_SEED             = 42
+# None = per-date seed derived from YYYYMMDD (unique daily RNG sequence).
+# Set to an integer only when you need a fully reproducible fixed run.
+SYNTHETIC_SEED             = None
+
+# ── Trend & realism configuration ─────────────────────────────────────────────
+#
+# TREND_ANCHOR_DATE:
+#   The "day 0" for compound growth.  Set to the earliest date in the backup
+#   so the trend starts from the very beginning of the dataset.
+#
+# TREND_DAILY_GROWTH_RATE:
+#   Compound daily growth applied to the base invoice count.
+#   0.0003 per day ≈ +11 % per year.
+#   Over ~5 years (2021-03-26 → 2026-06-10) this gives roughly ×1.76 uplift.
+TREND_ANCHOR_DATE       = date(2021, 3, 26)
+TREND_DAILY_GROWTH_RATE = 0.00015
 
 # ── Replenishment configuration (NEW in v03) ───────────────────────────────────
 #
@@ -103,11 +119,11 @@ SYNTHETIC_SEED             = 42
 #   Minimum units added per item even if it had zero sales.
 #   Prevents slow-moving SKUs from permanently dropping out of the item pool.
 
-REPLENISHMENT_INTERVAL_DAYS  = 6
+REPLENISHMENT_INTERVAL_DAYS  = 7
 REPLENISHMENT_ANCHOR_DATE    = date(2021, 3, 26)   # earliest date in original backup
 REPLENISHMENT_WINDOW_DAYS    = 7
-RESTOCK_MULTIPLIER           = 1.2
-MIN_RESTOCK_QTY              = 10.0
+RESTOCK_MULTIPLIER           = 1.1
+MIN_RESTOCK_QTY              = 0.0
 
 # ───────────────────────────────────────────────────────────────────────────────
 
@@ -253,9 +269,14 @@ def run_synthetic_generation(
         "--credit-rate",    str(SYNTHETIC_CREDIT_RATE),
         "--return-rate",    str(SYNTHETIC_RETURN_RATE),
         "--discount-rate",  str(SYNTHETIC_DISCOUNT_RATE),
-        "--seed",           str(SYNTHETIC_SEED),
+        "--trend-anchor",   TREND_ANCHOR_DATE.isoformat(),
+        "--trend-rate",     str(TREND_DAILY_GROWTH_RATE),
         "--commit",
     ]
+    # Only pass --seed when an explicit integer is configured; otherwise the
+    # generator derives a per-date seed from the business date automatically.
+    if SYNTHETIC_SEED is not None:
+        command.extend(["--seed", str(SYNTHETIC_SEED)])
     if SYNTHETIC_UPDATE_INVENTORY:
         command.append("--update-inventory")
     if replenish:

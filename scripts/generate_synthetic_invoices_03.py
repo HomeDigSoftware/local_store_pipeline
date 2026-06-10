@@ -1,3 +1,4 @@
+# ✅ IN DATA PIPE_LINE 10-06-26  (called by 02_extract_load_03.py on every pipeline run)
 """
 Generate synthetic retail invoices directly in SQL Server source tables used by the dbt pipeline.
 
@@ -39,6 +40,7 @@ Example:
 from __future__ import annotations
 
 import argparse
+import math
 import random
 from collections import defaultdict
 from dataclasses import dataclass
@@ -62,6 +64,15 @@ MSSQL_CONN_STR = (
 
 TWOPLACES  = Decimal("0.01")
 THREEPLACES = Decimal("0.001")
+
+# ── Surprise-event window constants ────────────────────────────────────────────
+# A single "surprise" day fires once per SURPRISE_WINDOW_MIN–SURPRISE_WINDOW_MAX
+# days, chosen deterministically per window via random.Random(window_number).
+# The day is unpredictable but fully reproducible across backfill runs.
+SURPRISE_ANCHOR     = date(2021, 3, 26)   # same as pipeline anchor
+SURPRISE_WINDOW_MIN = 21                   # minimum window length in days
+SURPRISE_WINDOW_MAX = 28                   # maximum window length in days
+# ───────────────────────────────────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -277,10 +288,32 @@ def parse_args() -> argparse.Namespace:
     # ──────────────────────────────────────────────────────────────────────────
 
     parser.add_argument(
+        "--trend-anchor",
+        default=None,
+        metavar="YYYY-MM-DD",
+        help=(
+            "Start date for compound-growth trend.  "
+            "If omitted, no trend is applied."
+        ),
+    )
+    parser.add_argument(
+        "--trend-rate",
+        type=float,
+        default=0.0,
+        help=(
+            "Daily compound growth rate applied to the invoice count.  "
+            "Example: 0.0003 ≈ +11%% per year.  Default: 0.0 (no trend)."
+        ),
+    )
+    parser.add_argument(
         "--seed",
         type=int,
         default=None,
-        help="Random seed for reproducible output.",
+        help=(
+            "Random seed for reproducible output.  "
+            "If omitted, a per-date seed is derived from --date (YYYYMMDD as int), "
+            "so every calendar day gets a unique but deterministic RNG sequence."
+        ),
     )
     parser.add_argument(
         "--commit",
@@ -330,14 +363,87 @@ def adjusted_rate(base_rate: float, multiplier: float) -> float:
     return max(0.0, min(1.0, base_rate * multiplier))
 
 
+def _monthly_event_multiplier(target_date: date, rng: random.Random) -> float:
+    """Israeli payroll calendar: payday is the 10th of every month.
+
+    - Days  4-9 : pre-payday slump  — money running out before the 10th
+    - Days 10-12: post-payday boost  — salary just arrived
+    - All other days: no adjustment
+    """
+    d = target_date.day
+    if 4 <= d <= 9:
+        return rng.uniform(0.62, 0.82)
+    if 10 <= d <= 12:
+        return rng.uniform(1.10, 1.30)
+    return 1.0
+
+
+def _surprise_event_multiplier(target_date: date) -> float:
+    """Fire a strong or weak surprise day once every 3-4 weeks.
+
+    Time since SURPRISE_ANCHOR is divided into variable-length windows
+    (SURPRISE_WINDOW_MIN–SURPRISE_WINDOW_MAX days).  Each window has
+    exactly one surprise day, chosen via random.Random(window_number)
+    so the day is unpredictable but deterministic across runs.
+    """
+    days_from_anchor = (target_date - SURPRISE_ANCHOR).days
+    if days_from_anchor < 0:
+        return 1.0
+
+    window_start = 0
+    window_num   = 0
+    while True:
+        w_rng  = random.Random(window_num)
+        w_size = w_rng.randint(SURPRISE_WINDOW_MIN, SURPRISE_WINDOW_MAX)
+        w_end  = window_start + w_size - 1
+        if window_start <= days_from_anchor <= w_end:
+            surprise_offset = w_rng.randint(0, w_size - 1)
+            if days_from_anchor == window_start + surprise_offset:
+                is_strong = w_rng.random() < 0.60
+                if is_strong:
+                    return w_rng.uniform(1.35, 1.65)
+                else:
+                    return w_rng.uniform(0.30, 0.52)
+            return 1.0
+        window_start = w_end + 1
+        window_num  += 1
+
+
 def adjusted_invoice_count(
     base_invoice_count: int,
     target_date: date,
     rng: random.Random,
+    trend_anchor: date | None = None,
+    trend_rate: float = 0.0,
 ) -> int:
+    """Compute invoice count using 4 variability layers:
+
+    1. Weekday multiplier  — Mon–Sun seasonality profile
+    2. Trend factor        — compound growth: (1 + rate) ** days_since_anchor
+    3. Lognormal jitter    — sigma=0.20 gives typical ±22% daily swing
+    4. Event multiplier    — priority: surprise day > monthly calendar event
+    """
     profile = resolve_day_profile(target_date)
-    jitter = rng.uniform(0.92, 1.08)
-    return max(1, round(base_invoice_count * profile.invoice_multiplier * jitter))
+
+    # Layer 1: weekday
+    weekday_mult = profile.invoice_multiplier
+
+    # Layer 2: compound-growth trend
+    trend_factor = 1.0
+    if trend_anchor is not None and trend_rate > 0.0:
+        days_elapsed = (target_date - trend_anchor).days
+        if days_elapsed > 0:
+            trend_factor = (1.0 + trend_rate) ** days_elapsed
+
+    # Layer 3: lognormal jitter — more visible day-to-day swings than uniform
+    jitter = math.exp(rng.gauss(0.0, 0.20))
+
+    # Layer 4: event multiplier (surprise overrides monthly calendar)
+    surprise_mult = _surprise_event_multiplier(target_date)
+    event_mult    = surprise_mult if surprise_mult != 1.0 else _monthly_event_multiplier(target_date, rng)
+
+    count = base_invoice_count * weekday_mult * trend_factor * jitter * event_mult
+    return min(max(1, round(count)), 260)
 
 
 def fetchone_dict(cursor: pyodbc.Cursor, query: str, params: tuple[Any, ...] = ()) -> dict[str, Any]:
@@ -466,27 +572,42 @@ def replenish_inventory(
         for r in sales_rows
     }
 
-    # ── Step 2: fetch all tracked inventory item IDs ───────────────────────
+    # ── Step 2: fetch all tracked inventory items with current balance ────────
     inv_rows = fetchall_dicts(
         cursor,
-        "SELECT Item_ID FROM dbo.Inventory WHERE Card_ID = 11 AND CardsGroup = 3",
+        """
+        SELECT Item_ID,
+               CAST(COALESCE(InventoryBalance, 0) AS DECIMAL(18, 3)) AS current_balance
+        FROM   dbo.Inventory
+        WHERE  Card_ID = 11 AND CardsGroup = 3
+        """,
     )
 
     total_items       = len(inv_rows)
-    items_with_sales  = 0
+    items_restocked   = 0
+    items_skipped     = 0
     total_units_added = Decimal("0.000")
 
-    # ── Step 3: compute and apply restock per item ─────────────────────────
+    # ── Step 3: restock only items where current inventory < 7-day sales ──────
     #
-    # Using individual UPDATEs (one per item) keeps each statement simple
-    # and gives fine-grained control over the restock amount.
-    # For a typical store catalogue size (hundreds to low thousands of items)
-    # this is fast enough; a batch UPDATE via temp-table could be added if needed.
+    # Condition: current_balance < qty_sold_in_window
+    # Restock amount: qty_sold * restock_multiplier (sold + 10%)
+    # Items with sufficient stock or zero sales are skipped entirely.
     for row in inv_rows:
-        item_id  = str(row["Item_ID"]).strip()
-        qty_sold = sales_by_item.get(item_id, 0.0)
-        restock  = max(qty_sold * restock_multiplier, min_restock_qty)
+        item_id         = str(row["Item_ID"]).strip()
+        current_balance = float(row["current_balance"])
+        qty_sold        = sales_by_item.get(item_id, 0.0)
+
+        if current_balance >= qty_sold:
+            items_skipped += 1
+            continue
+
+        restock         = qty_sold * restock_multiplier
         restock_decimal = quantize_qty(Decimal(str(round(restock, 3))))
+
+        if restock_decimal <= 0:
+            items_skipped += 1
+            continue
 
         cursor.execute(
             """
@@ -503,15 +624,14 @@ def replenish_inventory(
         )
 
         total_units_added += restock_decimal
-        if qty_sold > 0:
-            items_with_sales += 1
+        items_restocked   += 1
 
-    items_min_filled = total_items - items_with_sales
     print(
         f"Replenishment | window: {window_start}–{window_end} "
         f"({window_days} days) | "
-        f"{total_items} items updated: "
-        f"{items_with_sales} sales-based + {items_min_filled} minimum-fill | "
+        f"{total_items} items evaluated: "
+        f"{items_restocked} restocked (inventory < 7d sales) + "
+        f"{items_skipped} skipped (sufficient stock or no sales) | "
         f"total units added: {total_units_added}"
     )
 
@@ -617,11 +737,29 @@ def update_inventory_row(
 
 def main() -> None:
     args = parse_args()
-    rng = random.Random(args.seed)
-    target_date  = datetime.strptime(args.date, "%Y-%m-%d").date()
+
+    target_date = datetime.strptime(args.date, "%Y-%m-%d").date()
+
+    # Use a per-date seed when none is supplied so every calendar day gets a
+    # unique RNG sequence (fixes the flat-graph problem caused by a fixed seed).
+    seed = args.seed if args.seed is not None else int(target_date.strftime("%Y%m%d"))
+    rng  = random.Random(seed)
+
+    trend_anchor = (
+        datetime.strptime(args.trend_anchor, "%Y-%m-%d").date()
+        if args.trend_anchor
+        else None
+    )
+
     source_date  = to_source_date(target_date)
     day_profile  = resolve_day_profile(target_date)
-    planned_invoice_count = adjusted_invoice_count(args.invoice_count, target_date, rng)
+    planned_invoice_count = adjusted_invoice_count(
+        args.invoice_count,
+        target_date,
+        rng,
+        trend_anchor=trend_anchor,
+        trend_rate=args.trend_rate,
+    )
     credit_rate   = adjusted_rate(args.credit_rate,   day_profile.credit_rate_multiplier)
     return_rate   = adjusted_rate(args.return_rate,   day_profile.return_rate_multiplier)
     discount_rate = adjusted_rate(args.discount_rate, day_profile.discount_rate_multiplier)
