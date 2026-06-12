@@ -7,13 +7,13 @@ with shifts as (
 
 daily_employee_hours_base as (
 	select
-		shiftdate as shift_date,
+		shift_date,
 		employee_id,
-		sum(shiftdurationminutes) as total_shift_minutes,
-		sum(shiftdurationhours) as total_shift_hours,
+		sum(shift_duration_minutes) as total_shift_minutes,
+		sum(shift_duration_hours) as total_shift_hours,
 		count(*) as shift_count
 	from shifts
-	group by shiftdate, employee_id
+	group by shift_date, employee_id
 ),
 
 daily_employee_hours as (

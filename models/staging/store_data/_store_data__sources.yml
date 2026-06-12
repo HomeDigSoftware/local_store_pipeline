@@ -15,7 +15,9 @@ sources:
               - unique
           - name: itemdesc
             description: "Raw product description from the POS system."
-
+            data_tests:
+              - not_null:
+                  severity: warn
       - name: documents
         description: "Sales document headers representing receipts or transaction documents."
         loaded_at_field: _pipeline_loaded_at  
@@ -38,7 +40,12 @@ sources:
         loaded_at_field: _pipeline_loaded_at
         freshness:
           warn_after:  {count: 1, period: day}
-          error_after: {count: 2, period: day}  
+          error_after: {count: 2, period: day}
+        data_tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                - document_id
+                - line_id
         columns:
           - name: document_id
             description: "Foreign key to the transaction header."
@@ -48,6 +55,10 @@ sources:
                   arguments:
                     to: source('store_data', 'documents')
                     field: document_id
+          - name: line_id
+            description: "Natural line identifier within the document. Uniquely identifies a line together with document_id and is the basis for the fct_sales surrogate key."
+            data_tests:
+              - not_null
           - name: item_id
             description: "Product identifier sold on the line."
             data_tests:
@@ -56,7 +67,8 @@ sources:
                   arguments:
                     to: source('store_data', 'items')
                     field: item_id
-
+                  config:
+                    severity: warn
       - name: receiptlines
         description: "Receipt-level payment and settlement details linked to documents."
         columns:
@@ -70,6 +82,12 @@ sources:
                     field: document_id
           - name: paymenttype
             description: "Source payment type code."
+            data_tests:
+              - accepted_values:
+                  arguments:
+                    values: [1, 2, 3]
+                  config:
+                    severity: warn
 
       - name: inventory
         description: "Current inventory and stock position by product."
@@ -82,8 +100,14 @@ sources:
                   arguments:
                     to: source('store_data', 'items')
                     field: item_id
+                  config:
+                    severity: warn
           - name: inventorybalance
             description: "Current balance quantity according to the source system."
+            data_tests:
+              - not_null:
+                  config:
+                    severity: warn
 
       - name: employeesattendance
         description: "Raw employee attendance punches used to derive shifts and work hours."
@@ -106,6 +130,8 @@ sources:
               - not_null
           - name: movementtype
             description: "Attendance movement code such as in, out, or correction."
+            data_tests:
+              - not_null
           - name: update_datetime
             description: "System timestamp of the last update to this attendance record."
 
@@ -114,6 +140,9 @@ sources:
         columns:
           - name: emplyeenumber
             description: "Employee identifier used to join attendance records to employee names."
+            data_tests:
+              - not_null
+              - unique
 
       - name: creditcardstypes
         description: "Reference table for card type descriptions used in payment analysis."

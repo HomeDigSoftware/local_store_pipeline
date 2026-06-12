@@ -33,6 +33,7 @@ line_items as (
 		documents.receipt_date,
 		documents.receipt_time as sale_time,
 		documents.document_type,
+		document_lines.line_id,
 		document_lines.item_id,
 		document_lines.item_name,
 		document_lines.quantity,

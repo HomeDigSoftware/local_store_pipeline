@@ -8,6 +8,7 @@ with source_data as (
 cleaned_document_lines as (
 	select
 		document_id,
+		line_id,
 		item_id,
 		details as item_name,
 		itemsqty::numeric(18, 3) as quantity,

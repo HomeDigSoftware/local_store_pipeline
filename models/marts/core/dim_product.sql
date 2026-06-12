@@ -9,9 +9,9 @@ dim_product as (
 	select
 		md5(coalesce(item_id::text, '')) as product_key,
 		item_id,
-		item_name,
+		coalesce(item_name, 'Unknown Item') as item_name,
 		product_category_id,
-		product_category_name as category_name,
+		coalesce(product_category_name, 'Uncategorized') as category_name,
 		unit_cost,
 		unit_cost_inc_vat,
 		unit_sale_price,

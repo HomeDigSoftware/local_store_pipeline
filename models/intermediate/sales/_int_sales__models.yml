@@ -3,9 +3,18 @@ version: 2
 models:
   - name: int_sales__line_items
     description: "Reusable sales line model that standardizes one row per sold item line from staged document headers, lines, and payment context."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - document_id
+            - line_id
     columns:
       - name: document_id
         description: "Transaction document identifier."
+        data_tests:
+          - not_null
+      - name: line_id
+        description: "Natural line identifier within the document. Uniquely identifies the sales line together with document_id and is the basis for the fct_sales surrogate key."
         data_tests:
           - not_null
       - name: receipt_datetime
@@ -47,6 +56,11 @@ models:
 
   - name: int_sales__daily_product
     description: "Daily product sales aggregation built from int_sales__line_items for inventory, demand, and reporting models."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - sale_date
+            - item_id
     columns:
       - name: sale_date
         description: "Date of the product sales aggregation."
@@ -72,6 +86,7 @@ models:
         description: "Date of the store sales aggregation."
         data_tests:
           - not_null
+          - unique
       - name: total_sales_amount
         description: "Total sales amount for the day."
       - name: total_units_sold

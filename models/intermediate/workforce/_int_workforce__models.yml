@@ -18,6 +18,9 @@ models:
         description: "Normalized attendance movement type."
       - name: action_type
         description: "Normalized event direction as IN, OUT, or UNKNOWN."
+        data_tests:
+          - accepted_values:
+              values: [IN, OUT, UNKNOWN]
       - name: is_manual_correction
         description: "Flag indicating the event came from a manual correction code."
 
@@ -40,9 +43,20 @@ models:
         description: "Duration of the shift in minutes."
       - name: shift_duration_hours
         description: "Duration of the shift in hours."
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 24
+              config:
+                severity: warn
 
   - name: int_workforce__daily_employee_hours
     description: "Daily employee hours aggregation derived from cleaned shift sessions."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - shift_date
+            - employee_id
     columns:
       - name: shift_date
         description: "Date of the employee hours aggregation."
@@ -61,6 +75,11 @@ models:
 
   - name: int_workforce__daily_sales_attribution
     description: "Daily workforce attribution model that allocates store sales to employees based on their share of worked hours on the same day."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - shift_date
+            - employee_id
     columns:
       - name: shift_date
         description: "Date of the attribution record."
@@ -78,6 +97,12 @@ models:
         description: "Total store sales amount on the same day before attribution."
       - name: labor_share_ratio
         description: "Employee share of worked hours out of all worked hours on the same day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+              config:
+                severity: warn
       - name: attributed_sales_amount
         description: "Store sales allocated to the employee using the labor share ratio."
       - name: sales_per_hour

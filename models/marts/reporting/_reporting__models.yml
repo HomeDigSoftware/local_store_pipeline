@@ -8,6 +8,7 @@ models:
         description: "Date of the report grain."
         data_tests:
           - not_null
+          - unique
       - name: total_sales_amount
         description: "Total sales amount for the day."
       - name: total_units_sold
@@ -19,6 +20,11 @@ models:
 
   - name: rpt_product_velocity
     description: "Product velocity reporting model for stock coverage and movement analysis built from the inventory snapshot fact."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - snapshot_date
+            - item_id
     columns:
       - name: snapshot_date
         description: "Date of the inventory snapshot used for the report row."
@@ -38,6 +44,9 @@ models:
         description: "Estimated days of stock coverage based on recent velocity."
       - name: velocity_band
         description: "Movement speed classification for the product."
+        data_tests:
+          - accepted_values:
+              values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
 
   - name: rpt_inventory_risk
     description: "Inventory exception report that highlights stockout risk, overstock, and dead stock from the inventory snapshot fact."
@@ -52,6 +61,9 @@ models:
           - not_null
       - name: stock_status
         description: "Inventory risk classification."
+        data_tests:
+          - accepted_values:
+              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: current_inventory_qty
         description: "Current inventory quantity."
       - name: days_of_cover_30d
@@ -61,11 +73,19 @@ models:
 
   - name: rpt_employee_productivity
     description: "Workforce productivity report that exposes daily worked time per employee and populates sales productivity using hour-share attribution at the daily store level."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - shift_date
+            - employee_id
     columns:
       - name: employee_id
         description: "Employee identifier."
         data_tests:
           - not_null
+          - relationships:
+              to: ref('dim_employee')
+              field: employee_id
       - name: shift_date
         description: "Date of the productivity record."
         data_tests:
@@ -85,6 +105,11 @@ models:
 
   - name: rpt_inventory_actions
     description: "Inventory action report that translates stock risk and velocity metrics into replenishment and cleanup recommendations."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - snapshot_date
+            - item_id
     columns:
       - name: snapshot_date
         description: "Snapshot date used for the inventory action row."
@@ -96,6 +121,9 @@ models:
           - not_null
       - name: stock_status
         description: "Resolved stock status including healthy items."
+        data_tests:
+          - accepted_values:
+              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: reorder_flag
         description: "Flag indicating the item should be reordered soon or immediately."
       - name: action_priority
@@ -111,6 +139,11 @@ models:
         data_tests:
           - not_null
           - unique
+      - name: stock_status
+        description: "Current stock status carried from the inventory action model."
+        data_tests:
+          - accepted_values:
+              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: sales_amount_30d
         description: "Net sales amount over the last 30 days."
       - name: units_sold_30d
@@ -119,8 +152,6 @@ models:
         description: "Estimated gross profit over the last 30 days using current profit per unit."
       - name: current_inventory_qty
         description: "Current on-hand inventory quantity."
-      - name: stock_status
-        description: "Current stock status carried from the inventory action model."
 
   - name: rpt_executive_summary_daily
     description: "Daily executive summary that combines store sales with snapshot-based inventory risk counts."
@@ -159,7 +190,13 @@ models:
         description: "Rolling seven-day average sales amount."
 
   - name: rpt_payment_mix_daily
-    description: "Daily payment method breakdown showing revenue and ticket share per payment type."
+    description: "Daily payment method breakdown showing revenue and ticket share per payment type. Grain is one row per receipt_date, payment_type, and is_credit (the same payment_type may appear with both credit flags on a day)."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - receipt_date
+            - payment_type
+            - is_credit
     columns:
       - name: receipt_date
         description: "Date of the payment record."
@@ -169,6 +206,10 @@ models:
         description: "Payment method code."
         data_tests:
           - not_null
+          - accepted_values:
+              values: [1, 2, 3]
+              config:
+                severity: warn
       - name: is_credit
         description: "Flag indicating credit-based payment."
       - name: sales_amount
@@ -184,6 +225,11 @@ models:
 
   - name: rpt_returns_analysis_daily
     description: "Daily return analysis by product showing return quantities, amounts, and ticket counts."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - receipt_date
+            - item_id
     columns:
       - name: receipt_date
         description: "Date of the return."
@@ -193,6 +239,9 @@ models:
         description: "Product identifier."
         data_tests:
           - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: item_id
       - name: item_name
         description: "Product name."
       - name: product_category_id
@@ -201,6 +250,9 @@ models:
         description: "Product category name."
       - name: return_qty
         description: "Total units returned (positive value)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
       - name: return_amount
         description: "Total return value in ILS (positive value)."
       - name: return_ticket_count
@@ -208,6 +260,11 @@ models:
 
   - name: rpt_sales_by_hour
     description: "Hourly sales breakdown by date showing revenue, ticket count, and units sold per hour."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - receipt_date
+            - sales_hour
     columns:
       - name: receipt_date
         description: "Date of the sales record."
@@ -217,6 +274,9 @@ models:
         description: "Hour of the day (0-23)."
         data_tests:
           - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 23
       - name: day_of_week_name
         description: "Readable day of week name."
       - name: sales_amount

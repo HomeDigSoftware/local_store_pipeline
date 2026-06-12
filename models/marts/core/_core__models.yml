@@ -4,7 +4,7 @@ models:
   - name: dim_date
     description: "Conformed calendar dimension used across sales, inventory, and workforce marts."
     columns:
-      - name: date_day
+      - name: date_actual
         description: "Calendar date at the grain of the dimension."
         data_tests:
           - not_null
@@ -17,6 +17,7 @@ models:
         description: "Surrogate key of the product dimension."
         data_tests:
           - not_null
+          - unique
       - name: item_id
         description: "Business key of the product."
         data_tests:
@@ -24,8 +25,12 @@ models:
           - unique
       - name: item_name
         description: "Readable product name."
+        data_tests:
+          - not_null
       - name: category_name
         description: "Readable product category."
+        data_tests:
+          - not_null
 
   - name: dim_employee
     description: "Business-facing employee dimension built from the curated staged employee reference data."
@@ -34,6 +39,7 @@ models:
         description: "Surrogate key of the employee dimension."
         data_tests:
           - not_null
+          - unique
       - name: employee_id
         description: "Business key of the employee."
         data_tests:
@@ -41,35 +47,77 @@ models:
           - unique
       - name: employee_name
         description: "Readable employee name."
+        data_tests:
+          - not_null
 
   - name: fct_sales
     description: "Core sales fact table built from int_sales__line_items for product-level transaction analytics."
     columns:
       - name: sales_key
-        description: "Surrogate key of the sales fact."
+        description: "Surrogate key of the sales fact: MD5 of document_id || item_id || receipt_date || source_sequence || line_total || line_id. The natural line_id from the source guarantees uniqueness even when the same item is sold twice in one document at an identical price (e.g. a customer buying the same promotion twice)."
+        data_tests:
+          - not_null
+          - unique
+      - name: document_id
+        description: "Source document identifier — links all line items of one receipt."
         data_tests:
           - not_null
       - name: receipt_date
         description: "Date of the sale."
         data_tests:
           - not_null
+          - dbt_utils.accepted_range:
+              min_value: "'2021-03-26'::date"
+              max_value: "current_date"
+          - relationships:
+              to: ref('dim_date')
+              field: date_actual
       - name: item_id
         description: "Product identifier sold on the fact row."
         data_tests:
           - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: item_id
       - name: quantity
-        description: "Net quantity sold."
+        description: "Net quantity sold (negative for returns)."
+        data_tests:
+          - not_null
       - name: net_sales_amount
-        description: "Net sales amount for the fact row."
+        description: "Net sales amount for the fact row (negative for returns)."
+        data_tests:
+          - not_null
       - name: gross_sales_amount
         description: "Receipt-level total amount including VAT from the source document."
+        data_tests:
+          - not_null
       - name: is_return
-        description: "Flag indicating whether the source document is a return."
+        description: "Flag — 1 if the source document total is negative (return), 0 otherwise."
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
       - name: payment_type
-        description: "Payment type associated with the transaction."
-
+        description: "Payment type code — 1 = cash, 3 = credit card. Original POS data may contain additional codes (e.g. 2)."
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3]
+              severity: warn
+      - name: is_credit
+        description: "Flag — 1 if payment_type is credit card (3), 0 otherwise."
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
+      
   - name: fct_inventory_snapshot
     description: "Inventory snapshot fact table for stock analysis over time, built from the latest curated stock health model at run date."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - snapshot_date
+            - item_id
     columns:
       - name: snapshot_date
         description: "Date of the inventory snapshot."
@@ -83,10 +131,16 @@ models:
         description: "Current inventory quantity at snapshot time."
       - name: stock_status
         description: "Stock health classification at snapshot time."
+        data_tests:
+          - accepted_values:
+              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: days_of_cover_30d
         description: "Estimated number of days current stock will cover based on recent sales pace."
       - name: velocity_band
         description: "Movement speed classification derived from recent sales velocity."
+        data_tests:
+          - accepted_values:
+              values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
 
   - name: fct_employee_shift
     description: "Workforce fact table for shift analysis and productivity reporting built from curated paired shift sessions."
@@ -95,10 +149,14 @@ models:
         description: "Surrogate key of the shift fact."
         data_tests:
           - not_null
+          - unique
       - name: employee_id
         description: "Employee identifier."
         data_tests:
           - not_null
+          - relationships:
+              to: ref('dim_employee')
+              field: employee_id
       - name: shift_date
         description: "Date of the shift."
         data_tests:

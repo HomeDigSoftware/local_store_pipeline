@@ -14,7 +14,8 @@ sales_fact as (
 				coalesce(item_id::text, ''),
 				coalesce(receipt_date::text, ''),
 				coalesce(source_sequence::text, ''),
-				coalesce(line_total_inc_vat::text, '')
+				coalesce(line_total_inc_vat::text, ''),
+				coalesce(line_id::text, '')
 			)
 		) as sales_key,
 		document_id,

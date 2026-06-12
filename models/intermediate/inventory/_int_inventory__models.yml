@@ -8,6 +8,7 @@ models:
         description: "Product identifier."
         data_tests:
           - not_null
+          - unique
       - name: item_name
         description: "Readable product name from the staged item master."
       - name: current_inventory_qty
@@ -28,14 +29,21 @@ models:
         description: "Product identifier."
         data_tests:
           - not_null
+          - unique
       - name: stock_status
         description: "Business classification of stock health."
+        data_tests:
+          - accepted_values:
+              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: current_inventory_qty
         description: "Current stock quantity used in the health calculation."
       - name: days_of_cover_30d
         description: "Inventory coverage in days based on recent sales velocity."
       - name: velocity_band
         description: "Sales movement label carried forward from the product velocity model."
+        data_tests:
+          - accepted_values:
+              values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
 
   - name: int_inventory__product_velocity
     description: "Product velocity model that measures sales speed against available inventory."
@@ -44,6 +52,7 @@ models:
         description: "Product identifier."
         data_tests:
           - not_null
+          - unique
       - name: current_inventory_qty
         description: "Current inventory quantity used in the velocity calculation."
       - name: sold_qty_7d
@@ -58,3 +67,6 @@ models:
         description: "Estimated number of days the current stock will cover at the recent sales pace."
       - name: velocity_band
         description: "Business label for the product movement speed."
+        data_tests:
+          - accepted_values:
+              values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]

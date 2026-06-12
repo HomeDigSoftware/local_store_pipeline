@@ -9,6 +9,7 @@ models:
         description: "Transaction document identifier from the POS source."
         data_tests:
           - not_null
+          - unique
       - name: receipt_date
         description: "Business date on which the document was recorded."
         data_tests:
@@ -21,14 +22,27 @@ models:
         description: "Raw source document type code."
       - name: total_amount_inc_vat
         description: "Document total including VAT."
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
       - name: source_sequence
         description: "Technical source sequence used for lineage and ordering."
 
   - name: stg_store_data__document_lines
     description: "Source-aligned staging model for sales document line items with standardized product, quantity, and amount fields."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - document_id
+            - line_id
     columns:
       - name: document_id
         description: "Transaction document identifier linking the line to its header."
+        data_tests:
+          - not_null
+      - name: line_id
+        description: "Natural line identifier within the document. Uniquely identifies a line together with document_id and is the basis for the fct_sales surrogate key."
         data_tests:
           - not_null
       - name: item_id
@@ -39,6 +53,10 @@ models:
         description: "Raw product description captured on the transaction line."
       - name: quantity
         description: "Sold quantity recorded on the transaction line."
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
       - name: line_total_inc_vat
         description: "Line total amount including VAT."
 
@@ -76,6 +94,13 @@ models:
         description: "Product type identifier from the source item master."
       - name: cost_per_unit
         description: "Unit cost excluding VAT from the source item master."
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 0
+                row_condition: "cost_per_unit is not null"
+              config:
+                severity: warn
       - name: cost_per_unit_inc_vat
         description: "Unit cost including VAT based on the current source calculation."
       - name: sale_price
@@ -95,6 +120,7 @@ models:
         description: "Product identifier in the current inventory snapshot."
         data_tests:
           - not_null
+          - unique
       - name: opening_inventory_qty
         description: "Opening stock quantity from the source inventory snapshot."
       - name: inventory_balance_qty
@@ -137,6 +163,8 @@ models:
           - not_null
       - name: movement_type
         description: "Raw attendance movement code such as in, out, or correction."
+        data_tests:
+          - not_null
       - name: recording_type
         description: "Attendance recording type from the source system."
       - name: source_sequence
@@ -149,6 +177,7 @@ models:
         description: "Employee identifier from the source employee reference table."
         data_tests:
           - not_null
+          - unique
       - name: employee_name
         description: "Readable employee name from the source employee reference table."
 
@@ -159,5 +188,6 @@ models:
         description: "Product type identifier from the source reference table."
         data_tests:
           - not_null
+          - unique
       - name: item_type_name
         description: "Readable product type description from the source reference table."

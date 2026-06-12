@@ -24,7 +24,7 @@ SELECT
      i.employee_id
     ,i.employee_name
 
-    ,i.attendance_datetime::date AS shiftdate
+    ,i.attendance_datetime::date AS shift_date
     ,to_char(i.attendance_datetime::time, 'HH24:MI') AS shift_start_time
     ,to_char(o.attendance_datetime::time, 'HH24:MI') AS shift_end_time
 
@@ -35,32 +35,32 @@ SELECT
      lpad(
         (EXTRACT(EPOCH FROM (o.attendance_datetime - i.attendance_datetime))::int / 60 % 60)::text,
         2, '0'
-     ) AS shiftduration_hhmm
+     ) AS shift_duration_hhmm
 
-    ,EXTRACT(HOUR FROM i.attendance_datetime)::int AS shiftstarttour
-    ,EXTRACT(HOUR FROM o.attendance_datetime)::int AS shiftendtour
+    ,EXTRACT(HOUR FROM i.attendance_datetime)::int AS shift_start_hour
+    ,EXTRACT(HOUR FROM o.attendance_datetime)::int AS shift_end_hour
 
     ,EXTRACT(EPOCH FROM (o.attendance_datetime - i.attendance_datetime))::int / 60
-        AS shiftdurationminutes
+        AS shift_duration_minutes
 
     ,ROUND(
         (EXTRACT(EPOCH FROM (o.attendance_datetime - i.attendance_datetime)) / 3600)::numeric,
         2
-    ) AS shiftdurationhours
+    ) AS shift_duration_hours
 
-    ,i.source_sequence AS startsequence
-    ,o.source_sequence AS endsequence
+    ,i.source_sequence AS start_sequence
+    ,o.source_sequence AS end_sequence
 
     ,CASE
         WHEN i.attendance_datetime::date <> o.attendance_datetime::date
         THEN 1 ELSE 0
-    END AS iscrossmidnight
+    END AS is_cross_midnight
 
     ,CASE
         WHEN i.movement_type IN (91, 92)
           OR o.movement_type IN (91, 92)
         THEN 1 ELSE 0
-    END AS ismanualcorrection
+    END AS is_manual_correction
 
 FROM OrderedAttendance i
 JOIN OrderedAttendance o
