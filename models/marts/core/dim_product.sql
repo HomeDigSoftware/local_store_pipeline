@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table', indexes=[{'columns': ['item_id'], 'unique': true}, {'columns': ['category_name']}]) }}
 
 with current_stock as (
 	select *

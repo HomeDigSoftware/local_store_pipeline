@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table', indexes=[{'columns': ['snapshot_date']}]) }}
 
 with inventory_snapshot as (
 	select *

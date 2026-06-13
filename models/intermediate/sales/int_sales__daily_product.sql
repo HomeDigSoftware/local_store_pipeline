@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table', indexes=[{'columns': ['sale_date']}, {'columns': ['item_id']}]) }}
 
 with line_items as (
 	select *

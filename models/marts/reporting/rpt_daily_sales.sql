@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table', indexes=[{'columns': ['sale_date'], 'unique': true}]) }}
 
 with daily_store as (
 	select *
