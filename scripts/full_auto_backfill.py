@@ -31,11 +31,13 @@ FINAL DELIVERY TO SUPABASE (after the loop, steps 1-3)
 The series is accumulated in DEV (local raw) because only local raw is updated per
 iteration. To get EVERYTHING to Supabase, the loop is followed by:
   STEP 1  03_load_to_supabase_allowlist.py            8 source tables → Supabase raw
-  STEP 2  dbt run --target prod --exclude <history>   build all prod models → store_pipeline
-  STEP 3  copy raw.<history> (local) → Supabase store_pipeline.<history>
-Step 3 is a direct table copy because the history CANNOT be rebuilt on prod
-(Supabase raw only holds the final business date after step 1). Step 2 excludes the
-history model so the prod build never overwrites the accumulated series.
+  STEP 2  copy raw.<history> (local) → Supabase store_pipeline.<history>
+  STEP 3  dbt run --target prod --exclude <history>   build all prod models → store_pipeline
+The history is copied (STEP 2) a direct table copy because it CANNOT be rebuilt on
+prod (Supabase raw only holds the final business date after step 1). It is copied
+BEFORE the prod build (STEP 3) because fct_inventory_snapshot (and thus the inventory
+reports) now read the latest slice of the history table — the build must see the
+fresh series. STEP 3 excludes the history model so the build never overwrites it.
 
 IMPORTANT NOTES
 ---------------
@@ -180,10 +182,12 @@ def _step1_push_sources_to_supabase() -> bool:
 
 
 def _step2_build_prod_models() -> bool:
-    """STEP 2/3 — build all prod models in store_pipeline, EXCLUDING the history
-    model (so prod does not overwrite the accumulated series with a single date)."""
+    """STEP 3/3 — build all prod models in store_pipeline, EXCLUDING the history
+    model (so prod does not overwrite the accumulated series with a single date).
+    Runs AFTER the history copy: fct_inventory_snapshot reads the latest slice of
+    the history table, so the table must already be fresh in prod."""
     cmd = ["uv", "run", "dbt", "run", "--target", PROD_TARGET, "--exclude", HISTORY_MODEL]
-    log.info("STEP 2/3 — dbt build on prod  (exclude %s → %s)", HISTORY_MODEL, PROD_SCHEMA)
+    log.info("STEP 3/3 — dbt build on prod  (exclude %s → %s)", HISTORY_MODEL, PROD_SCHEMA)
     result = subprocess.run(cmd, cwd=str(PROJECT_ROOT))
     if result.returncode != 0:
         log.error("dbt prod build failed (code %d).", result.returncode)
@@ -192,9 +196,10 @@ def _step2_build_prod_models() -> bool:
 
 
 def _step3_copy_history_to_supabase() -> bool:
-    """STEP 3/3 — copy the accumulated history table from local raw → Supabase
-    store_pipeline (it cannot be rebuilt on prod, so we copy the finished table)."""
-    log.info("STEP 3/3 — copy raw.%s (local) → Supabase %s.%s",
+    """STEP 2/3 — copy the accumulated history table from local raw → Supabase
+    store_pipeline (it cannot be rebuilt on prod, so we copy the finished table).
+    Runs BEFORE the prod build so fct_inventory_snapshot sees the fresh series."""
+    log.info("STEP 2/3 — copy raw.%s (local) → Supabase %s.%s",
              HISTORY_MODEL, PROD_SCHEMA, HISTORY_MODEL)
     local_engine = supabase_engine = None
     try:
@@ -244,10 +249,13 @@ def _deliver_to_supabase() -> bool:
     log.info("═" * 60)
     log.info("Final delivery to Supabase (steps 1-3) + website revalidate (step 4)")
     log.info("═" * 60)
+    # Order matters: copy the history table to prod BEFORE the prod build, because
+    # fct_inventory_snapshot (and the inventory reports downstream) now read the latest
+    # slice of that table — the build must see the fresh series, not last run's.
     ok = (
-        _step1_push_sources_to_supabase()
-        and _step2_build_prod_models()
-        and _step3_copy_history_to_supabase()
+        _step1_push_sources_to_supabase()      # sources → Supabase raw
+        and _step3_copy_history_to_supabase()  # history → Supabase store_pipeline
+        and _step2_build_prod_models()         # dbt prod build (reads fresh history)
     )
     if ok:
         _step4_revalidate_website()   # only after store_pipeline is fully rebuilt

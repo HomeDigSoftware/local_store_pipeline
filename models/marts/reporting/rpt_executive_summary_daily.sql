@@ -5,6 +5,9 @@ with daily_sales as (
 	from {{ ref('rpt_daily_sales') }}
 ),
 
+-- Full history (one snapshot per business day) so EVERY day's summary gets its own
+-- inventory counts. The single-day fct_inventory_snapshot stamped one date only
+-- (current_date rarely matched a sale_date), leaving these columns NULL on all other days.
 inventory_by_day as (
 	select
 		snapshot_date as sale_date,
@@ -14,7 +17,7 @@ inventory_by_day as (
 		sum(case when stock_status = 'OVERSTOCK' then 1 else 0 end) as overstock_count,
 		count(*) as inventory_items_count,
 		avg(days_of_cover_30d) as avg_days_of_cover_30d
-	from {{ ref('fct_inventory_snapshot') }}
+	from {{ ref('fct_inventory_snapshot_history') }}
 	group by snapshot_date
 ),
 

@@ -112,7 +112,7 @@ models:
               values: [0, 1]
       
   - name: fct_inventory_snapshot
-    description: "Inventory snapshot fact table for stock analysis over time, built from the latest curated stock health model at run date."
+    description: "Current-view inventory snapshot — the latest business-day slice of fct_inventory_snapshot_history (snapshot_date = max business day). Consumed by rpt_inventory_risk and rpt_product_velocity."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
