@@ -31,13 +31,15 @@ FINAL DELIVERY TO SUPABASE (after the loop, steps 1-3)
 The series is accumulated in DEV (local raw) because only local raw is updated per
 iteration. To get EVERYTHING to Supabase, the loop is followed by:
   STEP 1  03_load_to_supabase_allowlist.py            8 source tables → Supabase raw
-  STEP 2  copy raw.<history> (local) → Supabase store_pipeline.<history>
+  STEP 2  APPEND new days of raw.<history> (local) → Supabase store_pipeline.<history>
   STEP 3  dbt run --target prod --exclude <history>   build all prod models → store_pipeline
-The history is copied (STEP 2) a direct table copy because it CANNOT be rebuilt on
-prod (Supabase raw only holds the final business date after step 1). It is copied
-BEFORE the prod build (STEP 3) because fct_inventory_snapshot (and thus the inventory
-reports) now read the latest slice of the history table — the build must see the
-fresh series. STEP 3 excludes the history model so the build never overwrites it.
+The history is delivered (STEP 2) because it CANNOT be rebuilt on prod (Supabase raw
+only holds the final business date after step 1). It is APPEND-only — only business
+days newer than Supabase's current max are sent, so there is no DROP/CREATE (no
+PostgREST schema reload) and no full re-transfer; Supabase becomes the durable archive.
+It runs BEFORE the prod build (STEP 3) because fct_inventory_snapshot (and thus the
+inventory reports) now read the latest slice of the history table — the build must see
+the fresh series. STEP 3 excludes the history model so the build never overwrites it.
 
 IMPORTANT NOTES
 ---------------
@@ -214,18 +216,49 @@ def _step3_copy_history_to_supabase() -> bool:
             conn.execute(sqlalchemy.text(f"CREATE SCHEMA IF NOT EXISTS {PROD_SCHEMA}"))
             conn.commit()
 
-        df = pd.read_sql_table(HISTORY_MODEL, local_engine, schema="raw")
-        df.to_sql(
-            HISTORY_MODEL,
-            supabase_engine,
-            schema=PROD_SCHEMA,
-            if_exists="replace",
-            index=False,
-            chunksize=2000,
+        # APPEND only the new business days — never DROP/CREATE (that triggers a
+        # PostgREST schema reload, the original Disk-IO culprit) and never re-transfer
+        # the whole series. Supabase thus becomes the durable archive: a local
+        # --full-refresh that shrinks raw.<history> can no longer wipe it.
+        table_exists = sqlalchemy.inspect(supabase_engine).has_table(
+            HISTORY_MODEL, schema=PROD_SCHEMA
         )
-        distinct_dates = df["snapshot_date"].nunique() if "snapshot_date" in df.columns else -1
-        log.info("  Copied %d rows (%d distinct snapshot_date) → Supabase %s.%s",
-                 len(df), distinct_dates, PROD_SCHEMA, HISTORY_MODEL)
+
+        if not table_exists:
+            # First delivery only: create the table with the full series (one-time DDL).
+            df = pd.read_sql_table(HISTORY_MODEL, local_engine, schema="raw")
+            df.to_sql(HISTORY_MODEL, supabase_engine, schema=PROD_SCHEMA,
+                      if_exists="replace", index=False, chunksize=2000)
+            n_dates = df["snapshot_date"].nunique() if "snapshot_date" in df.columns else -1
+            log.info("  First delivery — created %s.%s with %d rows (%d snapshot_date).",
+                     PROD_SCHEMA, HISTORY_MODEL, len(df), n_dates)
+            return True
+
+        # Incremental: send only rows newer than the latest day already on Supabase.
+        with supabase_engine.connect() as conn:
+            sup_max = conn.execute(sqlalchemy.text(
+                f"select max(snapshot_date) from {PROD_SCHEMA}.{HISTORY_MODEL}"
+            )).scalar()
+
+        if sup_max is None:
+            delta = pd.read_sql_table(HISTORY_MODEL, local_engine, schema="raw")
+        else:
+            sup_max_date = str(sup_max)[:10]   # 'YYYY-MM-DD' (from the DB, not user input)
+            delta = pd.read_sql_query(
+                f"select * from raw.{HISTORY_MODEL} where snapshot_date > '{sup_max_date}'",
+                local_engine,
+            )
+
+        if delta.empty:
+            log.info("  Supabase already current (max snapshot_date=%s) — nothing to append.",
+                     str(sup_max)[:10])
+            return True
+
+        delta.to_sql(HISTORY_MODEL, supabase_engine, schema=PROD_SCHEMA,
+                     if_exists="append", index=False, chunksize=2000)
+        n_new = delta["snapshot_date"].nunique() if "snapshot_date" in delta.columns else -1
+        log.info("  Appended %d rows (%d new snapshot_date, after %s) → %s.%s",
+                 len(delta), n_new, str(sup_max)[:10], PROD_SCHEMA, HISTORY_MODEL)
         return True
     except Exception as exc:
         log.error("History copy to Supabase failed: %s", exc)
