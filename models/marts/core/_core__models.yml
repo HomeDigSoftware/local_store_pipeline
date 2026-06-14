@@ -142,6 +142,45 @@ models:
           - accepted_values:
               values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
 
+  - name: fct_inventory_snapshot_history
+    description: >
+      Historical inventory time-series — one snapshot per item per BUSINESS day,
+      accumulated incrementally (does NOT replace fct_inventory_snapshot; the
+      reporting models still read the single-day snapshot). Valid ONLY when built
+      via the day-by-day backfill loop: the upstream figures are computed from the
+      current loaded data state, so they are point-in-time-correct only for the
+      latest loaded business day. A consistency guard emits rows only when the
+      stamped snapshot_date equals max(receipt_date), preventing a misleading
+      snapshot from an arbitrary --vars date.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - snapshot_date
+            - item_id
+    columns:
+      - name: snapshot_date
+        description: "Business date of the snapshot (= max receipt_date of the data loaded at build time)."
+        data_tests:
+          - not_null
+      - name: item_id
+        description: "Product identifier in the snapshot."
+        data_tests:
+          - not_null
+      - name: current_inventory_qty
+        description: "Inventory quantity for the item as of the snapshot's business day."
+      - name: stock_status
+        description: "Stock health classification at snapshot time."
+        data_tests:
+          - accepted_values:
+              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
+      - name: days_of_cover_30d
+        description: "Estimated number of days current stock will cover based on recent sales pace."
+      - name: velocity_band
+        description: "Movement speed classification derived from recent sales velocity."
+        data_tests:
+          - accepted_values:
+              values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
+
   - name: fct_employee_shift
     description: "Workforce fact table for shift analysis and productivity reporting built from curated paired shift sessions."
     columns:
