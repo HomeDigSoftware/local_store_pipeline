@@ -41,10 +41,9 @@ IMPORTANT NOTES
 ---------------
 * Target is DEV (local Postgres) for the per-iteration snapshot on purpose: only the
   local `raw` schema is updated per iteration, so only dev can accumulate the series.
-* Because the per-iteration dbt builds models into local raw, STEP 1 (03) will also
-  push those dev-built model tables to Supabase raw. That is cosmetic (prod dbt only
-  reads declared sources) but if you want Supabase raw to stay sources-only, refine
-  03 later to push a source allowlist.
+* STEP 1 uses the allowlist loader, so ONLY the 8 source tables are pushed to Supabase
+  raw (TRUNCATE+append, no DDL). The dev-built model tables in local raw are NOT pushed
+  — Supabase raw stays sources-only.
 * `+fct_inventory_snapshot_history` rebuilds the full ancestry every iteration for
   correctness (velocity/days-of-cover depend on the sales chain). That is heavier
   than a normal run; for a quick test, narrow DBT_SELECT if you only need stock
