@@ -30,7 +30,7 @@ FINAL DELIVERY TO SUPABASE (after the loop, steps 1-3)
 ------------------------------------------------------
 The series is accumulated in DEV (local raw) because only local raw is updated per
 iteration. To get EVERYTHING to Supabase, the loop is followed by:
-  STEP 1  03_load_to_supabase.py                      local raw → Supabase raw
+  STEP 1  03_load_to_supabase_allowlist.py            8 source tables → Supabase raw
   STEP 2  dbt run --target prod --exclude <history>   build all prod models → store_pipeline
   STEP 3  copy raw.<history> (local) → Supabase store_pipeline.<history>
 Step 3 is a direct table copy because the history CANNOT be rebuilt on prod
@@ -87,7 +87,7 @@ MSSQL_URL = URL.create(
 
 PROJECT_ROOT = Path(__file__).parent.parent          # dbt project root (has dbt_project.yml)
 SCRIPT_02 = Path(__file__).parent / "02_extract_load_03.py"
-SCRIPT_03 = Path(__file__).parent / "03_load_to_supabase.py"
+SCRIPT_03 = Path(__file__).parent / "03_load_to_supabase_allowlist.py"   # economical loader (not legacy replace-all)
 
 DBT_TARGET = "dev"                                   # accumulate locally; switch consciously
 DBT_SELECT = "+fct_inventory_snapshot_history"       # ancestry + the incremental snapshot
@@ -172,10 +172,10 @@ def _run_dbt_snapshot(business_date: date) -> bool:
 
 def _step1_push_sources_to_supabase() -> bool:
     """STEP 1/3 — local raw → Supabase raw (existing 03 script, all base tables)."""
-    log.info("STEP 1/3 — 03_load_to_supabase.py  (local raw → Supabase raw)")
+    log.info("STEP 1/3 — 03_load_to_supabase_allowlist.py  (8 source tables → Supabase raw)")
     result = subprocess.run([sys.executable, str(SCRIPT_03)])
     if result.returncode != 0:
-        log.error("03_load_to_supabase.py exited with code %d.", result.returncode)
+        log.error("03_load_to_supabase_allowlist.py exited with code %d.", result.returncode)
         return False
     return True
 

@@ -1,7 +1,16 @@
-# ✅ IN DATA PIPE_LINE 10-06-26  (called by 04_backfill_loop.py after all iterations complete)
+# ⛔ DEPRECATED 2026-06-13 — DO NOT USE. Superseded by 03_load_to_supabase_allowlist.py
 """
-Step 3 — Push all tables from local Postgres (store_local.raw) → Supabase (postgres.raw).
-Run this after 02_extract_load.py, before dbt run --target prod.
+Step 3 (LEGACY) — Push ALL local raw tables → Supabase raw with if_exists="replace".
+
+⛔ This script DROP+rewrites every table in local raw (~539 tables) on Supabase on
+   every run, which forces PostgREST to re-introspect the whole schema and caused the
+   Disk-IO exhaustion on the Nano (free) instance.
+
+   USE INSTEAD:  uv run python scripts/03_load_to_supabase_allowlist.py
+   (pushes only the 8 source tables dbt needs; TRUNCATE+append, no DDL churn.)
+
+   This file is kept for reference only and is guarded — it refuses to run unless you
+   pass --force-legacy.
 
 Install dependencies:
   uv add sqlalchemy psycopg2-binary
@@ -88,4 +97,13 @@ def load_to_supabase():
 
 
 if __name__ == "__main__":
+    if "--force-legacy" not in sys.argv:
+        print(
+            "\n[DEPRECATED] 03_load_to_supabase.py replace-alls ALL ~539 local raw\n"
+            "   tables onto Supabase, which caused the Disk-IO crisis.\n\n"
+            "   Use instead:\n"
+            "       uv run python scripts/03_load_to_supabase_allowlist.py\n\n"
+            "   (Re-run with --force-legacy only if you truly need the old behaviour.)\n"
+        )
+        sys.exit(1)
     load_to_supabase()
