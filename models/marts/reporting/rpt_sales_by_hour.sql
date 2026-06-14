@@ -8,7 +8,9 @@ with sales as (
 		quantity,
 		net_sales_amount
 	from {{ ref('fct_sales') }}
-	where is_return = 0
+	-- Include returns (negative net_sales_amount/quantity) so hourly sums are NET of
+	-- returns, consistent with int_sales__daily_store / rpt_daily_sales. Filtering
+	-- is_return out made this report GROSS and ~returns-amount higher than the daily KPI.
 ),
 
 date_dim as (

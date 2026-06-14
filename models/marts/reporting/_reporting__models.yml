@@ -280,7 +280,7 @@ models:
       - name: day_of_week_name
         description: "Readable day of week name."
       - name: sales_amount
-        description: "Total sales amount for the hour."
+        description: "Total sales amount for the hour, NET of returns (returns carry a negative net_sales_amount and are summed in, consistent with rpt_daily_sales)."
       - name: ticket_count
         description: "Number of distinct transactions in the hour."
       - name: units_sold

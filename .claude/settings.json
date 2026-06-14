@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(git fetch *)",
-      "Bash(git rev-list *)"
+      "Bash(git rev-list *)",
+      "Bash(ls tests/)",
+      "Bash(ls tests/singular/)",
+      "Bash(uv run *)",
+      "Bash(echo \"exit=$?\")"
     ]
   }
 }
