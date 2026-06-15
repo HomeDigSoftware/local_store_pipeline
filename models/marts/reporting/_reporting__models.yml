@@ -288,6 +288,58 @@ models:
       - name: avg_ticket_amount
         description: "Average basket value for the hour."
 
+  - name: rpt_inventory_health_trend
+    description: "Inventory-health trend over the accumulated snapshot history. Grain is one row per snapshot_date (business day), with per-status item counts, total on-hand units, average days of cover, plus a rolling 7-day at-risk average and week-over-week delta. Depth grows as the backfill loop accumulates more days; only meaningful when built via the day-by-day loop."
+    columns:
+      - name: snapshot_date
+        description: "Business date of the inventory snapshot (one row per day)."
+        data_tests:
+          - not_null
+          - unique
+      - name: items_count
+        description: "Total products in the snapshot for the day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: out_of_stock_count
+        description: "Products out of stock on the day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: stockout_risk_count
+        description: "Products at stockout risk on the day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: dead_stock_count
+        description: "Dead-stock products on the day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: overstock_count
+        description: "Overstocked products on the day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: healthy_count
+        description: "Healthy-stock products on the day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: at_risk_count
+        description: "Products out of stock or at stockout risk (needs attention now)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: total_inventory_units
+        description: "Total on-hand inventory units across all products for the day."
+      - name: avg_days_of_cover_30d
+        description: "Average days of stock coverage across products for the day."
+      - name: at_risk_7d_avg
+        description: "Rolling seven-day average of the at-risk product count."
+      - name: at_risk_wow_delta
+        description: "Week-over-week change in at-risk count (lag 7 days; null until 7 days exist)."
+
   - name: rpt_category_performance_30d
     description: "Thirty-day category performance report aggregating product sales, estimated profit, and inventory risk by category."
     columns:

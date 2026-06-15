@@ -24,6 +24,7 @@ exposures:
       - ref('rpt_product_performance_30d')
       - ref('rpt_product_velocity')
       - ref('rpt_category_performance_30d')
+      - ref('rpt_inventory_health_trend')
       - ref('rpt_employee_productivity')
 
     owner:

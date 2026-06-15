@@ -55,6 +55,13 @@ IMPORTANT NOTES
 * This script does NOT modify 04_backfill_loop.py, 02, 03, or the working
   fct_inventory_snapshot model. Test here first; promote later if it behaves.
 
+USAGE
+  uv run python scripts/full_auto_backfill.py              # interactive (prompts for days)
+  uv run python scripts/full_auto_backfill.py --auto-run   # unattended: run until today, no prompt
+  uv run python scripts/full_auto_backfill.py --days 5     # unattended: exactly 5 iterations
+  --auto-run is the entry point for the daily automated job (cron/scheduler). It exits
+  cleanly ("nothing to do") if the DB is already up to date, so it is safe to schedule.
+
 PREREQUISITES (same as 04)
   - 01_restore_backup.py run first with the original .bak
   - .env present and configured
@@ -63,6 +70,7 @@ PREREQUISITES (same as 04)
 import sys
 import time
 import json
+import argparse
 import subprocess
 import logging
 import os
@@ -70,6 +78,15 @@ from datetime import date, timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
+
+# Make our own stdout/stderr UTF-8 so the banner/box-drawing output never crashes
+# under a cp1252 console (Task Scheduler redirects stdout to a file -> cp1252).
+# The .bat also sets PYTHONUTF8=1 for child processes; this guards a direct run.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")
+    except (AttributeError, ValueError):
+        pass
 
 load_dotenv(Path(__file__).parent.parent / ".env")
 
@@ -295,7 +312,16 @@ def _deliver_to_supabase() -> bool:
     return ok
 
 
-def main() -> None:
+def main(auto_run: bool = False, days: int | None = None) -> None:
+    """Run the backfill loop.
+
+    Interactive by default (prompts for the number of days). For automation,
+    pass auto_run=True to run until today with NO prompt (the cron entry point),
+    or days=N to run exactly N iterations non-interactively. auto_run and days are
+    mutually exclusive; non-interactive modes also skip the 3-second countdown.
+    """
+    non_interactive = auto_run or days is not None
+
     print()
     print("╔" + "═" * 58 + "╗")
     print("║  full_auto_backfill — backfill + per-day dbt snapshot   ║")
@@ -319,35 +345,51 @@ def main() -> None:
     print(f"\n  dbt target   : {DBT_TARGET}")
     print(f"  dbt select   : {DBT_SELECT}")
 
-    print()
-    user_input = input(
-        "  Enter number of days to run  [press Enter to run until today]: "
-    ).strip()
-
-    if user_input == "":
+    if days is not None:
+        # Non-interactive explicit count (--days N). Validated in __main__.
+        iterations = days
+        mode_label = f"auto (--days) — {iterations} iteration(s)"
+    elif auto_run:
+        # Non-interactive run-until-today (--auto-run): the cron entry point.
         if fill_days <= 0:
             print("\n  DB is already up to date. Nothing to do.\n")
             engine.dispose()
             return
         iterations = fill_days
-        mode_label = f"auto — run until today ({iterations} iterations)"
+        mode_label = f"auto (--auto-run) — run until today ({iterations} iterations)"
     else:
-        try:
-            iterations = int(user_input)
-            if iterations <= 0:
-                print("  Error: number of days must be greater than zero.")
+        print()
+        user_input = input(
+            "  Enter number of days to run  [press Enter to run until today]: "
+        ).strip()
+
+        if user_input == "":
+            if fill_days <= 0:
+                print("\n  DB is already up to date. Nothing to do.\n")
                 engine.dispose()
                 return
-            mode_label = f"manual — {iterations} iteration(s)"
-        except ValueError:
-            print(f"  Error: '{user_input}' is not a valid number.")
-            engine.dispose()
-            return
+            iterations = fill_days
+            mode_label = f"auto — run until today ({iterations} iterations)"
+        else:
+            try:
+                iterations = int(user_input)
+                if iterations <= 0:
+                    print("  Error: number of days must be greater than zero.")
+                    engine.dispose()
+                    return
+                mode_label = f"manual — {iterations} iteration(s)"
+            except ValueError:
+                print(f"  Error: '{user_input}' is not a valid number.")
+                engine.dispose()
+                return
 
     print(f"\n  Mode      : {mode_label}")
     print(f"  Iterations: {iterations}")
-    print("\n  Starting in 3 seconds … (Ctrl+C to abort)\n")
-    time.sleep(3)
+    if non_interactive:
+        print("\n  Non-interactive mode — starting now.\n")
+    else:
+        print("\n  Starting in 3 seconds … (Ctrl+C to abort)\n")
+        time.sleep(3)
 
     log.info("full_auto_backfill started — %s", mode_label)
     success_count = 0
@@ -397,4 +439,26 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(
+        description="Backfill loop with a per-business-day dbt inventory snapshot. "
+                    "Interactive by default; use --auto-run for unattended automation."
+    )
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument(
+        "--auto-run",
+        action="store_true",
+        help="Run non-interactively until today's date (no prompt). The cron/scheduler "
+             "entry point. Exits cleanly with nothing to do if already up to date.",
+    )
+    group.add_argument(
+        "--days",
+        type=int,
+        metavar="N",
+        help="Run exactly N iterations non-interactively (no prompt). N must be > 0.",
+    )
+    args = parser.parse_args()
+
+    if args.days is not None and args.days <= 0:
+        parser.error("--days must be greater than zero.")
+
+    main(auto_run=args.auto_run, days=args.days)
