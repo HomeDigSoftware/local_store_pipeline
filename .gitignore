@@ -5,33 +5,14 @@ logs/
 .env
 .venv/
 
-DBT_PORTFOLIO_UPGRADE_GUIDE.md
-sql_server_profily_setup.md
-project_progres.md
-REPORTING_TABLE_BACKLOG.md
-DASHBOARD_IMPLEMENTATION_SPEC.md
-all_used_tables.md
-DASHBOARD_SUPABASE_SCHEMA.md
-WORK_PLAN_2026-06-07.md
-PROJECT_STATUS_2026-06-11.md
-MD_FILES_INDEX.md
-DATA_TESTS_CATALOG.md
-PROPOSAL_realistic_variance_2026-06-10.md
+# Runtime logs (not source)
+scripts/pipeline.log
+scripts/logs/
+
+# Local-only working docs (planning/status/reference — not part of the tracked dbt project)
 CLAUDE.md
-WORK_PLAN_2026-06-12.md
-WORK_PLAN_2026-06-13.md
-WORK_PLAN_2026-06-15.md
 WORK_LOG.md
+WORK_PLAN_2026-06-16.md
+DATA_TESTS_CATALOG.md
 INVOICE_GENERATION_WORKFLOW.md
-SUPABASE_LOAD_REDUCTION_PLAN.md
-HANDOFF_FROM_WEBSITE_2026-06-13.md
-HANDOFF_TO_WEBSITE_2026-06-13.md
-HANDOFF_FROM_WEBSITE_2026-06-13_R2.md
-HANDOFF_FROM_WEBSITE_2026-06-13_R3.md
-HANDOFF_TO_WEBSITE_2026-06-13_R2.md
-HANDOFF_FROM_WEBSITE_2026-06-13_DATAQUALITY.md
-HANDOFF_TO_WEBSITE_2026-06-14_DATAQUALITY.md
-HANDOFF_TO_WEBSITE_2026-06-15_INVENTORY_HISTORY.md
 store_pipeline_daily.xml
-store_pipeline_daily_utf16.xml
-run_daily_backfill.bat
