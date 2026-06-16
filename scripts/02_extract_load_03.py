@@ -16,7 +16,7 @@ Extends 02_extract_load_02.py with a REPLENISHMENT CYCLE:
 Replenishment parameters (configurable at the top of the file):
   REPLENISHMENT_INTERVAL_DAYS  — cadence in days (default 6).
   REPLENISHMENT_WINDOW_DAYS    — look-back window for sold-qty calculation (default 7).
-  RESTOCK_MULTIPLIER           — qty_sold × factor ordered (default 1.2 = 20 % buffer).
+  RESTOCK_MULTIPLIER           — qty_sold × factor ordered (1.1 = 10 % buffer).
   MIN_RESTOCK_QTY              — minimum units added even if nothing sold (default 10).
 
 All other behaviour (date resolution, table discovery, Postgres load, backup) is

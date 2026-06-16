@@ -31,11 +31,27 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   store_pipeline:
+    +meta:
+      owner: Shlomy
     staging:
       +materialized: table
+      +tags: ['staging', 'daily']
+      +meta:
+        domain: source
     intermediate:
       +materialized: table
+      +tags: ['intermediate']
+      +meta:
+        domain: business_logic
     marts:
       +materialized: table
+      core:
+        +tags: ['core', 'daily']
+        +meta:
+          domain: core
+      reporting:
+        +tags: ['reporting', 'dashboard']
+        +meta:
+          domain: reporting
 
 # Configuring seeds

@@ -5,6 +5,12 @@ sources:
     description: "Raw retail POS source tables loaded from the store operational system."
     schema: raw
     tables:
+      # NOTE: freshness is configured only on the sources the synthetic pipeline actually
+      # refreshes every day — documents & documentlines, via _pipeline_loaded_at (stamped at
+      # load time). items, inventory and employeesattendance are NOT re-loaded day-by-day
+      # (full-snapshot / static .bak tables) and carry no reliable load-timestamp column, so
+      # freshness is intentionally omitted rather than faked (it would always be STALE). To
+      # add it later, have the ingestion script stamp _pipeline_loaded_at on those tables too.
       - name: items
         description: "Raw product master table containing item attributes, prices, and category references."
         columns:
@@ -63,6 +69,8 @@ sources:
             description: "Product identifier sold on the line."
             data_tests:
               - not_null
+              # known issue (verified 2026-06-16): 1 orphan item_id (1 line) from a POS
+              # product deletion. Legitimate source noise, not an integrity bug — kept as warn.
               - relationships:
                   arguments:
                     to: source('store_data', 'items')
@@ -96,6 +104,8 @@ sources:
             description: "Product identifier in inventory records."
             data_tests:
               - not_null
+              # known issue (verified 2026-06-16): 1 orphan item_id (2 rows) from a POS
+              # product deletion. Legitimate source noise, not an integrity bug — kept as warn.
               - relationships:
                   arguments:
                     to: source('store_data', 'items')
@@ -111,10 +121,9 @@ sources:
 
       - name: employeesattendance
         description: "Raw employee attendance punches used to derive shifts and work hours."
-        loaded_at_field: update_datetime
-        freshness:
-          warn_after: {count: 1, period: day}
-          error_after: {count: 2, period: day}
+        # No freshness: the synthetic pipeline refreshes only SALES day-by-day; attendance
+        # comes from the static .bak and is never re-loaded, so update_datetime is frozen in
+        # the past and freshness would always be STALE. Omitted intentionally (see note on items).
         columns:
           - name: emplyee_id
             description: "Employee identifier as stored in the source system."

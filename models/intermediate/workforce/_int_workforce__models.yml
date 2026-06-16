@@ -44,6 +44,9 @@ models:
       - name: shift_duration_hours
         description: "Duration of the shift in hours."
         data_tests:
+          # known issue (verified 2026-06-16): exactly 1 shift of ~529.69h caused by a
+          # missing clock-out punch in the raw attendance data. Legitimate source noise,
+          # not a modeling bug — kept as warn rather than error.
           - dbt_utils.accepted_range:
               min_value: 0
               max_value: 24

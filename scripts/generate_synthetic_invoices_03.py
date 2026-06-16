@@ -33,7 +33,7 @@ Default behavior is a dry run. Use --commit to persist changes.
 Example:
     python .\\scripts\\generate_synthetic_invoices_03.py \\
         --date 2026-03-21 --invoice-count 105 \\
-        --replenish-inventory --replenish-window-days 7 --restock-multiplier 1.2 \\
+        --replenish-inventory --replenish-window-days 7 --restock-multiplier 1.1 \\
         --seed 42 --commit
 """
 
@@ -270,10 +270,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--restock-multiplier",
         type=float,
-        default=1.2,
+        default=1.1,
         help=(
             "Restock factor applied to qty_sold: restock = qty_sold * multiplier. "
-            "A value > 1.0 means the owner orders slightly more than was sold. Default: 1.2."
+            "A value > 1.0 means the owner orders slightly more than was sold. "
+            "Default: 1.1 (matches RESTOCK_MULTIPLIER in 02_extract_load_03.py, the "
+            "value the pipeline always passes explicitly)."
         ),
     )
     parser.add_argument(

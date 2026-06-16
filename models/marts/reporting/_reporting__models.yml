@@ -126,10 +126,37 @@ models:
               values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: reorder_flag
         description: "Flag indicating the item should be reordered soon or immediately."
+        data_tests:
+          - accepted_values:
+              values: [true, false]
+              quote: false
+      - name: overstock_flag
+        description: "Flag indicating the item is overstocked."
+        data_tests:
+          - accepted_values:
+              values: [true, false]
+              quote: false
+      - name: dead_stock_flag
+        description: "Flag indicating the item is a dead-stock candidate."
+        data_tests:
+          - accepted_values:
+              values: [true, false]
+              quote: false
       - name: action_priority
-        description: "Priority ranking of the recommended action."
+        description: "Priority ranking of the recommended action (1 = most urgent reorder .. 5 = no action)."
+        data_tests:
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
       - name: recommended_action
         description: "Suggested next action for the item."
+        data_tests:
+          - accepted_values:
+              values:
+                - 'Reorder immediately'
+                - 'Reorder soon'
+                - 'Review markdown or promotion'
+                - 'Reduce purchasing and monitor sell-through'
+                - 'No action needed'
 
   - name: rpt_product_performance_30d
     description: "Thirty-day product performance report combining sales, estimated gross profit, and inventory efficiency metrics."
