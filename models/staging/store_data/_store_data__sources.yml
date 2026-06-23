@@ -23,7 +23,8 @@ sources:
             description: "Raw product description from the POS system."
             data_tests:
               - not_null:
-                  severity: warn
+                  config:
+                    severity: warn
       - name: documents
         description: "Sales document headers representing receipts or transaction documents."
         loaded_at_field: _pipeline_loaded_at  
@@ -49,9 +50,10 @@ sources:
           error_after: {count: 2, period: day}
         data_tests:
           - dbt_utils.unique_combination_of_columns:
-              combination_of_columns:
-                - document_id
-                - line_id
+              arguments:
+                combination_of_columns:
+                  - document_id
+                  - line_id
         columns:
           - name: document_id
             description: "Foreign key to the transaction header."

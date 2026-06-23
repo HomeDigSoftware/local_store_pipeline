@@ -1,0 +1,10 @@
+# CI-only Python dependencies (GitHub Actions).
+#
+# The full local project also uses pyodbc, pandas, sqlalchemy and the
+# dbt-sqlserver / dbt-fabric adapters for the Python EL scripts (01-04). CI does
+# NOT run those scripts — it only validates the dbt project (parse + compile)
+# against a disposable Postgres service container. So it needs just the Postgres
+# adapter, which pulls in dbt-core + dbt-adapters transitively.
+#
+# Pinned to the exact local versions so CI mirrors the dev environment.
+dbt-postgres==1.10.0

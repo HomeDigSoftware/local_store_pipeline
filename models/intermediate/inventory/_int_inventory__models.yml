@@ -34,7 +34,8 @@ models:
         description: "Business classification of stock health."
         data_tests:
           - accepted_values:
-              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
+              arguments:
+                values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: current_inventory_qty
         description: "Current stock quantity used in the health calculation."
       - name: days_of_cover_30d
@@ -43,7 +44,8 @@ models:
         description: "Sales movement label carried forward from the product velocity model."
         data_tests:
           - accepted_values:
-              values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
+              arguments:
+                values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
 
   - name: int_inventory__product_velocity
     description: "Product velocity model that measures sales speed against available inventory."
@@ -69,4 +71,5 @@ models:
         description: "Business label for the product movement speed."
         data_tests:
           - accepted_values:
-              values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
+              arguments:
+                values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]

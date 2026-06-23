@@ -67,18 +67,21 @@ models:
         data_tests:
           - not_null
           - dbt_utils.accepted_range:
-              min_value: "'2021-03-26'::date"
-              max_value: "current_date"
+              arguments:
+                min_value: "'2021-03-26'::date"
+                max_value: "current_date"
           - relationships:
-              to: ref('dim_date')
-              field: date_actual
+              arguments:
+                to: ref('dim_date')
+                field: date_actual
       - name: item_id
         description: "Product identifier sold on the fact row."
         data_tests:
           - not_null
           - relationships:
-              to: ref('dim_product')
-              field: item_id
+              arguments:
+                to: ref('dim_product')
+                field: item_id
       - name: quantity
         description: "Net quantity sold (negative for returns)."
         data_tests:
@@ -96,28 +99,33 @@ models:
         data_tests:
           - not_null
           - accepted_values:
-              values: [0, 1]
+              arguments:
+                values: [0, 1]
       - name: payment_type
         description: "Payment type code — 1 = cash, 3 = credit card. Original POS data may contain additional codes (e.g. 2)."
         data_tests:
           - not_null
           - accepted_values:
-              values: [1, 2, 3]
-              severity: warn
+              arguments:
+                values: [1, 2, 3]
+              config:
+                severity: warn
       - name: is_credit
         description: "Flag — 1 if payment_type is credit card (3), 0 otherwise."
         data_tests:
           - not_null
           - accepted_values:
-              values: [0, 1]
-      
+              arguments:
+                values: [0, 1]
+
   - name: fct_inventory_snapshot
     description: "Current-view inventory snapshot — the latest business-day slice of fct_inventory_snapshot_history (snapshot_date = max business day). Consumed by rpt_inventory_risk and rpt_product_velocity."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - snapshot_date
-            - item_id
+          arguments:
+            combination_of_columns:
+              - snapshot_date
+              - item_id
     columns:
       - name: snapshot_date
         description: "Date of the inventory snapshot."
@@ -133,14 +141,16 @@ models:
         description: "Stock health classification at snapshot time."
         data_tests:
           - accepted_values:
-              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
+              arguments:
+                values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: days_of_cover_30d
         description: "Estimated number of days current stock will cover based on recent sales pace."
       - name: velocity_band
         description: "Movement speed classification derived from recent sales velocity."
         data_tests:
           - accepted_values:
-              values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
+              arguments:
+                values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
 
   - name: fct_inventory_snapshot_history
     description: >
@@ -154,9 +164,10 @@ models:
       snapshot from an arbitrary --vars date.
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - snapshot_date
-            - item_id
+          arguments:
+            combination_of_columns:
+              - snapshot_date
+              - item_id
     columns:
       - name: snapshot_date
         description: "Business date of the snapshot (= max receipt_date of the data loaded at build time)."
@@ -172,14 +183,16 @@ models:
         description: "Stock health classification at snapshot time."
         data_tests:
           - accepted_values:
-              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
+              arguments:
+                values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: days_of_cover_30d
         description: "Estimated number of days current stock will cover based on recent sales pace."
       - name: velocity_band
         description: "Movement speed classification derived from recent sales velocity."
         data_tests:
           - accepted_values:
-              values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
+              arguments:
+                values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
 
   - name: fct_employee_shift
     description: "Workforce fact table for shift analysis and productivity reporting built from curated paired shift sessions."
@@ -194,8 +207,9 @@ models:
         data_tests:
           - not_null
           - relationships:
-              to: ref('dim_employee')
-              field: employee_id
+              arguments:
+                to: ref('dim_employee')
+                field: employee_id
       - name: shift_date
         description: "Date of the shift."
         data_tests:

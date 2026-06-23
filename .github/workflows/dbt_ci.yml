@@ -1,0 +1,107 @@
+name: dbt CI
+
+# WHEN this pipeline runs:
+on:
+  pull_request:            # every Pull Request
+  push:
+    branches: [ main ]     # every push that lands on main
+  workflow_dispatch:       # a manual "Run workflow" button in the Actions tab
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # GATE: the project must structurally compile. No raw data is needed (the .bak
+  # can't live in CI), so we validate code — refs, sources, YAML, DAG, and that
+  # every model compiles to valid SQL — against a disposable Postgres.
+  # ---------------------------------------------------------------------------
+  dbt-validate:
+    name: dbt parse & compile
+    runs-on: ubuntu-latest
+
+    # A throwaway Postgres for the job; dbt connects to it at localhost:5432.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: store_local
+        ports:
+          - 5432:5432
+        # Wait until Postgres is actually accepting connections before dbt runs.
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DBT_PROFILES_DIR: ${{ github.workspace }}/ci   # use ci/profiles.yml
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Create the virtual environment
+        run: uv venv --python 3.12
+
+      - name: Install CI dependencies (dbt-postgres)
+        run: uv pip install -r requirements-ci.txt
+
+      - name: Install dbt packages (dbt_utils, dbt_expectations)
+        run: uv run dbt deps
+
+      - name: Validate the project (refs, sources, YAML, DAG)
+        run: uv run dbt parse --no-partial-parse
+
+      - name: Compile every model to SQL
+        run: uv run dbt compile
+
+  # ---------------------------------------------------------------------------
+  # NON-BLOCKING: style linting. Runs only if the gate passed. continue-on-error
+  # means findings are reported but never fail the workflow or block a merge.
+  # ---------------------------------------------------------------------------
+  sql-lint:
+    name: sqlfluff lint (non-blocking)
+    runs-on: ubuntu-latest
+    needs: dbt-validate
+    continue-on-error: true
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: store_local
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DBT_PROFILES_DIR: ${{ github.workspace }}/ci
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Create the virtual environment
+        run: uv venv --python 3.12
+
+      - name: Install dbt + sqlfluff
+        run: uv pip install -r requirements-ci.txt sqlfluff sqlfluff-templater-dbt
+
+      - name: Install dbt packages
+        run: uv run dbt deps
+
+      - name: Lint models with sqlfluff
+        run: uv run sqlfluff lint models

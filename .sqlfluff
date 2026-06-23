@@ -1,0 +1,34 @@
+# sqlfluff configuration — used by the (non-blocking) lint job in CI.
+# Uses the dbt templater so ref()/source()/config() resolve exactly as dbt sees
+# them. Findings surface as warnings; the CI lint job is continue-on-error and
+# never blocks a merge.
+[sqlfluff]
+templater = dbt
+dialect = postgres
+max_line_length = 120
+
+[sqlfluff:templater:dbt]
+project_dir = .
+profiles_dir = ci
+
+[sqlfluff:indentation]
+tab_space_size = 4
+indented_joins = false
+indented_using_on = true
+
+# Relax a few rules that clash with the existing dbt/Jinja style on this
+# (previously un-linted) codebase. Tighten these later if desired.
+[sqlfluff:rules]
+# RF04: keywords as identifiers (e.g. a column named "date") — common in POS data.
+# ST06: enforce select column ordering — too churny for existing models.
+# LT05: long lines are governed by max_line_length above.
+exclude_rules = RF04, ST06, LT05
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.identifiers]
+capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.functions]
+capitalisation_policy = lower

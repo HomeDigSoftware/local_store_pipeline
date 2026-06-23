@@ -1,0 +1,19 @@
+# dbt profile used ONLY by CI (GitHub Actions).
+#
+# It points at the disposable Postgres SERVICE CONTAINER that the workflow spins
+# up for the run — dummy credentials, never real secrets. The real dev/prod
+# profile lives in ~/.dbt/profiles.yml on the developer machine and is never
+# committed. This file mirrors the dev target's dbname/schema so the project
+# compiles identically in CI.
+store_pipeline:
+  target: ci
+  outputs:
+    ci:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: postgres
+      password: postgres
+      dbname: store_local
+      schema: raw
+      threads: 4

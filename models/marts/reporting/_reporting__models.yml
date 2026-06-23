@@ -22,9 +22,10 @@ models:
     description: "Product velocity reporting model for stock coverage and movement analysis built from the inventory snapshot fact."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - snapshot_date
-            - item_id
+          arguments:
+            combination_of_columns:
+              - snapshot_date
+              - item_id
     columns:
       - name: snapshot_date
         description: "Date of the inventory snapshot used for the report row."
@@ -46,7 +47,8 @@ models:
         description: "Movement speed classification for the product."
         data_tests:
           - accepted_values:
-              values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
+              arguments:
+                values: [FAST, STEADY, SLOW, NO_RECENT_SALES, OUT_OF_STOCK]
 
   - name: rpt_inventory_risk
     description: "Inventory exception report that highlights stockout risk, overstock, and dead stock from the inventory snapshot fact."
@@ -63,7 +65,8 @@ models:
         description: "Inventory risk classification."
         data_tests:
           - accepted_values:
-              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
+              arguments:
+                values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: current_inventory_qty
         description: "Current inventory quantity."
       - name: days_of_cover_30d
@@ -75,17 +78,19 @@ models:
     description: "Workforce productivity report that exposes daily worked time per employee and populates sales productivity using hour-share attribution at the daily store level."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - shift_date
-            - employee_id
+          arguments:
+            combination_of_columns:
+              - shift_date
+              - employee_id
     columns:
       - name: employee_id
         description: "Employee identifier."
         data_tests:
           - not_null
           - relationships:
-              to: ref('dim_employee')
-              field: employee_id
+              arguments:
+                to: ref('dim_employee')
+                field: employee_id
       - name: shift_date
         description: "Date of the productivity record."
         data_tests:
@@ -107,9 +112,10 @@ models:
     description: "Inventory action report that translates stock risk and velocity metrics into replenishment and cleanup recommendations."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - snapshot_date
-            - item_id
+          arguments:
+            combination_of_columns:
+              - snapshot_date
+              - item_id
     columns:
       - name: snapshot_date
         description: "Snapshot date used for the inventory action row."
@@ -123,40 +129,46 @@ models:
         description: "Resolved stock status including healthy items."
         data_tests:
           - accepted_values:
-              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
+              arguments:
+                values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: reorder_flag
         description: "Flag indicating the item should be reordered soon or immediately."
         data_tests:
           - accepted_values:
-              values: [true, false]
-              quote: false
+              arguments:
+                values: [true, false]
+                quote: false
       - name: overstock_flag
         description: "Flag indicating the item is overstocked."
         data_tests:
           - accepted_values:
-              values: [true, false]
-              quote: false
+              arguments:
+                values: [true, false]
+                quote: false
       - name: dead_stock_flag
         description: "Flag indicating the item is a dead-stock candidate."
         data_tests:
           - accepted_values:
-              values: [true, false]
-              quote: false
+              arguments:
+                values: [true, false]
+                quote: false
       - name: action_priority
         description: "Priority ranking of the recommended action (1 = most urgent reorder .. 5 = no action)."
         data_tests:
           - accepted_values:
-              values: [1, 2, 3, 4, 5]
+              arguments:
+                values: [1, 2, 3, 4, 5]
       - name: recommended_action
         description: "Suggested next action for the item."
         data_tests:
           - accepted_values:
-              values:
-                - 'Reorder immediately'
-                - 'Reorder soon'
-                - 'Review markdown or promotion'
-                - 'Reduce purchasing and monitor sell-through'
-                - 'No action needed'
+              arguments:
+                values:
+                  - 'Reorder immediately'
+                  - 'Reorder soon'
+                  - 'Review markdown or promotion'
+                  - 'Reduce purchasing and monitor sell-through'
+                  - 'No action needed'
 
   - name: rpt_product_performance_30d
     description: "Thirty-day product performance report combining sales, estimated gross profit, and inventory efficiency metrics."
@@ -170,7 +182,8 @@ models:
         description: "Current stock status carried from the inventory action model."
         data_tests:
           - accepted_values:
-              values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
+              arguments:
+                values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
       - name: sales_amount_30d
         description: "Net sales amount over the last 30 days."
       - name: units_sold_30d
@@ -220,10 +233,11 @@ models:
     description: "Daily payment method breakdown showing revenue and ticket share per payment type. Grain is one row per receipt_date, payment_type, and is_credit (the same payment_type may appear with both credit flags on a day)."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - receipt_date
-            - payment_type
-            - is_credit
+          arguments:
+            combination_of_columns:
+              - receipt_date
+              - payment_type
+              - is_credit
     columns:
       - name: receipt_date
         description: "Date of the payment record."
@@ -234,7 +248,8 @@ models:
         data_tests:
           - not_null
           - accepted_values:
-              values: [1, 2, 3]
+              arguments:
+                values: [1, 2, 3]
               config:
                 severity: warn
       - name: is_credit
@@ -254,9 +269,10 @@ models:
     description: "Daily return analysis by product showing return quantities, amounts, and ticket counts."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - receipt_date
-            - item_id
+          arguments:
+            combination_of_columns:
+              - receipt_date
+              - item_id
     columns:
       - name: receipt_date
         description: "Date of the return."
@@ -267,8 +283,9 @@ models:
         data_tests:
           - not_null
           - relationships:
-              to: ref('dim_product')
-              field: item_id
+              arguments:
+                to: ref('dim_product')
+                field: item_id
       - name: item_name
         description: "Product name."
       - name: product_category_id
@@ -279,7 +296,8 @@ models:
         description: "Total units returned (positive value)."
         data_tests:
           - dbt_utils.accepted_range:
-              min_value: 0
+              arguments:
+                min_value: 0
       - name: return_amount
         description: "Total return value in ILS (positive value)."
       - name: return_ticket_count
@@ -289,9 +307,10 @@ models:
     description: "Hourly sales breakdown by date showing revenue, ticket count, and units sold per hour."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - receipt_date
-            - sales_hour
+          arguments:
+            combination_of_columns:
+              - receipt_date
+              - sales_hour
     columns:
       - name: receipt_date
         description: "Date of the sales record."
@@ -302,8 +321,9 @@ models:
         data_tests:
           - not_null
           - dbt_utils.accepted_range:
-              min_value: 0
-              max_value: 23
+              arguments:
+                min_value: 0
+                max_value: 23
       - name: day_of_week_name
         description: "Readable day of week name."
       - name: sales_amount
@@ -327,37 +347,44 @@ models:
         description: "Total products in the snapshot for the day."
         data_tests:
           - dbt_utils.accepted_range:
-              min_value: 0
+              arguments:
+                min_value: 0
       - name: out_of_stock_count
         description: "Products out of stock on the day."
         data_tests:
           - dbt_utils.accepted_range:
-              min_value: 0
+              arguments:
+                min_value: 0
       - name: stockout_risk_count
         description: "Products at stockout risk on the day."
         data_tests:
           - dbt_utils.accepted_range:
-              min_value: 0
+              arguments:
+                min_value: 0
       - name: dead_stock_count
         description: "Dead-stock products on the day."
         data_tests:
           - dbt_utils.accepted_range:
-              min_value: 0
+              arguments:
+                min_value: 0
       - name: overstock_count
         description: "Overstocked products on the day."
         data_tests:
           - dbt_utils.accepted_range:
-              min_value: 0
+              arguments:
+                min_value: 0
       - name: healthy_count
         description: "Healthy-stock products on the day."
         data_tests:
           - dbt_utils.accepted_range:
-              min_value: 0
+              arguments:
+                min_value: 0
       - name: at_risk_count
         description: "Products out of stock or at stockout risk (needs attention now)."
         data_tests:
           - dbt_utils.accepted_range:
-              min_value: 0
+              arguments:
+                min_value: 0
       - name: total_inventory_units
         description: "Total on-hand inventory units across all products for the day."
       - name: avg_days_of_cover_30d

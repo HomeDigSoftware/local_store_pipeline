@@ -5,9 +5,10 @@ models:
     description: "Reusable sales line model that standardizes one row per sold item line from staged document headers, lines, and payment context."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - document_id
-            - line_id
+          arguments:
+            combination_of_columns:
+              - document_id
+              - line_id
     columns:
       - name: document_id
         description: "Transaction document identifier."
@@ -58,9 +59,10 @@ models:
     description: "Daily product sales aggregation built from int_sales__line_items for inventory, demand, and reporting models."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - sale_date
-            - item_id
+          arguments:
+            combination_of_columns:
+              - sale_date
+              - item_id
     columns:
       - name: sale_date
         description: "Date of the product sales aggregation."

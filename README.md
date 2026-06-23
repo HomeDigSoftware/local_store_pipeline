@@ -1,5 +1,7 @@
 # Store Analytics Pipeline
 
+[![dbt CI](https://github.com/HomeDigSoftware/local_store_pipeline/actions/workflows/dbt_ci.yml/badge.svg)](https://github.com/HomeDigSoftware/local_store_pipeline/actions/workflows/dbt_ci.yml)
+
 An end-to-end retail analytics platform that turns a small optical store's
 point-of-sale data into a live business dashboard. Real POS history is augmented
 with realistic synthetic sales, modelled with **dbt**, served from **Supabase**,

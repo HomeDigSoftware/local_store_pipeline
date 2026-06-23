@@ -33,9 +33,10 @@ models:
     description: "Source-aligned staging model for sales document line items with standardized product, quantity, and amount fields."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - document_id
-            - line_id
+          arguments:
+            combination_of_columns:
+              - document_id
+              - line_id
     columns:
       - name: document_id
         description: "Transaction document identifier linking the line to its header."

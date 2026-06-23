@@ -20,7 +20,8 @@ models:
         description: "Normalized event direction as IN, OUT, or UNKNOWN."
         data_tests:
           - accepted_values:
-              values: [IN, OUT, UNKNOWN]
+              arguments:
+                values: [IN, OUT, UNKNOWN]
       - name: is_manual_correction
         description: "Flag indicating the event came from a manual correction code."
 
@@ -48,8 +49,9 @@ models:
           # missing clock-out punch in the raw attendance data. Legitimate source noise,
           # not a modeling bug — kept as warn rather than error.
           - dbt_utils.accepted_range:
-              min_value: 0
-              max_value: 24
+              arguments:
+                min_value: 0
+                max_value: 24
               config:
                 severity: warn
 
@@ -57,9 +59,10 @@ models:
     description: "Daily employee hours aggregation derived from cleaned shift sessions."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - shift_date
-            - employee_id
+          arguments:
+            combination_of_columns:
+              - shift_date
+              - employee_id
     columns:
       - name: shift_date
         description: "Date of the employee hours aggregation."
@@ -80,9 +83,10 @@ models:
     description: "Daily workforce attribution model that allocates store sales to employees based on their share of worked hours on the same day."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - shift_date
-            - employee_id
+          arguments:
+            combination_of_columns:
+              - shift_date
+              - employee_id
     columns:
       - name: shift_date
         description: "Date of the attribution record."
@@ -102,8 +106,9 @@ models:
         description: "Employee share of worked hours out of all worked hours on the same day."
         data_tests:
           - dbt_utils.accepted_range:
-              min_value: 0
-              max_value: 1
+              arguments:
+                min_value: 0
+                max_value: 1
               config:
                 severity: warn
       - name: attributed_sales_amount
