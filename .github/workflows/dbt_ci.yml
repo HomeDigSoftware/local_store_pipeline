@@ -50,6 +50,18 @@ jobs:
       - name: Install CI dependencies (dbt-postgres)
         run: uv pip install -r requirements-ci.txt
 
+      # dim_date is built by a date-spine macro that runs `min(recordingdate)
+      # FROM raw.documents` at COMPILE time (run_query). The CI Postgres is
+      # empty, so seed one dated row to satisfy that single introspection query.
+      # No other model touches the DB at compile time.
+      - name: Seed a minimal raw stub for the date-spine
+        run: |
+          PGPASSWORD=postgres psql -h localhost -U postgres -d store_local -v ON_ERROR_STOP=1 <<'SQL'
+          create schema if not exists raw;
+          create table if not exists raw.documents (recordingdate text);
+          insert into raw.documents (recordingdate) values ('20210326');
+          SQL
+
       - name: Install dbt packages (dbt_utils, dbt_expectations)
         run: uv run dbt deps
 
@@ -99,6 +111,16 @@ jobs:
 
       - name: Install dbt + sqlfluff
         run: uv pip install -r requirements-ci.txt sqlfluff sqlfluff-templater-dbt
+
+      # sqlfluff's dbt templater compiles models too, so it hits the same
+      # compile-time date-spine query — seed the same minimal raw stub.
+      - name: Seed a minimal raw stub for the date-spine
+        run: |
+          PGPASSWORD=postgres psql -h localhost -U postgres -d store_local -v ON_ERROR_STOP=1 <<'SQL'
+          create schema if not exists raw;
+          create table if not exists raw.documents (recordingdate text);
+          insert into raw.documents (recordingdate) values ('20210326');
+          SQL
 
       - name: Install dbt packages
         run: uv run dbt deps

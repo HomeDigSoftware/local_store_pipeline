@@ -264,8 +264,20 @@ This is normal and expected. It just means we pick the *right* level of checking
 |---|---|---|
 | `dbt deps` | Packages install. | No |
 | `dbt parse` | All `ref()`/`source()` resolve, YAML is valid, the DAG is coherent. | No |
-| `dbt compile` | Every model's Jinja+SQL compiles to valid SQL against the *schema*. | No (needs a DB *connection*, not data) |
+| `dbt compile` | Every model's Jinja+SQL compiles to valid SQL against the *schema*. | Usually no — but see the caveat below |
 | `dbt build` / `dbt test` | Models execute correctly **and data passes tests**. | **Yes** |
+
+> **Real-world caveat we hit on THIS project (a genuine lesson).** "compile needs
+> no data" is the *general* rule, but it has an exception: if a macro calls
+> **`run_query()`** it executes a live SQL query *at compile time*. Our `dim_date`
+> is built by a date-spine macro that runs `select min(recordingdate) from
+> raw.documents` to find the spine's start date — so `dbt compile` failed in CI with
+> `relation "raw.documents" does not exist` against the empty Postgres. The fix isn't
+> to abandon compile; it's to **seed the one table that macro reads** with a single
+> dated row before compiling (a `psql` step in the workflow). Lesson: *know your
+> macros* — `run_query`/`statement` blocks turn an otherwise data-free step into one
+> that needs (a little) data. We grepped the repo to confirm `dim_date` was the only
+> such case.
 
 So your CI runs **`deps → parse → compile`**. That catches the overwhelming majority
 of real regressions:
