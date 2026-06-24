@@ -1,0 +1,22 @@
+version: 2
+
+seeds:
+  - name: employee_wages
+    description: >
+      Per-employee base hourly wage (ILS). The rate source joined into
+      int_workforce__shift_pay to price each shift's overtime tiers. Extensible:
+      add a row per employee_id to set individual rates.
+    columns:
+      - name: employee_id
+        description: "Employee identifier (matches dim_employee.employee_id)."
+        data_tests:
+          - not_null
+          - unique
+      - name: hourly_rate
+        description: "Base hourly wage in ILS (paid at x1.0 for the first 8 hours)."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 1000

@@ -26,6 +26,7 @@ exposures:
       - ref('rpt_category_performance_30d')
       - ref('rpt_inventory_health_trend')
       - ref('rpt_employee_productivity')
+      - ref('rpt_workforce_productivity_summary')
 
     owner:
       name: Shlomy

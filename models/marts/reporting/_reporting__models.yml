@@ -108,6 +108,74 @@ models:
       - name: sales_per_hour
         description: "Attributed sales divided by hours worked on the day."
 
+  - name: rpt_workforce_productivity_summary
+    description: >
+      Per-employee workforce scorecard (one row per employee). Combines per-shift
+      payroll (total pay, regular/OT tier hours, average hourly cost) with
+      hours-share sales attribution, then ranks staff by sales, hours and labor
+      efficiency and adds a trailing 7-day recent-form average.
+    columns:
+      - name: employee_id
+        description: "Employee identifier."
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_employee')
+                field: employee_id
+      - name: employee_name
+        description: "Readable employee name from the employee dimension."
+      - name: total_shifts
+        description: "Total shifts worked over the full window."
+      - name: total_hours
+        description: "Total hours worked over the full window."
+      - name: regular_hours
+        description: "Total hours paid at x1.0."
+      - name: ot125_hours
+        description: "Total hours paid at x1.25."
+      - name: ot150_hours
+        description: "Total hours paid at x1.5."
+      - name: hourly_rate
+        description: "Base hourly wage for the employee."
+      - name: total_pay
+        description: "Total payroll cost for the employee over the window."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: avg_hourly_cost
+        description: "total_pay / total_hours — the blended cost per worked hour (>= base rate)."
+      - name: attributed_sales
+        description: "Total store sales attributed to the employee by hours share."
+      - name: sales_per_labor_shekel
+        description: "attributed_sales / total_pay — sales generated per shekel of labor cost."
+      - name: avg_daily_sales_7d
+        description: "Average daily attributed sales over the trailing 7 days."
+      - name: avg_daily_hours_7d
+        description: "Average daily hours worked over the trailing 7 days."
+      - name: sales_rank
+        description: "Rank by attributed sales (1 = highest)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 3
+      - name: hours_rank
+        description: "Rank by total hours (1 = highest)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 3
+      - name: efficiency_rank
+        description: "Rank by sales per labor shekel (1 = highest)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 3
+
   - name: rpt_inventory_actions
     description: "Inventory action report that translates stock risk and velocity metrics into replenishment and cleanup recommendations."
     data_tests:

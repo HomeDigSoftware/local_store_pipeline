@@ -55,3 +55,13 @@ models:
           domain: reporting
 
 # Configuring seeds
+seeds:
+  store_pipeline:
+    +tags: ['seed']
+    +meta:
+      owner: Shlomy
+      domain: workforce
+    employee_wages:
+      +column_types:
+        employee_id: bigint
+        hourly_rate: numeric(10,2)
