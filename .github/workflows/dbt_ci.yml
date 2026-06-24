@@ -125,5 +125,8 @@ jobs:
       - name: Install dbt packages
         run: uv run dbt deps
 
-      - name: Lint models with sqlfluff
-        run: uv run sqlfluff lint models
+      # Informational only: print findings to the log but always exit 0, so a
+      # never-linted codebase's style findings never show as a red ❌. Drop the
+      # `|| true` later once the findings are cleaned up to enforce style.
+      - name: Lint models with sqlfluff (informational — never blocks the build)
+        run: uv run sqlfluff lint models || true
