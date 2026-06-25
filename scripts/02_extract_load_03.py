@@ -83,6 +83,15 @@ SYNTHETIC_UPDATE_INVENTORY = True
 # Set to an integer only when you need a fully reproducible fixed run.
 SYNTHETIC_SEED             = None
 
+# ── Synthetic attendance generation (workforce) ────────────────────────────────
+#
+# Generates employee clock IN/OUT punches into dbo.EmployeesAttendance for the
+# same business date as the invoices, via generate_synthetic_attendance_03.py.
+# The extract-to-raw step below then carries the punches to Postgres automatically
+# (no SKIP_TABLES change needed). Deterministic + idempotent per date.
+ENABLE_SYNTHETIC_ATTENDANCE = True
+ATTENDANCE_OT_SHARE         = 0.08   # fraction of shifts that run into the x1.5 (11-12h) tier
+
 # ── Trend & realism configuration ─────────────────────────────────────────────
 #
 # TREND_ANCHOR_DATE:
@@ -300,16 +309,52 @@ def run_synthetic_generation(
     return target_date
 
 
+def run_synthetic_attendance(target_date: str) -> None:
+    """
+    Generate synthetic employee attendance (clock IN/OUT punches) into SQL Server
+    for the resolved business date, aligned with the invoices for the same day.
+
+    The generator is deterministic and idempotent per date, so this is safe to
+    call on every daily run and on backfills without creating duplicate punches.
+    """
+    if not ENABLE_SYNTHETIC_ATTENDANCE:
+        log.info("Synthetic attendance generation is disabled — skipping.")
+        return
+
+    script_path = Path(__file__).parent / "generate_synthetic_attendance_03.py"
+    command = [
+        sys.executable,
+        str(script_path),
+        "--date",     target_date,
+        "--ot-share", str(ATTENDANCE_OT_SHARE),
+        "--commit",
+    ]
+    if SYNTHETIC_SEED is not None:
+        command.extend(["--seed", str(SYNTHETIC_SEED)])
+
+    log.info("Launching synthetic attendance generator (v03) for %s...", target_date)
+    result = subprocess.run(command, capture_output=True, text=True)
+
+    if result.returncode != 0:
+        log.error("Synthetic attendance generation failed.\n%s", result.stderr.strip())
+        raise RuntimeError("Synthetic attendance generation failed.")
+
+    for line in result.stdout.splitlines():
+        log.info("  attendance: %s", line)
+
+
 def extract_and_load(date_override: str | None = None) -> None:
     """
     Main ETL function:
       1. Generate synthetic invoices (with replenishment when applicable).
-      2. Copy every BASE TABLE from dbo (SQL Server) to raw schema (Postgres).
+      2. Generate synthetic employee attendance for the same business date.
+      3. Copy every BASE TABLE from dbo (SQL Server) to raw schema (Postgres).
     """
     log.info("Creating SQL Server engine (mssql+pyodbc)...")
     mssql_engine = sqlalchemy.create_engine(MSSQL_URL, fast_executemany=True)
 
     target_date = run_synthetic_generation(date_override, mssql_engine)
+    run_synthetic_attendance(target_date)
 
     log.info("Discovering tables in dbo schema...")
     inspector = inspect(mssql_engine)

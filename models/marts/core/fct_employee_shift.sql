@@ -2,7 +2,7 @@
 
 with shifts as (
 	select *
-	from {{ ref('int_workforce__shifts') }}
+	from {{ ref('int_workforce__shift_pay') }}
 ),
 
 employee_shift_fact as (
@@ -32,6 +32,15 @@ employee_shift_fact as (
 		end_sequence,
 		is_cross_midnight,
 		is_manual_correction,
+		-- payroll (from int_workforce__shift_pay)
+		hourly_rate,
+		regular_hours,
+		ot125_hours,
+		ot150_hours,
+		regular_pay,
+		ot125_pay,
+		ot150_pay,
+		total_pay,
 		current_timestamp as dbt_loaded_at,
 		'fct_employee_shift' as dbt_source_relation
 	from shifts

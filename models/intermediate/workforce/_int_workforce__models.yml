@@ -45,15 +45,16 @@ models:
       - name: shift_duration_hours
         description: "Duration of the shift in hours."
         data_tests:
-          # known issue (verified 2026-06-16): exactly 1 shift of ~529.69h caused by a
-          # missing clock-out punch in the raw attendance data. Legitimate source noise,
-          # not a modeling bug — kept as warn rather than error.
+          # The synthetic attendance generator hard-caps every shift at 12h, so any
+          # shift longer than that is a real integrity violation (a missing/duplicated
+          # punch) — enforced as error. (The old static .bak employees, including the
+          # one ~529h missing-clock-out shift, were purged on 2026-06-24.)
           - dbt_utils.accepted_range:
               arguments:
                 min_value: 0
-                max_value: 24
+                max_value: 12
               config:
-                severity: warn
+                severity: error
 
   - name: int_workforce__daily_employee_hours
     description: "Daily employee hours aggregation derived from cleaned shift sessions."
@@ -115,3 +116,85 @@ models:
         description: "Store sales allocated to the employee using the labor share ratio."
       - name: sales_per_hour
         description: "Attributed sales divided by the employee hours worked on the day."
+
+  - name: int_workforce__shift_pay
+    description: >
+      Per-shift payroll. Splits each shift's worked hours into Israeli-style
+      overtime tiers (1-8h x1.0, 9-10h x1.25, 11-12h x1.5, hard-capped at 12h)
+      and prices them against the per-employee hourly rate from the
+      employee_wages seed. total_pay = regular_pay + ot125_pay + ot150_pay.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - shift_date
+              - employee_id
+    columns:
+      - name: employee_id
+        description: "Employee identifier."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_employee')
+                field: employee_id
+      - name: shift_date
+        description: "Date attributed to the shift."
+        data_tests:
+          - not_null
+      - name: shift_duration_hours
+        description: "Duration of the shift in hours (<= 12 by construction)."
+      - name: hourly_rate
+        description: "Base hourly wage for the employee, joined from the employee_wages seed."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 1000
+      - name: regular_hours
+        description: "Hours paid at x1.0 (the first 8 hours of the shift)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 8
+      - name: ot125_hours
+        description: "Hours paid at x1.25 (hours 9-10)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 2
+      - name: ot150_hours
+        description: "Hours paid at x1.5 (hours 11-12)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 2
+      - name: regular_pay
+        description: "regular_hours * hourly_rate."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: ot125_pay
+        description: "ot125_hours * hourly_rate * 1.25."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: ot150_pay
+        description: "ot150_hours * hourly_rate * 1.5."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: total_pay
+        description: "Total shift pay = regular_pay + ot125_pay + ot150_pay."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0

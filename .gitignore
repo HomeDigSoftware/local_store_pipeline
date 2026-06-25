@@ -5,6 +5,10 @@ logs/
 .env
 .venv/
 
+# Python bytecode caches
+__pycache__/
+*.pyc
+
 # Runtime logs (not source)
 scripts/pipeline.log
 scripts/logs/
@@ -18,3 +22,4 @@ INVOICE_GENERATION_WORKFLOW.md
 store_pipeline_daily.xml
 store_pipeline_daily_utf16.xml
 WORKFORCE_DATA_PLAN_2026-06-24.md
+git_hub_commends_basic.md
