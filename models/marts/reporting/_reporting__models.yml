@@ -462,6 +462,72 @@ models:
       - name: at_risk_wow_delta
         description: "Week-over-week change in at-risk count (lag 7 days; null until 7 days exist)."
 
+  - name: rpt_item_stockout_days
+    description: "Per-item stockout exposure over the accumulated snapshot history. Grain is one row per item_id. Counts the days each product sat OUT_OF_STOCK or STOCKOUT_RISK, the combined at-risk days and their share of observed days, plus the longest unbroken at-risk streak and the first/last at-risk dates. Answers 'which products spend the most time unavailable?'. Depth grows as the backfill loop accumulates more snapshot days."
+    columns:
+      - name: item_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: item_id
+      - name: item_name
+        description: "Product name from the latest snapshot."
+      - name: product_category_id
+        description: "Product category identifier."
+      - name: product_category_name
+        description: "Product category name."
+      - name: total_snapshot_days
+        description: "Number of snapshot days the item appears in the history."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+      - name: out_of_stock_days
+        description: "Days the item was OUT_OF_STOCK."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: stockout_risk_days
+        description: "Days the item was STOCKOUT_RISK."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: at_risk_days
+        description: "Days OUT_OF_STOCK or STOCKOUT_RISK (out_of_stock_days + stockout_risk_days)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: at_risk_pct
+        description: "at_risk_days as a percentage of total_snapshot_days (0-100)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 100
+      - name: longest_at_risk_streak
+        description: "Longest run of consecutive at-risk days for the item."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: first_at_risk_date
+        description: "Earliest at-risk snapshot date (null if never at risk)."
+      - name: last_at_risk_date
+        description: "Most recent at-risk snapshot date (null if never at risk)."
+      - name: current_stock_status
+        description: "Stock status on the item's latest snapshot date."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
+
   - name: rpt_category_performance_30d
     description: "Thirty-day category performance report aggregating product sales, estimated profit, and inventory risk by category."
     columns:
