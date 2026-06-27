@@ -89,13 +89,13 @@ answers one question a store manager actually asks.
 > **[▶ Open the live dashboard](https://analytics-engineer-website.vercel.app/projects/convenience-store/dashboard)**
 
 <p align="center">
-  <img src="./docs/overview.jpg" alt="Overview — KPIs, sales and ticket trends, top products, stock split" width="100%">
+  <img src="./overview.jpg" alt="Overview — KPIs, sales and ticket trends, top products, stock split" width="100%">
 </p>
 
 <details>
 <summary><b>📈 Overview</b> — "Is the store healthy right now?"</summary>
 <br>
-<img src="./docs/overview.jpg" alt="Overview view" width="100%">
+<img src="./overview.jpg" alt="Overview view" width="100%">
 
 Headline KPIs with a prior-period comparison baseline, daily revenue and
 ticket-count trends (with a 7-day moving average and hover detail), the live
@@ -105,7 +105,7 @@ top-10 product ranking, and the current stock-status split.
 <details>
 <summary><b>🕐 Sales</b> — "When and how do we sell?"</summary>
 <br>
-<img src="./docs/sales.jpg" alt="Sales view" width="100%">
+<img src="./sales.jpg" alt="Sales view" width="100%">
 
 Daily sales and average-ticket trends, **sales by hour of day** (morning /
 midday / evening / night) to find peak trading hours for staffing, and a
@@ -115,7 +115,7 @@ midday / evening / night) to find peak trading hours for staffing, and a
 <details>
 <summary><b>📦 Inventory</b> — "What do I reorder or clear today?"</summary>
 <br>
-<img src="./docs/inventory.jpg" alt="Inventory view" width="100%">
+<img src="./inventory.jpg" alt="Inventory view" width="100%">
 
 Inventory health over time (at-risk items vs days of cover), stock-status mix
 over time, a current stock-status distribution, and a days-of-cover
@@ -126,7 +126,7 @@ the date filter — and pairs with an actionable reorder plan.
 <details>
 <summary><b>🏷️ Products & Categories</b> — "What makes money vs dead weight?"</summary>
 <br>
-<img src="./docs/product_categories.jpg" alt="Products and categories view" width="100%">
+<img src="./product_categories.jpg" alt="Products and categories view" width="100%">
 
 Top products by revenue, **category gross-profit share**, and a
 **sales-vs-gross-profit scatter** coloured by velocity band. A notable insight
@@ -136,7 +136,7 @@ the data surfaces: one category can dominate revenue while another drives margin
 <details>
 <summary><b>👥 Workforce</b> — "Who performs, and what does labour cost?"</summary>
 <br>
-<img src="./docs/workforce.jpg" alt="Workforce view" width="100%">
+<img src="./workforce.jpg" alt="Workforce view" width="100%">
 
 A per-employee scorecard rankable by sales, hours, or efficiency; labour cost
 split into regular vs overtime tiers; and daily attributed sales per employee.
@@ -147,7 +147,7 @@ ownership — and the dashboard says so, openly.
 ### How the dashboard is wired
 
 <p align="center">
-  <img src="./docs/dashboard_lineage.svg" alt="rpt_ reporting tables map to the five dashboard views" width="100%">
+  <img src="./dashboard_lineage.svg" alt="rpt_ reporting tables map to the five dashboard views" width="100%">
 </p>
 
 The dbt **reporting layer (`rpt_*`)** is the contract between transformation and
