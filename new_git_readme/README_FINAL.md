@@ -177,11 +177,29 @@ service container, plus an informational `sqlfluff` lint pass.
 
 ## 🛠 Tech stack
 
-**Ingestion** Python · pandas · SQLAlchemy · pyodbc · uv  
-**Transform** dbt 1.11 (postgres adapter) · dbt_utils · dbt_expectations  
-**Warehouse** PostgreSQL (local dev) · Supabase (production)  
-**Dashboard** Next.js · Vercel  
-**Orchestration** Windows Task Scheduler · GitHub Actions (CI)
+**Ingestion**  
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)
+![pyodbc](https://img.shields.io/badge/pyodbc-CC2927?logo=microsoftsqlserver&logoColor=white)
+![uv](https://img.shields.io/badge/uv-DE5FE9?logo=uv&logoColor=white)
+
+**Transform**  
+![dbt](https://img.shields.io/badge/dbt-1.11-FF694B?logo=dbt&logoColor=white)
+![dbt_utils](https://img.shields.io/badge/dbt__utils-FF694B?logo=dbt&logoColor=white)
+![dbt_expectations](https://img.shields.io/badge/dbt__expectations-FF694B?logo=dbt&logoColor=white)
+
+**Warehouse**  
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white)
+
+**Dashboard**  
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)
+
+**Orchestration**  
+![Windows Task Scheduler](https://img.shields.io/badge/Task%20Scheduler-0078D6?logo=windows&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
 
 ---
 
