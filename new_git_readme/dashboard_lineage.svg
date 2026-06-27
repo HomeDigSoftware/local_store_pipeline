@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 720" width="1240" height="720" font-family="var(--font-display)" role="img" aria-label="Dashboard lineage: rpt reporting tables feed five dashboard views">
+  <style>
+    :root{
+      --bg:#0e141b; --surface:#18222d; --surface-2:#20303d; --stroke:#2c3a48;
+      --ink:#eef4f9; --ink-soft:#8da0b0;
+      --overview:#3ecf8e; --sales:#5b8def; --inventory:#3ecf8e;
+      --products:#8b6bff; --workforce:#ffb454;
+      --rpt:#3ecf8e; --serve:#ff8a3d;
+      --font-display:"Inter","Segoe UI",system-ui,sans-serif;
+      --font-mono:"JetBrains Mono","SF Mono",ui-monospace,monospace;
+    }
+    .bg{fill:var(--bg);} .ink{fill:var(--ink);} .soft{fill:var(--ink-soft);}
+    .mono{font-family:var(--font-mono);} .tbl{fill:var(--surface-2);stroke:var(--stroke);}
+    .view{fill:var(--surface);} 
+    /* LIGHT THEME — uncomment
+    :root{--bg:#f5f7fa;--surface:#fff;--surface-2:#f0f4f8;--stroke:#dde4ec;--ink:#16202b;--ink-soft:#5a6b7b;}
+    */
+  </style>
+  <rect class="bg" width="1240" height="720"/>
+  <text class="ink" x="60" y="52" font-size="28" font-weight="800">Executive Dashboard — data lineage</text>
+  <text class="soft mono" x="61" y="78" font-size="13" letter-spacing="1">reporting layer (rpt_*) in Supabase  to  five views in the Next.js dashboard</text>
+
+  <text class="mono" x="60" y="116" font-size="12" letter-spacing="2" fill="var(--rpt)">REPORTING LAYER (rpt_*)</text>
+  <text class="mono" x="820" y="116" font-size="12" letter-spacing="2" fill="var(--serve)">DASHBOARD VIEWS</text>
+
+  <g class="mono" font-size="11.5">
+    <rect class="tbl" x="60" y="130" width="300" height="30" rx="8"/><text class="ink" x="74" y="150">rpt_executive_summary_daily</text>
+    <rect class="tbl" x="60" y="168" width="300" height="30" rx="8"/><text class="ink" x="74" y="188">rpt_sales_trend_daily</text>
+    <rect class="tbl" x="60" y="206" width="300" height="30" rx="8"/><text class="ink" x="74" y="226">rpt_sales_by_hour</text>
+    <rect class="tbl" x="60" y="244" width="300" height="30" rx="8"/><text class="ink" x="74" y="264">rpt_payment_mix_daily</text>
+    <rect class="tbl" x="60" y="282" width="300" height="30" rx="8"/><text class="ink" x="74" y="302">rpt_returns_analysis_daily</text>
+    <rect class="tbl" x="60" y="320" width="300" height="30" rx="8"/><text class="ink" x="74" y="340">rpt_inventory_risk</text>
+    <rect class="tbl" x="60" y="358" width="300" height="30" rx="8"/><text class="ink" x="74" y="378">rpt_inventory_actions</text>
+    <rect class="tbl" x="60" y="396" width="300" height="30" rx="8"/><text class="ink" x="74" y="416">rpt_inventory_health_trend</text>
+    <rect class="tbl" x="60" y="434" width="300" height="30" rx="8"/><text class="ink" x="74" y="454">rpt_inventory_vs_sales</text>
+    <rect class="tbl" x="60" y="472" width="300" height="30" rx="8"/><text class="ink" x="74" y="492">rpt_product_performance_30d</text>
+    <rect class="tbl" x="60" y="510" width="300" height="30" rx="8"/><text class="ink" x="74" y="530">rpt_category_performance</text>
+    <rect class="tbl" x="60" y="548" width="300" height="30" rx="8"/><text class="ink" x="74" y="568">rpt_employee_productivity</text>
+    <rect class="tbl" x="60" y="586" width="300" height="30" rx="8"/><text class="ink" x="74" y="606">rpt_employee_payroll</text>
+  </g>
+
+  <rect class="view" x="820" y="130" width="360" height="84" rx="14" stroke="var(--overview)" stroke-width="1.5"/>
+  <text x="840" y="156" font-size="15" font-weight="800" fill="var(--overview)">Overview</text>
+  <text class="soft mono" x="840" y="178" font-size="11">8 KPIs · daily trend · ticket trend</text>
+  <text class="soft mono" x="840" y="196" font-size="11">top products · stock split</text>
+
+  <rect class="view" x="820" y="226" width="360" height="84" rx="14" stroke="var(--sales)" stroke-width="1.5"/>
+  <text x="840" y="252" font-size="15" font-weight="800" fill="var(--sales)">Sales</text>
+  <text class="soft mono" x="840" y="274" font-size="11">hourly pattern · payment mix donut</text>
+  <text class="soft mono" x="840" y="292" font-size="11">avg ticket trend · returns table</text>
+
+  <rect class="view" x="820" y="322" width="360" height="84" rx="14" stroke="var(--inventory)" stroke-width="1.5"/>
+  <text x="840" y="348" font-size="15" font-weight="800" fill="var(--inventory)">Inventory</text>
+  <text class="soft mono" x="840" y="370" font-size="11">health KPIs · action plan · cover dist</text>
+  <text class="soft mono" x="840" y="388" font-size="11">inv-vs-sales scatter · stock-mix trend</text>
+
+  <rect class="view" x="820" y="418" width="360" height="84" rx="14" stroke="var(--products)" stroke-width="1.5"/>
+  <text x="840" y="444" font-size="15" font-weight="800" fill="var(--products)">Products &amp; Categories</text>
+  <text class="soft mono" x="840" y="466" font-size="11">GP KPIs · sales-vs-GP scatter</text>
+  <text class="soft mono" x="840" y="484" font-size="11">category ranking · dead/slow movers</text>
+
+  <rect class="view" x="820" y="514" width="360" height="84" rx="14" stroke="var(--workforce)" stroke-width="1.5"/>
+  <text x="840" y="540" font-size="15" font-weight="800" fill="var(--workforce)">Workforce</text>
+  <text class="soft mono" x="840" y="562" font-size="11">efficiency · payroll · OT split</text>
+  <text class="soft mono" x="840" y="580" font-size="11">medal scorecard · daily attributed sales</text>
+
+  <g fill="none" stroke-width="2" opacity="0.55" stroke-linecap="round">
+    <path d="M360 145 C 590 145, 600 165, 820 165" stroke="var(--overview)"/>
+    <path d="M360 183 C 590 183, 600 175, 820 175" stroke="var(--overview)"/>
+    <path d="M360 221 C 590 221, 600 255, 820 255" stroke="var(--sales)"/>
+    <path d="M360 259 C 590 259, 600 268, 820 268" stroke="var(--sales)"/>
+    <path d="M360 297 C 590 297, 600 280, 820 280" stroke="var(--sales)"/>
+    <path d="M360 335 C 590 335, 600 350, 820 350" stroke="var(--inventory)"/>
+    <path d="M360 373 C 590 373, 600 365, 820 365" stroke="var(--inventory)"/>
+    <path d="M360 411 C 590 411, 600 378, 820 378" stroke="var(--inventory)"/>
+    <path d="M360 449 C 600 449, 650 388, 820 388" stroke="var(--inventory)"/>
+    <path d="M360 487 C 600 487, 650 450, 820 450" stroke="var(--products)"/>
+    <path d="M360 525 C 600 525, 650 470, 820 470" stroke="var(--products)"/>
+    <path d="M360 563 C 600 563, 650 545, 820 545" stroke="var(--workforce)"/>
+    <path d="M360 601 C 600 601, 650 565, 820 565" stroke="var(--workforce)"/>
+  </g>
+
+  <rect class="tbl" x="60" y="640" width="1120" height="44" rx="12"/>
+  <text class="soft mono" x="84" y="667" font-size="11.5"><tspan fill="var(--rpt)">Supabase store_pipeline</tspan>  to  <tspan fill="var(--serve)">Next.js / Vercel</tspan>   ·   each view reads its own rpt_ tables   ·   refreshed nightly via revalidate webhook</text>
+  <text class="soft mono" x="60" y="706" font-size="11">Reporting layer is the contract between dbt and the UI: the dashboard never touches raw or marts directly — only rpt_*.</text>
+</svg>
