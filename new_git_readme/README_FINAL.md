@@ -49,7 +49,7 @@ full modern-data-stack workflow, end to end:
 ## 🏗 Architecture
 
 <p align="center">
-  <img src="./new_git_readme/pipeline_v3.svg" alt="Pipeline: three sources flow through an EL→T engine into a live dashboard" width="100%">
+  <img src="./pipeline_v3.svg" alt="Pipeline: three sources flow through an EL→T engine into a live dashboard" width="100%">
 </p>
 
 Three sources converge into one **EL → T** engine, which publishes to Supabase
