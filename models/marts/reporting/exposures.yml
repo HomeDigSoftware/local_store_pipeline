@@ -26,6 +26,8 @@ exposures:
       - ref('rpt_category_performance_30d')
       - ref('rpt_inventory_health_trend')
       - ref('rpt_item_stockout_days')
+      - ref('rpt_sales_by_hour_weekday')
+      - ref('rpt_staffing_vs_sales_by_hour')
       - ref('rpt_employee_productivity')
       - ref('rpt_workforce_productivity_summary')
 

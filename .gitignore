@@ -1,6 +1,7 @@
 
 target/
 dbt_packages/
+dbt_packages_local/
 logs/
 .env
 .venv/
@@ -23,3 +24,9 @@ store_pipeline_daily.xml
 store_pipeline_daily_utf16.xml
 WORKFORCE_DATA_PLAN_2026-06-24.md
 git_hub_commends_basic.md
+PIPELINE_HANDOFF_REQUEST_2026-06-27.md
+WEBSITE_HANDOFF_dashboard_fixes_2026-06-27.md
+WORK_PLAN_2026-06-27.md
+
+
+# new_git_readme_&_photos/

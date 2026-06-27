@@ -528,6 +528,88 @@ models:
               arguments:
                 values: [HEALTHY, OUT_OF_STOCK, STOCKOUT_RISK, OVERSTOCK, DEAD_STOCK]
 
+  - name: rpt_sales_by_hour_weekday
+    description: "Sales aggregated to (day_of_week x hour-of-day) over the full available history, powering an hour x weekday staffing heatmap. day_of_week follows the Postgres DOW convention (0=Sunday ... 6=Saturday); occurrences counts that weekday's active days so the UI can show a per-occurrence ('typical Friday 14:00') average. Net of returns."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - day_of_week
+              - sales_hour
+    columns:
+      - name: day_of_week
+        description: "Day of week, Postgres DOW convention: 0=Sunday ... 6=Saturday."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1, 2, 3, 4, 5, 6]
+      - name: day_name
+        description: "English day name (e.g. 'Sunday'); UI renders RTL where needed."
+        data_tests:
+          - not_null
+      - name: sales_hour
+        description: "Hour of day, 0-23."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 23
+      - name: net_sales_amount
+        description: "Net sales (returns subtracted) summed over the window for that weekday-hour."
+      - name: tickets_count
+        description: "Distinct receipts in that weekday-hour over the window."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: occurrences
+        description: "Number of that weekday with sales activity in the window (denominator for a per-occurrence average)."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+
+  - name: rpt_staffing_vs_sales_by_hour
+    description: "Labour coverage vs sales by hour-of-day, powering 'are we staffed when busy?'. labour_hours allocates employee-hours to each hour bucket from shift start/end (minute precision); headcount_avg is the average simultaneous staff during that hour. Labour and sales are both restricted to the date range present in both facts so sales-per-labour-hour is window-consistent. Grain: one row per sales_hour (0-23, full 24-row spine)."
+    columns:
+      - name: sales_hour
+        description: "Hour of day, 0-23."
+        data_tests:
+          - not_null
+          - unique
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 23
+      - name: labour_hours
+        description: "Total employee-hours present during that hour over the window."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: headcount_avg
+        description: "Average simultaneous staff during that hour (labour_hours / distinct staffed days)."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: net_sales_amount
+        description: "Net sales in that hour over the window."
+        data_tests:
+          - not_null
+      - name: tickets_count
+        description: "Distinct receipts in that hour over the window."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
   - name: rpt_category_performance_30d
     description: "Thirty-day category performance report aggregating product sales, estimated profit, and inventory risk by category."
     columns:

@@ -1,0 +1,58 @@
+[0m14:08:28  Running with dbt=1.11.3
+[0m14:08:28  Registered adapter: postgres=1.10.0
+[0m14:08:29  Unable to do partial parsing because config vars, config profile, or config target have changed
+[0m14:08:29  Unable to do partial parsing because profile has changed
+[0m14:08:29  Unable to do partial parsing because a project config has changed
+[0m14:08:34  Found 44 models, 2 snapshots, 10 analyses, 240 data tests, 1 seed, 15 sources, 3 exposures, 848 macros
+[0m14:08:34  
+[0m14:08:34  Concurrency: 1 threads (target='dev')
+[0m14:08:34  
+[0m14:08:34  1 of 21 START sql table model raw.rpt_sales_by_hour_weekday .................... [RUN]
+[0m14:08:34  1 of 21 OK created sql table model raw.rpt_sales_by_hour_weekday ............... [[32mSELECT 168[0m in 0.24s]
+[0m14:08:34  2 of 21 START sql table model raw.rpt_staffing_vs_sales_by_hour ................ [RUN]
+[0m14:08:34  2 of 21 OK created sql table model raw.rpt_staffing_vs_sales_by_hour ........... [[32mSELECT 24[0m in 0.13s]
+[0m14:08:34  3 of 21 START test accepted_values_rpt_sales_by_hour_weekday_day_of_week__0__1__2__3__4__5__6  [RUN]
+[0m14:08:35  3 of 21 PASS accepted_values_rpt_sales_by_hour_weekday_day_of_week__0__1__2__3__4__5__6  [[32mPASS[0m in 0.07s]
+[0m14:08:35  4 of 21 START test dbt_utils_accepted_range_rpt_sales_by_hour_weekday_occurrences__1  [RUN]
+[0m14:08:35  4 of 21 PASS dbt_utils_accepted_range_rpt_sales_by_hour_weekday_occurrences__1 . [[32mPASS[0m in 0.05s]
+[0m14:08:35  5 of 21 START test dbt_utils_accepted_range_rpt_sales_by_hour_weekday_sales_hour__23__0  [RUN]
+[0m14:08:35  5 of 21 PASS dbt_utils_accepted_range_rpt_sales_by_hour_weekday_sales_hour__23__0  [[32mPASS[0m in 0.05s]
+[0m14:08:35  6 of 21 START test dbt_utils_accepted_range_rpt_sales_by_hour_weekday_tickets_count__0  [RUN]
+[0m14:08:35  6 of 21 PASS dbt_utils_accepted_range_rpt_sales_by_hour_weekday_tickets_count__0  [[32mPASS[0m in 0.22s]
+[0m14:08:35  7 of 21 START test dbt_utils_unique_combination_of_columns_rpt_sales_by_hour_weekday_day_of_week__sales_hour  [RUN]
+[0m14:08:35  7 of 21 PASS dbt_utils_unique_combination_of_columns_rpt_sales_by_hour_weekday_day_of_week__sales_hour  [[32mPASS[0m in 0.05s]
+[0m14:08:35  8 of 21 START test not_null_rpt_sales_by_hour_weekday_day_name ................. [RUN]
+[0m14:08:35  8 of 21 PASS not_null_rpt_sales_by_hour_weekday_day_name ....................... [[32mPASS[0m in 0.05s]
+[0m14:08:35  9 of 21 START test not_null_rpt_sales_by_hour_weekday_day_of_week .............. [RUN]
+[0m14:08:35  9 of 21 PASS not_null_rpt_sales_by_hour_weekday_day_of_week .................... [[32mPASS[0m in 0.05s]
+[0m14:08:35  10 of 21 START test not_null_rpt_sales_by_hour_weekday_occurrences ............. [RUN]
+[0m14:08:35  10 of 21 PASS not_null_rpt_sales_by_hour_weekday_occurrences ................... [[32mPASS[0m in 0.05s]
+[0m14:08:35  11 of 21 START test not_null_rpt_sales_by_hour_weekday_sales_hour .............. [RUN]
+[0m14:08:35  11 of 21 PASS not_null_rpt_sales_by_hour_weekday_sales_hour .................... [[32mPASS[0m in 0.05s]
+[0m14:08:35  12 of 21 START test dbt_utils_accepted_range_rpt_staffing_vs_sales_by_hour_headcount_avg__0  [RUN]
+[0m14:08:35  12 of 21 PASS dbt_utils_accepted_range_rpt_staffing_vs_sales_by_hour_headcount_avg__0  [[32mPASS[0m in 0.05s]
+[0m14:08:35  13 of 21 START test dbt_utils_accepted_range_rpt_staffing_vs_sales_by_hour_labour_hours__0  [RUN]
+[0m14:08:35  13 of 21 PASS dbt_utils_accepted_range_rpt_staffing_vs_sales_by_hour_labour_hours__0  [[32mPASS[0m in 0.05s]
+[0m14:08:35  14 of 21 START test dbt_utils_accepted_range_rpt_staffing_vs_sales_by_hour_sales_hour__23__0  [RUN]
+[0m14:08:35  14 of 21 PASS dbt_utils_accepted_range_rpt_staffing_vs_sales_by_hour_sales_hour__23__0  [[32mPASS[0m in 0.05s]
+[0m14:08:35  15 of 21 START test dbt_utils_accepted_range_rpt_staffing_vs_sales_by_hour_tickets_count__0  [RUN]
+[0m14:08:35  15 of 21 PASS dbt_utils_accepted_range_rpt_staffing_vs_sales_by_hour_tickets_count__0  [[32mPASS[0m in 0.04s]
+[0m14:08:35  16 of 21 START test not_null_rpt_staffing_vs_sales_by_hour_headcount_avg ....... [RUN]
+[0m14:08:35  16 of 21 PASS not_null_rpt_staffing_vs_sales_by_hour_headcount_avg ............. [[32mPASS[0m in 0.04s]
+[0m14:08:35  17 of 21 START test not_null_rpt_staffing_vs_sales_by_hour_labour_hours ........ [RUN]
+[0m14:08:35  17 of 21 PASS not_null_rpt_staffing_vs_sales_by_hour_labour_hours .............. [[32mPASS[0m in 0.05s]
+[0m14:08:35  18 of 21 START test not_null_rpt_staffing_vs_sales_by_hour_net_sales_amount .... [RUN]
+[0m14:08:35  18 of 21 PASS not_null_rpt_staffing_vs_sales_by_hour_net_sales_amount .......... [[32mPASS[0m in 0.04s]
+[0m14:08:35  19 of 21 START test not_null_rpt_staffing_vs_sales_by_hour_sales_hour .......... [RUN]
+[0m14:08:36  19 of 21 PASS not_null_rpt_staffing_vs_sales_by_hour_sales_hour ................ [[32mPASS[0m in 0.05s]
+[0m14:08:36  20 of 21 START test not_null_rpt_staffing_vs_sales_by_hour_tickets_count ....... [RUN]
+[0m14:08:36  20 of 21 PASS not_null_rpt_staffing_vs_sales_by_hour_tickets_count ............. [[32mPASS[0m in 0.05s]
+[0m14:08:36  21 of 21 START test unique_rpt_staffing_vs_sales_by_hour_sales_hour ............ [RUN]
+[0m14:08:36  21 of 21 PASS unique_rpt_staffing_vs_sales_by_hour_sales_hour .................. [[32mPASS[0m in 0.05s]
+[0m14:08:36  
+[0m14:08:36  Finished running 2 table models, 19 data tests in 0 hours 0 minutes and 1.96 seconds (1.96s).
+[0m14:08:36  
+[0m14:08:36  [32mCompleted successfully[0m
+[0m14:08:36  
+[0m14:08:36  Done. PASS=21 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=21
+OPENSSL_Uplink(00007FFCDA094AF8,08): no OPENSSL_Applink
