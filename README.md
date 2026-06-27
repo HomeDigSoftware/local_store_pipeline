@@ -1,202 +1,247 @@
-# Store Analytics Pipeline
+# 🏪 Convenience Store Analytics Platform
 
-[![dbt CI](https://github.com/HomeDigSoftware/local_store_pipeline/actions/workflows/dbt_ci.yml/badge.svg)](https://github.com/HomeDigSoftware/local_store_pipeline/actions/workflows/dbt_ci.yml)
+> An end-to-end analytics engineering project: real point-of-sale data flows
+> through a Python EL pipeline, dbt transformations, and a Supabase warehouse,
+> into a live five-view executive dashboard — refreshed automatically every night.
 
-An end-to-end retail analytics platform that turns a small optical store's
-point-of-sale data into a live business dashboard. Real POS history is augmented
-with realistic synthetic sales, modelled with **dbt**, served from **Supabase**,
-and visualised by a **Next.js** dashboard — refreshed automatically every night.
+<p align="center">
+  <img alt="dbt" src="https://img.shields.io/badge/dbt-1.11-FF694B?logo=dbt&logoColor=white">
+  <img alt="Postgres" src="https://img.shields.io/badge/Postgres-Supabase-3ECF8E?logo=postgresql&logoColor=white">
+  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-Vercel-000000?logo=nextdotjs&logoColor=white">
+  <img alt="dbt tests" src="https://img.shields.io/badge/dbt%20tests-220%2B%20passing-3ECF8E">
+  <img alt="CI" src="https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white">
+</p>
 
-> **Portfolio project** demonstrating analytics-engineering practice: layered dbt
-> modelling, data-quality testing, SCD snapshots, an inventory time-series, and a
-> fully automated load → transform → publish → cache-bust pipeline.
-
----
-
-## Architecture
-
-```
-┌─────────────────────┐
-│  Verifone Retail360  │   real POS backup (.bak)
-│      SQL Server      │
-└──────────┬───────────┘
-           │  01_restore_backup.py  (RESTORE .bak)
-           ▼
-┌──────────────────────────────────────────────┐
-│  Python ingestion  (scripts/, the "EL")       │
-│  02_extract_load_03.py                         │
-│   • SQL Server → local Postgres (raw)          │
-│   • + synthetic invoices (Option C variance)   │
-│   • + periodic inventory replenishment (~6d)   │
-└──────────┬─────────────────────────────────────┘
-           ▼
-┌─────────────────────┐     03_load_to_supabase_allowlist.py
-│  Local Postgres      │ ──────────────────────────────────► ┌──────────────────┐
-│  db: store_local     │     8 source tables (TRUNCATE+append) │  Supabase (raw)  │
-│  schema: raw         │                                       └────────┬─────────┘
-└──────────┬───────────┘                                                │
-           │  dbt (the "T")                                             │
-           ▼                                                            ▼
-   staging → intermediate → marts/core → marts/reporting     dbt run --target prod
-           │                                                            │
-           ▼                                                            ▼
-   local raw (dev: all layers)                          ┌──────────────────────────┐
-                                                         │ Supabase store_pipeline   │
-                                                         │  dim_*, fct_*, rpt_*      │
-                                                         └────────────┬──────────────┘
-                                                                      │ revalidate webhook
-                                                                      ▼
-                                                         ┌──────────────────────────┐
-                                                         │  Next.js dashboard (Vercel)│
-                                                         └──────────────────────────┘
-```
-
-**Two pipelines, EL then T:** Python scripts do the Extract+Load (dbt does *not*
-load raw data); dbt does the Transform. See [CLAUDE.md](CLAUDE.md) for the full
-architecture and conventions, and [INVOICE_GENERATION_WORKFLOW.md](INVOICE_GENERATION_WORKFLOW.md)
-for the synthetic-invoice + replenishment logic.
+<p align="center">
+  <b><a href="https://analytics-engineer-website.vercel.app/projects/convenience-store/dashboard">▶ Open the live dashboard</a></b>
+  &nbsp;·&nbsp;
+  <a href="#-architecture">Architecture</a>
+  &nbsp;·&nbsp;
+  <a href="#-live-executive-dashboard">Dashboard</a>
+  &nbsp;·&nbsp;
+  <a href="#-tech-stack">Stack</a>
+</p>
 
 ---
 
-## Tech stack
+## What this project demonstrates
 
-| Layer | Technology |
-|-------|------------|
-| Source | Verifone Retail 360 POS → SQL Server `.bak` |
-| Ingestion / EL | Python (pandas, SQLAlchemy, pyodbc), orchestrated by `uv` |
-| Transform / T | **dbt 1.11.3**, postgres adapter (`dbt_utils`, `dbt_expectations`) |
-| Dev warehouse | local **Postgres** (`store_local`, schema `raw`) |
-| Prod warehouse | **Supabase** Postgres (schema `store_pipeline`) |
-| Dashboard | Next.js on Vercel (ISR + `revalidate` webhook) |
-| Automation | Windows Task Scheduler → `run_daily_backfill.bat` |
+This is a portfolio project for an **Analytics Engineer** role. It covers the
+full modern-data-stack workflow, end to end:
 
-Everything runs through **`uv`**: `uv run dbt ...`, `uv run python ...`.
-
----
-
-## dbt project layout
-
-```
-models/
-  staging/store_data/    stg_store_data__*      one per source table; clean + rename only
-  intermediate/
-    sales/               int_sales__*           line items, daily product/store, returns, attribution
-    inventory/           int_inventory__*       current stock, velocity, stock health
-    workforce/           int_workforce__*       attendance → shifts → daily hours
-  marts/
-    core/                dim_*, fct_*            conformed dims + facts (incl. fct_inventory_snapshot_history)
-    reporting/           rpt_*                   13 dashboard tables (the prod surface)
-snapshots/               2 SCD snapshots         item price history, inventory balance
-macros/                  create_dim_date_new.sql recursive date-spine → dim_date
-```
-
-**Scale:** ~39 models · 179 data tests (0 errors) · 13 `rpt_*` reporting tables ·
-2 snapshots · 3 exposures. All models materialised as **table**.
-
-### Reporting tables (`rpt_*`, served to the dashboard)
-`rpt_daily_sales` · `rpt_sales_trend_daily` · `rpt_executive_summary_daily` ·
-`rpt_sales_by_hour` · `rpt_payment_mix_daily` · `rpt_returns_analysis_daily` ·
-`rpt_product_performance_30d` · `rpt_category_performance_30d` ·
-`rpt_product_velocity` · `rpt_inventory_risk` · `rpt_inventory_actions` ·
-`rpt_inventory_health_trend` · `rpt_employee_productivity`.
+- **Ingesting real data** — a genuine Verifone Retail 360 point-of-sale backup
+  from a small store, augmented with realistic synthetic sales and inventory
+  replenishment cycles so the dataset is rich enough to model.
+- **The EL → T pattern** — Python handles Extract & Load; dbt owns Transform.
+- **Dimensional modelling** — staging → intermediate → marts (dims, facts,
+  reporting), including slowly-changing-dimension snapshots and a
+  point-in-time-correct inventory history.
+- **Data quality as a first-class concern** — 220+ dbt tests with a severity
+  policy that separates legitimate source noise (`warn`) from integrity
+  violations (`error`).
+- **Serving & presentation** — a Supabase production warehouse and a live
+  Next.js dashboard built for a store manager, not just for show.
+- **Automation & CI** — the whole pipeline runs unattended every night, and a
+  GitHub Actions workflow validates the dbt project on every push/PR.
 
 ---
 
-## Highlights
+## 🏗 Architecture
 
-- **Realistic synthetic data (Option C variance).** Real POS history is short, so
-  the pipeline augments it: weekday profile, compound trend, lognormal jitter,
-  Israeli payroll calendar, surprise events, and a deterministic inventory
-  replenishment cycle (~every 6 days). Date-seeded so the series is reproducible.
-- **Inventory time-series.** `fct_inventory_snapshot_history` accumulates one
-  point-in-time-correct inventory snapshot per business day (built day-by-day by
-  the backfill loop), enabling a real trend report (`rpt_inventory_health_trend`)
-  that a single-day snapshot could never support.
-- **Data quality.** 179 tests across all layers — `not_null`/`unique`/`relationships`/
-  `accepted_values`/`accepted_range`, composite-grain uniqueness, and singular
-  cross-model consistency tests. `severity: warn` marks known source noise;
-  `error` is reserved for real integrity violations. Map: [DATA_TESTS_CATALOG.md](DATA_TESTS_CATALOG.md).
-- **Free-tier-safe delivery.** Supabase `raw` holds only 8 source tables, loaded
-  TRUNCATE+append (zero DDL) to avoid PostgREST schema-reload IO storms; the
-  inventory history is delivered append-delta so Supabase is a durable archive.
+<p align="center">
+  <img src="./docs/pipeline_v3.svg" alt="Pipeline: three sources flow through an EL→T engine into a live dashboard" width="100%">
+</p>
 
----
+Three sources converge into one **EL → T** engine, which publishes to Supabase
+and a live Next.js dashboard.
 
-## Automation
+| Stage | Tool | What happens |
+|-------|------|--------------|
+| **Source** | Verifone Retail 360 `.bak` | Real SQL Server POS backup, restored locally |
+| **Extract & Load** | Python · pandas · SQLAlchemy · `uv` | SQL Server → local Postgres (`raw`), plus synthetic sales & inventory cycles |
+| **Transform** | dbt 1.11 (postgres adapter) | `staging → intermediate → marts/core → marts/reporting` · 42 models · 220+ tests |
+| **Serve** | Supabase Postgres | `dbt run --target prod` builds the `rpt_*` dashboard surface |
+| **Present** | Next.js on Vercel | Five-view executive dashboard, refreshed by a revalidate webhook |
 
-The whole pipeline runs unattended once a day.
+<details>
+<summary><b>dbt model layers (42 models, 2 SCD snapshots, 3 singular tests)</b></summary>
 
-```
-Windows Task Scheduler (daily 03:00, wakes from sleep)
-        │
-        ▼
-scripts/run_daily_backfill.bat        (sets PYTHONUTF8=1, logs to scripts/logs/)
-        │
-        ▼
-full_auto_backfill.py --auto-run      (no prompt; safe no-op if already current)
-   for each business day D:
-     02_extract_load_03.py            → load D into local raw (+ synthetic + replenish)
-     dbt run +fct_inventory_snapshot_history --vars snapshot_date=D
-   then (once):
-     03_load_to_supabase_allowlist.py → 8 sources → Supabase raw
-     copy inventory history (append-delta) → Supabase store_pipeline
-     dbt run --target prod            → build dim/fct/rpt in store_pipeline
-     revalidate_website.py            → bust the dashboard cache
-```
+- **staging (`stg_store_data__*`)** — one model per source table; clean & rename only.
+- **intermediate (`int_*`)** — business logic split by domain: `sales/`,
+  `inventory/` (velocity & stock health), `workforce/` (shifts, pay, attribution).
+- **marts/core (`dim_*`, `fct_*`)** — conformed dimensions and facts, including
+  `fct_inventory_snapshot_history` (one point-in-time-correct snapshot per
+  business day, built on a recursive date spine) and 2 SCD snapshots
+  (`snap_items_price_history`, `snap_inventory_balance`).
+- **marts/reporting (`rpt_*`)** — 15 dashboard-ready tables; the production
+  surface the UI reads from. Surfaced via the `store_analytics_dashboard`
+  dbt exposure.
 
-`--auto-run` exits cleanly when the data is already up to date, so the daily
-schedule is a safe no-op on days with nothing new.
+</details>
 
 ---
 
-## Running it
+## 📊 Live Executive Dashboard
+
+A five-view operational dashboard built on the dbt reporting layer. Each view
+answers one question a store manager actually asks.
+
+> **[▶ Open the live dashboard](https://analytics-engineer-website.vercel.app/projects/convenience-store/dashboard)**
+
+<p align="center">
+  <img src="./docs/overview.jpg" alt="Overview — KPIs, sales and ticket trends, top products, stock split" width="100%">
+</p>
+
+<details>
+<summary><b>📈 Overview</b> — "Is the store healthy right now?"</summary>
+<br>
+<img src="./docs/overview.jpg" alt="Overview view" width="100%">
+
+Headline KPIs with a prior-period comparison baseline, daily revenue and
+ticket-count trends (with a 7-day moving average and hover detail), the live
+top-10 product ranking, and the current stock-status split.
+</details>
+
+<details>
+<summary><b>🕐 Sales</b> — "When and how do we sell?"</summary>
+<br>
+<img src="./docs/sales.jpg" alt="Sales view" width="100%">
+
+Daily sales and average-ticket trends, **sales by hour of day** (morning /
+midday / evening / night) to find peak trading hours for staffing, and a
+**cash-vs-credit payment mix** — useful for understanding card-processing fees.
+</details>
+
+<details>
+<summary><b>📦 Inventory</b> — "What do I reorder or clear today?"</summary>
+<br>
+<img src="./docs/inventory.jpg" alt="Inventory view" width="100%">
+
+Inventory health over time (at-risk items vs days of cover), stock-status mix
+over time, a current stock-status distribution, and a days-of-cover
+distribution. The view always reflects the **latest snapshot**, independent of
+the date filter — and pairs with an actionable reorder plan.
+</details>
+
+<details>
+<summary><b>🏷️ Products & Categories</b> — "What makes money vs dead weight?"</summary>
+<br>
+<img src="./docs/product_categories.jpg" alt="Products and categories view" width="100%">
+
+Top products by revenue, **category gross-profit share**, and a
+**sales-vs-gross-profit scatter** coloured by velocity band. A notable insight
+the data surfaces: one category can dominate revenue while another drives margin.
+</details>
+
+<details>
+<summary><b>👥 Workforce</b> — "Who performs, and what does labour cost?"</summary>
+<br>
+<img src="./docs/workforce.jpg" alt="Workforce view" width="100%">
+
+A per-employee scorecard rankable by sales, hours, or efficiency; labour cost
+split into regular vs overtime tiers; and daily attributed sales per employee.
+Sales are attributed by **share of worked hours**, not direct transaction
+ownership — and the dashboard says so, openly.
+</details>
+
+### How the dashboard is wired
+
+<p align="center">
+  <img src="./docs/dashboard_lineage.svg" alt="rpt_ reporting tables map to the five dashboard views" width="100%">
+</p>
+
+The dbt **reporting layer (`rpt_*`)** is the contract between transformation and
+UI: the dashboard reads only `rpt_` tables — never `raw` or intermediate marts.
+The five views are backed by tables such as `rpt_executive_summary_daily`,
+`rpt_sales_trend_daily`, `rpt_sales_by_hour`, `rpt_payment_mix_daily`,
+`rpt_inventory_health_trend`, `rpt_inventory_actions`, `rpt_item_stockout_days`,
+`rpt_category_performance_30d`, `rpt_product_performance_30d`,
+`rpt_product_velocity`, and `rpt_workforce_productivity_summary`.
+
+---
+
+## ⏱ Automation
+
+The pipeline runs unattended, once a day. **Windows Task Scheduler** wakes the
+machine at `03:00` and runs `scripts/run_daily_backfill.bat` →
+`scripts/full_auto_backfill.py --auto-run`. For each new business day it loads
+data, takes the inventory snapshot, pushes to Supabase, runs
+`dbt run --target prod`, and triggers the dashboard revalidate webhook. If the
+data is already current, it exits cleanly as a safe no-op.
+
+A **GitHub Actions** workflow (`.github/workflows/dbt_ci.yml`) validates the
+project on every push/PR — `dbt deps`/`parse`/`compile` against a Postgres
+service container, plus an informational `sqlfluff` lint pass.
+
+---
+
+## 🛠 Tech stack
+
+**Ingestion**  
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)
+![pyodbc](https://img.shields.io/badge/pyodbc-CC2927?logo=microsoftsqlserver&logoColor=white)
+![uv](https://img.shields.io/badge/uv-DE5FE9?logo=uv&logoColor=white)
+
+**Transform**  
+![dbt](https://img.shields.io/badge/dbt-1.11-FF694B?logo=dbt&logoColor=white)
+![dbt_utils](https://img.shields.io/badge/dbt__utils-FF694B?logo=dbt&logoColor=white)
+![dbt_expectations](https://img.shields.io/badge/dbt__expectations-FF694B?logo=dbt&logoColor=white)
+
+**Warehouse**  
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white)
+
+**Dashboard**  
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)
+
+**Orchestration**  
+![Windows Task Scheduler](https://img.shields.io/badge/Task%20Scheduler-0078D6?logo=windows&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+
+---
+
+## 📁 Repository structure
+
+```
+.
+├── scripts/                 # Python EL: restore, extract-load (+synthetic), supabase load, backfill
+├── models/
+│   ├── staging/             # stg_store_data__*
+│   ├── intermediate/        # int_*  (sales / inventory / workforce)
+│   └── marts/
+│       ├── core/            # dim_*, fct_*
+│       └── reporting/       # rpt_*  (dashboard surface)
+├── snapshots/               # 2 SCD snapshots
+├── tests/singular/          # 3 cross-model consistency tests
+├── macros/                  # recursive date-spine generator (dim_date)
+├── seeds/                   # employee_wages.csv
+├── .github/workflows/       # dbt CI
+├── docs/                    # architecture diagrams + dashboard screenshots
+└── README.md
+```
+
+---
+
+## ▶ Running it
+
+This is a **portfolio project** wired to a specific local environment (a
+SQL Server `.bak`, a local Postgres, and Windows Task Scheduler), so it is not
+meant to be cloned and run end-to-end as-is. The dbt project itself is standard:
 
 ```bash
-# one-time
-uv sync
-uv run dbt deps
-
-# build / test (dev = local Postgres, schema raw)
-uv run dbt run
-uv run dbt test
-
-# deploy dashboard models to Supabase
-uv run dbt run  --target prod
-uv run dbt test --target prod
-
-# backfill manually
-uv run python scripts/full_auto_backfill.py            # interactive (prompts for days)
-uv run python scripts/full_auto_backfill.py --auto-run # unattended, run until today
-uv run python scripts/full_auto_backfill.py --days 1   # smoke test: one day end-to-end
+uv run dbt deps      # install dbt_utils + dbt_expectations
+uv run dbt parse     # validate refs / YAML
+uv run dbt build     # build + test all models (dev: local Postgres)
 ```
 
-Profiles live in `~/.dbt/profiles.yml` (`store_pipeline`: `dev` local Postgres,
-`prod` Supabase). Secrets are read from `.env` (gitignored).
-
 ---
 
-## Current state (2026-06-16)
+## 👤 Author
 
-- ✅ dbt: 39 models, 179 tests, 0 errors; 13 `rpt_*` deployed to Supabase `store_pipeline`.
-- ✅ Disk-IO crisis resolved (raw 539 → 8 tables, indexes, allowlist loader, caching + webhook).
-- ✅ Inventory snapshot history + trend report live; append-delta delivery.
-- ✅ Daily automated job live — Task Scheduler runs `--auto-run` at 03:00 (wakes from sleep).
-- ✅ Prod data backfilled up to date.
+**Zafrir Havia** — Analytics Engineer  
+Transforming raw data into decisions, built with Next.js, dbt & Supabase.
 
-Remaining polish is tracked in the dated `WORK_PLAN_*.md` (open tasks) and the
-day-by-day history in [WORK_LOG.md](WORK_LOG.md).
-
----
-
-## Documentation map
-
-| File | Purpose |
-|------|---------|
-| [CLAUDE.md](CLAUDE.md) | Architecture, stack reality, conventions, commands (source of truth) |
-| [WORK_LOG.md](WORK_LOG.md) | Chronological log of completed work |
-| `WORK_PLAN_<date>.md` | Remaining open tasks (latest dated file) |
-| [DATA_TESTS_CATALOG.md](DATA_TESTS_CATALOG.md) | Living map of every table/column and its tests |
-| [INVOICE_GENERATION_WORKFLOW.md](INVOICE_GENERATION_WORKFLOW.md) | Synthetic invoices + inventory replenishment logic |
-
-*(Planning/status docs are kept local-only by convention; the tracked repo is the
-dbt project + `scripts/`.)*
+<!-- TODO(author): add GitHub / LinkedIn / portfolio links and a LICENSE if desired. -->
