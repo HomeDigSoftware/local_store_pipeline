@@ -13,6 +13,10 @@ __pycache__/
 # Runtime logs (not source)
 scripts/pipeline.log
 scripts/logs/
+scratch_*.log
+compilation_output.txt
+table_list.csv
+work_info.md
 
 # Local-only working docs (planning/status/reference — not part of the tracked dbt project)
 CLAUDE.md
@@ -27,6 +31,10 @@ git_hub_commends_basic.md
 PIPELINE_HANDOFF_REQUEST_2026-06-27.md
 WEBSITE_HANDOFF_dashboard_fixes_2026-06-27.md
 WORK_PLAN_2026-06-27.md
+DASHBOARD_PROD_TABLE_ALLOWLIST_2026-06-28.md
+WORK_PLAN_2026-06-28.md
 
 
-# new_git_readme_&_photos/
+# Local-only readme working folders (source proposal + drafts; final README is tracked at root, images in docs/)
+new_git_readme/
+new_git_readme_&_photos/

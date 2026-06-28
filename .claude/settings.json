@@ -8,7 +8,9 @@
       "Bash(uv run *)",
       "Bash(echo \"exit=$?\")",
       "PowerShell($g = Get-Command gh -ErrorAction SilentlyContinue; if \\($g\\) { $g.Source; gh run list --limit 5 } else { \"gh not found on PATH\" })",
-      "PowerShell($paths = @\\(\"$env:ProgramFiles\\\\GitHub CLI\\\\gh.exe\",\"$env:LOCALAPPDATA\\\\Programs\\\\GitHub CLI\\\\gh.exe\",\"$env:ProgramFiles\\(x86\\)\\\\GitHub CLI\\\\gh.exe\"\\); $found = $paths | Where-Object { Test-Path $_ }; if \\($found\\) { \"FOUND: $found\" } else { \"not in standard locations\"; Get-ChildItem -Path \"C:\\\\\" -Filter gh.exe -Recurse -ErrorAction SilentlyContinue -Depth 4 | Select-Object -First 3 -ExpandProperty FullName })"
+      "PowerShell($paths = @\\(\"$env:ProgramFiles\\\\GitHub CLI\\\\gh.exe\",\"$env:LOCALAPPDATA\\\\Programs\\\\GitHub CLI\\\\gh.exe\",\"$env:ProgramFiles\\(x86\\)\\\\GitHub CLI\\\\gh.exe\"\\); $found = $paths | Where-Object { Test-Path $_ }; if \\($found\\) { \"FOUND: $found\" } else { \"not in standard locations\"; Get-ChildItem -Path \"C:\\\\\" -Filter gh.exe -Recurse -ErrorAction SilentlyContinue -Depth 4 | Select-Object -First 3 -ExpandProperty FullName })",
+      "Bash(git rm *)",
+      "Bash(git status *)"
     ]
   }
 }

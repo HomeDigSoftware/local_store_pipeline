@@ -175,6 +175,66 @@ service container, plus an informational `sqlfluff` lint pass.
 
 ---
 
+## ⚙️ Engineering for a free-tier warehouse
+
+The production warehouse runs on Supabase's **free tier** — shared CPU, a 500 MB
+database, and a capped IO/egress burst budget. A naive "rebuild everything every
+night" pipeline exhausts that budget, so the production path is shaped by a few
+deliberate cost decisions. (The full reasoning behind each is documented in the
+project's decision log; the summary follows.)
+
+**The failure mode — schema-reload storms.** Supabase auto-reloads the PostgREST
+schema cache on *every* DDL statement (an event trigger fires on each
+`CREATE`/`DROP`/`ALTER`). Each reload runs a heavy introspection batch — walking
+types and constraints recursively and scanning `pg_timezone_names`. A pipeline
+that drops and recreates dozens of tables nightly therefore triggers dozens of
+these storms, and on a shared CPU they dominate the instance's time budget. This
+was diagnosed from `pg_stat_statements` (the introspection queries, not dashboard
+queries, were the top cost) — and it drove the decisions below.
+
+**Decision 1 — load with DML, not DDL.** The raw layer is loaded by `TRUNCATE` +
+`INSERT` against a fixed source allowlist, never `DROP`/`CREATE`. `INSERT` is data,
+not schema, so it triggers *no* schema reload. An earlier replace-all loader had
+ballooned `raw` to **539 tables** and caused exactly the storm above; cutting it
+to **8 source tables** loaded by DML removed it.
+
+**Decision 2 — publish only what the dashboard reads.** The dbt project has ~45
+models, but the dashboard queries only ~20 of them (the read-set is derived from
+the dashboard's own SQL, not guessed). Only that read-set belongs in Supabase;
+staging, most intermediates, and a 43 MB point-in-time inventory-history fact are
+kept in the **local dev warehouse**, where they're computed for free. Fewer
+objects in the exposed schema means cheaper introspection per reload and a
+smaller, faster production database.
+
+**Decision 3 — reporting models are *tables*, not views.** Each materialization
+trades build cost against read cost:
+
+| materialization | build cost | storage | read cost | nightly DDL? |
+|---|---|---|---|---|
+| **table** | compute + write all rows | yes | cheap (indexed scan) | yes — drop/create |
+| **view** | ~none (stores SQL only) | none | recomputes on every read | yes — create-or-replace |
+| **incremental** | write new rows only | yes | cheap (indexed scan) | no — insert/merge |
+
+A view looks free because it stores no rows and costs nothing to build — but that
+cost doesn't vanish, it **moves to read time**: the underlying query re-runs on
+every dashboard hit. For an interactive dashboard that reads these tables
+constantly, paying compute per read is the wrong trade. So reporting models are
+materialized as **indexed tables** (fast indexed reads for the UI) and loaded into
+production by DML per Decision 1 — giving cheap reads *and* no nightly schema
+churn. (`incremental` would also avoid the DDL but adds state/complexity these
+small tables don't justify.)
+
+**Decision 4 — index the access paths.** Every reporting table is indexed on the
+exact columns the dashboard filters and sorts on (`snapshot_date`, `item_id`, the
+hour/weekday grain, …), so the UI issues index scans, not sequential ones.
+
+**Where it stands:** production holds only the ~20-table dashboard read-set
+(~46 MB, down from ~116 MB), `raw` is 8 tables (down from 539), and the load path
+is pure DML — the nightly run performs no schema-changing DDL, so the schema-reload
+storm is gone.
+
+---
+
 ## 🛠 Tech stack
 
 **Ingestion**  

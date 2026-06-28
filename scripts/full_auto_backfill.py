@@ -28,18 +28,21 @@ Pair this with: models/marts/core/fct_inventory_snapshot_history.sql
 
 FINAL DELIVERY TO SUPABASE (after the loop, steps 1-3)
 ------------------------------------------------------
-The series is accumulated in DEV (local raw) because only local raw is updated per
-iteration. To get EVERYTHING to Supabase, the loop is followed by:
-  STEP 1  03_load_to_supabase_allowlist.py            8 source tables → Supabase raw
-  STEP 2  APPEND new days of raw.<history> (local) → Supabase store_pipeline.<history>
-  STEP 3  dbt run --target prod --exclude <history>   build all prod models → store_pipeline
-The history is delivered (STEP 2) because it CANNOT be rebuilt on prod (Supabase raw
-only holds the final business date after step 1). It is APPEND-only — only business
-days newer than Supabase's current max are sent, so there is no DROP/CREATE (no
-PostgREST schema reload) and no full re-transfer; Supabase becomes the durable archive.
-It runs BEFORE the prod build (STEP 3) because fct_inventory_snapshot (and thus the
-inventory reports) now read the latest slice of the history table — the build must see
-the fresh series. STEP 3 excludes the history model so the build never overwrites it.
+The full dbt DAG is built in DEV (local raw). To publish to Supabase, the loop is
+followed by:
+  STEP 1  03_load_to_supabase_allowlist.py            8 source tables → Supabase raw (DML)
+  STEP 2  dbt run --target dev --exclude <history>    build the full DAG in local dev
+  STEP 3  05_publish_dashboard_models.py --apply      copy the ~20-table dashboard
+                                                      read-set (local dev → Supabase
+                                                      store_pipeline) via TRUNCATE+append
+WHY copy instead of `dbt run --target prod`: the old prod build DROP/CREATEd all ~44
+models nightly, and every DDL forces a PostgREST schema-cache reload (the introspection
+storm that exhausted the free-tier IO budget — see README "Engineering for a free-tier
+warehouse"). STEP 3 instead loads ONLY the read-set the dashboard reads, by DML
+(TRUNCATE+append) — no DDL → no schema reload. The other ~25 models (incl. the 43 MB
+history) stay in dev only and are dropped from prod one-time by
+cleanup_supabase_store_pipeline.py. STEP 2 refreshes the read-set in dev first so the
+copy is current (history itself is maintained per-date by the loop, hence --exclude).
 
 IMPORTANT NOTES
 ---------------
@@ -108,6 +111,7 @@ MSSQL_URL = URL.create(
 PROJECT_ROOT = Path(__file__).parent.parent          # dbt project root (has dbt_project.yml)
 SCRIPT_02 = Path(__file__).parent / "02_extract_load_03.py"
 SCRIPT_03 = Path(__file__).parent / "03_load_to_supabase_allowlist.py"   # economical loader (not legacy replace-all)
+SCRIPT_05 = Path(__file__).parent / "05_publish_dashboard_models.py"     # DML publisher of the dashboard read-set
 
 DBT_TARGET = "dev"                                   # accumulate locally; switch consciously
 DBT_SELECT = "+fct_inventory_snapshot_history"       # ancestry + the incremental snapshot
@@ -200,91 +204,33 @@ def _step1_push_sources_to_supabase() -> bool:
     return True
 
 
-def _step2_build_prod_models() -> bool:
-    """STEP 3/3 — build all prod models in store_pipeline, EXCLUDING the history
-    model (so prod does not overwrite the accumulated series with a single date).
-    Runs AFTER the history copy: fct_inventory_snapshot reads the latest slice of
-    the history table, so the table must already be fresh in prod."""
-    cmd = ["uv", "run", "dbt", "run", "--target", PROD_TARGET, "--exclude", HISTORY_MODEL]
-    log.info("STEP 3/3 — dbt build on prod  (exclude %s → %s)", HISTORY_MODEL, PROD_SCHEMA)
+def _step2_build_dev_models() -> bool:
+    """STEP 2/3 — build the full dbt DAG in local DEV (raw), EXCLUDING the history
+    model (which the loop already maintains per business date). This refreshes every
+    rpt_/dim_/fct_/int_ model locally so the read-set is current before it is copied
+    to Supabase. Replaces the old `dbt run --target prod` (the schema-reload storm)."""
+    cmd = ["uv", "run", "dbt", "run", "--target", DBT_TARGET, "--exclude", HISTORY_MODEL]
+    log.info("STEP 2/3 — dbt build on dev  (full DAG, exclude %s)", HISTORY_MODEL)
     result = subprocess.run(cmd, cwd=str(PROJECT_ROOT))
     if result.returncode != 0:
-        log.error("dbt prod build failed (code %d).", result.returncode)
+        log.error("dbt dev build failed (code %d).", result.returncode)
         return False
     return True
 
 
-def _step3_copy_history_to_supabase() -> bool:
-    """STEP 2/3 — copy the accumulated history table from local raw → Supabase
-    store_pipeline (it cannot be rebuilt on prod, so we copy the finished table).
-    Runs BEFORE the prod build so fct_inventory_snapshot sees the fresh series."""
-    log.info("STEP 2/3 — copy raw.%s (local) → Supabase %s.%s",
-             HISTORY_MODEL, PROD_SCHEMA, HISTORY_MODEL)
-    local_engine = supabase_engine = None
-    try:
-        local_url = (
-            f"postgresql://{os.environ['PG_USER']}:{os.environ['PG_PASSWORD']}"
-            f"@{os.environ['PG_HOST']}:{os.environ['PG_PORT']}/{os.environ['PG_DATABASE']}"
-        )
-        local_engine = sqlalchemy.create_engine(local_url)
-        supabase_engine = sqlalchemy.create_engine(os.environ["SUPABASE_URL"])
-
-        with supabase_engine.connect() as conn:
-            conn.execute(sqlalchemy.text(f"CREATE SCHEMA IF NOT EXISTS {PROD_SCHEMA}"))
-            conn.commit()
-
-        # APPEND only the new business days — never DROP/CREATE (that triggers a
-        # PostgREST schema reload, the original Disk-IO culprit) and never re-transfer
-        # the whole series. Supabase thus becomes the durable archive: a local
-        # --full-refresh that shrinks raw.<history> can no longer wipe it.
-        table_exists = sqlalchemy.inspect(supabase_engine).has_table(
-            HISTORY_MODEL, schema=PROD_SCHEMA
-        )
-
-        if not table_exists:
-            # First delivery only: create the table with the full series (one-time DDL).
-            df = pd.read_sql_table(HISTORY_MODEL, local_engine, schema="raw")
-            df.to_sql(HISTORY_MODEL, supabase_engine, schema=PROD_SCHEMA,
-                      if_exists="replace", index=False, chunksize=2000)
-            n_dates = df["snapshot_date"].nunique() if "snapshot_date" in df.columns else -1
-            log.info("  First delivery — created %s.%s with %d rows (%d snapshot_date).",
-                     PROD_SCHEMA, HISTORY_MODEL, len(df), n_dates)
-            return True
-
-        # Incremental: send only rows newer than the latest day already on Supabase.
-        with supabase_engine.connect() as conn:
-            sup_max = conn.execute(sqlalchemy.text(
-                f"select max(snapshot_date) from {PROD_SCHEMA}.{HISTORY_MODEL}"
-            )).scalar()
-
-        if sup_max is None:
-            delta = pd.read_sql_table(HISTORY_MODEL, local_engine, schema="raw")
-        else:
-            sup_max_date = str(sup_max)[:10]   # 'YYYY-MM-DD' (from the DB, not user input)
-            delta = pd.read_sql_query(
-                f"select * from raw.{HISTORY_MODEL} where snapshot_date > '{sup_max_date}'",
-                local_engine,
-            )
-
-        if delta.empty:
-            log.info("  Supabase already current (max snapshot_date=%s) — nothing to append.",
-                     str(sup_max)[:10])
-            return True
-
-        delta.to_sql(HISTORY_MODEL, supabase_engine, schema=PROD_SCHEMA,
-                     if_exists="append", index=False, chunksize=2000)
-        n_new = delta["snapshot_date"].nunique() if "snapshot_date" in delta.columns else -1
-        log.info("  Appended %d rows (%d new snapshot_date, after %s) → %s.%s",
-                 len(delta), n_new, str(sup_max)[:10], PROD_SCHEMA, HISTORY_MODEL)
-        return True
-    except Exception as exc:
-        log.error("History copy to Supabase failed: %s", exc)
+def _step3_publish_readset_to_supabase() -> bool:
+    """STEP 3/3 — copy ONLY the dashboard read-set (~20 tables) from local dev →
+    Supabase store_pipeline via TRUNCATE+append (DML, no DDL → no PostgREST schema
+    reload). Replaces the nightly prod dbt build that DROP/CREATEd all ~44 models.
+    The non-read-set models (incl. the 43 MB history) stay in dev and are removed
+    from prod one-time by cleanup_supabase_store_pipeline.py."""
+    log.info("STEP 3/3 — 05_publish_dashboard_models.py --apply  (read-set dev → Supabase %s)",
+             PROD_SCHEMA)
+    result = subprocess.run([sys.executable, str(SCRIPT_05), "--apply"])
+    if result.returncode != 0:
+        log.error("05_publish_dashboard_models.py exited with code %d.", result.returncode)
         return False
-    finally:
-        if local_engine is not None:
-            local_engine.dispose()
-        if supabase_engine is not None:
-            supabase_engine.dispose()
+    return True
 
 
 def _step4_revalidate_website() -> None:
@@ -299,16 +245,15 @@ def _deliver_to_supabase() -> bool:
     log.info("═" * 60)
     log.info("Final delivery to Supabase (steps 1-3) + website revalidate (step 4)")
     log.info("═" * 60)
-    # Order matters: copy the history table to prod BEFORE the prod build, because
-    # fct_inventory_snapshot (and the inventory reports downstream) now read the latest
-    # slice of that table — the build must see the fresh series, not last run's.
+    # Build the full DAG in dev first, THEN copy only the dashboard read-set to prod
+    # by DML. No prod dbt build → no DDL → no PostgREST schema-reload storm.
     ok = (
-        _step1_push_sources_to_supabase()      # sources → Supabase raw
-        and _step3_copy_history_to_supabase()  # history → Supabase store_pipeline
-        and _step2_build_prod_models()         # dbt prod build (reads fresh history)
+        _step1_push_sources_to_supabase()          # sources → Supabase raw (DML; backup)
+        and _step2_build_dev_models()              # full DAG built in local dev
+        and _step3_publish_readset_to_supabase()   # read-set dev → Supabase store_pipeline (DML)
     )
     if ok:
-        _step4_revalidate_website()   # only after store_pipeline is fully rebuilt
+        _step4_revalidate_website()   # only after the read-set is published
     return ok
 
 
