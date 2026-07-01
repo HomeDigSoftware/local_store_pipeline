@@ -18,6 +18,9 @@ compilation_output.txt
 table_list.csv
 work_info.md
 
+# Local scratch data dumps
+supabase_data/
+
 # Local-only working docs (planning/status/reference — not part of the tracked dbt project)
 CLAUDE.md
 WORK_LOG.md
@@ -35,6 +38,9 @@ DASHBOARD_PROD_TABLE_ALLOWLIST_2026-06-28.md
 WORK_PLAN_2026-06-28.md
 DASHBOARD_PROD_TABLE_ALLOWLIST_2026-06-28_from_web_agent.md
 WEBSITE_HANDOFF_supabase_io_cutover_2026-06-29.md
+WORK_PLAN_2026-07-01.md
+DASHBOARD_PROD_TABLE_ALLOWLIST_2026-06-28_old.md
+CICD_GUIDE.md
 
 
 # Local-only readme working folders (source proposal + drafts; final README is tracked at root, images in docs/)
