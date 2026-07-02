@@ -108,6 +108,15 @@ MSSQL_URL = URL.create(
     query={"driver": "ODBC Driver 17 for SQL Server"},
 )
 
+# ── SQL Server wake/retry ──
+# The scheduled 03:00 job wakes the PC (Task Scheduler WakeToRun) and can fire
+# BEFORE the named SQL Server instance (…\STORE_DATA) is accepting connections,
+# so the first connect times out ("server not found / login timeout"). Retry the
+# initial probe with a wait instead of treating a transient failure as up-to-date.
+MSSQL_CONNECT_RETRIES = 6            # attempts for the initial source probe
+MSSQL_CONNECT_WAIT_SECONDS = 30      # wait between attempts (~3 min of headroom)
+MSSQL_LOGIN_TIMEOUT_SECONDS = 10     # bound each individual connect attempt
+
 PROJECT_ROOT = Path(__file__).parent.parent          # dbt project root (has dbt_project.yml)
 SCRIPT_02 = Path(__file__).parent / "02_extract_load_03.py"
 SCRIPT_03 = Path(__file__).parent / "03_load_to_supabase_allowlist.py"   # economical loader (not legacy replace-all)
@@ -135,29 +144,57 @@ log = logging.getLogger(__name__)
 
 
 def _get_current_max_date(engine: sqlalchemy.Engine) -> date | None:
-    """MAX business date from dbo.Documents (dynamic column discovery)."""
+    """MAX business date from dbo.Documents (dynamic column discovery).
+
+    RAISES on connection/query failure so callers can retry (source still waking)
+    or fail loudly. Returns None ONLY when the table is genuinely empty or has no
+    recognised date column — never to hide a connection error as "nothing to do".
+    """
     candidates = ["Recordingdate", "ReferenceDate", "ValueDate"]
     upper_candidates = ", ".join(f"'{c.upper()}'" for c in candidates)
-    try:
-        with engine.connect() as conn:
-            col_row = conn.execute(text(f"""
-                SELECT TOP 1 COLUMN_NAME
-                FROM   INFORMATION_SCHEMA.COLUMNS
-                WHERE  TABLE_SCHEMA = 'dbo'
-                  AND  TABLE_NAME   = 'Documents'
-                  AND  UPPER(COLUMN_NAME) IN ({upper_candidates})
-                ORDER BY ORDINAL_POSITION
-            """)).fetchone()
-            if col_row is None:
-                return None
-            col_name: str = col_row[0]
-            max_row = conn.execute(
-                text(f"SELECT CAST(MAX([{col_name}]) AS DATE) FROM dbo.Documents")
-            ).fetchone()
-            return max_row[0] if max_row and max_row[0] else None
-    except Exception as exc:
-        log.error("Could not query MAX date from dbo.Documents: %s", exc)
-        return None
+    with engine.connect() as conn:
+        col_row = conn.execute(text(f"""
+            SELECT TOP 1 COLUMN_NAME
+            FROM   INFORMATION_SCHEMA.COLUMNS
+            WHERE  TABLE_SCHEMA = 'dbo'
+              AND  TABLE_NAME   = 'Documents'
+              AND  UPPER(COLUMN_NAME) IN ({upper_candidates})
+            ORDER BY ORDINAL_POSITION
+        """)).fetchone()
+        if col_row is None:
+            return None
+        col_name: str = col_row[0]
+        max_row = conn.execute(
+            text(f"SELECT CAST(MAX([{col_name}]) AS DATE) FROM dbo.Documents")
+        ).fetchone()
+        return max_row[0] if max_row and max_row[0] else None
+
+
+def _get_current_max_date_with_retry(engine: sqlalchemy.Engine) -> date | None:
+    """Initial source probe with retry, to ride out the 3 AM wake race.
+
+    Retries `_get_current_max_date` while SQL Server is still coming up. Returns
+    the date (or None if the table is genuinely empty). Re-raises the last error
+    only after every attempt fails, so the caller can exit non-zero — a real
+    outage is never silently swallowed as "DB is already up to date".
+    """
+    last_exc: Exception | None = None
+    for attempt in range(1, MSSQL_CONNECT_RETRIES + 1):
+        try:
+            return _get_current_max_date(engine)
+        except Exception as exc:
+            last_exc = exc
+            log.warning("SQL Server source not reachable (attempt %d/%d): %s",
+                        attempt, MSSQL_CONNECT_RETRIES,
+                        str(exc).splitlines()[0][:160])
+            if attempt < MSSQL_CONNECT_RETRIES:
+                log.info("Waiting %ds for SQL Server to come up …",
+                         MSSQL_CONNECT_WAIT_SECONDS)
+                time.sleep(MSSQL_CONNECT_WAIT_SECONDS)
+    log.error("SQL Server source still unreachable after %d attempts (~%ds).",
+              MSSQL_CONNECT_RETRIES,
+              MSSQL_CONNECT_RETRIES * MSSQL_CONNECT_WAIT_SECONDS)
+    raise last_exc  # type: ignore[misc]
 
 
 def _run_extract_load(iteration: int, total: int) -> bool:
@@ -272,8 +309,16 @@ def main(auto_run: bool = False, days: int | None = None) -> None:
     print("║  full_auto_backfill — backfill + per-day dbt snapshot   ║")
     print("╚" + "═" * 58 + "╝")
 
-    engine = sqlalchemy.create_engine(MSSQL_URL)
-    current_max = _get_current_max_date(engine)
+    engine = sqlalchemy.create_engine(
+        MSSQL_URL, connect_args={"timeout": MSSQL_LOGIN_TIMEOUT_SECONDS}
+    )
+    try:
+        current_max = _get_current_max_date_with_retry(engine)
+    except Exception:
+        print("\n  ERROR: SQL Server source unreachable after retries — see "
+              "scripts/pipeline.log.\n  This is a real outage, NOT 'nothing to do'.\n")
+        engine.dispose()
+        sys.exit(2)   # distinct non-zero exit so Task Scheduler flags the failure
     today = date.today()
 
     if current_max is not None:
@@ -346,7 +391,12 @@ def main(auto_run: bool = False, days: int | None = None) -> None:
             break
 
         # 2. find the business date that was just generated
-        business_date = _get_current_max_date(engine)
+        try:
+            business_date = _get_current_max_date(engine)
+        except Exception as exc:
+            log.error("Could not resolve business date after iteration %d: %s — skipping dbt.",
+                      i, str(exc).splitlines()[0][:160])
+            break
         if business_date is None:
             log.error("Could not resolve business date after iteration %d — skipping dbt.", i)
             break
@@ -369,12 +419,12 @@ def main(auto_run: bool = False, days: int | None = None) -> None:
 
     if success_count < iterations:
         log.warning("Skipping Supabase delivery — backfill did not complete successfully.")
-        return
+        sys.exit(1)   # non-zero: an iteration failed, so the scheduler flags it
 
     if DELIVER_TO_SUPABASE_AT_END:
         if not _deliver_to_supabase():
             log.error("Supabase delivery did not complete. Local data is intact.")
-            return
+            sys.exit(1)   # non-zero: delivery failed
 
     log.info(
         "Done. Verify — local:  select snapshot_date, count(*) "
