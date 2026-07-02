@@ -23,7 +23,10 @@ daily_status as (
 		-- "at risk" = items that need attention now (empty or about to be)
 		count(*) filter (where stock_status in ('OUT_OF_STOCK', 'STOCKOUT_RISK')) as at_risk_count,
 		sum(current_inventory_qty) as total_inventory_units,
-		avg(days_of_cover_30d) as avg_days_of_cover_30d
+		avg(days_of_cover_30d) as avg_days_of_cover_30d,
+		-- median is robust to the overstock outliers that inflate the mean; exposing
+		-- both resolves the 50.8-vs-129.2 "days of cover" mismatch on the dashboard.
+		percentile_cont(0.5) within group (order by days_of_cover_30d) as median_days_of_cover_30d
 	from history
 	group by snapshot_date
 ),
@@ -40,6 +43,7 @@ trend as (
 		at_risk_count,
 		total_inventory_units,
 		avg_days_of_cover_30d,
+		median_days_of_cover_30d,
 		-- rolling 7-day average of the at-risk population (smooths daily noise)
 		avg(at_risk_count) over (order by snapshot_date rows between 6 preceding and current row) as at_risk_7d_avg,
 		-- week-over-week change in at-risk count (lag 7 rows = same weekday prior week,

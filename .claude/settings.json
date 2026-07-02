@@ -12,7 +12,8 @@
       "Bash(git rm *)",
       "Bash(git status *)",
       "Bash(cp WEBSITE_HANDOFF_supabase_io_cutover_2026-06-29.md \"//wsl.localhost/Ubuntu-22.04/home/tzaf/projects/analytics_engineer_website/WEBSITE_HANDOFF_supabase_io_cutover_2026-06-29.md\")",
-      "Read(///wsl.localhost/Ubuntu-22.04/home/tzaf/projects/analytics_engineer_website/**)"
+      "Read(///wsl.localhost/Ubuntu-22.04/home/tzaf/projects/analytics_engineer_website/**)",
+      "PowerShell(Get-Service | Where-Object { $_.Name -match 'MSSQL|SQLBrowser|SQLSERVERAGENT' } | Select-Object Name, DisplayName, Status, StartType | Format-Table -AutoSize)"
     ]
   }
 }

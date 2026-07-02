@@ -16,7 +16,10 @@ inventory_by_day as (
 		sum(case when stock_status = 'DEAD_STOCK' then 1 else 0 end) as dead_stock_count,
 		sum(case when stock_status = 'OVERSTOCK' then 1 else 0 end) as overstock_count,
 		count(*) as inventory_items_count,
-		avg(days_of_cover_30d) as avg_days_of_cover_30d
+		avg(days_of_cover_30d) as avg_days_of_cover_30d,
+		-- median is robust to the overstock outliers that inflate the mean; exposing
+		-- both resolves the 50.8-vs-129.2 "days of cover" mismatch on the dashboard.
+		percentile_cont(0.5) within group (order by days_of_cover_30d) as median_days_of_cover_30d
 	from {{ ref('fct_inventory_snapshot_history') }}
 	group by snapshot_date
 ),
@@ -34,6 +37,7 @@ executive_summary as (
 		inventory_by_day.overstock_count,
 		inventory_by_day.inventory_items_count,
 		inventory_by_day.avg_days_of_cover_30d,
+		inventory_by_day.median_days_of_cover_30d,
 		current_timestamp as dbt_loaded_at,
 		'rpt_executive_summary_daily' as dbt_source_relation
 	from daily_sales

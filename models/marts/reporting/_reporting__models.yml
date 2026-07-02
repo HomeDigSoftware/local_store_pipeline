@@ -277,6 +277,12 @@ models:
         description: "Count of products with stockout risk on the snapshot date matching the day."
       - name: avg_days_of_cover_30d
         description: "Average days of cover across inventory items for the snapshot date matching the day."
+      - name: median_days_of_cover_30d
+        description: "Median days of cover across inventory items — robust to the overstock outliers that inflate the mean (resolves the days-of-cover mismatch on the dashboard)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
 
   - name: rpt_sales_trend_daily
     description: "Daily sales trend report with calendar attributes and period-over-period comparisons."
@@ -457,6 +463,12 @@ models:
         description: "Total on-hand inventory units across all products for the day."
       - name: avg_days_of_cover_30d
         description: "Average days of stock coverage across products for the day."
+      - name: median_days_of_cover_30d
+        description: "Median days of stock coverage across products — robust to the overstock outliers that inflate the mean (resolves the days-of-cover mismatch on the dashboard)."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: at_risk_7d_avg
         description: "Rolling seven-day average of the at-risk product count."
       - name: at_risk_wow_delta
