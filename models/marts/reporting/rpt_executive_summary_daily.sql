@@ -14,6 +14,10 @@ inventory_by_day as (
 		sum(case when stock_status = 'OUT_OF_STOCK' then 1 else 0 end) as out_of_stock_count,
 		sum(case when stock_status = 'STOCKOUT_RISK' then 1 else 0 end) as stockout_risk_count,
 		sum(case when stock_status = 'DEAD_STOCK' then 1 else 0 end) as dead_stock_count,
+		-- velocity band NO_RECENT_SALES = zero recent sales, distinct from the DEAD_STOCK
+		-- *status* (which also requires on-hand stock). Exposed separately so the dashboard
+		-- stops conflating the two "dead stock" numbers.
+		sum(case when velocity_band = 'NO_RECENT_SALES' then 1 else 0 end) as no_recent_sales_count,
 		sum(case when stock_status = 'OVERSTOCK' then 1 else 0 end) as overstock_count,
 		count(*) as inventory_items_count,
 		avg(days_of_cover_30d) as avg_days_of_cover_30d,
@@ -34,6 +38,7 @@ executive_summary as (
 		inventory_by_day.out_of_stock_count,
 		inventory_by_day.stockout_risk_count,
 		inventory_by_day.dead_stock_count,
+		inventory_by_day.no_recent_sales_count,
 		inventory_by_day.overstock_count,
 		inventory_by_day.inventory_items_count,
 		inventory_by_day.avg_days_of_cover_30d,

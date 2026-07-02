@@ -18,6 +18,10 @@ daily_status as (
 		count(*) filter (where stock_status = 'OUT_OF_STOCK') as out_of_stock_count,
 		count(*) filter (where stock_status = 'STOCKOUT_RISK') as stockout_risk_count,
 		count(*) filter (where stock_status = 'DEAD_STOCK') as dead_stock_count,
+		-- velocity band NO_RECENT_SALES = zero recent sales, distinct from the DEAD_STOCK
+		-- *status* (which also requires on-hand stock). Exposed separately so the dashboard
+		-- stops conflating the two "dead stock" numbers.
+		count(*) filter (where velocity_band = 'NO_RECENT_SALES') as no_recent_sales_count,
 		count(*) filter (where stock_status = 'OVERSTOCK') as overstock_count,
 		count(*) filter (where stock_status = 'HEALTHY') as healthy_count,
 		-- "at risk" = items that need attention now (empty or about to be)
@@ -38,6 +42,7 @@ trend as (
 		out_of_stock_count,
 		stockout_risk_count,
 		dead_stock_count,
+		no_recent_sales_count,
 		overstock_count,
 		healthy_count,
 		at_risk_count,
