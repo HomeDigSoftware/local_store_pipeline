@@ -9,9 +9,11 @@ dim_product as (
 	select
 		md5(coalesce(item_id::text, '')) as product_key,
 		item_id,
-		coalesce(item_name, 'Unknown Item') as item_name,
+		-- Placeholders for unmapped/deleted POS products (orphan item_ids). Parenthesised
+		-- so the dashboard reads them as intentional, not as junk "Unknown Item" rows.
+		coalesce(item_name, '(unmapped item)') as item_name,
 		product_category_id,
-		coalesce(product_category_name, 'Uncategorized') as category_name,
+		coalesce(product_category_name, '(uncategorized)') as category_name,
 		unit_cost,
 		unit_cost_inc_vat,
 		unit_sale_price,
