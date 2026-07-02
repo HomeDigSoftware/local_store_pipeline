@@ -275,6 +275,12 @@ models:
         description: "Count of products out of stock on the snapshot date matching the day."
       - name: stockout_risk_count
         description: "Count of products with stockout risk on the snapshot date matching the day."
+      - name: no_recent_sales_count
+        description: "Count of products in the NO_RECENT_SALES velocity band (zero recent sales) — distinct from dead_stock_count, which is the DEAD_STOCK stock status."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: avg_days_of_cover_30d
         description: "Average days of cover across inventory items for the snapshot date matching the day."
       - name: median_days_of_cover_30d
@@ -437,6 +443,12 @@ models:
                 min_value: 0
       - name: dead_stock_count
         description: "Dead-stock products on the day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: no_recent_sales_count
+        description: "Products in the NO_RECENT_SALES velocity band (zero recent sales) — distinct from dead_stock_count, which is the DEAD_STOCK stock status."
         data_tests:
           - dbt_utils.accepted_range:
               arguments:
