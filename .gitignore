@@ -30,6 +30,8 @@ supabase_screen_shots/
 # Local-only working docs (planning/status/reference — not part of the tracked dbt project)
 CLAUDE.md
 WORK_LOG.md
+WORK_PLAN_*.md
+WEBSITE_HANDOFF_*.md
 WORK_PLAN_2026-06-16.md
 DATA_TESTS_CATALOG.md
 INVOICE_GENERATION_WORKFLOW.md

@@ -32,11 +32,11 @@
     <rect class="tbl" x="60" y="320" width="300" height="30" rx="8"/><text class="ink" x="74" y="340">rpt_inventory_risk</text>
     <rect class="tbl" x="60" y="358" width="300" height="30" rx="8"/><text class="ink" x="74" y="378">rpt_inventory_actions</text>
     <rect class="tbl" x="60" y="396" width="300" height="30" rx="8"/><text class="ink" x="74" y="416">rpt_inventory_health_trend</text>
-    <rect class="tbl" x="60" y="434" width="300" height="30" rx="8"/><text class="ink" x="74" y="454">rpt_inventory_vs_sales</text>
+    <rect class="tbl" x="60" y="434" width="300" height="30" rx="8"/><text class="ink" x="74" y="454">rpt_item_stockout_days</text>
     <rect class="tbl" x="60" y="472" width="300" height="30" rx="8"/><text class="ink" x="74" y="492">rpt_product_performance_30d</text>
-    <rect class="tbl" x="60" y="510" width="300" height="30" rx="8"/><text class="ink" x="74" y="530">rpt_category_performance</text>
+    <rect class="tbl" x="60" y="510" width="300" height="30" rx="8"/><text class="ink" x="74" y="530">rpt_category_performance_30d</text>
     <rect class="tbl" x="60" y="548" width="300" height="30" rx="8"/><text class="ink" x="74" y="568">rpt_employee_productivity</text>
-    <rect class="tbl" x="60" y="586" width="300" height="30" rx="8"/><text class="ink" x="74" y="606">rpt_employee_payroll</text>
+    <rect class="tbl" x="60" y="586" width="300" height="30" rx="8"/><text class="ink" x="74" y="606">rpt_workforce_productivity_summary</text>
   </g>
 
   <rect class="view" x="820" y="130" width="360" height="84" rx="14" stroke="var(--overview)" stroke-width="1.5"/>
