@@ -9,12 +9,14 @@ on:
 
 jobs:
   # ---------------------------------------------------------------------------
-  # GATE: the project must structurally compile. No raw data is needed (the .bak
-  # can't live in CI), so we validate code — refs, sources, YAML, DAG, and that
-  # every model compiles to valid SQL — against a disposable Postgres.
+  # GATE: the project must build AND pass its tests. A small raw fixture
+  # (ci/fixture/seed_raw.sql) seeds all 8 source tables into a disposable
+  # Postgres, then we validate code (parse/compile) AND run every model,
+  # snapshot and data test via `dbt build`. The real .bak can't live in CI, so
+  # this fixture stands in for it.
   # ---------------------------------------------------------------------------
   dbt-validate:
-    name: dbt parse & compile
+    name: dbt build & test
     runs-on: ubuntu-latest
 
     # A throwaway Postgres for the job; dbt connects to it at localhost:5432.
@@ -50,17 +52,17 @@ jobs:
       - name: Install CI dependencies (dbt-postgres)
         run: uv pip install -r requirements-ci.txt
 
-      # dim_date is built by a date-spine macro that runs `min(recordingdate)
-      # FROM raw.documents` at COMPILE time (run_query). The CI Postgres is
-      # empty, so seed one dated row to satisfy that single introspection query.
-      # No other model touches the DB at compile time.
-      - name: Seed a minimal raw stub for the date-spine
+      # Load the full raw fixture (all 8 source tables) BEFORE dbt runs. The
+      # date-spine macro runs `min(recordingdate) FROM raw.documents` at COMPILE
+      # time (run_query), and `dbt build` below then runs+tests every model, so
+      # the raw data must exist first. The fixture is guarded (ci.fixture_ok)
+      # because it drops raw.* — see ci/fixture/seed_raw.sql.
+      - name: Load the raw CI fixture (all 8 source tables)
         run: |
-          PGPASSWORD=postgres psql -h localhost -U postgres -d store_local -v ON_ERROR_STOP=1 <<'SQL'
-          create schema if not exists raw;
-          create table if not exists raw.documents (recordingdate text);
-          insert into raw.documents (recordingdate) values ('20210326');
-          SQL
+          PGPASSWORD=postgres psql -h localhost -U postgres -d store_local \
+            -v ON_ERROR_STOP=1 \
+            -c "SET ci.fixture_ok = '1';" \
+            -f ci/fixture/seed_raw.sql
 
       - name: Install dbt packages (dbt_utils, dbt_expectations)
         run: uv run dbt deps
@@ -70,6 +72,12 @@ jobs:
 
       - name: Compile every model to SQL
         run: uv run dbt compile
+
+      # THE INTEGRATION GATE: build every model + snapshot and run every data
+      # test against the fixture. This is what turns CI from "it compiles" into
+      # "it runs and the tests pass". A failing test fails the PR.
+      - name: Build all models and run all data tests (against the fixture)
+        run: uv run dbt build
 
   # ---------------------------------------------------------------------------
   # NON-BLOCKING: style linting. Runs only if the gate passed. continue-on-error
@@ -113,14 +121,13 @@ jobs:
         run: uv pip install -r requirements-ci.txt sqlfluff sqlfluff-templater-dbt
 
       # sqlfluff's dbt templater compiles models too, so it hits the same
-      # compile-time date-spine query — seed the same minimal raw stub.
-      - name: Seed a minimal raw stub for the date-spine
+      # compile-time date-spine query — load the same guarded raw fixture.
+      - name: Load the raw CI fixture (all 8 source tables)
         run: |
-          PGPASSWORD=postgres psql -h localhost -U postgres -d store_local -v ON_ERROR_STOP=1 <<'SQL'
-          create schema if not exists raw;
-          create table if not exists raw.documents (recordingdate text);
-          insert into raw.documents (recordingdate) values ('20210326');
-          SQL
+          PGPASSWORD=postgres psql -h localhost -U postgres -d store_local \
+            -v ON_ERROR_STOP=1 \
+            -c "SET ci.fixture_ok = '1';" \
+            -f ci/fixture/seed_raw.sql
 
       - name: Install dbt packages
         run: uv run dbt deps
