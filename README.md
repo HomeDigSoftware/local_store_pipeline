@@ -304,4 +304,3 @@ uv run dbt build     # build + test all models (dev: local Postgres)
 **Zafrir Havia** — Analytics Engineer  
 Transforming raw data into decisions, built with Next.js, dbt & Supabase.
 
-<!-- TODO(author): add GitHub / LinkedIn / portfolio links and a LICENSE if desired. -->

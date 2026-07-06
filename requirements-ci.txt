@@ -1,10 +1,14 @@
 # CI-only Python dependencies (GitHub Actions).
 #
 # The full local project also uses pyodbc, pandas, sqlalchemy and the
-# dbt-sqlserver / dbt-fabric adapters for the Python EL scripts (01-04). CI does
-# NOT run those scripts — it only validates the dbt project (parse + compile)
-# against a disposable Postgres service container. So it needs just the Postgres
-# adapter, which pulls in dbt-core + dbt-adapters transitively.
+# dbt-sqlserver / dbt-fabric adapters for the Python EL scripts. CI does NOT run
+# those scripts — it seeds a raw fixture (ci/fixture/seed_raw.sql) into a
+# disposable Postgres and runs the full dbt build + data tests against it. So it
+# needs just the Postgres adapter, which pulls in dbt-core + dbt-adapters
+# transitively.
 #
-# Pinned to the exact local versions so CI mirrors the dev environment.
+# Pinned to the exact local version so CI mirrors the dev environment.
+# NOTE: dbt-postgres is the postgres ADAPTER, versioned separately from dbt-core.
+# Pinning the adapter to 1.10.0 installs dbt-core 1.11.3 transitively — that 1.11
+# is what the README badge refers to (the badge tracks dbt-core, not the adapter).
 dbt-postgres==1.10.0

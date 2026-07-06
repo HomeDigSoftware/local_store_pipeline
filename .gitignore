@@ -1,7 +1,6 @@
 
 target/
 dbt_packages/
-dbt_packages_local/
 logs/
 .env
 .venv/
@@ -20,6 +19,13 @@ work_info.md
 
 # Local scratch data dumps
 supabase_data/
+
+# Editor / tool configs and stray local folders (machine-specific; .vscode held a
+# plaintext DB credential — untracked so it stops leaking going forward)
+.claude/
+.vscode/
+.backup/
+supabase_screen_shots/
 
 # Local-only working docs (planning/status/reference — not part of the tracked dbt project)
 CLAUDE.md
@@ -41,8 +47,9 @@ WEBSITE_HANDOFF_supabase_io_cutover_2026-06-29.md
 WORK_PLAN_2026-07-01.md
 DASHBOARD_PROD_TABLE_ALLOWLIST_2026-06-28_old.md
 CICD_GUIDE.md
-
+WEBSITE_HANDOFF_p1_definition_fixes_2026-07-02.md
 
 # Local-only readme working folders (source proposal + drafts; final README is tracked at root, images in docs/)
 new_git_readme/
 new_git_readme_&_photos/
+interview_prepering/

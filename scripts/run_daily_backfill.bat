@@ -18,10 +18,15 @@ REM ============================================================================
 
 setlocal
 
-REM --- machine-specific paths -------------------------------------------------
+REM --- paths -------------------------------------------------------------------
+REM Derive the project root from THIS .bat's own location (it lives in scripts\),
+REM so the file is portable and carries no personal path. %~dp0 ends in a
+REM backslash, so %~dp0.. is the project root and %~dp0logs is scripts\logs.
+REM Override UV_EXE if uv is installed elsewhere (a full path is used because Task
+REM Scheduler runs with a minimal PATH that may not include uv).
 set "UV_EXE=C:\Tools\uv\uv.exe"
-set "PROJECT_ROOT=f:\.DATA-Analyst-Coures\.shlomy_store\full_project\store_pipeline"
-set "LOG_DIR=%PROJECT_ROOT%\scripts\logs"
+set "PROJECT_ROOT=%~dp0.."
+set "LOG_DIR=%~dp0logs"
 
 REM --- force UTF-8 for ALL child python processes ------------------------------
 REM Under Task Scheduler stdout is redirected to a file with the cp1252 code page,

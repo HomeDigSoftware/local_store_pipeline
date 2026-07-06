@@ -18,15 +18,9 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-# NOTE: the default `dbt_packages/` cache was left admin-owned by a past elevated
-# `dbt deps` run, making it unreadable in non-elevated sessions. Install packages
-# into a fresh local-only dir instead. Safe to revert once the old folder is removed.
-packages-install-path: "dbt_packages_local"
-
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
-  - "dbt_packages_local"
 
 
 # Configuring models

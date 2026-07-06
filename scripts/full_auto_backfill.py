@@ -1,15 +1,17 @@
-# EXPERIMENTAL / SANDBOX orchestrator — does NOT replace 04_backfill_loop.py.
 """
-full_auto_backfill.py — backfill loop WITH a dbt snapshot run integrated per
-iteration, so a real historical inventory time-series is accumulated.
+full_auto_backfill.py — the PRODUCTION nightly orchestrator. This is the script
+Windows Task Scheduler runs every night (via run_daily_backfill.bat): it runs the
+backfill loop WITH a dbt snapshot run integrated per iteration, so a real
+historical inventory time-series is accumulated, then publishes to Supabase.
 
 WHY THIS EXISTS
 ---------------
-04_backfill_loop.py runs 02_extract_load_03.py N times, then runs 03 once at the
-end. dbt is never called inside the loop, so the working fct_inventory_snapshot
-model (which stamps current_date) can only ever capture ONE snapshot — today.
+It supersedes the archived old_script/04_backfill_loop.py, which ran
+02_extract_load_03.py N times then ran 03 once at the end. That old loop never
+called dbt inside the iteration, so the fct_inventory_snapshot model (which stamps
+current_date) could only ever capture ONE snapshot — today.
 
-This sandbox interleaves a dbt run after every iteration:
+This orchestrator instead interleaves a dbt run after every iteration:
 
     for each business date D:
         1. 02_extract_load_03.py   -> loads date D into local Postgres `raw`
@@ -55,8 +57,9 @@ IMPORTANT NOTES
   correctness (velocity/days-of-cover depend on the sales chain). That is heavier
   than a normal run; for a quick test, narrow DBT_SELECT if you only need stock
   levels without recomputed velocity.
-* This script does NOT modify 04_backfill_loop.py, 02, 03, or the working
-  fct_inventory_snapshot model. Test here first; promote later if it behaves.
+* The per-day extract/load (02) and Supabase loaders (03/05) are called as
+  subprocesses, unchanged; this orchestrator only sequences them and adds the
+  per-iteration dbt snapshot run.
 
 USAGE
   uv run python scripts/full_auto_backfill.py              # interactive (prompts for days)
